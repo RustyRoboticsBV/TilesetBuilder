@@ -1,11 +1,13 @@
 # Tile Generation
 Should a tile from the standard 47-tile blob tileset be missing from a ZIP file, the importer will attempt to generate it. As long as any of the edge tiles (`EDGE_L`, `EDGE_R`, `EDGE_T` or `EDGE_B`) are present in the tileset, the importer can generate all of the other 46 tiles from it.
 
-Generally, for good-looking results you will need:
+For good-looking results you will typically need:
 - The inner/center tile (`CENTER`).
 - The four edge tiles (`EDGE_L`, `EDGE_R`, `EDGE_T`, `EDGE_B`).
 - The four outer corner tiles (`NOOK_TL`, `NOOK_TR`, `NOOK_BL`, `NOOK_BR`).
 - The four inner corner tiles (`CORNER_TL`, `CORNER_TR`, `CORNER_BL`, `CORNER_BR`).
+
+Depending on your tileset, more tiles may be needed for good results (`CAP_LEFT`, `CAP_RIGHT` and `SMALL` being common examples).
 
 ## Generation Logic
 The ways in which each tile is generated is as follows:

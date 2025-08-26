@@ -1,8 +1,12 @@
 # Rusty.TilesetMaker
-An import plugin for the Godot game engine. It can import standard 47-tile "blob" tilesets from a ZIP file that contains images. The importer can generate missing tiles by recombining other tiles in the tileset, reducing the number of tiles that you need to manage.
+An import plugin for the Godot game engine. It can:
+- Create standard 47-tile "blob" tilesets from a ZIP file that contains separate tile images, so you won't have to do this manually.
+- Generate missing tiles by combining or transposing other tiles in the tileset, reducing the number of tiles that you need to manage.
+
+See *Documentation/TileGeneration.md* for more details about how missing tiles are generated.
 
 ## Install Guide
-1. Create a folder called `Addons/RustyTilesetImporter`.
+1. Create a folder called `Addons/TilesetImporter`.
 2. Extract the contents of this repository to that folder.
 3. Enable the import plugin under `Project Settings` => `Plugins`.
 
@@ -12,9 +16,6 @@ The tool supports ZIP files that contain BMP and PNG files.
 
 The importer expects the tile images inside the ZIP file to have specific names. See the image below for reference:
 ![The tiles of a 47-tile blob tileset, and their identifiers.](TilesetReference.png)
-
-## Recombination
-If a tile is missing from the ZIP file, the importer will attempt to generate it by transposing or combining other tiles from the tileset. The way in which it does this is relatively simplistic. If this default generation is not enough for a tile, you must instead supply an image yourself. See *Documentation/TileGeneration.md* for a specification of how tiles are generated.
 
 ## Planned Features
 - Adding the option for user-defined, non-standard tiles.

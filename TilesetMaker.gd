@@ -57,6 +57,7 @@ enum TileID {
 class TileImage:
 	var id : TileID;
 	var image : Image;
+	var direct_load : bool;
 	
 	# Return the width of the image.
 	func get_width() -> int:
@@ -101,55 +102,38 @@ class TileImage:
 		mycopy.image.rotate_90(COUNTERCLOCKWISE);
 		return mycopy;
 	
-	# Create an image from the left half of one image and the right half of another.
-	func combine_h(img_left: TileImage, img_right: TileImage):
+	# Create a new image from the left half of this image and the right half of another.
+	func combine_h(right: TileImage):
 		# Ensure both images are the same size.
-		if img_left.get_width() != img_right.get_width() or img_left.get_height() != img_right.get_height():
+		if get_width() != right.get_width() or get_height() != right.get_height():
 			push_error("Images must have the same dimensions!")
 			return null;
 		
-		var width : int = img_left.get_width();
-		var height : int = img_left.get_height();
-		var half_width : int = width / 2;
+		# Get dimensions.
+		var half_width : int = get_width() / 2;
+		var height : int = get_height();
 		
-		# Create a new empty image with the same size
-		image = Image.create(width, height, false, img_left.image.get_format());
-		
-		# Copy the left half of img_left
-		image.blit_rect(img_left.image, Rect2(Vector2.ZERO, Vector2(half_width, height)), Vector2.ZERO);
-		
-		# Copy the right half of img_right
-		image.blit_rect(img_right.image, Rect2(Vector2(half_width, 0), Vector2(half_width, height)), Vector2(half_width, 0));
+		# Combine the images.
+		var mycopy = copy();
+		mycopy.image.blit_rect(right.image, Rect2(Vector2(half_width, 0), Vector2(half_width, height)), Vector2(half_width, 0));
+		return mycopy;
 	
-	# Create an image from the bottom half of one image and the top half of another.
-	func combine_v(bottom: TileImage, top: TileImage):
+	# Create a new image from the bottom half of this image and the top half of another.
+	func combine_v(top: TileImage):
 		# Ensure both images are the same size.
-		if bottom.get_width() != top.get_width() or bottom.get_height() != top.get_height():
+		if get_width() != top.get_width() or get_height() != top.get_height():
 			push_error("Images must have the same dimensions!")
 			return null;
 		
-		var width : int = bottom.get_width();
-		var height : int = bottom.get_height();
-		var half_height : int = height / 2;
+		# Get dimensions.
+		var width : int = get_width();
+		var half_height : int = get_height() / 2;
 		
-		# Create a new empty image with the same size.
-		image = Image.create(width, height, false, bottom.image.get_format());
-		
-		# Copy the top half.
-		image.blit_rect(top.image, Rect2(Vector2.ZERO, Vector2(width, half_height)), Vector2.ZERO);
-		
-		# Copy the bottom half.
-		image.blit_rect(bottom.image, Rect2(Vector2(0, half_height), Vector2(width, half_height)), Vector2(0, half_height));
+		# Combine the images.
+		var mycopy = copy();
+		mycopy.image.blit_rect(top.image, Rect2(Vector2.ZERO, Vector2(width, half_height)), Vector2.ZERO);
+		return mycopy;
 	
-	func combine_quad(bottom_left : TileImage, bottom_right : TileImage, top_left : TileImage, top_right : TileImage):
-		var left : TileImage = TileImage.new();
-		left.combine_v(bottom_left, top_left);
-		
-		var right : TileImage = TileImage.new();
-		right.combine_v(bottom_right, top_right);
-		
-		combine_h(left, right);
-		
 	# Create an image from the bottom-left half of one image and the top-right half of another.
 	func combine_diagonal_down(bottom: TileImage, top: TileImage):
 		# Ensure both images are the same size.
@@ -797,7 +781,7 @@ func resolve_h(tile_id : TileID, fallback_id_left : TileID, fallback_id_right : 
 	
 	# Try to resolve by combining fallback tiles.
 	if has_resolved(fallback_id_left) and has_resolved(fallback_id_right):
-		get_resolved(tile_id).combine_h(get_resolved(fallback_id_left), get_resolved(fallback_id_right));
+		resolve(tile_id, get_resolved(fallback_id_left).combine_h(get_resolved(fallback_id_right)));
 		return true;
 	
 	return false;
@@ -813,7 +797,7 @@ func resolve_v(tile_id : TileID, fallback_id_bottom : TileID, fallback_id_top : 
 	
 	# Try to resolve by combining fallback tiles.
 	if has_resolved(fallback_id_bottom) and has_resolved(fallback_id_top):
-		get_resolved(tile_id).combine_v(get_resolved(fallback_id_bottom), get_resolved(fallback_id_top));
+		resolve(tile_id, get_resolved(fallback_id_bottom).combine_v(get_resolved(fallback_id_top)));
 		return true;
 	
 	return false;
@@ -861,7 +845,9 @@ func resolve_quad(tile_id : TileID, fallback_bl : TileID, fallback_br : TileID, 
 	
 	# Try to resolve by combining fallback tiles.
 	if has_resolved(fallback_bl) and has_resolved(fallback_br) and has_resolved(fallback_tl) and has_resolved(fallback_tr):
-		get_resolved(tile_id).combine_quad(get_resolved(fallback_bl), get_resolved(fallback_br), get_resolved(fallback_tl), get_resolved(fallback_tr));
+		var bottom_half : TileImage = get_resolved(fallback_bl).combine_h(get_resolved(fallback_br));
+		var top_half : TileImage = get_resolved(fallback_tl).combine_h(get_resolved(fallback_tr));
+		resolve(tile_id, bottom_half.combine_v(top_half));
 		return true;
 	
 	return false;
@@ -871,6 +857,7 @@ func simple_resolve(tile_id : TileID) -> bool:
 	var key : String = TileID.keys()[tile_id];
 	if src_images.has(key):
 		dst_images[tile_id].image = src_images[key];
+		dst_images[tile_id].direct_load = true;
 		return true;
 	else:
 		return false;
