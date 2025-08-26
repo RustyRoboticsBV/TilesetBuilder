@@ -11,11 +11,14 @@ You can import ZIP tilesets as either a `Texture2D` or a `TileSet`. In the case 
 The tool supports ZIP files that contain BMP and PNG files.
 
 The importer expects the tile images inside the ZIP file to have specific names. See the image below for reference:
-![The possible tiles in the tileset, and their identifiers.](TilesetReference.png)
+![The tiles of a 47-tile blob tileset, and their identifiers.](TilesetReference.png)
 
 ## Recombination
-If a tile is missing from the ZIP file, the importer will attempt to generate them by transposing or combining other tiles from the tileset. The way in which it does this is relatively simplistic: if the default generation is not enough for a tile, you must instead supply an image yourself. See *Recombination.md* for a specification of how tiles are generated.
+If a tile is missing from the ZIP file, the importer will attempt to generate them by transposing or combining other tiles from the tileset. The way in which it does this is relatively simplistic: if the default generation is not enough for a tile, you must instead supply an image yourself. See *Documentation/TileGeneration.md* for a specification of how tiles are generated.
 
 ## Planned Features
 - Adding additional, non-standard tiles.
 - Adding tile variants.
+
+## Known Issues
+Whenever the importer assign terrain bitmasks to its generated tileset, Godot spams the console with error messages, despite the tileset importing succesfully. This seems to be an internal engine bug.
