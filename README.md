@@ -24,4 +24,5 @@ If a tile is missing from the ZIP file, the importer will attempt to generate it
 For the tileset importer, there seem to be internal engine bugs that cause Godot to spam the console with large amounts of errors:
 - Whenever the tileset importer assigns terrain bitmasks to its generated tileset, hundreds of errors get spammed to the console.
 - When a tileset is reimported while a scene that uses it is opened, Godot will start spamming the console with errors that cause huge slowdown until the scene is closed. Reopening the scene fixes this.
+
 Despite this, the importing process seems to finish succesfully. The texture import doesn't have these problems.
