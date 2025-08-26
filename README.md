@@ -8,9 +8,10 @@ An import plugin for the Godot game engine that imports tilesets from a ZIP file
 
 ## How to Use
 You can import ZIP tilesets as either a `Texture2D` or a `TileSet`. In the case of the latter, terrains will be automatically set up. In the case of the former, you will have to do this yourself.
+The tool supports ZIP files that contain BMP and PNG files.
 
 The importer expects the tile images inside the ZIP file to have specific names. See the image below for reference:
-[TODO: IMAGE]
+![The possible tiles in the tileset, and their identifiers.](TilesetReference.png)
 
 ## Recombination
 If a tile is missing from the ZIP file, the importer will attempt to generate them by transposing or combining other tiles from the tileset. The way in which it does this is relatively simplistic: if the default generation is not enough for a tile, you must instead supply an image yourself. See *Recombination.md* for a specification of how tiles are generated.
