@@ -8,7 +8,7 @@ func _get_import_options(String, int) -> Array[Dictionary]:
 	return [];
 	
 func _get_visible_name() -> String:
-	return "Tileset Importer";
+	return "Tileset Texture Importer";
 	
 func _get_recognized_extensions() -> PackedStringArray:
 	return ["zip"];
@@ -30,11 +30,11 @@ func _import(source_file: String, save_path: String, _options: Dictionary, _plat
 
 	# Create tileset.
 	var tileset_maker = TilesetMaker.new();
-	var tileset : Texture2D = tileset_maker.create_tileset(source_file);
+	var tileset = tileset_maker.create_tileset(source_file);
 	
 	# Save the resulting resource.
 	var save_file = "%s.%s" % [save_path, _get_save_extension()];
-	var err = ResourceSaver.save(tileset, save_file);
+	var err = ResourceSaver.save(tileset.texture, save_file);
 
 	if err != OK:
 		push_error("Failed to save imported tileset: %s" % save_file)

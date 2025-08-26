@@ -53,6 +53,7 @@ enum TileID {
 	EXIT_BR_V
 }
 
+# A single tile image.
 class TileImage:
 	var id : TileID;
 	var image : Image;
@@ -222,12 +223,22 @@ class TileImage:
 		# Blit onto the destination at the same position.
 		dst_image.blit_rect(image, src_rect, Vector2(tile_x * tile_w, tile_y * tile_h));
 
+# A generated tileset texture.
+class TilesetTexture:
+	var texture : Texture2D = ImageTexture.create_from_image(Image.create(1, 1, false, Image.FORMAT_RGB8));
+	var tile_num_x : int = 0;
+	var tile_num_y : int = 0;
+	var tile_w : int = 0;
+	var tile_h : int = 0;
+
+
+
 
 var src_images : Dictionary[String, Image] = {};
 var dst_images : Array[TileImage] = [];
 
 # Load a tileset texture from a ZIP file.
-func create_tileset(file_path : String) -> Texture2D:
+func create_tileset(file_path : String) -> TilesetTexture:
 	# Load images from ZIP file.
 	src_images = load_images_from_zip(file_path);
 	print("Images in ZIP: " + str(src_images));
@@ -454,7 +465,7 @@ func create_tileset(file_path : String) -> Texture2D:
 	
 	if tile_w == 0 or tile_h == 0:
 		var empty_image : Image = Image.create(1, 1, false, Image.FORMAT_RGBA8);
-		return ImageTexture.create_from_image(empty_image);
+		return TilesetTexture.new();
 	print("Tile size = (" + str(tile_w) + ", " + str(tile_h) + ")");
 	
 	# Copy all resolved tiles to a texture.
@@ -513,7 +524,13 @@ func create_tileset(file_path : String) -> Texture2D:
 	get_resolved(TileID.GAP_B).blit_onto(image, 10, 3, tile_w, tile_h);
 	get_resolved(TileID.NOOK_BR).blit_onto(image, 11, 3, tile_w, tile_h);
 	
-	return ImageTexture.create_from_image(image);
+	var result = TilesetTexture.new();
+	result.texture = ImageTexture.create_from_image(image);
+	result.tile_num_x = 12;
+	result.tile_num_y = 4;
+	result.tile_w = tile_w;
+	result.tile_h = tile_h;
+	return result;
 
 # Load all the PNGs from a ZIP file and return them as a dictionary.
 static func load_images_from_zip(path: String) -> Dictionary[String, Image]:

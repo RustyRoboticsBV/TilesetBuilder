@@ -4,7 +4,7 @@ extends EditorPlugin;
 var import_plugin;
 
 func _enter_tree():
-	import_plugin = preload("TilesetImporter.gd").new();
+	import_plugin = preload("TilesetTextureImporter.gd").new();
 	add_import_plugin(import_plugin);
 
 
