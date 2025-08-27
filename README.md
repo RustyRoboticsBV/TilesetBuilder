@@ -7,7 +7,7 @@ An import plugin for the Godot game engine. It can:
 ZIP archives of PNG and/or BMP files are supported.
 
 ## Install Guide
-1. Create a folder called `Addons/TilesetImporter`.
+1. Create a folder called `Addons/ZipTilesetImporter`.
 2. Extract the contents of this repository to that folder.
 3. Enable the import plugin under `Project Settings` => `Plugins`.
 
