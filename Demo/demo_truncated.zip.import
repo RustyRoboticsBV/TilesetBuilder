@@ -1,0 +1,14 @@
+[remap]
+
+importer="tile_atlas_builder"
+type="Texture2D"
+uid="uid://c8m3qgm52b0a0"
+path="res://.godot/imported/demo_truncated.zip-b68ce4f754dadf58a43af957c597e82c.res"
+
+[deps]
+
+source_file="res://Addons/TilesetMaker/Demo/demo_truncated.zip"
+dest_files=["res://.godot/imported/demo_truncated.zip-b68ce4f754dadf58a43af957c597e82c.res"]
+
+[params]
+
