@@ -8,7 +8,7 @@ func _get_import_options(String, int) -> Array[Dictionary]:
 	return [];
 	
 func _get_visible_name() -> String:
-	return "Tileset Builder";
+	return "ZIP Tileset";
 	
 func _get_recognized_extensions() -> PackedStringArray:
 	return ["zip"];

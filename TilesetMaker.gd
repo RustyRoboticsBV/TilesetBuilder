@@ -597,7 +597,7 @@ func create_tileset_texture(file_path : String) -> TilesetTexture:
 	
 	# Copy all resolved tiles to a texture.
 	print();
-	print("Building tileset...");
+	print("Building tile atlas texture...");
 	var image : Image = Image.create(tile_w * 12, tile_h * 4, false, Image.FORMAT_RGBA8);
 	get_resolved(TileID.CAP_T).blit_onto(image, 0, 0, tile_w, tile_h);
 	get_resolved(TileID.TURN_TL).blit_onto(image, 1, 0, tile_w, tile_h);
@@ -650,6 +650,7 @@ func create_tileset_texture(file_path : String) -> TilesetTexture:
 	get_resolved(TileID.EDGE_B).blit_onto(image, 9, 3, tile_w, tile_h);
 	get_resolved(TileID.GAP_B).blit_onto(image, 10, 3, tile_w, tile_h);
 	get_resolved(TileID.NOOK_BR).blit_onto(image, 11, 3, tile_w, tile_h);
+	print("Done!");
 	
 	var result = TilesetTexture.new();
 	result.texture = ImageTexture.create_from_image(image);
