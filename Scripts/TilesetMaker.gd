@@ -361,7 +361,7 @@ func set_peering_bits(source : TileSetAtlasSource, x : int, y : int, bits : Arra
 	set_peer_bit(tile, TileSet.CellNeighbor.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER, !bits.has("BR"));
 
 func set_peer_bit(tile : TileData, side : TileSet.CellNeighbor, enabled : bool):
-	tile.set_terrain_peering_bit(side, enabled);
+	tile.set_terrain_peering_bit(side, 0 if enabled else -1);
 
 
 
