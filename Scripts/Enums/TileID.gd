@@ -1,4 +1,4 @@
-# The IDs of all tiles.
+## The IDs of all tiles from the standard 47-tile blob tileset.
 enum TileID {
 	EDGE_L,
 	EDGE_R,
