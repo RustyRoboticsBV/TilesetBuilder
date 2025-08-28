@@ -1,4 +1,15 @@
 const TileID = preload("../Enums/TileID.gd").TileID;
+const Bit = preload("../Enums/PeeringBit.gd").PeeringBit;
+
+# Peering bit short-hands.
+const TL : Bit = Bit.TL;
+const T : Bit = Bit.T;
+const TR : Bit = Bit.TR;
+const L : Bit = Bit.L;
+const R : Bit = Bit.R;
+const BL : Bit = Bit.BL;
+const B : Bit = Bit.B;
+const BR : Bit = Bit.BR;
 
 ## A dictionary of the coordinates of each tile ID.
 const Coords : Dictionary[TileID, Vector2i] = {
@@ -55,6 +66,61 @@ const Coords : Dictionary[TileID, Vector2i] = {
 	TileID.NOOK_BR:			Vector2i(11, 3)
 };
 
+## A dictionary of the coordinates of each tile ID.
+const PeeringBits : Dictionary[TileID, Array] = {
+	TileID.CAP_T:			[B],
+	TileID.TURN_TL:			[B, R],
+	TileID.JUNCTION_T:		[B, L, R],
+	TileID.TURN_TR:			[B, L],
+	TileID.HUB_BR:			[B, R, T, TL, L],
+	TileID.EXIT_H_TL:		[L, R, BR, B],
+	TileID.EXIT_H_TR:		[R, L, BL, B],
+	TileID.HUB_BL:			[B, L, T, TR, R],
+	TileID.NOOK_TL:			[B, BR, R],
+	TileID.GAP_T:			[T, L, BL, B, BR, R],
+	TileID.EDGE_T:			[L, BL, B, BR, R],
+	TileID.NOOK_TR:			[B, BL, L],
+	
+	TileID.MIDDLE_V:		[T, B],
+	TileID.JUNCTION_L:		[R, T, B],
+	TileID.CROSS:			[L, R, T, B],
+	TileID.JUNCTION_R:		[L, T, B],
+	TileID.EXIT_V_TL:		[T, B, BR, R],
+	TileID.CORNER_TL:		[L, BL, B, BR, R, TR, T],
+	TileID.CORNER_TR:		[R, BR, B, BL, L, TL, T],
+	TileID.EXIT_V_TR:		[T, B, BL, L],
+	TileID.EDGE_L:			[B, BR, R, TR, T],
+	TileID.DIAG_U:			[L, BL, B, T, TR, R],
+	#TileID.EMPTY:			[],
+	TileID.GAP_R:			[R, T, TL, L, BL, B],
+	
+	TileID.CAP_B:			[T],
+	TileID.TURN_BL:			[T, R],
+	TileID.JUNCTION_B:		[T, L, R],
+	TileID.TURN_BR:			[T, L],
+	TileID.EXIT_V_BL:		[B, T, TR, R],
+	TileID.CORNER_BL:		[L, TL, T, TR, R, BR, B],
+	TileID.CORNER_BR:		[R, TR, T, TL, L, BL, B],
+	TileID.EXIT_V_BR:		[B, T, TL, L],
+	TileID.GAP_L:			[L, B, BR, R, TR, T],
+	TileID.CENTER:			[L, BL, B, BR, R, TR, T, TL],
+	TileID.DIAG_D:			[L, TL, T, B, BR, R],
+	TileID.EDGE_R:			[B, BL, L, TL, T],
+	
+	TileID.SMALL:			[],
+	TileID.CAP_L:			[R],
+	TileID.MIDDLE_H:		[L, R],
+	TileID.CAP_R:			[L],
+	TileID.HUB_TR:			[T, R, B, BL, L],
+	TileID.EXIT_H_BL:		[L, R, TR, T],
+	TileID.EXIT_H_BR:		[R, L, TL, T],
+	TileID.HUB_TL:			[T, L, B, BR, R],
+	TileID.NOOK_BL:			[R, TR, T],
+	TileID.EDGE_B:			[L, TL, T, TR, R],
+	TileID.GAP_B:			[B, L, TL, T, TR, R],
+	TileID.NOOK_BR:			[L, TL, T]
+};
+
 ## A single tile image.
 class TileImage:
 	var id : TileID;
@@ -73,13 +139,20 @@ class TileImage:
 			return 0;
 		return image.get_height();
 	
-	# Return the tileset position.
+	# Return the tile coordinates.
 	func get_coords() -> Vector2i:
 		if TileID.values().has(id):
 			return Coords[id];
 		else:
 			return Vector2i(-1, -1);
-				
+	
+	# Return the tile peering bitmask.
+	func get_peering_bits() -> Array:
+		if TileID.values().has(id):
+			return PeeringBits[id];
+		else:
+			return [];
+	
 	# Return a duplicate of this tile image.
 	func copy() -> TileImage:
 		var mycopy : TileImage = TileImage.new();
