@@ -1,6 +1,7 @@
 extends Resource;
 
 const TilesetTexture = preload("TilesetTexture.gd").TilesetTexture;
+const Bit = preload("../Enums/PeeringBit.gd").PeeringBit;
 
 # Load a tileset from a ZIP file.
 func create_tileset(file_path : String) -> TileSet:
@@ -131,14 +132,14 @@ func create_tile(source : TileSetAtlasSource, x : int, y : int):
 
 func set_peering_bits(source : TileSetAtlasSource, x : int, y : int, bits : Array[String]):
 	var tile : TileData = source.get_tile_data(Vector2i(x, y), 0);
-	set_peer_bit(tile, TileSet.CellNeighbor.CELL_NEIGHBOR_TOP_LEFT_CORNER, !bits.has("TL"));
-	set_peer_bit(tile, TileSet.CellNeighbor.CELL_NEIGHBOR_TOP_SIDE, !bits.has("T"));
-	set_peer_bit(tile, TileSet.CellNeighbor.CELL_NEIGHBOR_TOP_RIGHT_CORNER, !bits.has("TR"));
-	set_peer_bit(tile, TileSet.CellNeighbor.CELL_NEIGHBOR_LEFT_SIDE, !bits.has("L"));
-	set_peer_bit(tile, TileSet.CellNeighbor.CELL_NEIGHBOR_RIGHT_SIDE, !bits.has("R"));
-	set_peer_bit(tile, TileSet.CellNeighbor.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER, !bits.has("BL"));
-	set_peer_bit(tile, TileSet.CellNeighbor.CELL_NEIGHBOR_BOTTOM_SIDE, !bits.has("B"));
-	set_peer_bit(tile, TileSet.CellNeighbor.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER, !bits.has("BR"));
+	set_peer_bit(tile, Bit.TL, !bits.has("TL"));
+	set_peer_bit(tile, Bit.T, !bits.has("T"));
+	set_peer_bit(tile, Bit.TR, !bits.has("TR"));
+	set_peer_bit(tile, Bit.L, !bits.has("L"));
+	set_peer_bit(tile, Bit.R, !bits.has("R"));
+	set_peer_bit(tile, Bit.BL, !bits.has("BL"));
+	set_peer_bit(tile, Bit.B, !bits.has("B"));
+	set_peer_bit(tile, Bit.BR, !bits.has("BR"));
 
-func set_peer_bit(tile : TileData, side : TileSet.CellNeighbor, enabled : bool):
-	tile.set_terrain_peering_bit(side, 0 if enabled else -1);
+func set_peer_bit(tile : TileData, side : Bit, enabled : bool):
+	tile.set_terrain_peering_bit(side as TileSet.CellNeighbor, 0 if enabled else -1);
