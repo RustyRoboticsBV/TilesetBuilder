@@ -249,58 +249,10 @@ class TilesetTexture:
 		print();
 		print("Building tile atlas texture...");
 		var image : Image = Image.create(tile_w * 12, tile_h * 4, false, Image.FORMAT_RGBA8);
-		get_resolved(TileID.CAP_T).blit_onto(image, 0, 0, tile_w, tile_h);
-		get_resolved(TileID.TURN_TL).blit_onto(image, 1, 0, tile_w, tile_h);
-		get_resolved(TileID.JUNCTION_T).blit_onto(image, 2, 0, tile_w, tile_h);
-		get_resolved(TileID.TURN_TR).blit_onto(image, 3, 0, tile_w, tile_h);
-		get_resolved(TileID.HUB_BR).blit_onto(image, 4, 0, tile_w, tile_h);
-		get_resolved(TileID.EXIT_TL_H).blit_onto(image, 5, 0, tile_w, tile_h);
-		get_resolved(TileID.EXIT_TR_H).blit_onto(image, 6, 0, tile_w, tile_h);
-		get_resolved(TileID.HUB_BL).blit_onto(image, 7, 0, tile_w, tile_h);
-		get_resolved(TileID.NOOK_TL).blit_onto(image, 8, 0, tile_w, tile_h);
-		get_resolved(TileID.GAP_T).blit_onto(image, 9, 0, tile_w, tile_h);
-		get_resolved(TileID.EDGE_T).blit_onto(image, 10, 0, tile_w, tile_h);
-		get_resolved(TileID.NOOK_TR).blit_onto(image, 11, 0, tile_w, tile_h);
-		
-		get_resolved(TileID.MIDDLE_V).blit_onto(image, 0, 1, tile_w, tile_h);
-		get_resolved(TileID.JUNCTION_L).blit_onto(image, 1, 1, tile_w, tile_h);
-		get_resolved(TileID.CROSS).blit_onto(image, 2, 1, tile_w, tile_h);
-		get_resolved(TileID.JUNCTION_R).blit_onto(image, 3, 1, tile_w, tile_h);
-		get_resolved(TileID.EXIT_TL_V).blit_onto(image, 4, 1, tile_w, tile_h);
-		get_resolved(TileID.CORNER_TL).blit_onto(image, 5, 1, tile_w, tile_h);
-		get_resolved(TileID.CORNER_TR).blit_onto(image, 6, 1, tile_w, tile_h);
-		get_resolved(TileID.EXIT_TR_V).blit_onto(image, 7, 1, tile_w, tile_h);
-		get_resolved(TileID.EDGE_L).blit_onto(image, 8, 1, tile_w, tile_h);
-		get_resolved(TileID.DIAG_U).blit_onto(image, 9, 1, tile_w, tile_h);
-		#get_resolved(TileID.EMPTY).blit_onto(image, 10, 1, tile_w, tile_h);
-		get_resolved(TileID.GAP_R).blit_onto(image, 11, 1, tile_w, tile_h);
-		
-		get_resolved(TileID.CAP_B).blit_onto(image, 0, 2, tile_w, tile_h);
-		get_resolved(TileID.TURN_BL).blit_onto(image, 1, 2, tile_w, tile_h);
-		get_resolved(TileID.JUNCTION_B).blit_onto(image, 2, 2, tile_w, tile_h);
-		get_resolved(TileID.TURN_BR).blit_onto(image, 3, 2, tile_w, tile_h);
-		get_resolved(TileID.EXIT_BL_V).blit_onto(image, 4, 2, tile_w, tile_h);
-		get_resolved(TileID.CORNER_BL).blit_onto(image, 5, 2, tile_w, tile_h);
-		get_resolved(TileID.CORNER_BR).blit_onto(image, 6, 2, tile_w, tile_h);
-		get_resolved(TileID.EXIT_BR_V).blit_onto(image, 7, 2, tile_w, tile_h);
-		get_resolved(TileID.GAP_L).blit_onto(image, 8, 2, tile_w, tile_h);
-		get_resolved(TileID.CENTER).blit_onto(image, 9, 2, tile_w, tile_h);
-		get_resolved(TileID.DIAG_D).blit_onto(image, 10, 2, tile_w, tile_h);
-		get_resolved(TileID.EDGE_R).blit_onto(image, 11, 2, tile_w, tile_h);
-		
-		get_resolved(TileID.SMALL).blit_onto(image, 0, 3, tile_w, tile_h);
-		get_resolved(TileID.CAP_L).blit_onto(image, 1, 3, tile_w, tile_h);
-		get_resolved(TileID.MIDDLE_H).blit_onto(image, 2, 3, tile_w, tile_h);
-		get_resolved(TileID.CAP_R).blit_onto(image, 3, 3, tile_w, tile_h);
-		get_resolved(TileID.HUB_TR).blit_onto(image, 4, 3, tile_w, tile_h);
-		get_resolved(TileID.EXIT_BL_H).blit_onto(image, 5, 3, tile_w, tile_h);
-		get_resolved(TileID.EXIT_BR_H).blit_onto(image, 6, 3, tile_w, tile_h);
-		get_resolved(TileID.HUB_TL).blit_onto(image, 7, 3, tile_w, tile_h);
-		get_resolved(TileID.NOOK_BL).blit_onto(image, 8, 3, tile_w, tile_h);
-		get_resolved(TileID.EDGE_B).blit_onto(image, 9, 3, tile_w, tile_h);
-		get_resolved(TileID.GAP_B).blit_onto(image, 10, 3, tile_w, tile_h);
-		get_resolved(TileID.NOOK_BR).blit_onto(image, 11, 3, tile_w, tile_h);
-		print("Done!");
+		for id in TileID.values():
+			var tile : TileImage = get_resolved(id);
+			var coords : Vector2i = tile.get_coords();
+			tile.blit_onto(image, coords.x, coords.y, tile_w, tile_h);
 		
 		var result = TilesetTexture.new();
 		result.texture = ImageTexture.create_from_image(image);
@@ -308,6 +260,8 @@ class TilesetTexture:
 		result.tile_num_y = 4;
 		result.tile_w = tile_w;
 		result.tile_h = tile_h;
+		
+		print("Done!");
 		return result;
 
 	# Load all the PNGs from a ZIP file and return them as a dictionary.
