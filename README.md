@@ -16,15 +16,18 @@ After installing, create a ZIP file and fill it with image files, using the file
 - When importing as a tileset, its terrain (autotiling) will automatically be set up.
 - When importing as a texture, you must create the actual tileset resource yourself, but you get more control over its properties.
 
-This image shows you which tile each filename will map to:
+### Standard Tiles
+This image shows you which tile each filename maps to:
 ![The tiles of a 47-tile blob tileset, and their identifiers.](TilesetReference.png)
 
 For example, the file `archive.zip/NOOK_TR.png` would be used as the top-right outer corner tile.
 
 As stated before, missing tiles will be automatically generated. See `Documentation/TileGeneration.md` for more details about the generation process.
 
+### User-Defined Tiles
+You can add custom tiles by adding images with filenames that are not in the image above. These tiles are placed below the standard tileset area. For example, if you want to add slopes to your tileset you can do so in this way.
+
 ## Planned Features
-- Adding the option for user-defined, non-standard tiles.
 - Adding the option for tile variants.
 
 ## Known Issues

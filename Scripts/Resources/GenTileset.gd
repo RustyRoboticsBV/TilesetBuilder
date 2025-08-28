@@ -18,6 +18,7 @@ func create_tileset(file_path : String) -> TileSet:
 	tileset.tile_size = Vector2i(texture.tile_w, texture.tile_h);
 	tileset.add_source(source);
 	
+	# Add terrain (i.e. autotiling).
 	tileset.add_terrain_set();
 	tileset.add_terrain(0);
 	tileset.set_terrain_name(0, 0, "Main");
@@ -32,20 +33,26 @@ func create_tileset(file_path : String) -> TileSet:
 	
 	return tileset;
 
+## Create a tile.
 func create_tile(source : TileSetAtlasSource, x : int, y : int, peering_bits : Array):
+	# Create tile.
 	source.create_tile(Vector2i(x, y));
 	var tile : TileData = source.get_tile_data(Vector2i(x, y), 0);
+	
+	# Set terrain.
 	tile.terrain_set = 0;
 	tile.terrain = 0;
 	
-	set_peer_bit(tile, Bit.TL, peering_bits.has(Bit.TL));
-	set_peer_bit(tile, Bit.T, peering_bits.has(Bit.T));
-	set_peer_bit(tile, Bit.TR, peering_bits.has(Bit.TR));
-	set_peer_bit(tile, Bit.L, peering_bits.has(Bit.L));
-	set_peer_bit(tile, Bit.R, peering_bits.has(Bit.R));
-	set_peer_bit(tile, Bit.BL, peering_bits.has(Bit.BL));
-	set_peer_bit(tile, Bit.B, peering_bits.has(Bit.B));
-	set_peer_bit(tile, Bit.BR, peering_bits.has(Bit.BR));
+	# Set peering bits.
+	set_peering_bit(tile, Bit.TL, peering_bits.has(Bit.TL));
+	set_peering_bit(tile, Bit.T, peering_bits.has(Bit.T));
+	set_peering_bit(tile, Bit.TR, peering_bits.has(Bit.TR));
+	set_peering_bit(tile, Bit.L, peering_bits.has(Bit.L));
+	set_peering_bit(tile, Bit.R, peering_bits.has(Bit.R));
+	set_peering_bit(tile, Bit.BL, peering_bits.has(Bit.BL));
+	set_peering_bit(tile, Bit.B, peering_bits.has(Bit.B));
+	set_peering_bit(tile, Bit.BR, peering_bits.has(Bit.BR));
 
-func set_peer_bit(tile : TileData, side : Bit, enabled : bool):
+## Set a terrain peering bit.
+func set_peering_bit(tile : TileData, side : Bit, enabled : bool):
 	tile.set_terrain_peering_bit(side as TileSet.CellNeighbor, 0 if enabled else -1);

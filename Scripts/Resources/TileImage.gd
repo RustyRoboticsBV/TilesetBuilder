@@ -126,6 +126,7 @@ class TileImage:
 	var id : TileID;
 	var image : Image;
 	var resolved_simply : bool;
+	var user_defined_index : int;
 	
 	# Return the width of the image.
 	func get_width() -> int:

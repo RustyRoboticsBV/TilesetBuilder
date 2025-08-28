@@ -1,6 +1,3 @@
-extends Node;
-
-# Imports.
 const TileID = preload("../Enums/TileID.gd").TileID;
 const TileImage = preload("TileImage.gd").TileImage;
 
@@ -15,6 +12,7 @@ class TilesetTexture:
 
 	static var src_images : Dictionary[String, Image] = {};
 	static var dst_images : Array[TileImage] = [];
+	static var usr_images : Array[TileImage] = [];
 
 	# Load a tileset texture from a ZIP file.
 	static func create_tileset_texture(file_path : String) -> TilesetTexture:
@@ -228,9 +226,23 @@ class TilesetTexture:
 				print("Infinite loop detected!");
 				break;
 		
+		# Add user-defined tiles.
+		usr_images = [];
+		for src_image in src_images:
+			if not TileID.keys().has(src_image):
+				var user_defined : TileImage = TileImage.new();
+				user_defined.image =  src_images[src_image];
+				
+				usr_images.append(user_defined);
+				print("Found user-defined tile " + str(usr_images.size()) + ": " + src_image);
+			else:
+				print(src_image + " is not a usr tile.");
+		
 		# Figure out tile size.
 		print();
 		print("Determining tile size...");
+		var tile_num_x : int = 12;
+		var tile_num_y : int = 4 + ceil(float(usr_images.size()) / 12.0);
 		var tile_w : int = 0;
 		var tile_h : int = 0;
 		for id in TileID.values():
@@ -249,17 +261,22 @@ class TilesetTexture:
 		# Copy all resolved tiles to a texture.
 		print();
 		print("Building tile atlas texture...");
-		var image : Image = Image.create(tile_w * 12, tile_h * 4, false, Image.FORMAT_RGBA8);
+		var image : Image = Image.create(tile_w * tile_num_x, tile_h * tile_num_y, false, Image.FORMAT_RGBA8);
 		
 		for id in TileID.values():
 			var tile : TileImage = get_resolved(id);
 			var coords : Vector2i = tile.get_coords();
 			tile.blit_onto(image, coords.x, coords.y, tile_w, tile_h);
 		
+		for u in usr_images.size():
+			var x : int = u % tile_num_x;
+			var y : int = 4 + floor(u / float(tile_num_x));
+			usr_images[u].blit_onto(image, x, y, tile_w, tile_h);
+		
 		var result = TilesetTexture.new();
 		result.texture = ImageTexture.create_from_image(image);
-		result.tile_num_x = 12;
-		result.tile_num_y = 4;
+		result.tile_num_x = tile_num_x;
+		result.tile_num_y = tile_num_y;
 		result.tile_w = tile_w;
 		result.tile_h = tile_h;
 		result.tiles = dst_images;
