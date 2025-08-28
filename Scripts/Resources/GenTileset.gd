@@ -32,10 +32,10 @@ const PeeringBits : Dictionary[TileID, Array] = {
 	TileID.JUNCTION_L:		[R, T, B],
 	TileID.CROSS:			[L, R, T, B],
 	TileID.JUNCTION_R:		[L, T, B],
-	TileID.EXIT_TL_V:		[T, B, BL, L],
-	TileID.CORNER_TL:		[L, BL, B, BR, R, TR],
-	TileID.CORNER_TR:		[R, BR, B, BL, L, TL],
-	TileID.EXIT_TR_V:		[T, B, BR, R],
+	TileID.EXIT_TL_V:		[T, B, BR, R],
+	TileID.CORNER_TL:		[L, BL, B, BR, R, TR, T],
+	TileID.CORNER_TR:		[R, BR, B, BL, L, TL, T],
+	TileID.EXIT_TR_V:		[T, B, BL, L],
 	TileID.EDGE_L:			[B, BR, R, TR, T],
 	TileID.DIAG_U:			[L, BL, B, T, TR, R],
 	#TileID.EMPTY:			[],
@@ -46,8 +46,8 @@ const PeeringBits : Dictionary[TileID, Array] = {
 	TileID.JUNCTION_B:		[T, L, R],
 	TileID.TURN_BR:			[T, L],
 	TileID.EXIT_BL_V:		[B, T, TR, R],
-	TileID.CORNER_BL:		[B, BR, R, TR, T, TL],
-	TileID.CORNER_BR:		[B, BL, L, TL, T, TR],
+	TileID.CORNER_BL:		[L, TL, T, TR, R, BR, B],
+	TileID.CORNER_BR:		[R, TR, T, TL, L, BL, B],
 	TileID.EXIT_BR_V:		[B, T, TL, L],
 	TileID.GAP_L:			[L, B, BR, R, TR, T],
 	TileID.CENTER:			[L, BL, B, BR, R, TR, T, TL],
@@ -89,122 +89,27 @@ func create_tileset(file_path : String) -> TileSet:
 	tileset.set_terrain_color(0, 0, Color.RED);
 	
 	# Create tiles.
-	create_tile(source, 0, 0);
-	create_tile(source, 1, 0);
-	create_tile(source, 2, 0);
-	create_tile(source, 3, 0);
-	create_tile(source, 4, 0);
-	create_tile(source, 5, 0);
-	create_tile(source, 6, 0);
-	create_tile(source, 7, 0);
-	create_tile(source, 8, 0);
-	create_tile(source, 9, 0);
-	create_tile(source, 10, 0);
-	create_tile(source, 11, 0);
-	create_tile(source, 0, 1);
-	create_tile(source, 1, 1);
-	create_tile(source, 2, 1);
-	create_tile(source, 3, 1);
-	create_tile(source, 4, 1);
-	create_tile(source, 5, 1);
-	create_tile(source, 6, 1);
-	create_tile(source, 7, 1);
-	create_tile(source, 8, 1);
-	create_tile(source, 9, 1);
-	create_tile(source, 11, 1);
-	create_tile(source, 0, 2);
-	create_tile(source, 1, 2);
-	create_tile(source, 2, 2);
-	create_tile(source, 3, 2);
-	create_tile(source, 4, 2);
-	create_tile(source, 5, 2);
-	create_tile(source, 6, 2);
-	create_tile(source, 7, 2);
-	create_tile(source, 8, 2);
-	create_tile(source, 9, 2);
-	create_tile(source, 10, 2);
-	create_tile(source, 11, 2);
-	create_tile(source, 0, 3);
-	create_tile(source, 1, 3);
-	create_tile(source, 2, 3);
-	create_tile(source, 3, 3);
-	create_tile(source, 4, 3);
-	create_tile(source, 5, 3);
-	create_tile(source, 6, 3);
-	create_tile(source, 7, 3);
-	create_tile(source, 8, 3);
-	create_tile(source, 9, 3);
-	create_tile(source, 10, 3);
-	create_tile(source, 11, 3);
-	print("Created tiles.");
-	
-	set_peering_bits(source, 0, 0, ["B"]);
-	set_peering_bits(source, 1, 0, ["B", "R"]);
-	set_peering_bits(source, 2, 0, ["B", "L", "R"]);
-	set_peering_bits(source, 3, 0, ["B", "L"]);
-	set_peering_bits(source, 4, 0, ["L", "TL", "T", "R", "B"]);
-	set_peering_bits(source, 5, 0, ["L", "B", "BR", "R"]);
-	set_peering_bits(source, 6, 0, ["R", "B", "BL", "L"]);
-	set_peering_bits(source, 7, 0, ["R", "TR", "T", "L", "B"]);
-	set_peering_bits(source, 8, 0, ["B", "BR", "R"]);
-	set_peering_bits(source, 9, 0, ["T", "L", "BL", "B", "BR", "R"]);
-	set_peering_bits(source, 10, 0, ["L", "BL", "B", "BR", "R"]);
-	set_peering_bits(source, 11, 0, ["B", "BL", "L"]);
-	set_peering_bits(source, 1, 1, ["R", "T", "B"]);
-	set_peering_bits(source, 2, 1, ["L", "R", "T", "B"]);
-	set_peering_bits(source, 3, 1, ["L", "T", "B"]);
-	set_peering_bits(source, 4, 1, ["T", "R", "BR", "B"]);
-	set_peering_bits(source, 5, 1, ["L", "BL", "B", "BR", "R", "TR", "T"]);
-	set_peering_bits(source, 6, 1, ["R", "BR", "B", "BL", "L", "TL", "T"]);
-	set_peering_bits(source, 7, 1, ["T", "L", "BL", "B"]);
-	set_peering_bits(source, 8, 1, ["T", "TR", "R", "BR", "B"]);
-	set_peering_bits(source, 9, 1, ["B", "BL", "L", "T", "TR", "R"]);
-	set_peering_bits(source, 11, 1, ["T", "TL", "L", "BL", "B", "R"]);
-	set_peering_bits(source, 1, 2, ["T", "R"]);
-	set_peering_bits(source, 2, 2, ["T", "L", "R"]);
-	set_peering_bits(source, 3, 2, ["T", "L"]);
-	set_peering_bits(source, 4, 2, ["B", "R", "TR", "T"]);
-	set_peering_bits(source, 5, 2, ["L", "TL", "T", "TR", "R", "BR", "B"]);
-	set_peering_bits(source, 6, 2, ["R", "TR", "T", "TL", "L", "BL", "B"]);
-	set_peering_bits(source, 7, 2, ["B", "L", "TL", "T"]);
-	set_peering_bits(source, 8, 2, ["L", "T", "TR", "R", "BR", "B"]);
-	set_peering_bits(source, 9, 2, ["L", "TL", "T", "TR", "R", "BR", "B", "BL"]);
-	set_peering_bits(source, 10, 2, ["L", "TL", "T", "B", "BR", "R"]);
-	set_peering_bits(source, 11, 2, ["T", "TL", "L", "BL", "B"]);
-	set_peering_bits(source, 0, 1, ["T", "B"]);
-	set_peering_bits(source, 0, 2, ["T"]);
-	set_peering_bits(source, 0, 3, [""]);
-	set_peering_bits(source, 1, 3, ["R"]);
-	set_peering_bits(source, 2, 3, ["L", "R"]);
-	set_peering_bits(source, 3, 3, ["L"]);
-	set_peering_bits(source, 4, 3, ["L", "BL", "B", "R", "T"]);
-	set_peering_bits(source, 5, 3, ["L", "T", "TR", "R"]);
-	set_peering_bits(source, 6, 3, ["R", "T", "TL", "L"]);
-	set_peering_bits(source, 7, 3, ["R", "BR", "B", "L", "T"]);
-	set_peering_bits(source, 8, 3, ["T", "TR", "R"]);
-	set_peering_bits(source, 9, 3, ["L", "TL", "T", "TR", "R"]);
-	set_peering_bits(source, 10, 3, ["B", "L", "TL", "T", "TR", "R"]);
-	set_peering_bits(source, 11, 3, ["T", "TL", "L"]);
-	print("Set terrain.");
+	for id in TileID.values():
+		var coords = texture.tiles[id].get_coords();
+		var peering_bits = PeeringBits[id];
+		create_tile(source, coords.x, coords.y, peering_bits);
 	
 	return tileset;
 
-func create_tile(source : TileSetAtlasSource, x : int, y : int):
+func create_tile(source : TileSetAtlasSource, x : int, y : int, peering_bits : Array):
 	source.create_tile(Vector2i(x, y));
 	var tile : TileData = source.get_tile_data(Vector2i(x, y), 0);
 	tile.terrain_set = 0;
 	tile.terrain = 0;
-
-func set_peering_bits(source : TileSetAtlasSource, x : int, y : int, bits : Array[String]):
-	var tile : TileData = source.get_tile_data(Vector2i(x, y), 0);
-	set_peer_bit(tile, Bit.TL, !bits.has("TL"));
-	set_peer_bit(tile, Bit.T, !bits.has("T"));
-	set_peer_bit(tile, Bit.TR, !bits.has("TR"));
-	set_peer_bit(tile, Bit.L, !bits.has("L"));
-	set_peer_bit(tile, Bit.R, !bits.has("R"));
-	set_peer_bit(tile, Bit.BL, !bits.has("BL"));
-	set_peer_bit(tile, Bit.B, !bits.has("B"));
-	set_peer_bit(tile, Bit.BR, !bits.has("BR"));
+	
+	set_peer_bit(tile, Bit.TL, peering_bits.has(TL));
+	set_peer_bit(tile, Bit.T, peering_bits.has(T));
+	set_peer_bit(tile, Bit.TR, peering_bits.has(TR));
+	set_peer_bit(tile, Bit.L, peering_bits.has(L));
+	set_peer_bit(tile, Bit.R, peering_bits.has(R));
+	set_peer_bit(tile, Bit.BL, peering_bits.has(BL));
+	set_peer_bit(tile, Bit.B, peering_bits.has(B));
+	set_peer_bit(tile, Bit.BR, peering_bits.has(BR));
 
 func set_peer_bit(tile : TileData, side : Bit, enabled : bool):
 	tile.set_terrain_peering_bit(side as TileSet.CellNeighbor, 0 if enabled else -1);

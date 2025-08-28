@@ -7,6 +7,7 @@ const TileImage = preload("TileImage.gd").TileImage;
 # A generated tileset texture.
 class TilesetTexture:
 	var texture : Texture2D = ImageTexture.create_from_image(Image.create(1, 1, false, Image.FORMAT_RGB8));
+	var tiles : Array[TileImage] = [];
 	var tile_num_x : int = 0;
 	var tile_num_y : int = 0;
 	var tile_w : int = 0;
@@ -249,6 +250,7 @@ class TilesetTexture:
 		print();
 		print("Building tile atlas texture...");
 		var image : Image = Image.create(tile_w * 12, tile_h * 4, false, Image.FORMAT_RGBA8);
+		
 		for id in TileID.values():
 			var tile : TileImage = get_resolved(id);
 			var coords : Vector2i = tile.get_coords();
@@ -260,6 +262,7 @@ class TilesetTexture:
 		result.tile_num_y = 4;
 		result.tile_w = tile_w;
 		result.tile_h = tile_h;
+		result.tiles = dst_images;
 		
 		print("Done!");
 		return result;
