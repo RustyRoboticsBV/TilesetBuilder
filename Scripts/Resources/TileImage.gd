@@ -1,7 +1,59 @@
-extends Resource;
-
-# Imports.
 const TileID = preload("../Enums/TileID.gd").TileID;
+
+## A dictionary of the coordinates of each tile ID.
+const Coords : Dictionary[TileID, Vector2i] = {
+	TileID.CAP_T:			Vector2i(0, 0),
+	TileID.TURN_TL:			Vector2i(1, 0),
+	TileID.JUNCTION_T:		Vector2i(2, 0),
+	TileID.TURN_TR:			Vector2i(3, 0),
+	TileID.HUB_BR:			Vector2i(4, 0),
+	TileID.EXIT_TL_H:		Vector2i(5, 0),
+	TileID.EXIT_TR_H:		Vector2i(6, 0),
+	TileID.HUB_BL:			Vector2i(7, 0),
+	TileID.NOOK_TL:			Vector2i(8, 0),
+	TileID.GAP_T:			Vector2i(9, 0),
+	TileID.EDGE_T:			Vector2i(10, 0),
+	TileID.NOOK_TR:			Vector2i(11, 0),
+	
+	TileID.MIDDLE_V:		Vector2i(0, 1),
+	TileID.JUNCTION_L:		Vector2i(1, 1),
+	TileID.CROSS:			Vector2i(2, 1),
+	TileID.JUNCTION_R:		Vector2i(3, 1),
+	TileID.EXIT_TL_V:		Vector2i(4, 1),
+	TileID.CORNER_TL:		Vector2i(5, 1),
+	TileID.CORNER_TR:		Vector2i(6, 1),
+	TileID.EXIT_TR_V:		Vector2i(7, 1),
+	TileID.EDGE_L:			Vector2i(8, 1),
+	TileID.DIAG_U:			Vector2i(9, 1),
+	#TileID.EMPTY:			Vector2i(10, 1),
+	TileID.GAP_R:			Vector2i(11, 1),
+	
+	TileID.CAP_B:			Vector2i(0, 2),
+	TileID.TURN_BL:			Vector2i(1, 2),
+	TileID.JUNCTION_B:		Vector2i(2, 2),
+	TileID.TURN_BR:			Vector2i(3, 2),
+	TileID.EXIT_BL_V:		Vector2i(4, 2),
+	TileID.CORNER_BL:		Vector2i(5, 2),
+	TileID.CORNER_BR:		Vector2i(6, 2),
+	TileID.EXIT_BR_V:		Vector2i(7, 2),
+	TileID.GAP_L:			Vector2i(8, 2),
+	TileID.CENTER:			Vector2i(9, 2),
+	TileID.DIAG_D:			Vector2i(10, 2),
+	TileID.EDGE_R:			Vector2i(11, 2),
+	
+	TileID.SMALL:			Vector2i(0, 3),
+	TileID.CAP_L:			Vector2i(1, 3),
+	TileID.MIDDLE_H:		Vector2i(2, 3),
+	TileID.CAP_R:			Vector2i(3, 3),
+	TileID.HUB_TR:			Vector2i(4, 3),
+	TileID.EXIT_BL_H:		Vector2i(5, 3),
+	TileID.EXIT_BR_H:		Vector2i(6, 3),
+	TileID.HUB_TL:			Vector2i(7, 3),
+	TileID.NOOK_BL:			Vector2i(8, 3),
+	TileID.EDGE_B:			Vector2i(9, 3),
+	TileID.GAP_B:			Vector2i(10, 3),
+	TileID.NOOK_BR:			Vector2i(11, 3)
+};
 
 ## A single tile image.
 class TileImage:
@@ -21,6 +73,13 @@ class TileImage:
 			return 0;
 		return image.get_height();
 	
+	# Return the tileset position.
+	func get_coords() -> Vector2i:
+		if TileID.values().has(id):
+			return Coords[id];
+		else:
+			return Vector2i(-1, -1);
+				
 	# Return a duplicate of this tile image.
 	func copy() -> TileImage:
 		var mycopy : TileImage = TileImage.new();
