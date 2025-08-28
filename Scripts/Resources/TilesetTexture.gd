@@ -1,5 +1,6 @@
 const TileID = preload("../Enums/TileID.gd").TileID;
 const TileImage = preload("TileImage.gd").TileImage;
+const TilesetSource = preload("TilesetSource.gd").TilesetSource;
 
 # A generated tileset texture.
 class TilesetTexture:
@@ -10,15 +11,15 @@ class TilesetTexture:
 	var tile_w : int = 0;
 	var tile_h : int = 0;
 
-	static var src_images : Dictionary[String, Image] = {};
+	static var source : TilesetSource = TilesetSource.new();
 	static var dst_images : Array[TileImage] = [];
 	static var usr_images : Array[TileImage] = [];
 
 	# Load a tileset texture from a ZIP file.
 	static func create_tileset_texture(file_path : String) -> TilesetTexture:
-		# Load images from ZIP file.
-		src_images = load_images_from_zip(file_path);
-		print("Images in ZIP: " + str(src_images));
+		# Load tileset source.
+		source = TilesetSource.new();
+		source.create_from_zip(file_path);
 		
 		# Create list of empty tile images.
 		dst_images = [];
@@ -227,16 +228,7 @@ class TilesetTexture:
 				break;
 		
 		# Add user-defined tiles.
-		usr_images = [];
-		for src_image in src_images:
-			if not TileID.keys().has(src_image):
-				var user_defined : TileImage = TileImage.new();
-				user_defined.image =  src_images[src_image];
-				
-				usr_images.append(user_defined);
-				print("Found user-defined tile " + str(usr_images.size()) + ": " + src_image);
-			else:
-				print(src_image + " is not a usr tile.");
+		usr_images = source.user_tiles.values();
 		
 		# Figure out tile size.
 		print();
@@ -479,9 +471,8 @@ class TilesetTexture:
 
 	# Try to resolve a tile by directly taking its image from the src_images dictionary.
 	static func simple_resolve(tile_id : TileID) -> bool:
-		var key : String = TileID.keys()[tile_id];
-		if src_images.has(key):
-			dst_images[tile_id].image = src_images[key];
+		if source.standard_tiles.has(tile_id):
+			dst_images[tile_id] = source.standard_tiles[tile_id];
 			dst_images[tile_id].resolved_simply = true;
 			return true;
 		else:

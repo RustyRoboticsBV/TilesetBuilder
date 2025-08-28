@@ -12,3 +12,4 @@ dest_files=["res://.godot/imported/demo_truncated.zip-b68ce4f754dadf58a43af957c5
 
 [params]
 
+Run Custom Logic=false

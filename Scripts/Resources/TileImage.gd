@@ -126,66 +126,72 @@ class TileImage:
 	var id : TileID;
 	var image : Image;
 	var resolved_simply : bool;
-	var user_defined_index : int;
 	
-	# Return the width of the image.
+	## Create a new tile image from an image.
+	static func create_from_img(img : Image):
+		var new_image : TileImage = TileImage.new();
+		new_image.image = img;
+		return new_image;
+	
+	## Return the width of the image.
 	func get_width() -> int:
 		if image == null:
 			return 0;
 		return image.get_width();
 	
-	# Return the height of the image.
+	## Return the height of the image.
 	func get_height() -> int:
 		if image == null:
 			return 0;
 		return image.get_height();
 	
-	# Return the tile coordinates.
+	## Return the tile coordinates.
 	func get_coords() -> Vector2i:
 		if TileID.values().has(id):
 			return Coords[id];
 		else:
 			return Vector2i(-1, -1);
 	
-	# Return the tile peering bitmask.
+	## Return the tile peering bitmask.
 	func get_peering_bits() -> Array:
 		if TileID.values().has(id):
 			return PeeringBits[id];
 		else:
 			return [];
 	
-	# Return a duplicate of this tile image.
+	## Return a duplicate of this tile image.
 	func copy() -> TileImage:
 		var mycopy : TileImage = TileImage.new();
 		mycopy.id = id;
 		mycopy.image = image.duplicate();
+		mycopy.resolved_simply = resolved_simply;
 		return mycopy;
 	
-	# Return a duplicate of this tile image that has been flipped horizontally.
+	## Return a duplicate of this tile image that has been flipped horizontally.
 	func flip_x() -> TileImage:
 		var mycopy = copy();
 		mycopy.image.flip_x();
 		return mycopy;
 	
-	# Return a duplicate of this tile image that has been flipped vertically.
+	## Return a duplicate of this tile image that has been flipped vertically.
 	func flip_y() -> TileImage:
 		var mycopy = copy();
 		mycopy.image.flip_y();
 		return mycopy;
 	
-	# Return a duplicate of this tile image that has been rotated clockwise.
+	## Return a duplicate of this tile image that has been rotated clockwise.
 	func rotate_clock() -> TileImage:
 		var mycopy = copy();
 		mycopy.image.rotate_90(CLOCKWISE);
 		return mycopy;
 	
-	# Return a duplicate of this tile image that has been rotated counter-clockwise.
+	## Return a duplicate of this tile image that has been rotated counter-clockwise.
 	func rotate_counter() -> TileImage:
 		var mycopy = copy();
 		mycopy.image.rotate_90(COUNTERCLOCKWISE);
 		return mycopy;
 	
-	# Create a new image from the left half of this image and the right half of another.
+	## Create a new image from the left half of this image and the right half of another.
 	func combine_h(right: TileImage):
 		# Ensure both images are the same size.
 		if get_width() != right.get_width() or get_height() != right.get_height():
@@ -201,7 +207,7 @@ class TileImage:
 		mycopy.image.blit_rect(right.image, Rect2(Vector2(half_width, 0), Vector2(half_width, height)), Vector2(half_width, 0));
 		return mycopy;
 	
-	# Create a new image from the bottom half of this image and the top half of another.
+	## Create a new image from the bottom half of this image and the top half of another.
 	func combine_v(top: TileImage):
 		# Ensure both images are the same size.
 		if get_width() != top.get_width() or get_height() != top.get_height():
@@ -217,7 +223,7 @@ class TileImage:
 		mycopy.image.blit_rect(top.image, Rect2(Vector2.ZERO, Vector2(width, half_height)), Vector2.ZERO);
 		return mycopy;
 	
-	# Create the bottom-left half of this image and the top-right half of another.
+	## Create the bottom-left half of this image and the top-right half of another.
 	func combine_diagonal_down(top_right: TileImage):
 		# Ensure both images are the same size.
 		if get_width() != top_right.get_width() or get_height() != top_right.get_height():
@@ -242,7 +248,7 @@ class TileImage:
 		
 		return mycopy;
 	
-	# Create the top-left half of this image and the bottom-right half of another.
+	## Create the top-left half of this image and the bottom-right half of another.
 	func combine_diagonal_up(bottom_right: TileImage):
 		# Ensure both images are the same size.
 		if get_width() != bottom_right.get_width() or get_height() != bottom_right.get_height():
@@ -267,7 +273,7 @@ class TileImage:
 		
 		return mycopy;
 	
-	# Blit this tile image onto a larger image.
+	## Blit this tile image onto a larger image.
 	func blit_onto(dst_image : Image, tile_x : int, tile_y : int, tile_w : int, tile_h : int):
 		# Do nothing if we didn't resolve.
 		if image == null:
