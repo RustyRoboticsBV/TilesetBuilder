@@ -12,56 +12,56 @@ The ways in which each tile is generated is as follows:
   - `EDGE_T`: flipping `EDGE_B` or rotating `EDGE_L`.
   - `EDGE_B`: flipping `EDGE_T`.
 - Outer corners:
-  - `NOOK_TL`: diagonally-combining `EDGE_L` and `EDGE_T`.
-  - `NOOK_TR`: diagonally-combining `EDGE_R` and `EDGE_T`.
-  - `NOOK_BL`: diagonally-combining `EDGE_L` and `EDGE_B`.
-  - `NOOK_BR`: diagonally-combining `EDGE_R` and `EDGE_B`.
+  - `NOOK_TL`: flipping `NOOK_TR`, flipping `NOOK_BL`, or diagonally-combining `EDGE_L` and `EDGE_T`.
+  - `NOOK_TR`: flipping `NOOK_TL` or diagonally-combining `EDGE_R` and `EDGE_T`.
+  - `NOOK_BL`: flipping `NOOK_BR`, flipping `NOOK_TL` or diagonally-combining `EDGE_L` and `EDGE_B`.
+  - `NOOK_BR`: flipping `NOOL_BL` or diagonally-combining `EDGE_R` and `EDGE_B`.
 - Inner corners:
-  - `CORNER_TL`: diagonally-combining `EDGE_T` and `EDGE_L`.
-  - `CORNER_TR`: diagonally-combining `EDGE_T` and `EDGE_R`.
-  - `CORNER_BL`: diagonally-combining `EDGE_B` and `EDGE_L`.
-  - `CORNER_BR`: diagonally-combining `EDGE_B` and `EDGE_R`.
+  - `CORNER_TL`: flipping `CORNER_TR`, flipping `CORNER_BL` or diagonally-combining `EDGE_T` and `EDGE_L`.
+  - `CORNER_TR`: flipping `CORNER_TL` or diagonally-combining `EDGE_T` and `EDGE_R`.
+  - `CORNER_BL`: flipping `CORNER_TL`, flipping `CORNER_BR` or diagonally-combining `EDGE_B` and `EDGE_L`.
+  - `CORNER_BR`: flipping `CORNER_BL` or diagonally-combining `EDGE_B` and `EDGE_R`.
 - Caps:
-  - `CAP_L`: vertically-combining `NOOK_TL` and `NOOK_BL`.
-  - `CAP_R`: vertically-combining `NOOK_TR` and `NOOK_BR`.
-  - `CAP_T`: horizontally-combining `NOOK_TL` and `NOOK_TR`.
-  - `CAP_B`: horizontally-combining `NOOK_BL` and `NOOK_BR`.
+  - `CAP_L`: flipping `CAP_R` or vertically-combining `NOOK_TL` and `NOOK_BL`.
+  - `CAP_R`: flipping `CAP_L` or vertically-combining `NOOK_TR` and `NOOK_BR`.
+  - `CAP_T`: flipping `CAP_B` or horizontally-combining `NOOK_TL` and `NOOK_TR`.
+  - `CAP_B`: flipping `CAP_T` or horizontally-combining `NOOK_BL` and `NOOK_BR`.
 - Thin middle:
   - `MIDDLE_H`: vertically-combining `EDGE_T` and `EDGE_B`.
   - `MIDDLE_V`: horizontally-combining `EDGE_L` and `EDGE_R`.
 - `SINGLE`: combining the corners of `NOOK_TL`, `NOOK_TR`, `NOOK_BL` and `NOOK_BR`.
 - Double inner corners:
-  - `GAP_L`: vertically-combining `CORNER_TL` and `CORNER_BL`.
-  - `GAP_R`: vertically-combining `CORNER_TR` and `CORNER_BR`.
-  - `GAP_T`: horizontally-combining `CORNER_TL` and `CORNER_TR`.
-  - `GAP_B`: horizontally-combining `CORNER_BL` and `CORNER_BR`.
+  - `GAP_L`: flipping `GAP_R` or vertically combining `CORNER_TL` and `CORNER_BL`.
+  - `GAP_R`: flipping `GAP_L` or vertically combining `CORNER_TR` and `CORNER_BR`.
+  - `GAP_T`: flipping `GAP_B` or horizontally combining `CORNER_TL` and `CORNER_TR`.
+  - `GAP_B`: flipping `GAP_T` or horizontally combining `CORNER_BL` and `CORNER_BR`.
 - Diagonally-opposed double inner corners:
-  - `DIAG_U`: diagonally-combining `CORNER_TL` and `CORNER_BR`.
-  - `DIAG_D`: diagonally-combining `CORNER_BL` and `CORNER_TR`.
+  - `DIAG_U`: vertically-combining `CORNER_TL` and `CORNER_BR`.
+  - `DIAG_D`: vertically-combining `CORNER_BL` and `CORNER_TR`.
 - Triple inner corners:
-  - `HUB_TL`: combining the corners of `CORNER_TL`, `CORNER_TR`, `CENTER` and `CORNER_BL`.
-  - `HUB_TR`: combining the corners of `CORNER_TL`, `CORNER_TR`, `CORNER_BR` and `CENTER`.
-  - `HUB_BL`: combining the corners of `CORNER_TL`, `CENTER`, `CORNER_BR` and `CORNER_BL`.
-  - `HUB_BR`: combining the corners of `CENTER`, `CORNER_TR`, `CORNER_BR` and `CORNER_BL`.
+  - `HUB_TL`: flipping `GAP_TR`, flipping `GAP_BL` or combining the corners of `CORNER_TL`, `CORNER_TR`, `CENTER` and `CORNER_BL`.
+  - `HUB_TR`: flipping `GAP_TL` or combining the corners of `CORNER_TL`, `CORNER_TR`, `CORNER_BR` and `CENTER`.
+  - `HUB_BL`: flipping `GAP_BR`, flipping `GAP_TL` or combining the corners of `CORNER_TL`, `CENTER`, `CORNER_BR` and `CORNER_BL`.
+  - `HUB_BR`: flipping `GAP_BL` or combining the corners of `CENTER`, `CORNER_TR`, `CORNER_BR` and `CORNER_BL`.
 - `CROSS`: combining the corners of `CORNER_TL`, `CORNER_TR`, `CORNER_BR` and `CORNER_BL`.
 - Elbow turns:
-  - `TURN_TL`: combining `NOOK_TL` with the bottom-right corner of `CORNER_BR`.
-  - `TURN_TR`: combining `NOOK_TR` with the bottom-Left corner of `CORNER_BL`.
-  - `TURN_BL`: combining `NOOK_BL` with the top-right corner of `CORNER_TR`.
-  - `TURN_BR`: combining `NOOK_BR` with the top-left corner of `CORNER_TL`.
+  - `TURN_TL`: flipping `TURN_TR`, flipping `TURN_BL` or combining `NOOK_TL` with the bottom-right corner of `CORNER_BR`.
+  - `TURN_TR`: flipping `TURN_TL` or combining `NOOK_TR` with the bottom-Left corner of `CORNER_BL`.
+  - `TURN_BL`: flipping `TURN_BR`, flipping `TURN_TL` combining `NOOK_BL` with the top-right corner of `CORNER_TR`.
+  - `TURN_BR`: flipping `TURN_BL` or combining `NOOK_BR` with the top-left corner of `CORNER_TL`.
 - T-Junctions:
-  - `JUNCTION_L`: horizontally-combining `EDGE_L` and `GAP_R`.
-  - `JUNCTION_R`: horizontally-combining `EDGE_R` and `GAP_L`.
-  - `JUNCTION_T`: vertically-combining `EDGE_T` and `GAP_B`.
-  - `JUNCTION_B`: vertically-combining `EDGE_B` and `GAP_T`.
+  - `JUNCTION_L`: flipping `JUNCTION_R` or horizontally-combining `EDGE_L` and `GAP_R`.
+  - `JUNCTION_R`: flipping `JUNCTION_L` or horizontally-combining `EDGE_R` and `GAP_L`.
+  - `JUNCTION_T`: flipping `JUNCTION_B` or vertically-combining `EDGE_T` and `GAP_B`.
+  - `JUNCTION_B`: flipping `JUNCTION_T` or vertically-combining `EDGE_B` and `GAP_T`.
 - Edge + inner corner:
   - Horizontal edges:
-	- `EXIT_H_TL`: vertically-combining `EDGE_T` and `CORNER_BL`.
+	- `EXIT_H_TL`: flipping `EXIT_H_TR`, flipping `EXIT_H_BL` or vertically-combining `EDGE_T` and `CORNER_BL`.
 	- `EXIT_H_TR`: vertically-combining `EDGE_T` and `CORNER_BR`.
-	- `EXIT_H_BL`: vertically-combining `EDGE_B` and `CORNER_TL`.
+	- `EXIT_H_BL`: flipping `EXIT_H_BR`, flipping `EXIT_H_TL` or vertically-combining `EDGE_B` and `CORNER_TL`.
 	- `EXIT_H_BR`: vertically-combining `EDGE_B` and `CORNER_TR`.
   - Vertical edges:
-	- `EXIT_V_TL`: horizontally-combining `EDGE_L` and `CORNER_TR`.
-	- `EXIT_V_BL`: horizontally-combining `EDGE_L` and `CORNER_BR`.
-	- `EXIT_V_TR`: horizontally-combining `EDGE_R` and `CORNER_TL`.
-	- `EXIT_V_BR`: horizontally-combining `EDGE_R` and `CORNER_BL`.
+	- `EXIT_V_TL`: flipping `EXIT_V_TR`, flipping `EXIT_V_BL` or horizontally-combining `EDGE_L` and `CORNER_TR`.
+	- `EXIT_V_TR`: flipping `TURN_TL` or horizontally-combining `EDGE_R` and `CORNER_TL`.
+	- `EXIT_V_BL`: flipping `EXIT_V_BR`, flipping `EXIT_V_TL` or horizontally-combining `EDGE_L` and `CORNER_BR`.
+	- `EXIT_V_BR`: flipping `EXIT_V_BL` or horizontally-combining `EDGE_R` and `CORNER_BL`.

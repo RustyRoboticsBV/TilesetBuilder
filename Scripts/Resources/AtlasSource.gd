@@ -1,4 +1,3 @@
-@tool
 const TileID = preload("../Enums/TileID.gd").TileID;
 const TileImage = preload("TileImage.gd").TileImage;
 

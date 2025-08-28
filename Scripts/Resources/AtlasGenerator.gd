@@ -1,5 +1,3 @@
-@tool
-
 const TileID = preload("../Enums/TileID.gd").TileID;
 const TileImage = preload("TileImage.gd").TileImage;
 const AtlasSource = preload("AtlasSource.gd").AtlasSource;
@@ -10,23 +8,17 @@ const operations : Dictionary = {
 	# Edges.
 	TileID.EDGE_L: {
 		0: ["flip_x", TileID.EDGE_R],
-		1: ["rotate_counter", TileID.EDGE_T],
-		2: ["rotate_clock", TileID.EDGE_B]
+		1: ["rotate_counter", TileID.EDGE_T]
 	},
 	TileID.EDGE_R: {
-		0: ["flip_x", TileID.EDGE_L],
-		1: ["rotate_counter", TileID.EDGE_B],
-		2: ["rotate_clock", TileID.EDGE_T]
+		0: ["flip_x", TileID.EDGE_L]
 	},
 	TileID.EDGE_T: {
 		0: ["flip_y", TileID.EDGE_B],
-		1: ["rotate_counter", TileID.EDGE_R],
-		2: ["rotate_clock", TileID.EDGE_L]
+		1: ["rotate_clock", TileID.EDGE_L]
 	},
 	TileID.EDGE_B: {
-		0: ["flip_y", TileID.EDGE_T],
-		1: ["rotate_counter", TileID.EDGE_L],
-		2: ["rotate_clock", TileID.EDGE_R]
+		0: ["flip_y", TileID.EDGE_T]
 	},
 	
 	# Nooks.
@@ -37,7 +29,6 @@ const operations : Dictionary = {
 	},
 	TileID.NOOK_TR: {
 		0: ["flip_x", TileID.NOOK_TL],
-		1: ["flip_y ", TileID.NOOK_BR],
 		2: ["combine_diag_u", TileID.EDGE_T, TileID.EDGE_R]
 	},
 	TileID.NOOK_BL: {
@@ -46,8 +37,7 @@ const operations : Dictionary = {
 		2: ["combine_diag_u", TileID.EDGE_L, TileID.EDGE_B]
 	},
 	TileID.NOOK_BR: {
-		0: ["flip_x", TileID.NOOK_BL],
-		1: ["flip_y ", TileID.NOOK_TR],
+		0: ["flip_x ", TileID.NOOK_BL],
 		2: ["combine_diag_d", TileID.EDGE_B, TileID.EDGE_R]
 	},
 	
@@ -59,17 +49,15 @@ const operations : Dictionary = {
 	},
 	TileID.CORNER_TR: {
 		0: ["flip_x", TileID.CORNER_TL],
-		1: ["flip_y ", TileID.CORNER_BR],
 		2: ["combine_diag_u", TileID.EDGE_R, TileID.EDGE_T]
 	},
 	TileID.CORNER_BL: {
 		0: ["flip_x", TileID.CORNER_BR],
-		1: ["flip_y ", TileID.CORNER_TL],
+		1: ["flip_y", TileID.CORNER_TL],
 		2: ["combine_diag_u", TileID.EDGE_B, TileID.EDGE_L]
 	},
 	TileID.CORNER_BR: {
 		0: ["flip_x", TileID.CORNER_BL],
-		1: ["flip_y ", TileID.CORNER_TR],
 		2: ["combine_diag_d", TileID.EDGE_R, TileID.EDGE_B]
 	},
 	
@@ -107,27 +95,21 @@ const operations : Dictionary = {
 	# Turns.
 	TileID.TURN_TL: {
 		0: ["flip_x", TileID.TURN_TR],
-		1: ["rotate_clock", TileID.TURN_BL],
-		2: ["rotate_counter", TileID.TURN_TR],
-		3: ["combine_quad", TileID.NOOK_TL, TileID.CORNER_BR, TileID.NOOK_TL, TileID.NOOK_TL]
+		1: ["flip_y", TileID.TURN_BL],
+		2: ["combine_quad", TileID.NOOK_TL, TileID.CORNER_BR, TileID.NOOK_TL, TileID.NOOK_TL]
 	},
 	TileID.TURN_TR: {
 		0: ["flip_x", TileID.TURN_TL],
-		1: ["rotate_clock", TileID.TURN_TL],
-		2: ["rotate_counter", TileID.TURN_BR],
-		3: ["combine_quad", TileID.CORNER_BL, TileID.NOOK_TL, TileID.NOOK_TL, TileID.NOOK_TL]
+		1: ["combine_quad", TileID.CORNER_BL, TileID.NOOK_TL, TileID.NOOK_TL, TileID.NOOK_TL]
 	},
 	TileID.TURN_BL: {
 		0: ["flip_x", TileID.TURN_BR],
-		1: ["rotate_clock", TileID.TURN_BR],
-		2: ["rotate_counter", TileID.TURN_TL],
-		3: ["combine_quad", TileID.NOOK_BL, TileID.NOOK_BL, TileID.NOOK_BL, TileID.NOOK_TR]
+		1: ["flip_y", TileID.TURN_TL],
+		2: ["combine_quad", TileID.NOOK_BL, TileID.NOOK_BL, TileID.NOOK_BL, TileID.CORNER_TR]
 	},
 	TileID.TURN_BR: {
 		0: ["flip_x", TileID.TURN_BL],
-		1: ["rotate_clock", TileID.TURN_TR],
-		2: ["rotate_counter", TileID.TURN_BL],
-		3: ["combine_quad", TileID.NOOK_BR, TileID.NOOK_BR, TileID.CORNER_TL, TileID.NOOK_BR]
+		1: ["combine_quad", TileID.NOOK_BR, TileID.NOOK_BR, TileID.CORNER_TL, TileID.NOOK_BR]
 	},
 	
 	# Center.
@@ -138,41 +120,37 @@ const operations : Dictionary = {
 	# Junctions.
 	TileID.JUNCTION_L: {
 		0: ["flip_x", TileID.JUNCTION_R],
-		1: ["rotate_clock", TileID.JUNCTION_B],
-		2: ["rotate_counter", TileID.JUNCTION_T],
-		3: ["combine_quad", TileID.EDGE_L, TileID.CORNER_BR, TileID.EDGE_L, TileID.CORNER_TR]
+		1: ["combine_quad", TileID.EDGE_L, TileID.CORNER_BR, TileID.EDGE_L, TileID.CORNER_TR]
 	},
 	TileID.JUNCTION_R: {
 		0: ["flip_x", TileID.JUNCTION_L],
-		1: ["rotate_clock", TileID.JUNCTION_T],
-		2: ["rotate_counter", TileID.JUNCTION_B],
-		3: ["combine_quad", TileID.CORNER_BL, TileID.EDGE_R, TileID.CORNER_BL, TileID.EDGE_R]
+		1: ["combine_quad", TileID.CORNER_BL, TileID.EDGE_R, TileID.CORNER_BL, TileID.EDGE_R]
 	},
 	TileID.JUNCTION_B: {
-		0: ["flip_Y", TileID.JUNCTION_T],
-		1: ["rotate_clock", TileID.JUNCTION_R],
-		2: ["rotate_counter", TileID.JUNCTION_L],
-		3: ["combine_quad", TileID.EDGE_B, TileID.EDGE_B, TileID.CORNER_TL, TileID.CORNER_TR]
+		0: ["flip_y", TileID.JUNCTION_T],
+		1: ["combine_quad", TileID.EDGE_B, TileID.EDGE_B, TileID.CORNER_TL, TileID.CORNER_TR]
 	},
 	TileID.JUNCTION_T: {
-		0: ["flip_Y", TileID.JUNCTION_B],
-		1: ["rotate_clock", TileID.JUNCTION_L],
-		2: ["rotate_counter", TileID.JUNCTION_R],
-		3: ["combine_quad", TileID.CORNER_BL, TileID.CORNER_BR, TileID.EDGE_T, TileID.EDGE_T]
+		0: ["flip_y", TileID.JUNCTION_B],
+		1: ["combine_quad", TileID.CORNER_BL, TileID.CORNER_BR, TileID.EDGE_T, TileID.EDGE_T]
 	},
 	
 	# Gaps.
 	TileID.GAP_L: {
-		0: ["combine_v", TileID.CORNER_BL, TileID.CORNER_TL]
+		0: ["flip_x", TileID.GAP_R],
+		1: ["combine_v", TileID.CORNER_BL, TileID.CORNER_TL]
 	},
 	TileID.GAP_R: {
-		0: ["combine_v", TileID.CORNER_BR, TileID.CORNER_TR]
+		0: ["flip_x", TileID.GAP_L],
+		1: ["combine_v", TileID.CORNER_BR, TileID.CORNER_TR]
 	},
 	TileID.GAP_T: {
-		0: ["combine_h", TileID.CORNER_TL, TileID.CORNER_TR]
+		0: ["flip_y", TileID.GAP_B],
+		1: ["combine_h", TileID.CORNER_TL, TileID.CORNER_TR]
 	},
 	TileID.GAP_B: {
-		0: ["combine_h", TileID.CORNER_BL, TileID.CORNER_BR]
+		0: ["flip_y", TileID.GAP_T],
+		1: ["combine_h", TileID.CORNER_BL, TileID.CORNER_BR]
 	},
 	
 	# Diagonal.
@@ -185,16 +163,22 @@ const operations : Dictionary = {
 	
 	# Hubs.
 	TileID.HUB_TL: {
-		0: ["combine_quad", TileID.CORNER_BL, TileID.CENTER, TileID.CORNER_TL, TileID.CORNER_TR]
+		0: ["flip_x", TileID.HUB_TR],
+		1: ["flip_y", TileID.HUB_BL],
+		2: ["combine_quad", TileID.CORNER_BL, TileID.CENTER, TileID.CORNER_TL, TileID.CORNER_TR]
 	},
 	TileID.HUB_TR: {
-		0: ["combine_quad", TileID.CENTER, TileID.CORNER_BR, TileID.CORNER_TL, TileID.CORNER_TR]
+		0: ["flip_x", TileID.HUB_TL],
+		1: ["combine_quad", TileID.CENTER, TileID.CORNER_BR, TileID.CORNER_TL, TileID.CORNER_TR]
 	},
 	TileID.HUB_BL: {
-		0: ["combine_quad", TileID.CORNER_BL, TileID.CORNER_BR, TileID.CORNER_TL, TileID.CENTER]
+		0: ["flip_x", TileID.HUB_BR],
+		1: ["flip_y", TileID.HUB_TL],
+		2: ["combine_quad", TileID.CORNER_BL, TileID.CORNER_BR, TileID.CORNER_TL, TileID.CENTER]
 	},
 	TileID.HUB_BR: {
-		0: ["combine_quad", TileID.CORNER_BL, TileID.CORNER_BR, TileID.CENTER, TileID.CORNER_TR]
+		0: ["flip_x", TileID.HUB_BL],
+		1: ["combine_quad", TileID.CORNER_BL, TileID.CORNER_BR, TileID.CENTER, TileID.CORNER_TR]
 	},
 	
 	# Cross.
@@ -204,30 +188,42 @@ const operations : Dictionary = {
 	
 	# Horizontal exits.
 	TileID.EXIT_H_TL: {
-		0: ["combine_v", TileID.CORNER_BL, TileID.EDGE_T]
+		0: ["flip_x", TileID.EXIT_H_TR],
+		1: ["flip_y", TileID.EXIT_H_BL],
+		2: ["combine_v", TileID.CORNER_BL, TileID.EDGE_T]
 	},
 	TileID.EXIT_H_TR: {
-		0: ["combine_v", TileID.CORNER_BR, TileID.EDGE_T]
+		0: ["flip_x", TileID.EXIT_H_TL],
+		1: ["combine_v", TileID.CORNER_BR, TileID.EDGE_T]
 	},
 	TileID.EXIT_H_BL: {
-		0: ["combine_v", TileID.EDGE_B, TileID.CORNER_TL]
+		0: ["flip_x", TileID.EXIT_H_BR],
+		1: ["flip_y", TileID.EXIT_H_TL],
+		2: ["combine_v", TileID.EDGE_B, TileID.CORNER_TL]
 	},
 	TileID.EXIT_H_BR: {
-		0: ["combine_v", TileID.EDGE_B, TileID.CORNER_TR]
+		0: ["flip_x", TileID.EXIT_H_BL],
+		1: ["combine_v", TileID.EDGE_B, TileID.CORNER_TR]
 	},
 	
 	# Vertical exits.
 	TileID.EXIT_V_TL: {
-		0: ["combine_h", TileID.EDGE_L, TileID.CORNER_TR]
+		0: ["flip_x", TileID.EXIT_V_TR],
+		1: ["flip_y", TileID.EXIT_V_BL],
+		2: ["combine_h", TileID.EDGE_L, TileID.CORNER_TR]
 	},
 	TileID.EXIT_V_TR: {
-		0: ["combine_h", TileID.CORNER_TL, TileID.EDGE_R]
+		0: ["flip_x", TileID.EXIT_V_TL],
+		1: ["combine_h", TileID.CORNER_TL, TileID.EDGE_R]
 	},
 	TileID.EXIT_V_BL: {
-		0: ["combine_h", TileID.EDGE_L, TileID.CORNER_BR]
+		0: ["flip_x", TileID.EXIT_V_BR],
+		1: ["flip_y", TileID.EXIT_V_TL],
+		2: ["combine_h", TileID.EDGE_L, TileID.CORNER_BR]
 	},
 	TileID.EXIT_V_BR: {
-		0: ["combine_h", TileID.CORNER_BL, TileID.EDGE_R]
+		0: ["flip_x", TileID.EXIT_V_BL],
+		1: ["combine_h", TileID.CORNER_BL, TileID.EDGE_R]
 	}
 };
 
@@ -254,7 +250,6 @@ class AtlasGenerator:
 				resolved[key] = source.standard_tiles[id];
 			else:
 				resolved[key] = null;
-				print("Set " + key + " to null.");
 		
 		# Try to resolve all missing standard tiles.
 		print();
@@ -311,25 +306,25 @@ class AtlasGenerator:
 				match opcode:
 					"flip_x":
 						if tile0 != null:
-							print("Resolving " + tile_key + ", by flipping " + tile0.get_key());
+							print("Resolving " + tile_key + ", by horizontally flipping " + tile0.get_key());
 							_resolve(id, tile0.flip_x());
 							return true;
 						
 					"flip_y":
 						if tile0 != null:
-							print("Resolving " + tile_key + ", by flipping " + tile0.get_key());
+							print("Resolving " + tile_key + ", by vertically flipping " + tile0.get_key());
 							_resolve(id, tile0.flip_y());
 							return true;
 					
 					"rotate_clock":
 						if tile0 != null:
-							print("Resolving " + tile_key + ", by rotating " + tile0.get_key());
+							print("Resolving " + tile_key + ", by rotating " + tile0.get_key() + " clockwise");
 							_resolve(id, tile0.rotate_clock());
 							return true;
 					
 					"rotate_counter":
 						if tile0 != null:
-							print("Resolving " + tile_key + ", by rotating " + tile0.get_key());
+							print("Resolving " + tile_key + ", by rotating " + tile0.get_key() + "counter-clockwise");
 							_resolve(id, tile0.rotate_counter());
 							return true;
 					

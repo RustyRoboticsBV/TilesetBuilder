@@ -1,0 +1,14 @@
+[remap]
+
+importer="tile_atlas_builder"
+type="Texture2D"
+uid="uid://cfp0rx58ugc4r"
+path="res://.godot/imported/demo_minimal2.zip-bb0a80b3221fad711b52b5bf9e66f433.res"
+
+[deps]
+
+source_file="res://Addons/TilesetMaker/Demo/demo_minimal2.zip"
+dest_files=["res://.godot/imported/demo_minimal2.zip-bb0a80b3221fad711b52b5bf9e66f433.res"]
+
+[params]
+

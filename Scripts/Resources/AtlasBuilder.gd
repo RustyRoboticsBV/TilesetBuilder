@@ -1,5 +1,3 @@
-@tool
-
 const TileImage = preload("TileImage.gd").TileImage;
 
 # A tileset assembler.
