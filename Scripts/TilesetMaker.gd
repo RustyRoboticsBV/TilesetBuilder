@@ -613,7 +613,7 @@ func resolve_diagonal_down(tile_id : TileID, fallback_id_bl : TileID, fallback_i
 	
 	# Try to resolve by combining fallback tiles.
 	if has_resolved(fallback_id_bl) and has_resolved(fallback_id_tr):
-		get_resolved(tile_id).combine_diagonal_down(get_resolved(fallback_id_bl), get_resolved(fallback_id_tr));
+		resolve(tile_id, get_resolved(fallback_id_bl).combine_diagonal_down(get_resolved(fallback_id_tr)));
 		return true;
 	
 	return false;
@@ -629,7 +629,7 @@ func resolve_diagonal_up(tile_id : TileID, fallback_id_tl : TileID, fallback_id_
 	
 	# Try to resolve by combining fallback tiles.
 	if has_resolved(fallback_id_tl) and has_resolved(fallback_id_br):
-		get_resolved(tile_id).combine_diagonal_up(get_resolved(fallback_id_tl), get_resolved(fallback_id_br));
+		resolve(tile_id, get_resolved(fallback_id_tl).combine_diagonal_up(get_resolved(fallback_id_br)));
 		return true;
 	
 	return false;
