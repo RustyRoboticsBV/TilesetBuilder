@@ -25,7 +25,8 @@ const operations : Dictionary = {
 	TileID.NOOK_TL: {
 		0: ["flip_x", TileID.NOOK_TR],
 		1: ["flip_y ", TileID.NOOK_BL],
-		2: ["combine_diag_d", TileID.EDGE_L, TileID.EDGE_T]
+		2: ["flip_xy", TileID.NOOK_BR],
+		3: ["combine_diag_d", TileID.EDGE_L, TileID.EDGE_T]
 	},
 	TileID.NOOK_TR: {
 		0: ["flip_x", TileID.NOOK_TL],
@@ -45,7 +46,8 @@ const operations : Dictionary = {
 	TileID.CORNER_TL: {
 		0: ["flip_x", TileID.CORNER_TR],
 		1: ["flip_y ", TileID.CORNER_BL],
-		2: ["combine_diag_d", TileID.EDGE_T, TileID.EDGE_L]
+		2: ["flip_xy ", TileID.CORNER_BR],
+		3: ["combine_diag_d", TileID.EDGE_T, TileID.EDGE_L]
 	},
 	TileID.CORNER_TR: {
 		0: ["flip_x", TileID.CORNER_TL],
@@ -96,7 +98,8 @@ const operations : Dictionary = {
 	TileID.TURN_TL: {
 		0: ["flip_x", TileID.TURN_TR],
 		1: ["flip_y", TileID.TURN_BL],
-		2: ["combine_quad", TileID.NOOK_TL, TileID.CORNER_BR, TileID.NOOK_TL, TileID.NOOK_TL]
+		2: ["flip_xy", TileID.TURN_BR],
+		3: ["combine_quad", TileID.NOOK_TL, TileID.CORNER_BR, TileID.NOOK_TL, TileID.NOOK_TL]
 	},
 	TileID.TURN_TR: {
 		0: ["flip_x", TileID.TURN_TL],
@@ -165,7 +168,8 @@ const operations : Dictionary = {
 	TileID.HUB_TL: {
 		0: ["flip_x", TileID.HUB_TR],
 		1: ["flip_y", TileID.HUB_BL],
-		2: ["combine_quad", TileID.CORNER_BL, TileID.CENTER, TileID.CORNER_TL, TileID.CORNER_TR]
+		2: ["flip_xy", TileID.HUB_BR],
+		3: ["combine_quad", TileID.CORNER_BL, TileID.CENTER, TileID.CORNER_TL, TileID.CORNER_TR]
 	},
 	TileID.HUB_TR: {
 		0: ["flip_x", TileID.HUB_TL],
@@ -190,7 +194,8 @@ const operations : Dictionary = {
 	TileID.EXIT_H_TL: {
 		0: ["flip_x", TileID.EXIT_H_TR],
 		1: ["flip_y", TileID.EXIT_H_BL],
-		2: ["combine_v", TileID.CORNER_BL, TileID.EDGE_T]
+		2: ["flip_xy", TileID.EXIT_H_BR],
+		3: ["combine_v", TileID.CORNER_BL, TileID.EDGE_T]
 	},
 	TileID.EXIT_H_TR: {
 		0: ["flip_x", TileID.EXIT_H_TL],
@@ -210,7 +215,8 @@ const operations : Dictionary = {
 	TileID.EXIT_V_TL: {
 		0: ["flip_x", TileID.EXIT_V_TR],
 		1: ["flip_y", TileID.EXIT_V_BL],
-		2: ["combine_h", TileID.EDGE_L, TileID.CORNER_TR]
+		2: ["flip_xy", TileID.EXIT_V_BR],
+		3: ["combine_h", TileID.EDGE_L, TileID.CORNER_TR]
 	},
 	TileID.EXIT_V_TR: {
 		0: ["flip_x", TileID.EXIT_V_TL],
@@ -314,6 +320,12 @@ class AtlasGenerator:
 						if tile0 != null:
 							print("Resolving " + tile_key + ", by vertically flipping " + tile0.get_key());
 							_resolve(id, tile0.flip_y());
+							return true;
+					
+					"flip_xy":
+						if tile0 != null:
+							print("Resolving " + tile_key + ", by xy-flipping " + tile0.get_key());
+							_resolve(id, tile0.flip_x().flip_y());
 							return true;
 					
 					"rotate_clock":

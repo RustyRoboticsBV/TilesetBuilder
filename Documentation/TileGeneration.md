@@ -12,12 +12,12 @@ The ways in which each tile is generated is as follows:
   - `EDGE_T`: flipping `EDGE_B` or rotating `EDGE_L`.
   - `EDGE_B`: flipping `EDGE_T`.
 - Outer corners:
-  - `NOOK_TL`: flipping `NOOK_TR`, flipping `NOOK_BL`, or diagonally-combining `EDGE_L` and `EDGE_T`.
+  - `NOOK_TL`: flipping `NOOK_TR`, `NOOK_BL` or `NOOK_BR`, or diagonally-combining `EDGE_L` and `EDGE_T`.
   - `NOOK_TR`: flipping `NOOK_TL` or diagonally-combining `EDGE_R` and `EDGE_T`.
   - `NOOK_BL`: flipping `NOOK_BR`, flipping `NOOK_TL` or diagonally-combining `EDGE_L` and `EDGE_B`.
   - `NOOK_BR`: flipping `NOOL_BL` or diagonally-combining `EDGE_R` and `EDGE_B`.
 - Inner corners:
-  - `CORNER_TL`: flipping `CORNER_TR`, flipping `CORNER_BL` or diagonally-combining `EDGE_T` and `EDGE_L`.
+  - `CORNER_TL`: flipping `CORNER_TR`, `CORNER_BL` or `CORNER_BR` or diagonally-combining `EDGE_T` and `EDGE_L`.
   - `CORNER_TR`: flipping `CORNER_TL` or diagonally-combining `EDGE_T` and `EDGE_R`.
   - `CORNER_BL`: flipping `CORNER_TL`, flipping `CORNER_BR` or diagonally-combining `EDGE_B` and `EDGE_L`.
   - `CORNER_BR`: flipping `CORNER_BL` or diagonally-combining `EDGE_B` and `EDGE_R`.
@@ -39,13 +39,13 @@ The ways in which each tile is generated is as follows:
   - `DIAG_U`: vertically-combining `CORNER_TL` and `CORNER_BR`.
   - `DIAG_D`: vertically-combining `CORNER_BL` and `CORNER_TR`.
 - Triple inner corners:
-  - `HUB_TL`: flipping `GAP_TR`, flipping `GAP_BL` or combining the corners of `CORNER_TL`, `CORNER_TR`, `CENTER` and `CORNER_BL`.
+  - `HUB_TL`: flipping `GAP_TR`, `GAP_BL` or `GAP_BR` or combining the corners of `CORNER_TL`, `CORNER_TR`, `CENTER` and `CORNER_BL`.
   - `HUB_TR`: flipping `GAP_TL` or combining the corners of `CORNER_TL`, `CORNER_TR`, `CORNER_BR` and `CENTER`.
   - `HUB_BL`: flipping `GAP_BR`, flipping `GAP_TL` or combining the corners of `CORNER_TL`, `CENTER`, `CORNER_BR` and `CORNER_BL`.
   - `HUB_BR`: flipping `GAP_BL` or combining the corners of `CENTER`, `CORNER_TR`, `CORNER_BR` and `CORNER_BL`.
 - `CROSS`: combining the corners of `CORNER_TL`, `CORNER_TR`, `CORNER_BR` and `CORNER_BL`.
 - Elbow turns:
-  - `TURN_TL`: flipping `TURN_TR`, flipping `TURN_BL` or combining `NOOK_TL` with the bottom-right corner of `CORNER_BR`.
+  - `TURN_TL`: flipping `TURN_TR`, `TURN_BL` or `TURN_BR` or combining `NOOK_TL` with the bottom-right corner of `CORNER_BR`.
   - `TURN_TR`: flipping `TURN_TL` or combining `NOOK_TR` with the bottom-Left corner of `CORNER_BL`.
   - `TURN_BL`: flipping `TURN_BR`, flipping `TURN_TL` combining `NOOK_BL` with the top-right corner of `CORNER_TR`.
   - `TURN_BR`: flipping `TURN_BL` or combining `NOOK_BR` with the top-left corner of `CORNER_TL`.
@@ -56,12 +56,12 @@ The ways in which each tile is generated is as follows:
   - `JUNCTION_B`: flipping `JUNCTION_T` or vertically-combining `EDGE_B` and `GAP_T`.
 - Edge + inner corner:
   - Horizontal edges:
-	- `EXIT_H_TL`: flipping `EXIT_H_TR`, flipping `EXIT_H_BL` or vertically-combining `EDGE_T` and `CORNER_BL`.
+	- `EXIT_H_TL`: flipping `EXIT_H_TR`, `EXIT_H_BL`, `EXIT_H_BR` or vertically-combining `EDGE_T` and `CORNER_BL`.
 	- `EXIT_H_TR`: vertically-combining `EDGE_T` and `CORNER_BR`.
 	- `EXIT_H_BL`: flipping `EXIT_H_BR`, flipping `EXIT_H_TL` or vertically-combining `EDGE_B` and `CORNER_TL`.
 	- `EXIT_H_BR`: vertically-combining `EDGE_B` and `CORNER_TR`.
   - Vertical edges:
-	- `EXIT_V_TL`: flipping `EXIT_V_TR`, flipping `EXIT_V_BL` or horizontally-combining `EDGE_L` and `CORNER_TR`.
+	- `EXIT_V_TL`: flipping `EXIT_V_TR`, `EXIT_V_BL`, `EXIT_V_BR` or horizontally-combining `EDGE_L` and `CORNER_TR`.
 	- `EXIT_V_TR`: flipping `TURN_TL` or horizontally-combining `EDGE_R` and `CORNER_TL`.
 	- `EXIT_V_BL`: flipping `EXIT_V_BR`, flipping `EXIT_V_TL` or horizontally-combining `EDGE_L` and `CORNER_BR`.
 	- `EXIT_V_BR`: flipping `EXIT_V_BL` or horizontally-combining `EDGE_R` and `CORNER_BL`.
