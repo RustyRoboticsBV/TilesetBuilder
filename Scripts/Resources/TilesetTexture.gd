@@ -105,9 +105,9 @@ class TilesetTexture:
 				print("Resolved MIDDLE_H");
 				changed = true;
 			
-			# Small.
-			if resolve_quad(TileID.SMALL, TileID.NOOK_BL, TileID.NOOK_BR, TileID.NOOK_TL, TileID.NOOK_TR):
-				print("Resolved SMALL");
+			# Single.
+			if resolve_quad(TileID.SINGLE, TileID.NOOK_BL, TileID.NOOK_BR, TileID.NOOK_TL, TileID.NOOK_TR):
+				print("Resolved SINGLE");
 				changed = true;
 			
 			# Gaps.

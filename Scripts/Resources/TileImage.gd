@@ -52,7 +52,7 @@ const Coords : Dictionary[TileID, Vector2i] = {
 	TileID.DIAG_D:			Vector2i(10, 2),
 	TileID.EDGE_R:			Vector2i(11, 2),
 	
-	TileID.SMALL:			Vector2i(0, 3),
+	TileID.SINGLE:			Vector2i(0, 3),
 	TileID.CAP_L:			Vector2i(1, 3),
 	TileID.MIDDLE_H:		Vector2i(2, 3),
 	TileID.CAP_R:			Vector2i(3, 3),
@@ -107,7 +107,7 @@ const PeeringBits : Dictionary[TileID, Array] = {
 	TileID.DIAG_D:			[L, TL, T, B, BR, R],
 	TileID.EDGE_R:			[B, BL, L, TL, T],
 	
-	TileID.SMALL:			[],
+	TileID.SINGLE:			[],
 	TileID.CAP_L:			[R],
 	TileID.MIDDLE_H:		[L, R],
 	TileID.CAP_R:			[L],

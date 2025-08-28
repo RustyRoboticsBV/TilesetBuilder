@@ -1,13 +1,7 @@
 # Tile Generation
-Should a tile from the standard 47-tile blob tileset be missing from a ZIP file, the importer will attempt to generate it. As long as any of the edge tiles (`EDGE_L`, `EDGE_R`, `EDGE_T` or `EDGE_B`) are present in the tileset, the importer can generate all of the other 46 tiles from it.
+Should a tile from the standard 47-tile blob tileset be missing from a ZIP file, the importer will attempt to generate it. As long as at least one edge tile (`EDGE_L`, `EDGE_R`, `EDGE_T` or `EDGE_B`) is present in the tileset, the importer can generate all of the other 46 tiles from it.
 
-For good-looking results you will typically need:
-- The inner/center tile (`CENTER`).
-- The four edge tiles (`EDGE_L`, `EDGE_R`, `EDGE_T`, `EDGE_B`).
-- The four outer corner tiles (`NOOK_TL`, `NOOK_TR`, `NOOK_BL`, `NOOK_BR`).
-- The four inner corner tiles (`CORNER_TL`, `CORNER_TR`, `CORNER_BL`, `CORNER_BR`).
-
-Depending on your tileset, more tiles may be needed for good results (`CAP_LEFT`, `CAP_RIGHT` and `SMALL` being common examples).
+Typically you will more tiles than just one edge, as the generation algorithm is quite simple.
 
 ## Generation Logic
 The ways in which each tile is generated is as follows:
@@ -35,7 +29,7 @@ The ways in which each tile is generated is as follows:
 - Thin middle:
   - `MIDDLE_H`: vertically-combining `EDGE_T` and `EDGE_B`.
   - `MIDDLE_V`: horizontally-combining `EDGE_L` and `EDGE_R`.
-- `SMALL`: combining the corners of `NOOK_TL`, `NOOK_TR`, `NOOK_BL` and `NOOK_BR`.
+- `SINGLE`: combining the corners of `NOOK_TL`, `NOOK_TR`, `NOOK_BL` and `NOOK_BR`.
 - Double inner corners:
   - `GAP_L`: vertically-combining `CORNER_TL` and `CORNER_BL`.
   - `GAP_R`: vertically-combining `CORNER_TR` and `CORNER_BR`.
@@ -62,12 +56,12 @@ The ways in which each tile is generated is as follows:
   - `JUNCTION_B`: vertically-combining `EDGE_B` and `GAP_T`.
 - Edge + inner corner:
   - Horizontal edges:
-	- `EXIT_TL_H`: vertically-combining `EDGE_T` and `CORNER_BL`.
-	- `EXIT_TR_H`: vertically-combining `EDGE_T` and `CORNER_BR`.
-	- `EXIT_BL_H`: vertically-combining `EDGE_B` and `CORNER_TL`.
-	- `EXIT_BR_H`: vertically-combining `EDGE_B` and `CORNER_TR`.
+	- `EXIT_H_TL`: vertically-combining `EDGE_T` and `CORNER_BL`.
+	- `EXIT_H_TR`: vertically-combining `EDGE_T` and `CORNER_BR`.
+	- `EXIT_H_BL`: vertically-combining `EDGE_B` and `CORNER_TL`.
+	- `EXIT_H_BR`: vertically-combining `EDGE_B` and `CORNER_TR`.
   - Vertical edges:
-	- `EXIT_TL_V`: horizontally-combining `EDGE_L` and `CORNER_TR`.
-	- `EXIT_BL_V`: horizontally-combining `EDGE_L` and `CORNER_BR`.
-	- `EXIT_TR_V`: horizontally-combining `EDGE_R` and `CORNER_TL`.
-	- `EXIT_BR_V`: horizontally-combining `EDGE_R` and `CORNER_BL`.
+	- `EXIT_V_TL`: horizontally-combining `EDGE_L` and `CORNER_TR`.
+	- `EXIT_V_BL`: horizontally-combining `EDGE_L` and `CORNER_BR`.
+	- `EXIT_V_TR`: horizontally-combining `EDGE_R` and `CORNER_TL`.
+	- `EXIT_V_BR`: horizontally-combining `EDGE_R` and `CORNER_BL`.

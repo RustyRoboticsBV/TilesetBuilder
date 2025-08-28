@@ -19,7 +19,7 @@ enum TileID {
 	CAP_R,
 	MIDDLE_H,
 	MIDDLE_V,
-	SMALL,
+	SINGLE,
 	GAP_L,
 	GAP_R,
 	GAP_B,
