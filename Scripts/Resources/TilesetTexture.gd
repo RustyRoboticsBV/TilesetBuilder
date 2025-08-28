@@ -187,36 +187,36 @@ class TilesetTexture:
 				changed = true;
 			
 			# Exits.
-			if resolve_h(TileID.EXIT_TL_V, TileID.EDGE_L, TileID.CORNER_TR):
-				print("Resolved EXIT_TL_V");
+			if resolve_h(TileID.EXIT_V_TL, TileID.EDGE_L, TileID.CORNER_TR):
+				print("Resolved EXIT_V_TL");
 				changed = true;
 				
-			if resolve_h(TileID.EXIT_BL_V, TileID.EDGE_L, TileID.CORNER_BR):
-				print("Resolved EXIT_BL_V");
+			if resolve_h(TileID.EXIT_V_BL, TileID.EDGE_L, TileID.CORNER_BR):
+				print("Resolved EXIT_V_BL");
 				changed = true;
 				
-			if resolve_h(TileID.EXIT_TR_V, TileID.CORNER_TL, TileID.EDGE_R):
-				print("Resolved EXIT_TR_V");
+			if resolve_h(TileID.EXIT_V_TR, TileID.CORNER_TL, TileID.EDGE_R):
+				print("Resolved EXIT_V_TR");
 				changed = true;
 				
-			if resolve_h(TileID.EXIT_BR_V, TileID.CORNER_BL, TileID.EDGE_R):
-				print("Resolved EXIT_BR_V");
+			if resolve_h(TileID.EXIT_V_BR, TileID.CORNER_BL, TileID.EDGE_R):
+				print("Resolved EXIT_V_BR");
 				changed = true;
 			
-			if resolve_v(TileID.EXIT_TL_H, TileID.CORNER_BL, TileID.EDGE_T):
-				print("Resolved EXIT_TL_H");
+			if resolve_v(TileID.EXIT_H_TL, TileID.CORNER_BL, TileID.EDGE_T):
+				print("Resolved EXIT_H_TL");
 				changed = true;
 			
-			if resolve_v(TileID.EXIT_TR_H, TileID.CORNER_BR, TileID.EDGE_T):
-				print("Resolved EXIT_TR_H");
+			if resolve_v(TileID.EXIT_H_TR, TileID.CORNER_BR, TileID.EDGE_T):
+				print("Resolved EXIT_H_TR");
 				changed = true;
 			
-			if resolve_v(TileID.EXIT_BL_H, TileID.EDGE_B, TileID.CORNER_TL):
-				print("Resolved EXIT_BL_H");
+			if resolve_v(TileID.EXIT_H_BL, TileID.EDGE_B, TileID.CORNER_TL):
+				print("Resolved EXIT_H_BL");
 				changed = true;
 			
-			if resolve_v(TileID.EXIT_BR_H, TileID.EDGE_B, TileID.CORNER_TR):
-				print("Resolved EXIT_BR_H");
+			if resolve_v(TileID.EXIT_H_BR, TileID.EDGE_B, TileID.CORNER_TR):
+				print("Resolved EXIT_H_BR");
 				changed = true;
 			
 			if not changed:

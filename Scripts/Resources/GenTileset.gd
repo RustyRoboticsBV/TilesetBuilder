@@ -12,7 +12,6 @@ const BL : Bit = Bit.BL;
 const B : Bit = Bit.B;
 const BR : Bit = Bit.BR;
 
-
 ## A dictionary of the coordinates of each tile ID.
 const PeeringBits : Dictionary[TileID, Array] = {
 	TileID.CAP_T:			[B],
@@ -20,8 +19,8 @@ const PeeringBits : Dictionary[TileID, Array] = {
 	TileID.JUNCTION_T:		[B, L, R],
 	TileID.TURN_TR:			[B, L],
 	TileID.HUB_BR:			[B, R, T, TL, L],
-	TileID.EXIT_TL_H:		[L, R, BR, B],
-	TileID.EXIT_TR_H:		[R, L, BL, B],
+	TileID.EXIT_H_TL:		[L, R, BR, B],
+	TileID.EXIT_H_TR:		[R, L, BL, B],
 	TileID.HUB_BL:			[B, L, T, TR, R],
 	TileID.NOOK_TL:			[B, BR, R],
 	TileID.GAP_T:			[T, L, BL, B, BR, R],
@@ -32,10 +31,10 @@ const PeeringBits : Dictionary[TileID, Array] = {
 	TileID.JUNCTION_L:		[R, T, B],
 	TileID.CROSS:			[L, R, T, B],
 	TileID.JUNCTION_R:		[L, T, B],
-	TileID.EXIT_TL_V:		[T, B, BR, R],
+	TileID.EXIT_V_TL:		[T, B, BR, R],
 	TileID.CORNER_TL:		[L, BL, B, BR, R, TR, T],
 	TileID.CORNER_TR:		[R, BR, B, BL, L, TL, T],
-	TileID.EXIT_TR_V:		[T, B, BL, L],
+	TileID.EXIT_V_TR:		[T, B, BL, L],
 	TileID.EDGE_L:			[B, BR, R, TR, T],
 	TileID.DIAG_U:			[L, BL, B, T, TR, R],
 	#TileID.EMPTY:			[],
@@ -45,10 +44,10 @@ const PeeringBits : Dictionary[TileID, Array] = {
 	TileID.TURN_BL:			[T, R],
 	TileID.JUNCTION_B:		[T, L, R],
 	TileID.TURN_BR:			[T, L],
-	TileID.EXIT_BL_V:		[B, T, TR, R],
+	TileID.EXIT_V_BL:		[B, T, TR, R],
 	TileID.CORNER_BL:		[L, TL, T, TR, R, BR, B],
 	TileID.CORNER_BR:		[R, TR, T, TL, L, BL, B],
-	TileID.EXIT_BR_V:		[B, T, TL, L],
+	TileID.EXIT_V_BR:		[B, T, TL, L],
 	TileID.GAP_L:			[L, B, BR, R, TR, T],
 	TileID.CENTER:			[L, BL, B, BR, R, TR, T, TL],
 	TileID.DIAG_D:			[L, TL, T, B, BR, R],
@@ -59,8 +58,8 @@ const PeeringBits : Dictionary[TileID, Array] = {
 	TileID.MIDDLE_H:		[L, R],
 	TileID.CAP_R:			[L],
 	TileID.HUB_TR:			[T, R, B, BL, L],
-	TileID.EXIT_BL_H:		[L, R, TR, T],
-	TileID.EXIT_BR_H:		[R, L, TL, T],
+	TileID.EXIT_H_BL:		[L, R, TR, T],
+	TileID.EXIT_H_BR:		[R, L, TL, T],
 	TileID.HUB_TL:			[T, L, B, BR, R],
 	TileID.NOOK_BL:			[R, TR, T],
 	TileID.EDGE_B:			[L, TL, T, TR, R],
