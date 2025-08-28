@@ -1,35 +1,31 @@
+@tool
 const TileID = preload("../Enums/TileID.gd").TileID;
 const TileImage = preload("TileImage.gd").TileImage;
 
-# A generated tileset texture.
-class TilesetSource:
+# A tileset source loader.
+class AtlasSource:
 	
 	var standard_tiles : Dictionary[TileID, TileImage];
 	var user_tiles : Dictionary[String, TileImage];
 	
-	## Create a tileset source from a ZIP file.
-	func create_from_zip(file_path : String):
+	## Create a atlas source from a ZIP file.
+	static func create_from_zip(file_path : String):
+		var source = AtlasSource.new();
+		source.load_from_zip(file_path);
+		return source;
+	
+	## Load from a ZIP file.
+	func load_from_zip(file_path : String):
 		var images = _load_images_from_zip(file_path);
 		_categorize(images);
 	
-	## Take a dictionary of images and store them in this tileset source.
-	func _categorize(images : Dictionary[String, Image]):
-		standard_tiles = {};
-		user_tiles = {};
-		
-		print();
-		var keys = TileID.keys();
-		for image_key in images:
-			if keys.has(image_key):
-				for id in keys.size():
-					if keys[id] == image_key:
-						standard_tiles[id] = TileImage.create_from_img(images[image_key]);
-						standard_tiles[id].id = id as TileID;
-						print("Found standard tile: " + image_key);
-						break;
-			else:
-				user_tiles[image_key] = TileImage.create_from_img(images[image_key]);
-				print("Found user-defined tile " + str(user_tiles.size()) + ": " + image_key);
+	## Get a tile, using a tile ID or string.
+	func get_tile(id) -> TileImage:
+		if id is TileID:
+			return standard_tiles[id];
+		else:
+			return user_tiles[id];
+	
 	
 	## Load all the images from a ZIP file and return them as a dictionary.
 	## Unrecognized file types are ignored.
@@ -89,3 +85,28 @@ class TilesetSource:
 		
 		print("Images in ZIP: " + str(images.keys()));
 		return images;
+	
+	## Take a dictionary of images and store them in this tileset source.
+	func _categorize(images : Dictionary[String, Image]):
+		standard_tiles = {};
+		user_tiles = {};
+		
+		print();
+		var next_user_index = 0;
+		var keys = TileID.keys();
+		for image_key in images:
+			if keys.has(image_key):
+				for id in keys.size():
+					if keys[id] == image_key:
+						standard_tiles[id] = TileImage.create_from_img(images[image_key]);
+						standard_tiles[id].id = id as TileID;
+						standard_tiles[id].resolved_simply = true;
+						print("Found standard tile: " + image_key);
+						break;
+			else:
+				user_tiles[image_key] = TileImage.create_from_img(images[image_key]);
+				user_tiles[image_key].user_index = next_user_index;
+				user_tiles[image_key].user_key = image_key;
+				user_tiles[image_key].resolved_simply = true;
+				next_user_index += 1;
+				print("Found user-defined tile " + str(user_tiles.size()) + ": " + image_key);

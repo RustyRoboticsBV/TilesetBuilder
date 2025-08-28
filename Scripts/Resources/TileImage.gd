@@ -124,14 +124,29 @@ const PeeringBits : Dictionary[TileID, Array] = {
 ## A single tile image.
 class TileImage:
 	var id : TileID;
+	var user_index : int = -1;
+	var user_key : String = "";
 	var image : Image;
 	var resolved_simply : bool;
+	
+	func _to_string() -> String:
+		return get_key() + ": " + str(image);
 	
 	## Create a new tile image from an image.
 	static func create_from_img(img : Image):
 		var new_image : TileImage = TileImage.new();
 		new_image.image = img;
 		return new_image;
+	
+	## Create an empty image.
+	static func create_empty(w : int, h : int) -> TileImage:
+		var img = TileImage.new();
+		img.image = Image.create_empty(w, h, false, Image.FORMAT_RGBA8);
+		return img;
+		
+	## Check if the tile is user-defined or standard.
+	func is_user_defined() -> bool:
+		return user_key != "";
 	
 	## Return the width of the image.
 	func get_width() -> int:
@@ -145,9 +160,20 @@ class TileImage:
 			return 0;
 		return image.get_height();
 	
+	## Get the key of this tile.
+	func get_key() -> String:
+		if is_user_defined():
+			return user_key;
+		else:
+			return TileID.keys()[id];
+	
 	## Return the tile coordinates.
 	func get_coords() -> Vector2i:
-		if TileID.values().has(id):
+		if is_user_defined():
+			var x : int = user_index % 12;
+			var y : int = 4 + floor(float(user_index) / 12);
+			return Vector2i(x, y);
+		elif TileID.values().has(id):
 			return Coords[id];
 		else:
 			return Vector2i(-1, -1);
@@ -192,7 +218,7 @@ class TileImage:
 		return mycopy;
 	
 	## Create a new image from the left half of this image and the right half of another.
-	func combine_h(right: TileImage):
+	func combine_h(right: TileImage) -> TileImage:
 		# Ensure both images are the same size.
 		if get_width() != right.get_width() or get_height() != right.get_height():
 			push_error("Images must have the same dimensions!")
@@ -208,7 +234,7 @@ class TileImage:
 		return mycopy;
 	
 	## Create a new image from the bottom half of this image and the top half of another.
-	func combine_v(top: TileImage):
+	func combine_v(top: TileImage) -> TileImage:
 		# Ensure both images are the same size.
 		if get_width() != top.get_width() or get_height() != top.get_height():
 			push_error("Images must have the same dimensions!")
@@ -223,8 +249,8 @@ class TileImage:
 		mycopy.image.blit_rect(top.image, Rect2(Vector2.ZERO, Vector2(width, half_height)), Vector2.ZERO);
 		return mycopy;
 	
-	## Create the bottom-left half of this image and the top-right half of another.
-	func combine_diagonal_down(top_right: TileImage):
+	## Create a new image from the bottom-left half of this image and the top-right half of another.
+	func combine_diagonal_down(top_right: TileImage) -> TileImage:
 		# Ensure both images are the same size.
 		if get_width() != top_right.get_width() or get_height() != top_right.get_height():
 			push_error("Images must have the same dimensions!")
@@ -248,8 +274,8 @@ class TileImage:
 		
 		return mycopy;
 	
-	## Create the top-left half of this image and the bottom-right half of another.
-	func combine_diagonal_up(bottom_right: TileImage):
+	## Create a new image form the top-left half of this image and the bottom-right half of another.
+	func combine_diagonal_up(bottom_right: TileImage) -> TileImage:
 		# Ensure both images are the same size.
 		if get_width() != bottom_right.get_width() or get_height() != bottom_right.get_height():
 			push_error("Images must have the same dimensions!")
@@ -272,6 +298,12 @@ class TileImage:
 					mycopy.image.set_pixel(x, y, bottom_right.image.get_pixel(x, y));
 		
 		return mycopy;
+	
+	## Create a new image from the bottom-left quadrant of this image and the bottom-right, top-left and top-right quadrants of three other images.
+	func combine_quad(bottom_right : TileImage, top_left : TileImage, top_right : TileImage) -> TileImage:
+		var top : TileImage = top_left.combine_h(top_right);
+		var bottom : TileImage = combine_h(bottom_right);
+		return bottom.combine_v(top);
 	
 	## Blit this tile image onto a larger image.
 	func blit_onto(dst_image : Image, tile_x : int, tile_y : int, tile_w : int, tile_h : int):

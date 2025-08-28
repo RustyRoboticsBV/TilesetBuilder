@@ -1,7 +1,9 @@
 @tool
 extends EditorImportPlugin;
 
-const TilesetTexture = preload("Resources/TilesetTexture.gd").TilesetTexture;
+const AtlasSource = preload("Resources/AtlasSource.gd").AtlasSource;
+const AtlasGenerator = preload("Resources/AtlasGenerator.gd").AtlasGenerator;
+const AtlasBuilder = preload("Resources/AtlasBuilder.gd").AtlasBuilder;
 
 func _get_importer_name() -> String:
 	return "tile_atlas_builder";
@@ -27,15 +29,18 @@ func _get_priority() -> float:
 func _get_save_extension() -> String:
 	return "res";
 	
-func _import(source_file: String, save_path: String, options: Dictionary, _platform_variants: Array, _gen_files: Array) -> int:
+func _import(source_file: String, save_path: String, _options: Dictionary, _platform_variants: Array, _gen_files: Array) -> int:
 	print("Importing tileset from: '%s'" % source_file);
 
 	# Create tileset.
-	var tileset = TilesetTexture.create_tileset_texture(source_file);
+	var source = AtlasSource.create_from_zip(source_file);
+	var generator = AtlasGenerator.create_from_source(source);
+	var builder = generator.emit();
+	var texture = builder.get_texture();
 	
 	# Save the resulting resource.
 	var save_file = "%s.%s" % [save_path, _get_save_extension()];
-	var err = ResourceSaver.save(tileset.texture, save_file);
+	var err = ResourceSaver.save(texture, save_file);
 
 	if err != OK:
 		push_error("Failed to save imported tileset: %s" % save_file)

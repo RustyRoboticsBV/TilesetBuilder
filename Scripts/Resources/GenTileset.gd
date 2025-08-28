@@ -1,12 +1,17 @@
-const TilesetTexture = preload("TilesetTexture.gd").TilesetTexture;
+const AtlasSource = preload("AtlasSource.gd").AtlasSource;
+const AtlasGenerator = preload("AtlasGenerator.gd").AtlasGenerator;
+const AtlasBuilder = preload("AtlasBuilder.gd").AtlasBuilder;
 const TileImage = preload("TileImage.gd").TileImage;
 const TileID = preload("../Enums/TileID.gd").TileID;
 const Bit = preload("../Enums/PeeringBit.gd").PeeringBit;
 
 ## Load a tileset from a ZIP file.
 func create_tileset(file_path : String) -> TileSet:
-	# Generate texture.
-	var texture : TilesetTexture = TilesetTexture.create_tileset_texture(file_path);
+	# Create texture.
+	var asource = AtlasSource.create_from_zip(file_path);
+	var generator = AtlasGenerator.create_from_source(asource);
+	var builder = generator.emit();
+	var texture = builder.get_texture();
 	
 	# Create tileset source.
 	var source : TileSetAtlasSource = TileSetAtlasSource.new();
@@ -34,7 +39,7 @@ func create_tileset(file_path : String) -> TileSet:
 	return tileset;
 
 ## Create a tile.
-func create_tile(source : TileSetAtlasSource, x : int, y : int, peering_bits : Array):
+func create_tile(source : TileSetSource, x : int, y : int, peering_bits : Array):
 	# Create tile.
 	source.create_tile(Vector2i(x, y));
 	var tile : TileData = source.get_tile_data(Vector2i(x, y), 0);
