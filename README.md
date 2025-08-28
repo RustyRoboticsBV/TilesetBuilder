@@ -4,7 +4,7 @@ An import plugin for the Godot game engine (version 4.4). It can:
 - Generate missing tiles by combining or transposing other tiles in the tileset, reducing the number of tiles that you need to manage.
 - Import ZIP tilesets as either a `Texture2D` atlas or a `TileSet`.
 
-ZIP archives of PNG and/or BMP files are supported.
+ZIP archives of PNG and/or BMP files are supported. The images in the ZIP files must conform to specific filenames (see the image below).
 
 ## Install Guide
 1. Create a folder called `Addons/ZipTilesetImporter`.
@@ -13,7 +13,7 @@ ZIP archives of PNG and/or BMP files are supported.
 
 ## How to Use
 After installing, create a ZIP file and fill it with image files, using the filenames in the image below. You can choose between importing the ZIP file as a texture atlas or tileset under `Import` => `Import As` window.
-- When importing as a tileset, terrain (autotiling) will automatically be set up.
+- When importing as a tileset, its terrain (autotiling) will automatically be set up.
 - When importing as a texture, you must create the actual tileset resource yourself, but you get more control over its properties.
 
 This image shows you which tile each filename will map to:
