@@ -1,6 +1,8 @@
 @tool
 extends EditorImportPlugin;
 
+const TilesetTexture = preload("Resources/TilesetTexture.gd").TilesetTexture;
+
 func _get_importer_name() -> String:
 	return "tile_atlas_builder";
 	
@@ -29,8 +31,7 @@ func _import(source_file: String, save_path: String, _options: Dictionary, _plat
 	print("Importing tileset from: '%s'" % source_file);
 
 	# Create tileset.
-	var tileset_maker = TilesetMaker.new();
-	var tileset = tileset_maker.create_tileset_texture(source_file);
+	var tileset = TilesetTexture.create_tileset_texture(source_file);
 	
 	# Save the resulting resource.
 	var save_file = "%s.%s" % [save_path, _get_save_extension()];

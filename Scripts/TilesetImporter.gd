@@ -1,6 +1,8 @@
 @tool
 extends EditorImportPlugin;
 
+const GenTileset = preload("Resources/GenTileset.gd");
+
 func _get_importer_name() -> String:
 	return "tileset_builder";
 	
@@ -29,7 +31,7 @@ func _import(source_file: String, save_path: String, _options: Dictionary, _plat
 	print("Importing tileset from: '%s'" % source_file);
 
 	# Create tileset.
-	var tileset_maker = TilesetMaker.new();
+	var tileset_maker = GenTileset.new();
 	var tileset = tileset_maker.create_tileset(source_file);
 	
 	# Save the resulting resource.
