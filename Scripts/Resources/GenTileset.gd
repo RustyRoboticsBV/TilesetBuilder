@@ -15,12 +15,12 @@ func create_tileset(file_path : String) -> TileSet:
 	
 	# Create tileset source.
 	var source : TileSetAtlasSource = TileSetAtlasSource.new();
-	source.texture_region_size = Vector2i(texture.tile_w, texture.tile_h);
-	source.texture = texture.texture;
+	source.texture_region_size = builder.get_tile_size();
+	source.texture = texture;
 	
 	# Create tileset.
 	var tileset : TileSet = TileSet.new();
-	tileset.tile_size = Vector2i(texture.tile_w, texture.tile_h);
+	tileset.tile_size = source.texture_region_size;
 	tileset.add_source(source);
 	
 	# Add terrain (i.e. autotiling).
@@ -31,7 +31,7 @@ func create_tileset(file_path : String) -> TileSet:
 	
 	# Create tiles.
 	for id in TileID.values():
-		var tile : TileImage = texture.tiles[id];
+		var tile : TileImage = builder.tiles[id];
 		var coords : Vector2i = tile.get_coords();
 		var peering_bits : Array = tile.get_peering_bits();
 		create_tile(source, coords.x, coords.y, peering_bits);

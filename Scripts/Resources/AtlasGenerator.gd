@@ -235,16 +235,72 @@ const operations : Dictionary = {
 	
 	# Slopes.
 	SlopeTileID.SLOPE_TL: {
-		0: ["flip_x", SlopeTileID.SLOPE_TR]
-	},
-	SlopeTileID.SLOPE_TL_CORNER: {
-		0: ["flip_x", SlopeTileID.SLOPE_TR_CORNER]
+		0: ["flip_x", SlopeTileID.SLOPE_TR],
+		1: ["flip_y", SlopeTileID.SLOPE_BL],
+		2: ["flip_xy", SlopeTileID.SLOPE_BR]
 	},
 	SlopeTileID.SLOPE_TR: {
 		0: ["flip_x", SlopeTileID.SLOPE_TL]
 	},
-	SlopeTileID.SLOPE_TR_CORNER: {
-		0: ["flip_x", SlopeTileID.SLOPE_TL_CORNER]
+	SlopeTileID.SLOPE_BL: {
+		0: ["flip_x", SlopeTileID.SLOPE_BR],
+		1: ["flip_y", SlopeTileID.SLOPE_TL]
+	},
+	SlopeTileID.SLOPE_BR: {
+		0: ["flip_x", SlopeTileID.SLOPE_BL]
+	},
+	
+	# Slope corners.
+	SlopeTileID.SLOPE_CORNER_TL: {
+		0: ["flip_x", SlopeTileID.SLOPE_CORNER_TR],
+		1: ["flip_y", SlopeTileID.SLOPE_CORNER_BL],
+		2: ["flip_xy", SlopeTileID.SLOPE_CORNER_BR]
+	},
+	SlopeTileID.SLOPE_CORNER_TR: {
+		0: ["flip_x", SlopeTileID.SLOPE_CORNER_TL]
+	},
+	SlopeTileID.SLOPE_CORNER_BL: {
+		0: ["flip_x", SlopeTileID.SLOPE_CORNER_BR],
+		1: ["flip_y", SlopeTileID.SLOPE_CORNER_TL]
+	},
+	SlopeTileID.SLOPE_CORNER_BR: {
+		0: ["flip_x", SlopeTileID.SLOPE_CORNER_BL]
+	},
+	
+	# Slope base.
+	SlopeTileID.SLOPE_BASE_TL: {
+		0: ["flip_x", SlopeTileID.SLOPE_BASE_TR],
+		1: ["flip_y", SlopeTileID.SLOPE_BASE_BL],
+		2: ["flip_xy", SlopeTileID.SLOPE_BASE_BR],
+		3: ["combine_diag_d", TileID.EDGE_T, SlopeTileID.SLOPE_CORNER_TL]
+	},
+	SlopeTileID.SLOPE_BASE_TR: {
+		0: ["flip_x", SlopeTileID.SLOPE_BASE_TL]
+	},
+	SlopeTileID.SLOPE_BASE_BL: {
+		0: ["flip_x", SlopeTileID.SLOPE_BASE_BR],
+		1: ["flip_y", SlopeTileID.SLOPE_BASE_TL]
+	},
+	SlopeTileID.SLOPE_BASE_BR: {
+		0: ["flip_x", SlopeTileID.SLOPE_BASE_BL]
+	},
+	
+	# Slope peak.
+	SlopeTileID.SLOPE_PEAK_TL: {
+		0: ["flip_x", SlopeTileID.SLOPE_PEAK_TR],
+		1: ["flip_y", SlopeTileID.SLOPE_PEAK_BL],
+		2: ["flip_xy", SlopeTileID.SLOPE_PEAK_BR],
+		3: ["combine_diag_d", SlopeTileID.SLOPE_CORNER_TL, TileID.EDGE_T]
+	},
+	SlopeTileID.SLOPE_PEAK_TR: {
+		0: ["flip_x", SlopeTileID.SLOPE_PEAK_TL]
+	},
+	SlopeTileID.SLOPE_PEAK_BL: {
+		0: ["flip_x", SlopeTileID.SLOPE_PEAK_BR],
+		1: ["flip_y", SlopeTileID.SLOPE_PEAK_TL]
+	},
+	SlopeTileID.SLOPE_PEAK_BR: {
+		0: ["flip_x", SlopeTileID.SLOPE_PEAK_BL]
 	}
 };
 

@@ -65,3 +65,30 @@ The ways in which each tile is generated is as follows:
 	- `EXIT_V_TR`: flipping `TURN_TL` or horizontally-combining `EDGE_R` and `CORNER_TL`.
 	- `EXIT_V_BL`: flipping `EXIT_V_BR`, flipping `EXIT_V_TL` or horizontally-combining `EDGE_L` and `CORNER_BR`.
 	- `EXIT_V_BR`: flipping `EXIT_V_BL` or horizontally-combining `EDGE_R` and `CORNER_BL`.
+
+## Slopes
+Slope tiles can also be generated. At very least, you will need:
+- One the four slope surface tiles: `SLOPE_TL`, `SLOPE_TR`, `SLOPE_BL` or `SLOPE_BR`.
+- One of the four slope-to-slope corner connections: `SLOPE_CORNER_TL`, `SLOPE_CORNER_TR`, `SLOPE_CORNER_BL` or `SLOPE_CORNER_BR`.
+
+## Slope Generation Logic
+- Slope surfaces:
+  - `SLOPE_TL`: flipping `SLOPE_TR` or `Slope_BL`.
+  - `SLOPE_TR`: flipping `SLOPE_TL`.
+  - `SLOPE_BL`: flipping `SLOPE_BR` or `SLOPE_TL`.
+  - `SLOPE_BR`: flipping `SLOPE_BL`.
+- Slope-to-slope corner connectors:
+  - `SLOPE_CORNER_TL`: flipping `SLOPE_CORNER_TR` or `SLOPE_CORNER_BL`.
+  - `SLOPE_CORNER_TR`: flipping `SLOPE_CORNER_TL`.
+  - `SLOPE_CORNER_BL`: flipping `SLOPE_CORNER_BR` or `SLOPE_CORNER_TL`.
+  - `SLOPE_CORNER_BR`: flipping `SLOPE_CORNER_BL`.
+- Bottom slope-to-ground corner connectors:
+  - `SLOPE_BASE_TL`: flipping `SLOPE_BASE_TR` or `SLOPE_BASE_BL`, or diagonally-combining `CORNER_TL` with `SLOPE_CORNER_TL`.
+  - `SLOPE_BASE_TR`: flipping `SLOPE_BASE_TL` or `SLOPE_BASE_BL`, or diagonally-combining `CORNER_TR` with `SLOPE_CORNER_TR`.
+  - `SLOPE_BASE_BL`: flipping `SLOPE_BASE_BR` or `SLOPE_BASE_TL`, or diagonally-combining `CORNER_BL` with `SLOPE_CORNER_BL`.
+  - `SLOPE_BASE_BR`: flipping `SLOPE_BASE_BL`, or diagonally-combining `CORNER_BR` with `SLOPE_CORNER_BR`.
+- Top slope-to-ground corner connectors:
+  - `SLOPE_PEAK_TL`: flipping `SLOPE_PEAK_TR` or `SLOPE_PEAK_BL`, or diagonally-combining `EDGE_T` with `SLOPE_CORNER_TL`.
+  - `SLOPE_PEAK_TR`: flipping `SLOPE_PEAK_TL` or `SLOPE_PEAK_BL`, or diagonally-combining `EDGE_T` with `SLOPE_CORNER_TR`.
+  - `SLOPE_PEAK_BL`: flipping `SLOPE_PEAK_BR` or `SLOPE_PEAK_TL`, or diagonally-combining `EDGE_B` with `SLOPE_CORNER_BL`.
+  - `SLOPE_PEAK_BR`: flipping `SLOPE_PEAK_BL`, or diagonally-combining `EDGE_B` with `SLOPE_CORNER_BR`.

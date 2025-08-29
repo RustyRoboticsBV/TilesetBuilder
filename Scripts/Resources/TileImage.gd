@@ -67,9 +67,24 @@ const Coords : Dictionary[int, Vector2i] = {
 	TileID.NOOK_BR:			Vector2i(11, 3),
 	
 	SlopeTileID.SLOPE_TL:			Vector2i(0, 4),
-	SlopeTileID.SLOPE_TL_CORNER:	Vector2i(1, 4),
-	SlopeTileID.SLOPE_TR_CORNER:	Vector2i(2, 4),
-	SlopeTileID.SLOPE_TR:			Vector2i(3, 4)
+	SlopeTileID.SLOPE_CORNER_TL:	Vector2i(1, 4),
+	SlopeTileID.SLOPE_CORNER_TR:	Vector2i(2, 4),
+	SlopeTileID.SLOPE_TR:			Vector2i(3, 4),
+	
+	SlopeTileID.SLOPE_BASE_TL:		Vector2i(0, 5),
+	SlopeTileID.SLOPE_PEAK_TL:		Vector2i(1, 5),
+	SlopeTileID.SLOPE_PEAK_TR:		Vector2i(2, 5),
+	SlopeTileID.SLOPE_BASE_TR:		Vector2i(3, 5),
+	
+	SlopeTileID.SLOPE_BASE_BL:		Vector2i(0, 6),
+	SlopeTileID.SLOPE_PEAK_BL:		Vector2i(1, 6),
+	SlopeTileID.SLOPE_PEAK_BR:		Vector2i(2, 6),
+	SlopeTileID.SLOPE_BASE_BR:		Vector2i(3, 6),
+	
+	SlopeTileID.SLOPE_BL:			Vector2i(0, 7),
+	SlopeTileID.SLOPE_CORNER_BL:	Vector2i(1, 7),
+	SlopeTileID.SLOPE_CORNER_BR:	Vector2i(2, 7),
+	SlopeTileID.SLOPE_BR:			Vector2i(3, 7),
 };
 
 ## A dictionary of the coordinates of each tile ID.

@@ -35,7 +35,15 @@ class AtlasBuilder:
 	
 	# Get the number of tiles on the x and y axes.
 	func get_tile_num() -> Vector2i:
-		return Vector2i(num_tiles_x, ceil(float(tiles.size()) / num_tiles_x));
+		var highest_x : int = 0;
+		var highest_y : int = 0;
+		for tile in tiles:
+			var coords = tile.get_coords();
+			if coords.x > highest_x:
+				highest_x = coords.x;
+			if coords.y > highest_y:
+				highest_y = coords.y;
+		return Vector2i(highest_x + 1, highest_y + 1);
 	
 	# Get the tile dimensions.
 	func get_tile_size() -> Vector2i:
