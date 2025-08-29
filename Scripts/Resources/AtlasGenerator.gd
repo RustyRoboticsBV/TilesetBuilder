@@ -1,4 +1,5 @@
 const TileID = preload("../Enums/TileID.gd").TileID;
+const SlopeTileID = preload("../Enums/SlopeTileID.gd").SlopeTileID;
 const TileImage = preload("TileImage.gd").TileImage;
 const AtlasSource = preload("AtlasSource.gd").AtlasSource;
 const AtlasBuilder = preload("AtlasBuilder.gd").AtlasBuilder;
@@ -230,6 +231,20 @@ const operations : Dictionary = {
 	TileID.EXIT_V_BR: {
 		0: ["flip_x", TileID.EXIT_V_BL],
 		1: ["combine_h", TileID.CORNER_BL, TileID.EDGE_R]
+	},
+	
+	# Slopes.
+	SlopeTileID.SLOPE_TL: {
+		0: ["flip_x", SlopeTileID.SLOPE_TR]
+	},
+	SlopeTileID.SLOPE_TL_CORNER: {
+		0: ["flip_x", SlopeTileID.SLOPE_TR_CORNER]
+	},
+	SlopeTileID.SLOPE_TR: {
+		0: ["flip_x", SlopeTileID.SLOPE_TL]
+	},
+	SlopeTileID.SLOPE_TR_CORNER: {
+		0: ["flip_x", SlopeTileID.SLOPE_TL_CORNER]
 	}
 };
 
@@ -251,11 +266,20 @@ class AtlasGenerator:
 		
 		# Create entries for all standard tiles.
 		for id in TileID.values():
-			var key = TileID.keys()[id];
+			var key = _get_key(id);
 			if source.standard_tiles.keys().has(id as TileID):
 				resolved[key] = source.standard_tiles[id];
 			else:
 				resolved[key] = null;
+		
+		# Create entries for used slope tiles (if slopes are used).
+		if source.slope_tiles.size() > 0:
+			for id in SlopeTileID.values():
+				var key = _get_key(id);
+				if source.slope_tiles.keys().has(id as SlopeTileID):
+					resolved[key] = source.slope_tiles[id];
+				elif id != SlopeTileID.NONE:
+					resolved[key] = null;
 		
 		# Try to resolve all missing standard tiles.
 		print();
@@ -266,6 +290,10 @@ class AtlasGenerator:
 			var changed : bool = false;
 			
 			for id in TileID.values():
+				if not _has_resolved(id):
+					if _try_resolve(id):
+						changed = true;
+			for id in SlopeTileID.values():
 				if not _has_resolved(id):
 					if _try_resolve(id):
 						changed = true;
@@ -292,8 +320,8 @@ class AtlasGenerator:
 		return builder;
 	
 	
-	func _try_resolve(id : TileID) -> bool:
-		var tile_key : String = TileID.keys()[id];
+	func _try_resolve(id) -> bool:
+		var tile_key : String = _get_key(id);
 		
 		# Do nothing if the tile has already been resolved.
 		if _has_resolved(id):
@@ -336,7 +364,7 @@ class AtlasGenerator:
 					
 					"rotate_counter":
 						if tile0 != null:
-							print("Resolving " + tile_key + ", by rotating " + tile0.get_key() + "counter-clockwise");
+							print("Resolving " + tile_key + ", by rotating " + tile0.get_key() + " counter-clockwise");
 							_resolve(id, tile0.rotate_counter());
 							return true;
 					
@@ -373,22 +401,34 @@ class AtlasGenerator:
 		return false;
 	
 	func _has_resolved(key) -> bool:
-		return resolved[_get_key(key)] != null;
+		key = _get_key(key);
+		if resolved.keys().has(key):
+			return resolved[key] != null;
+		else:
+			return false;
 	
 	func _get_resolved(key) -> TileImage:
-		return resolved[_get_key(key)];
+		key = _get_key(key);
+		if resolved.keys().has(key):
+			return resolved[key];
+		else:
+			return null;
 	
 	func _resolve(key, tile : TileImage):
 		resolved[_get_key(key)] = tile;
-		if key is TileID:
+		if key in TileID.values():
 			tile.id = key;
-		if key is String:
+		elif key in SlopeTileID.values():
+			tile.slope = key;
+		elif key is String:
 			tile.user_key = key;
 	
 	func _get_key(key) -> String:
 		if key is String:
 			return key;
-		elif key is TileID:
-			return TileID.keys()[key];
+		elif key in TileID.values():
+			return TileID.find_key(key);
+		elif key in SlopeTileID.values():
+			return SlopeTileID.find_key(key)
 		else:
 			return "";

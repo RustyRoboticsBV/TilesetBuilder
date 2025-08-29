@@ -1,0 +1,14 @@
+[remap]
+
+importer="tile_atlas_builder"
+type="Texture2D"
+uid="uid://codk0sqsi7xq1"
+path="res://.godot/imported/demo_slopes.zip-a1247bd09c3218b1b8031c85c4fdaee2.res"
+
+[deps]
+
+source_file="res://Addons/TilesetMaker/Demo/demo_slopes.zip"
+dest_files=["res://.godot/imported/demo_slopes.zip-a1247bd09c3218b1b8031c85c4fdaee2.res"]
+
+[params]
+

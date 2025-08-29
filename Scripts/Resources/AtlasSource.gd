@@ -1,10 +1,12 @@
 const TileID = preload("../Enums/TileID.gd").TileID;
+const SlopeTileID = preload("../Enums/SlopeTileID.gd").SlopeTileID;
 const TileImage = preload("TileImage.gd").TileImage;
 
 # A tileset source loader.
 class AtlasSource:
 	
 	var standard_tiles : Dictionary[TileID, TileImage];
+	var slope_tiles : Dictionary[SlopeTileID, TileImage];
 	var user_tiles : Dictionary[String, TileImage];
 	
 	## Create a atlas source from a ZIP file.
@@ -88,20 +90,26 @@ class AtlasSource:
 	## Take a dictionary of images and store them in this tileset source.
 	func _categorize(images : Dictionary[String, Image]):
 		standard_tiles = {};
+		slope_tiles = {};
 		user_tiles = {};
 		
 		print();
 		var next_user_index = 0;
-		var keys = TileID.keys();
 		for image_key in images:
-			if keys.has(image_key):
-				for id in keys.size():
-					if keys[id] == image_key:
-						standard_tiles[id] = TileImage.create_from_img(images[image_key]);
-						standard_tiles[id].id = id as TileID;
-						standard_tiles[id].resolved_simply = true;
-						print("Found standard tile: " + image_key);
-						break;
+			if TileID.keys().has(image_key):
+				var id : TileID = TileID[image_key];
+				standard_tiles[id] = TileImage.create_from_img(images[image_key]);
+				standard_tiles[id].id = id as TileID;
+				standard_tiles[id].resolved_simply = true;
+				print("Found standard tile: " + image_key);
+			
+			elif SlopeTileID.keys().has(image_key):
+				var id : SlopeTileID = SlopeTileID[image_key];
+				slope_tiles[id] = TileImage.create_from_img(images[image_key]);
+				slope_tiles[id].slope = id as SlopeTileID;
+				slope_tiles[id].resolved_simply = true;
+				print("Found slope tile: " + image_key);
+			
 			else:
 				user_tiles[image_key] = TileImage.create_from_img(images[image_key]);
 				user_tiles[image_key].user_index = next_user_index;

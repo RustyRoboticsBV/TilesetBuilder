@@ -1,4 +1,5 @@
 const TileID = preload("../Enums/TileID.gd").TileID;
+const SlopeTileID = preload("../Enums/SlopeTileID.gd").SlopeTileID;
 const Bit = preload("../Enums/PeeringBit.gd").PeeringBit;
 
 # Peering bit short-hands.
@@ -12,7 +13,7 @@ const B : Bit = Bit.B;
 const BR : Bit = Bit.BR;
 
 ## A dictionary of the coordinates of each tile ID.
-const Coords : Dictionary[TileID, Vector2i] = {
+const Coords : Dictionary[int, Vector2i] = {
 	TileID.CAP_T:			Vector2i(0, 0),
 	TileID.TURN_TL:			Vector2i(1, 0),
 	TileID.JUNCTION_T:		Vector2i(2, 0),
@@ -63,7 +64,12 @@ const Coords : Dictionary[TileID, Vector2i] = {
 	TileID.NOOK_BL:			Vector2i(8, 3),
 	TileID.EDGE_B:			Vector2i(9, 3),
 	TileID.GAP_B:			Vector2i(10, 3),
-	TileID.NOOK_BR:			Vector2i(11, 3)
+	TileID.NOOK_BR:			Vector2i(11, 3),
+	
+	SlopeTileID.SLOPE_TL:			Vector2i(0, 4),
+	SlopeTileID.SLOPE_TL_CORNER:	Vector2i(1, 4),
+	SlopeTileID.SLOPE_TR_CORNER:	Vector2i(2, 4),
+	SlopeTileID.SLOPE_TR:			Vector2i(3, 4)
 };
 
 ## A dictionary of the coordinates of each tile ID.
@@ -124,6 +130,7 @@ const PeeringBits : Dictionary[TileID, Array] = {
 ## A single tile image.
 class TileImage:
 	var id : TileID;
+	var slope : SlopeTileID = SlopeTileID.NONE;
 	var user_index : int = -1;
 	var user_key : String = "";
 	var image : Image;
@@ -148,6 +155,10 @@ class TileImage:
 	func is_user_defined() -> bool:
 		return user_key != "";
 	
+	## Check if the tile is a slope.
+	func is_slope() -> bool:
+		return slope != SlopeTileID.NONE;
+	
 	## Return the width of the image.
 	func get_width() -> int:
 		if image == null:
@@ -164,8 +175,10 @@ class TileImage:
 	func get_key() -> String:
 		if is_user_defined():
 			return user_key;
+		elif is_slope():
+			return SlopeTileID.find_key(slope);
 		else:
-			return TileID.keys()[id];
+			return TileID.find_key(id);
 	
 	## Return the tile coordinates.
 	func get_coords() -> Vector2i:
@@ -173,6 +186,8 @@ class TileImage:
 			var x : int = user_index % 12;
 			var y : int = 4 + floor(float(user_index) / 12);
 			return Vector2i(x, y);
+		elif is_slope():
+			return Coords[slope];
 		elif TileID.values().has(id):
 			return Coords[id];
 		else:
@@ -225,7 +240,7 @@ class TileImage:
 			return null;
 		
 		# Get dimensions.
-		var half_width : int = get_width() / 2;
+		var half_width : int = floor(get_width() / 2.0);
 		var height : int = get_height();
 		
 		# Combine the images.
@@ -242,7 +257,7 @@ class TileImage:
 		
 		# Get dimensions.
 		var width : int = get_width();
-		var half_height : int = get_height() / 2;
+		var half_height : int = floor(get_height() / 2.0);
 		
 		# Combine the images.
 		var mycopy = copy();

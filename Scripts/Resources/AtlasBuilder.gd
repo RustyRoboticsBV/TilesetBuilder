@@ -29,7 +29,7 @@ class AtlasBuilder:
 			if tile.is_user_defined():
 				print(tile.user_key + str(coords));
 			tiles[i].blit_onto(image, coords.x, coords.y, tile_size.x, tile_size.y);
-			#print("Blitting " + tile.get_key());
+			print("Placing " + tile.get_key() + " at " + str(coords));
 		
 		return ImageTexture.create_from_image(image);
 	
