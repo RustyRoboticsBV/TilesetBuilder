@@ -32,10 +32,14 @@ These are the relevant filenames:
 
 ![The slope tiles and their identifiers.](SlopeReference.png)
 
+The slope tileset is not complete, and is limited to some of the more common cases. This is because the total number of possible slope-to-edge connection combinations is very large, making the tileset needlessly big for how uncommon these tiles are.
+
 ### User-Defined Tiles
 You can add custom tiles by adding images with filenames that are not in the image above. These tiles are placed below the standard tileset area. For example, if you want to add slopes to your tileset you can do so in this way.
 
 ## Planned Features
+- 1-by-2 slopes.
+- 2-by-1 slopes.
 - Adding the option for tile variants.
 
 ## Known Issues
