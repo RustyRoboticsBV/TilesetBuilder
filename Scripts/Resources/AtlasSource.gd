@@ -1,6 +1,7 @@
 const TileID = preload("../Enums/TileID.gd").TileID;
 const SlopeTileID = preload("../Enums/SlopeTileID.gd").SlopeTileID;
 const TileImage = preload("TileImage.gd").TileImage;
+const TileDatabase = preload("TileDatabase.gd").TileDatabase;
 
 # A tileset source loader.
 class AtlasSource:
@@ -94,21 +95,15 @@ class AtlasSource:
 		user_tiles = {};
 		
 		print();
+		var database = TileDatabase.get_db();
 		var next_user_index = 0;
 		for image_key in images:
-			if TileID.keys().has(image_key):
+			if database.has_key(image_key):
 				var id : TileID = TileID[image_key];
 				standard_tiles[id] = TileImage.create_from_img(images[image_key]);
 				standard_tiles[id].id = id as TileID;
 				standard_tiles[id].resolved_simply = true;
 				print("Found standard tile: " + image_key);
-			
-			elif SlopeTileID.keys().has(image_key):
-				var id : SlopeTileID = SlopeTileID[image_key];
-				slope_tiles[id] = TileImage.create_from_img(images[image_key]);
-				slope_tiles[id].slope = id as SlopeTileID;
-				slope_tiles[id].resolved_simply = true;
-				print("Found slope tile: " + image_key);
 			
 			else:
 				user_tiles[image_key] = TileImage.create_from_img(images[image_key]);
@@ -116,4 +111,4 @@ class AtlasSource:
 				user_tiles[image_key].user_key = image_key;
 				user_tiles[image_key].resolved_simply = true;
 				next_user_index += 1;
-				print("Found user-defined tile " + str(user_tiles.size()) + ": " + image_key);
+				print("Found user-defined tile " + str(user_tiles.size()) + ": '" + image_key + "'");

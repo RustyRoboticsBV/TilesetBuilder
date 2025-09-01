@@ -26,8 +26,6 @@ class AtlasBuilder:
 				continue;
 			
 			var coords : Vector2i = tile.get_coords();
-			if tile.is_user_defined():
-				print(tile.user_key + str(coords));
 			tiles[i].blit_onto(image, coords.x, coords.y, tile_size.x, tile_size.y);
 			print("Placing " + tile.get_key() + " at " + str(coords));
 		
@@ -38,6 +36,8 @@ class AtlasBuilder:
 		var highest_x : int = 0;
 		var highest_y : int = 0;
 		for tile in tiles:
+			if tile == null:
+				continue;
 			var coords = tile.get_coords();
 			if coords.x > highest_x:
 				highest_x = coords.x;

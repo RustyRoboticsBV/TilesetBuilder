@@ -1,153 +1,17 @@
 const TileID = preload("../Enums/TileID.gd").TileID;
 const SlopeTileID = preload("../Enums/SlopeTileID.gd").SlopeTileID;
 const Bit = preload("../Enums/PeeringBit.gd").PeeringBit;
-
-# Peering bit short-hands.
-const TL : Bit = Bit.TL;
-const T : Bit = Bit.T;
-const TR : Bit = Bit.TR;
-const L : Bit = Bit.L;
-const R : Bit = Bit.R;
-const BL : Bit = Bit.BL;
-const B : Bit = Bit.B;
-const BR : Bit = Bit.BR;
-
-## A dictionary of the coordinates of each tile ID.
-const Coords : Dictionary[int, Vector2i] = {
-	TileID.CAP_T:			Vector2i(0, 0),
-	TileID.TURN_TL:			Vector2i(1, 0),
-	TileID.JUNCTION_T:		Vector2i(2, 0),
-	TileID.TURN_TR:			Vector2i(3, 0),
-	TileID.HUB_BR:			Vector2i(4, 0),
-	TileID.EXIT_H_TL:		Vector2i(5, 0),
-	TileID.EXIT_H_TR:		Vector2i(6, 0),
-	TileID.HUB_BL:			Vector2i(7, 0),
-	TileID.NOOK_TL:			Vector2i(8, 0),
-	TileID.GAP_T:			Vector2i(9, 0),
-	TileID.EDGE_T:			Vector2i(10, 0),
-	TileID.NOOK_TR:			Vector2i(11, 0),
-	
-	TileID.MIDDLE_V:		Vector2i(0, 1),
-	TileID.JUNCTION_L:		Vector2i(1, 1),
-	TileID.CROSS:			Vector2i(2, 1),
-	TileID.JUNCTION_R:		Vector2i(3, 1),
-	TileID.EXIT_V_TL:		Vector2i(4, 1),
-	TileID.CORNER_TL:		Vector2i(5, 1),
-	TileID.CORNER_TR:		Vector2i(6, 1),
-	TileID.EXIT_V_TR:		Vector2i(7, 1),
-	TileID.EDGE_L:			Vector2i(8, 1),
-	TileID.DIAG_U:			Vector2i(9, 1),
-	#TileID.EMPTY:			Vector2i(10, 1),
-	TileID.GAP_R:			Vector2i(11, 1),
-	
-	TileID.CAP_B:			Vector2i(0, 2),
-	TileID.TURN_BL:			Vector2i(1, 2),
-	TileID.JUNCTION_B:		Vector2i(2, 2),
-	TileID.TURN_BR:			Vector2i(3, 2),
-	TileID.EXIT_V_BL:		Vector2i(4, 2),
-	TileID.CORNER_BL:		Vector2i(5, 2),
-	TileID.CORNER_BR:		Vector2i(6, 2),
-	TileID.EXIT_V_BR:		Vector2i(7, 2),
-	TileID.GAP_L:			Vector2i(8, 2),
-	TileID.CENTER:			Vector2i(9, 2),
-	TileID.DIAG_D:			Vector2i(10, 2),
-	TileID.EDGE_R:			Vector2i(11, 2),
-	
-	TileID.SINGLE:			Vector2i(0, 3),
-	TileID.CAP_L:			Vector2i(1, 3),
-	TileID.MIDDLE_H:		Vector2i(2, 3),
-	TileID.CAP_R:			Vector2i(3, 3),
-	TileID.HUB_TR:			Vector2i(4, 3),
-	TileID.EXIT_H_BL:		Vector2i(5, 3),
-	TileID.EXIT_H_BR:		Vector2i(6, 3),
-	TileID.HUB_TL:			Vector2i(7, 3),
-	TileID.NOOK_BL:			Vector2i(8, 3),
-	TileID.EDGE_B:			Vector2i(9, 3),
-	TileID.GAP_B:			Vector2i(10, 3),
-	TileID.NOOK_BR:			Vector2i(11, 3),
-	
-	SlopeTileID.SLOPE_TL:			Vector2i(0, 4),
-	SlopeTileID.SLOPE_CORNER_TL:	Vector2i(1, 4),
-	SlopeTileID.SLOPE_CORNER_TR:	Vector2i(2, 4),
-	SlopeTileID.SLOPE_TR:			Vector2i(3, 4),
-	
-	SlopeTileID.SLOPE_BASE_TL:		Vector2i(0, 5),
-	SlopeTileID.SLOPE_PEAK_TL:		Vector2i(1, 5),
-	SlopeTileID.SLOPE_PEAK_TR:		Vector2i(2, 5),
-	SlopeTileID.SLOPE_BASE_TR:		Vector2i(3, 5),
-	
-	SlopeTileID.SLOPE_BASE_BL:		Vector2i(0, 6),
-	SlopeTileID.SLOPE_PEAK_BL:		Vector2i(1, 6),
-	SlopeTileID.SLOPE_PEAK_BR:		Vector2i(2, 6),
-	SlopeTileID.SLOPE_BASE_BR:		Vector2i(3, 6),
-	
-	SlopeTileID.SLOPE_BL:			Vector2i(0, 7),
-	SlopeTileID.SLOPE_CORNER_BL:	Vector2i(1, 7),
-	SlopeTileID.SLOPE_CORNER_BR:	Vector2i(2, 7),
-	SlopeTileID.SLOPE_BR:			Vector2i(3, 7),
-};
-
-## A dictionary of the coordinates of each tile ID.
-const PeeringBits : Dictionary[TileID, Array] = {
-	TileID.CAP_T:			[B],
-	TileID.TURN_TL:			[B, R],
-	TileID.JUNCTION_T:		[B, L, R],
-	TileID.TURN_TR:			[B, L],
-	TileID.HUB_BR:			[B, R, T, TL, L],
-	TileID.EXIT_H_TL:		[L, R, BR, B],
-	TileID.EXIT_H_TR:		[R, L, BL, B],
-	TileID.HUB_BL:			[B, L, T, TR, R],
-	TileID.NOOK_TL:			[B, BR, R],
-	TileID.GAP_T:			[T, L, BL, B, BR, R],
-	TileID.EDGE_T:			[L, BL, B, BR, R],
-	TileID.NOOK_TR:			[B, BL, L],
-	
-	TileID.MIDDLE_V:		[T, B],
-	TileID.JUNCTION_L:		[R, T, B],
-	TileID.CROSS:			[L, R, T, B],
-	TileID.JUNCTION_R:		[L, T, B],
-	TileID.EXIT_V_TL:		[T, B, BR, R],
-	TileID.CORNER_TL:		[L, BL, B, BR, R, TR, T],
-	TileID.CORNER_TR:		[R, BR, B, BL, L, TL, T],
-	TileID.EXIT_V_TR:		[T, B, BL, L],
-	TileID.EDGE_L:			[B, BR, R, TR, T],
-	TileID.DIAG_U:			[L, BL, B, T, TR, R],
-	#TileID.EMPTY:			[],
-	TileID.GAP_R:			[R, T, TL, L, BL, B],
-	
-	TileID.CAP_B:			[T],
-	TileID.TURN_BL:			[T, R],
-	TileID.JUNCTION_B:		[T, L, R],
-	TileID.TURN_BR:			[T, L],
-	TileID.EXIT_V_BL:		[B, T, TR, R],
-	TileID.CORNER_BL:		[L, TL, T, TR, R, BR, B],
-	TileID.CORNER_BR:		[R, TR, T, TL, L, BL, B],
-	TileID.EXIT_V_BR:		[B, T, TL, L],
-	TileID.GAP_L:			[L, B, BR, R, TR, T],
-	TileID.CENTER:			[L, BL, B, BR, R, TR, T, TL],
-	TileID.DIAG_D:			[L, TL, T, B, BR, R],
-	TileID.EDGE_R:			[B, BL, L, TL, T],
-	
-	TileID.SINGLE:			[],
-	TileID.CAP_L:			[R],
-	TileID.MIDDLE_H:		[L, R],
-	TileID.CAP_R:			[L],
-	TileID.HUB_TR:			[T, R, B, BL, L],
-	TileID.EXIT_H_BL:		[L, R, TR, T],
-	TileID.EXIT_H_BR:		[R, L, TL, T],
-	TileID.HUB_TL:			[T, L, B, BR, R],
-	TileID.NOOK_BL:			[R, TR, T],
-	TileID.EDGE_B:			[L, TL, T, TR, R],
-	TileID.GAP_B:			[B, L, TL, T, TR, R],
-	TileID.NOOK_BR:			[L, TL, T]
-};
+const BlockID = preload("../Enums/BlockID.gd").BlockID;
+const TileInfo = preload("TileInfo.gd").TileInfo;
+const TileDatabase = preload("TileDatabase.gd").TileDatabase;
 
 ## A single tile image.
 class TileImage:
 	var id : TileID;
-	var slope : SlopeTileID = SlopeTileID.NONE;
+	
 	var user_index : int = -1;
 	var user_key : String = "";
+	
 	var image : Image;
 	var resolved_simply : bool;
 	
@@ -170,10 +34,6 @@ class TileImage:
 	func is_user_defined() -> bool:
 		return user_key != "";
 	
-	## Check if the tile is a slope.
-	func is_slope() -> bool:
-		return slope != SlopeTileID.NONE;
-	
 	## Return the width of the image.
 	func get_width() -> int:
 		if image == null:
@@ -190,8 +50,6 @@ class TileImage:
 	func get_key() -> String:
 		if is_user_defined():
 			return user_key;
-		elif is_slope():
-			return SlopeTileID.find_key(slope);
 		else:
 			return TileID.find_key(id);
 	
@@ -201,17 +59,19 @@ class TileImage:
 			var x : int = user_index % 12;
 			var y : int = 4 + floor(float(user_index) / 12);
 			return Vector2i(x, y);
-		elif is_slope():
-			return Coords[slope];
 		elif TileID.values().has(id):
-			return Coords[id];
+			var info : TileInfo = TileDatabase.get_db().get_info(id);
+			if info.block == BlockID.Slope:
+				return Vector2i(0, 4) + info.coords;
+			else:
+				return info.coords;
 		else:
 			return Vector2i(-1, -1);
 	
 	## Return the tile peering bitmask.
 	func get_peering_bits() -> Array:
 		if TileID.values().has(id):
-			return PeeringBits[id];
+			return TileDatabase.get_db().get_info(id).peering_bits;
 		else:
 			return [];
 	
