@@ -53,6 +53,8 @@ func _apply_string(text : String, operator : String) -> String:
 			return _apply_rotate_counter(text);
 		"rotate_180":
 			return _apply_rotate_clock(_apply_rotate_clock(text));
+		"transpose":
+			return _apply_rotate_counter(_apply_flip_x(text));
 		_:
 			return text;
 
