@@ -1,10 +1,6 @@
 @tool
 extends EditorImportPlugin;
 
-const AtlasSource = preload("Resources/AtlasSource.gd").AtlasSource;
-const AtlasGenerator = preload("Resources/AtlasGenerator.gd").AtlasGenerator;
-const AtlasBuilder = preload("Resources/AtlasBuilder.gd").AtlasBuilder;
-
 func _get_importer_name() -> String:
 	return "tile_atlas_builder";
 	
@@ -33,10 +29,9 @@ func _import(source_file: String, save_path: String, _options: Dictionary, _plat
 	print("Importing tileset from: '%s'" % source_file);
 
 	# Create tileset.
-	var source = AtlasSource.create_from_zip(source_file);
-	var generator = AtlasGenerator.create_from_source(source);
-	var builder = generator.emit();
-	var texture = builder.get_texture();
+	var db = TileDatabase.new();
+	db.load_from_json("../Data/tiles.json");
+	var texture = null;
 	
 	# Save the resulting resource.
 	var save_file = "%s.%s" % [save_path, _get_save_extension()];

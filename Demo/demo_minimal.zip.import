@@ -3,12 +3,11 @@
 importer="tile_atlas_builder"
 type="Texture2D"
 uid="uid://bvrdjw1wrbrdx"
-path="res://.godot/imported/demo_minimal.zip-eace943aa535c5a2e47d34169a65b0c4.res"
+valid=false
 
 [deps]
 
 source_file="res://Addons/TilesetMaker/Demo/demo_minimal.zip"
-dest_files=["res://.godot/imported/demo_minimal.zip-eace943aa535c5a2e47d34169a65b0c4.res"]
 
 [params]
 

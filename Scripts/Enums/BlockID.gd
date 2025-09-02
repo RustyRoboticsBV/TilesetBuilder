@@ -1,5 +1,0 @@
-enum BlockID
-{
-	Standard,
-	Slope
-}
