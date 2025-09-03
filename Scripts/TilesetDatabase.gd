@@ -34,7 +34,9 @@ func load_from_json(file_path : String):
 			copy["coords"] = coords;
 			json[key] = copy;
 	_dict = json;
-	
+
+
+
 func _load_json_from_file(file_path: String) -> Dictionary:
 	file_path = get_script().resource_path.get_base_dir() + "/" + file_path;
 	file_path = ProjectSettings.globalize_path(file_path);

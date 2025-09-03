@@ -1,6 +1,8 @@
 extends Resource;
 class_name TileAtlasGenerator;
 
+@warning_ignore_start("shadowed_variable_base_class")
+
 @export var standard_tiles : Dictionary[String, Image] = {};
 @export var user_tiles : Dictionary[String, Image] = {};
 
@@ -28,8 +30,6 @@ func _init(source : TileAtlasSource, database : TileDatabase):
 			break;
 
 func _try_resolve(id : String, rules : Dictionary) -> bool:
-	if id == "CAP_L":
-		print(rules);
 	for key in rules:
 		var operator = rules[key]["op"];
 		match operator:
