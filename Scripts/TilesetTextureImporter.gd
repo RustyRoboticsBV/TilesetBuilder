@@ -31,11 +31,16 @@ func _import(source_file: String, save_path: String, _options: Dictionary, _plat
 	# Create tileset.
 	var db = TileDatabase.new();
 	db.load_from_json("../Data/tiles.json");
+	
+	var source = AtlasSource.new();
+	source.load_from_zip(source_file, db);
+	
 	var texture = null;
 	
 	# Save the resulting resource.
 	var save_file = "%s.%s" % [save_path, _get_save_extension()];
-	var err = ResourceSaver.save(texture, save_file);
+	#var err = ResourceSaver.save(texture, save_file);
+	var err = ResourceSaver.save(source, save_file);
 
 	if err != OK:
 		push_error("Failed to save imported tileset: %s" % save_file)

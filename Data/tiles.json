@@ -1,0 +1,582 @@
+{
+	"CENTER": {
+		"block": "main",
+		"coords": [9, 2],
+		"derive": {
+			"0": {
+			"op": "merge_x",
+			"L": "EDGE_T",
+			"R": "EDGE_B"
+			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"L": "solid",
+			"BL": "solid",
+			"B": "solid",
+				"BR": "solid",
+				"R": "solid",
+				"TR": "solid",
+				"T": "solid",
+				"TL": "solid"
+			}
+	},
+
+	"EDGE_T": {
+		"block": "main",
+		"coords": [10, 0],
+		"derive": {
+			"0": {
+				"op": "flip_y",
+				"src": "EDGE_B"
+			},
+			"1": {
+				"op": "rotate_clock",
+				"src": "EDGE_L"
+			},
+			"2": {
+				"op": "rotate_counter",
+				"src": "EDGE_R"
+			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"L": "solid",
+			"BL": "solid",
+			"B": "solid",
+			"BR": "solid",
+			"R": "solid"
+		}
+	},
+	"EDGE_L": {
+		"coords": [8, 1],
+		"inherit": {
+			"op": "rotate_counter",
+			"from": "EDGE_T"
+		}
+	},
+	"EDGE_R": {
+		"coords": [11, 2],
+		"inherit": {
+			"op": "rotate_clock",
+			"from": "EDGE_T"
+		}
+	},
+	"EDGE_B": {
+		"coords": [9, 3],
+		"inherit": {
+			"op": "flip_y",
+			"from": "EDGE_T"
+		}
+	},
+
+	"NOOK_TL": {
+		"block": "main",
+		"coords": [8, 0],
+		"derive": {
+			"0": {
+				"op": "merge_diag_d",
+				"BL": "EDGE_L",
+				"TR": "EDGE_T"
+			},
+			"1": {
+				"op": "flip_x",
+				"from": "NOOK_TR"
+			},
+			"2": {
+				"op": "flip_y",
+				"from": "NOOK_BL"
+			},
+			"3": {
+				"op": "flip_xy",
+				"from": "NOOK_BR"
+			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"B": "solid",
+			"BR": "solid",
+			"R": "solid"
+		}
+	},
+	"NOOK_TR": {
+		"coords": [11, 0],
+		"inherit": {
+			"op": "flip_x",
+			"from": "NOOK_TL"
+		}
+	},
+	"NOOK_BL": {
+		"coords": [8, 3],
+		"inherit": {
+			"op": "flip_y",
+			"from": "NOOK_TL"
+		}
+	},
+	"NOOK_BR": {
+		"coords": [11, 3],
+		"inherit": {
+			"op": "flip_x",
+			"from": "NOOK_BL"
+		}
+	},
+
+	"CORNER_TL": {
+		"block": "main",
+		"coords": [5, 1],
+		"derive": {
+			"0": {
+				"op": "merge_diag_d",
+				"BL": "EDGE_T",
+				"TR": "EDGE_L"
+			},
+			"1": {
+				"op": "flip_x",
+				"src": "CORNER_TR"
+			},
+			"2": {
+				"op": "flip_y",
+				"src": "CORNER_BL"
+			},
+			"3": {
+				"op": "flip_xy",
+				"src": "CORNER_BR"
+			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"L": "solid",
+			"BL": "solid",
+			"B": "solid",
+			"BR": "solid",
+			"R": "solid",
+			"TR": "solid"
+		}
+	},
+	"CORNER_TR": {
+		"coords": [6, 1],
+		"inherit": {
+			"op": "flip_x",
+			"from": "CORNER_TL"
+		}
+	},
+	"CORNER_BL": {
+		"coords": [5, 2],
+		"inherit": {
+			"op": "flip_y",
+			"from": "CORNER_TL"
+		}
+	},
+	"CORNER_BR": {
+		"coords": [6, 2],
+		"inherit": {
+			"op": "flip_x",
+			"from": "CORNER_BL"
+		}
+	},
+
+	"CAP_T": {
+		"block": "main",
+		"coords": [0, 0],
+		"derive": {
+			"0": {
+				"op": "merge_x",
+				"L": "NOOK_TL",
+				"R": "NOOK_TR"
+			},
+			"1": {
+				"op": "flip_y",
+				"from": "CAP_B"
+			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"B": "solid"
+		}
+	},
+	"CAP_L": {
+		"coords": [1, 3],
+		"inherit": {
+			"op": "rotate_counter",
+			"from": "CAP_T"
+		}
+	},
+	"CAP_R": {
+		"coords": [3, 3],
+		"inherit": {
+			"op": "flip_x",
+			"from": "CAP_L"
+		}
+	},
+	"CAP_B": {
+		"coords": [0, 2],
+		"inherit": {
+			"op": "flip_y",
+			"from": "CAP_T"
+		}
+	},
+
+	"MIDDLE_V": {
+		"block": "main",
+		"coords": [0, 1],
+		"derive": {
+			"0": {
+				"op": "merge_x",
+				"L": "EDGE_L",
+				"R": "EDGE_R"
+			},
+			"1": {
+				"op": "rotate_clock",
+				"from": "MIDDLE_H"
+			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"T": "solid",
+			"B": "solid"
+		}
+	},
+	"MIDDLE_H": {
+		"coords": [2, 3],
+		"inherit": {
+			"op": "rotate_counter",
+			"from": "MIDDLE_V"
+		}
+	},
+
+	"SINGLE": {
+		"block": "main",
+		"coords": [0, 3],
+		"derive": {
+			"0": {
+				"op": "merge_quad",
+				"BL": "NOOK_BL",
+				"BR": "NOOK_BR",
+				"TL": "NOOK_TL",
+				"TR": "NOOK_TR"
+			}
+		},
+		"layer": "solid",
+		"peering_bits": {}
+	},
+
+	"GAP_T": {
+		"block": "main",
+		"coords": [9, 0],
+		"composite": ["CORNER_TL", "CORNER_TR"],
+		"derive": {
+			"0": {
+				"op": "flip_y",
+				"src": "GAP_B"
+			},
+			"1": {
+				"op": "rotate_clock",
+				"src": "GAP_L"
+			},
+			"2": {
+				"op": "rotate_counter",
+				"src": "GAP_R"
+			},
+			"3": {
+				"op": "merge_x",
+				"L": "CORNER_TL",
+				"R": "CORNER_TR"
+			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"L": "solid",
+			"BL": "solid",
+			"B": "solid",
+			"BR": "solid",
+			"R": "solid",
+			"T": "solid"
+		}
+	},
+	"GAP_L": {
+		"coords": [9, 2],
+		"inherit": {
+			"op": "rotate_counter",
+			"from": "GAP_T"
+		}
+	},
+	"GAP_R": {
+		"coords": [11, 1],
+		"inherit": {
+			"op": "rotate_clock",
+			"from": "GAP_T"
+		}
+	},
+	"GAP_B": {
+		"coords": [10, 3],
+		"inherit": {
+			"op": "flip_y",
+			"from": "GAP_T"
+		}
+	},
+
+	"DIAG_U": {
+		"block": "main",
+		"coords": [9, 1],
+		"composite": ["CORNER_TL", "CORNER_BR"],
+		"derive": {
+			"0": {
+				"op": "flip_x",
+				"src": "DIAG_D"
+			},
+			"1": {
+				"op": "merge_diag_u",
+				"BL": "CORNER_TL",
+				"TR": "CORNER_BR"
+			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"L": "solid",
+			"BL": "solid",
+			"B": "solid",
+			"T": "solid",
+			"TR": "solid",
+			"R": "solid"
+		}
+	},
+	"DIAG_D": {
+		"coords": [10, 2],
+		"inherit": {
+			"op": "flip_y",
+			"from": "DIAG_U"
+		}
+	},
+
+	"HUB_TL": {
+		"block": "main",
+		"coords": [7, 3],
+		"composite": ["CORNER_BL", "CORNER_TL", "CORNER_TR"],
+		"derive": {
+			"0": {
+				"op": "flip_x",
+				"src": "HUB_TR"
+			},
+			"1": {
+				"op": "flip_y",
+				"src": "HUB_BL"
+			},
+			"2": {
+				"op": "flip_xy",
+				"src": "HUB_BR"
+			},
+			"3": {
+				"op": "merge_quad",
+				"BL": "CORNER_TL",
+				"BR": "CENTER",
+				"TL": "CORNER_TL",
+				"TR": "CORNER_TR"
+			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"B": "solid",
+			"BR": "solid",
+			"R": "solid",
+			"T": "solid",
+			"L": "solid"
+		}
+	},
+	"HUB_TR": {
+		"coords": [4, 3],
+		"inherit": {
+			"from": "HUB_TL",
+			"op": "flip_x"
+		}
+	},
+	"HUB_BL": {
+		"coords": [7, 0],
+		"inherit": {
+			"from": "HUB_TL",
+			"op": "flip_y"
+		}
+	},
+	"HUB_BR": {
+		"coords": [4, 0],
+		"inherit": {
+			"from": "HUB_TL",
+			"op": "flip_xy"
+		}
+	},
+
+	"CROSS": {
+		"block": "main",
+		"coords": [2, 1],
+		"composite": ["CORNER_TL", "CORNER_TR", "CORNER_BL", "CORNER_BR"],
+		"derive": {
+			"0": {
+				"op": "merge_quad",
+				"BL": "CORNER_BL",
+				"BR": "CORNER_BR",
+				"TL": "CORNER_TL",
+				"TR": "CORNER_TR"
+				}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"T": "solid",
+			"L": "solid",
+			"R": "solid",
+			"B": "solid"
+		}
+	},
+
+	"TURN_TL": {
+		"block": "main",
+		"coords": [1, 0],
+		"composite": ["NOOK_TL", "CORNER_BR"],
+		"derive": {
+			"0": {
+				"op": "merge_quad",
+				"BL": "NOOK_BL",
+				"BR": "NOOK_BR",
+				"TL": "NOOK_T",
+				"TR": "EDGE_T"
+			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"L": "solid",
+			"R": "solid"
+		}
+	},
+	"TURN_TR": {
+		"coords": [3, 0],
+		"inherit": {
+			"from": "TURN_TL",
+			"op": "flip_x"
+		}
+	},
+	"TURN_BL": {
+		"coords": [1, 2],
+		"inherit": {
+			"from": "TURN_TL",
+			"op": "flip_y"
+		}
+	},
+	"TURN_BR": {
+		"coords": [3, 2],
+		"inherit": {
+			"from": "TURN_TL",
+			"op": "flip_xy"
+		}
+	},
+
+	"JUNCTION_T": {
+		"block": "main",
+		"coords": [2, 0],
+		"composite": ["EDGE_T", "CORNER_BR", "CORNER_BR"],
+		"derive": {
+			
+			"0": {
+				"op": "merge_quad",
+				"BL": "CORNER_BL",
+				"BR": "CORNER_BR",
+				"TL": "EDGE_T",
+				"TR": "EDGE_T"
+			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"L": "solid",
+			"R": "solid",
+			"B": "solid"
+		}
+	},
+	"JUNCTION_L": {
+		"coords": [1, 1],
+		"inherit": {
+			"from": "JUNCTION_T",
+			"op": "rotate_counter"
+		}
+	},
+	"JUNCTION_R": {
+		"coords": [3, 1],
+		"inherit": {
+			"from": "JUNCTION_T",
+			"op": "rotate_clock"
+		}
+	},
+	"JUNCTION_B": {
+		"coords": [2, 2],
+		"inherit": {
+			"from": "JUNCTION_T",
+			"op": "flip_y"
+		}
+	},
+
+	"EXIT_H_TL": {
+		"block": "main",
+		"coords": [5, 0],
+		"composite": ["EDGE_T", "CORNER_BL"],
+		"derive": {
+			"0": {
+				"op": "merge_y",
+				"B": "CORNER_BL",
+				"T": "EDGE_T"
+			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"B": "solid",
+			"BR": "solid",
+			"R": "solid",
+			"L": "solid"
+		}
+	},
+	"EXIT_H_TR": {
+		"coords": [6, 0],
+		"inherit": {
+			"from": "EXIT_H_TL",
+			"op": "flip_x"
+		}
+	},
+	"EXIT_H_BL": {
+		"coords": [5, 3],
+		"inherit": {
+			"from": "EXIT_H_TL",
+			"op": "flip_y"
+		}
+	},
+	"EXIT_H_BR": {
+		"coords": [6, 3],
+		"inherit": {
+			"from": "EXIT_H_TL",
+			"op": "flip_xy"
+		}
+	},
+	
+	"EXIT_V_TL": {
+		"coords": [4, 1],
+		"inherit": {
+			"from": "EXIT_H_TL",
+			"op": "transpose"
+		}
+	},
+	"EXIT_V_TR": {
+		"coords": [7, 1],
+		"inherit": {
+			"from": "EXIT_V_TL",
+			"op": "flip_x"
+		}
+	},
+	"EXIT_V_BL": {
+		"coords": [4, 2],
+		"inherit": {
+			"from": "EXIT_V_TL",
+			"op": "flip_y"
+		}
+	},
+	"EXIT_V_BR": {
+		"coords": [7, 2],
+		"inherit": {
+			"from": "EXIT_V_TL",
+			"op": "flip_xy"
+		}
+	}
+}

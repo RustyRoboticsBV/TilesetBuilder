@@ -1,6 +1,16 @@
 extends Resource;
 class_name TileDatabase;
 
+var _dict : Dictionary = {};
+
+## Get a tile's data from the database.
+func get_tile(id : String) -> Dictionary:
+	return _dict[id];
+
+func has_tile(id : String) -> bool:
+	return _dict.has(id);
+
+## Load the database from a JSON file.
 func load_from_json(file_path : String):
 	var json = _load_json_from_file(file_path);
 	
@@ -8,7 +18,6 @@ func load_from_json(file_path : String):
 	for key in json.keys():
 		var tile : Dictionary = json[key];
 		
-		print();
 		if tile.has("inherit"):
 			var from = tile["inherit"]["from"];
 			var operator = tile["inherit"]["op"];
@@ -19,7 +28,7 @@ func load_from_json(file_path : String):
 			copy = JSON.parse_string(copy);
 			copy["coords"] = coords;
 			json[key] = copy;
-	print(json);
+	_dict = json;
 	
 func _load_json_from_file(file_path: String) -> Dictionary:
 	file_path = get_script().resource_path.get_base_dir() + "/" + file_path;
