@@ -78,18 +78,6 @@
 				"op": "merge_diag_d",
 				"BL": "EDGE_L",
 				"TR": "EDGE_T"
-			},
-			"1": {
-				"op": "flip_x",
-				"src": "NOOK_TR"
-			},
-			"2": {
-				"op": "flip_y",
-				"src": "NOOK_BL"
-			},
-			"3": {
-				"op": "flip_xy",
-				"src": "NOOK_BR"
 			}
 		},
 		"layer": "solid",
@@ -129,18 +117,6 @@
 				"op": "merge_diag_d",
 				"BL": "EDGE_T",
 				"TR": "EDGE_L"
-			},
-			"1": {
-				"op": "flip_x",
-				"src": "CORNER_TR"
-			},
-			"2": {
-				"op": "flip_y",
-				"src": "CORNER_BL"
-			},
-			"3": {
-				"op": "flip_xy",
-				"src": "CORNER_BR"
 			}
 		},
 		"layer": "solid",
@@ -183,10 +159,6 @@
 				"op": "merge_x",
 				"L": "NOOK_TL",
 				"R": "NOOK_TR"
-			},
-			"1": {
-				"op": "flip_y",
-				"src": "CAP_B"
 			}
 		},
 		"layer": "solid",
@@ -224,10 +196,6 @@
 				"op": "merge_x",
 				"L": "EDGE_L",
 				"R": "EDGE_R"
-			},
-			"1": {
-				"op": "rotate_clock",
-				"from": "MIDDLE_H"
 			}
 		},
 		"layer": "solid",
@@ -266,18 +234,6 @@
 		"composite": ["CORNER_TL", "CORNER_TR"],
 		"derive": {
 			"0": {
-				"op": "flip_y",
-				"src": "GAP_B"
-			},
-			"1": {
-				"op": "rotate_clock",
-				"src": "GAP_L"
-			},
-			"2": {
-				"op": "rotate_counter",
-				"src": "GAP_R"
-			},
-			"3": {
 				"op": "merge_x",
 				"L": "CORNER_TL",
 				"R": "CORNER_TR"
@@ -321,10 +277,6 @@
 		"composite": ["CORNER_TL", "CORNER_BR"],
 		"derive": {
 			"0": {
-				"op": "flip_x",
-				"src": "DIAG_D"
-			},
-			"1": {
 				"op": "merge_diag_u",
 				"TL": "CORNER_TL",
 				"BR": "CORNER_BR"
@@ -355,18 +307,6 @@
 		"composite": ["CORNER_BL", "CORNER_TL", "CORNER_TR"],
 		"derive": {
 			"0": {
-				"op": "flip_x",
-				"src": "HUB_TR"
-			},
-			"1": {
-				"op": "flip_y",
-				"src": "HUB_BL"
-			},
-			"2": {
-				"op": "flip_xy",
-				"src": "HUB_BR"
-			},
-			"3": {
 				"op": "merge_quad",
 				"BL": "CORNER_BL",
 				"BR": "CENTER",
