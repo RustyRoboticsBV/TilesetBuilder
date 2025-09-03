@@ -35,12 +35,15 @@ func _import(source_file: String, save_path: String, _options: Dictionary, _plat
 	var source = AtlasSource.new();
 	source.load_from_zip(source_file, db);
 	
+	var generator = AtlasGenerator.new(source, db);
+	
+	
 	var texture = null;
 	
 	# Save the resulting resource.
 	var save_file = "%s.%s" % [save_path, _get_save_extension()];
 	#var err = ResourceSaver.save(texture, save_file);
-	var err = ResourceSaver.save(source, save_file);
+	var err = ResourceSaver.save(generator, save_file);
 
 	if err != OK:
 		push_error("Failed to save imported tileset: %s" % save_file)

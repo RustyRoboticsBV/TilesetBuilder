@@ -7,8 +7,13 @@ var _dict : Dictionary = {};
 func get_tile(id : String) -> Dictionary:
 	return _dict[id];
 
+## Check if the database has some tile.
 func has_tile(id : String) -> bool:
 	return _dict.has(id);
+
+## Get a list of all tile names in the database.
+func keys() -> Array:
+	return _dict.keys() as Array;
 
 ## Load the database from a JSON file.
 func load_from_json(file_path : String):

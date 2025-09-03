@@ -81,15 +81,15 @@
 			},
 			"1": {
 				"op": "flip_x",
-				"from": "NOOK_TR"
+				"src": "NOOK_TR"
 			},
 			"2": {
 				"op": "flip_y",
-				"from": "NOOK_BL"
+				"src": "NOOK_BL"
 			},
 			"3": {
 				"op": "flip_xy",
-				"from": "NOOK_BR"
+				"src": "NOOK_BR"
 			}
 		},
 		"layer": "solid",
@@ -102,22 +102,22 @@
 	"NOOK_TR": {
 		"coords": [11, 0],
 		"inherit": {
-			"op": "flip_x",
+			"op": "rotate_clock",
 			"from": "NOOK_TL"
 		}
 	},
 	"NOOK_BL": {
 		"coords": [8, 3],
 		"inherit": {
-			"op": "flip_y",
+			"op": "rotate_counter",
 			"from": "NOOK_TL"
 		}
 	},
 	"NOOK_BR": {
 		"coords": [11, 3],
 		"inherit": {
-			"op": "flip_x",
-			"from": "NOOK_BL"
+			"op": "flip_xy",
+			"from": "NOOK_TL"
 		}
 	},
 
@@ -186,7 +186,7 @@
 			},
 			"1": {
 				"op": "flip_y",
-				"from": "CAP_B"
+				"src": "CAP_B"
 			}
 		},
 		"layer": "solid",
@@ -326,8 +326,8 @@
 			},
 			"1": {
 				"op": "merge_diag_u",
-				"BL": "CORNER_TL",
-				"TR": "CORNER_BR"
+				"TL": "CORNER_TL",
+				"BR": "CORNER_BR"
 			}
 		},
 		"layer": "solid",
@@ -341,10 +341,11 @@
 		}
 	},
 	"DIAG_D": {
+		"block": "main",
 		"coords": [10, 2],
 		"inherit": {
-			"op": "flip_y",
-			"from": "DIAG_U"
+			"from": "DIAG_U",
+			"op": "rotate_clock"
 		}
 	},
 
@@ -474,11 +475,9 @@
 		"derive": {
 			
 			"0": {
-				"op": "merge_quad",
-				"BL": "CORNER_BL",
-				"BR": "CORNER_BR",
-				"TL": "EDGE_T",
-				"TR": "EDGE_T"
+				"op": "merge_y",
+				"B": "GAP_B",
+				"T": "EDGE_T"
 			}
 		},
 		"layer": "solid",

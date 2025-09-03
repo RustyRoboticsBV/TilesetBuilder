@@ -3,7 +3,7 @@ class_name AtlasSource;
 
 @export var parts : Dictionary[String, Image];
 @export var part_masks : Dictionary[String, Image];
-@export var tiles : Dictionary[String, Image];
+@export var standard_tiles : Dictionary[String, Image];
 @export var user_tiles : Dictionary[String, Image];
 
 ## Load images from a ZIP file.
@@ -75,7 +75,7 @@ func _categorize(images : Dictionary[String, Image], database : TileDatabase):
 	# Clear current images.
 	parts = {};
 	part_masks = {};
-	tiles = {};
+	standard_tiles = {};
 	user_tiles = {};
 	
 	# Read and classify images from dictionary.
@@ -87,7 +87,7 @@ func _categorize(images : Dictionary[String, Image], database : TileDatabase):
 			part_masks[key.substr(4)] = images[key];
 			print("Found part mask: " + key.substr(4));
 		elif database.has_tile(key):
-			tiles[key] = images[key]
+			standard_tiles[key] = images[key]
 			print("Found tile: " + key);
 		else:
 			user_tiles[key] = images[key];
