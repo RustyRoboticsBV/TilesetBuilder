@@ -294,7 +294,7 @@
 		}
 	},
 	"GAP_L": {
-		"coords": [9, 2],
+		"coords": [8, 2],
 		"inherit": {
 			"op": "rotate_counter",
 			"from": "GAP_T"
