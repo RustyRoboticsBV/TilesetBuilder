@@ -5,8 +5,8 @@
 		"derive": {
 			"0": {
 			"op": "merge_x",
-			"L": "EDGE_T",
-			"R": "EDGE_B"
+			"L": "EDGE_R",
+			"R": "EDGE_L"
 			}
 		},
 		"layer": "solid",
@@ -368,7 +368,7 @@
 			},
 			"3": {
 				"op": "merge_quad",
-				"BL": "CORNER_TL",
+				"BL": "CORNER_BL",
 				"BR": "CENTER",
 				"TL": "CORNER_TL",
 				"TR": "CORNER_TR"
@@ -434,10 +434,10 @@
 		"derive": {
 			"0": {
 				"op": "merge_quad",
-				"BL": "NOOK_BL",
-				"BR": "NOOK_BR",
-				"TL": "NOOK_T",
-				"TR": "EDGE_T"
+				"BL": "NOOK_TL",
+				"BR": "CORNER_BR",
+				"TL": "NOOK_TL",
+				"TR": "NOOK_TL"
 			}
 		},
 		"layer": "solid",
