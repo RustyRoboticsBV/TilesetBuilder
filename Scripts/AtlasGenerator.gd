@@ -9,15 +9,26 @@ func _init(source : AtlasSource, database : TileDatabase):
 	standard_tiles = source.standard_tiles;
 	
 	# Try to resolve missing tiles.
-	for key in database.keys():
-		if standard_tiles.has(key):
-			continue;
+	for loop_index in 100:
+		print("Loop " + str(loop_index) + ":");
+		var _changed : bool = false;
 		
-		var info = database.get_tile(key);
-		var derive = info["derive"];
-		_try_resolve(key, derive);
+		for key in database.keys():
+			if standard_tiles.has(key):
+				continue;
+			
+			var info = database.get_tile(key);
+			var derive = info["derive"];
+			var success = _try_resolve(key, derive);
+			if success:
+				_changed = true;
+		
+		if !_changed:
+			break;
 
 func _try_resolve(id : String, rules : Dictionary) -> bool:
+	if id == "CAP_L":
+		print(rules);
 	for key in rules:
 		var operator = rules[key]["op"];
 		match operator:
@@ -52,13 +63,11 @@ func _try_resolve(id : String, rules : Dictionary) -> bool:
 				if _try_merge_y(id, bottom, top):
 					return true;
 			"merge_diag_d":
-				print("trying " + str(rules[key]));
 				var bottom_left = rules[key]["BL"];
 				var top_right = rules[key]["TR"];
 				if _try_merge_diag_d(id, bottom_left, top_right):
 					return true;
 			"merge_diag_u":
-				print("trying " + str(rules[key]));
 				var top_left = rules[key]["TL"];
 				var bottom_right = rules[key]["BR"];
 				if _try_merge_diag_u(id, top_left, bottom_right):
@@ -251,8 +260,6 @@ func _try_merge_quad(target : String, bottom_left : String, bottom_right : Strin
 	
 	var half_width : int = floor(bl.get_width() / 2.0);
 	var half_height : int = floor(bl.get_height() / 2.0);
-	var width : int = bl.get_width();
-	var height : int = bl.get_height();
 	
 	# Create new image.
 	var copy = bl.duplicate();
