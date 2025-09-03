@@ -32,10 +32,10 @@ func _import(source_file: String, save_path: String, _options: Dictionary, _plat
 	var db = TileDatabase.new();
 	db.load_from_json("../Data/tiles.json");
 	
-	var source = AtlasSource.new();
+	var source = TileAtlasSource.new();
 	source.load_from_zip(source_file, db);
 	
-	var generator = AtlasGenerator.new(source, db);
+	var generator = TileAtlasGenerator.new(source, db);
 	
 	var texture = TileAtlasTexture.new(generator, db);
 	

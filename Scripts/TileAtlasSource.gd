@@ -1,5 +1,5 @@
 extends Resource
-class_name AtlasSource;
+class_name TileAtlasSource;
 
 @export var parts : Dictionary[String, Image];
 @export var part_masks : Dictionary[String, Image];
@@ -54,6 +54,9 @@ func _load_images_from_zip(path: String) -> Dictionary[String, Image]:
 				load_err = image.load_ktx_from_buffer(bytes);
 			else:
 				load_err = ERR_FILE_UNRECOGNIZED;
+			
+			# Set image format.
+			image.convert(Image.FORMAT_RGBA8);
 			
 			# Store loaded image.
 			if load_err == ERR_FILE_UNRECOGNIZED:

@@ -1,10 +1,10 @@
 extends Resource;
-class_name AtlasGenerator;
+class_name TileAtlasGenerator;
 
 @export var standard_tiles : Dictionary[String, Image] = {};
 @export var user_tiles : Dictionary[String, Image] = {};
 
-func _init(source : AtlasSource, database : TileDatabase):
+func _init(source : TileAtlasSource, database : TileDatabase):
 	user_tiles = source.user_tiles;
 	standard_tiles = source.standard_tiles;
 	
@@ -24,6 +24,7 @@ func _init(source : AtlasSource, database : TileDatabase):
 				_changed = true;
 		
 		if !_changed:
+			print("No more tiles could be derived.");
 			break;
 
 func _try_resolve(id : String, rules : Dictionary) -> bool:
