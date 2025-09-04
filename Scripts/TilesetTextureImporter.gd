@@ -65,8 +65,6 @@ func _import(source_file: String, save_path: String, _options: Dictionary, _plat
 	print();
 	print("Done!");
 	var save_file = "%s.%s" % [save_path, _get_save_extension()];
-	#var err = ResourceSaver.save(source, save_file);
-	#var err = ResourceSaver.save(generator, save_file);
 	var err = ResourceSaver.save(texture, save_file);
 
 	if err != OK:

@@ -1,9 +1,20 @@
 extends Resource;
 class_name TileAtlasCompositor;
 
+@warning_ignore_start("shadowed_variable")
+
 @export var tiles : Dictionary[String, Image] = {};
+@export var source : TileAtlasSource;
+@export var parts_generator : TileAtlasGenerator;
+@export var parts_masks_generator : TileAtlasGenerator;
+@export var prefabs_generator : TileAtlasGenerator;
 
 func _init(source : TileAtlasSource, parts : TileAtlasGenerator, part_masks : TileAtlasGenerator, prefabs : TileAtlasGenerator, database : TileDatabase) -> void:
+	self.source = source;
+	self.parts_generator = parts;
+	self.parts_masks_generator = part_masks;
+	self.prefabs_generator = prefabs;
+	
 	for id in database.keys():
 		if source.standard_tiles.has(id):
 			tiles[id] = source.standard_tiles[id].duplicate();

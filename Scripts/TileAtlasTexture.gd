@@ -1,7 +1,14 @@
 extends ImageTexture;
 class_name TileAtlasTexture;
 
+@warning_ignore_start("shadowed_variable")
+
+#@export var compositor : TileAtlasCompositor;
+
 func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database : TileDatabase) -> void:
+	# Debug: store compositor.
+	#self.compositor = compositor;
+	
 	# Find tile size.
 	var tile_w : int = 0;
 	var tile_h : int = 0;
@@ -16,7 +23,7 @@ func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database 
 	var atlas = Image.create(12 * tile_w, 4 * tile_h, false, Image.FORMAT_RGBA8);
 	for id in compositor.tiles.keys():
 		var image : Image = compositor.tiles[id];
-		_fix_alpha_border(image);
+		_fix_alpha_border(image.duplicate());
 		
 		var coords : Array = database.get_tile(id)["coords"];
 		var x : int = coords[0] * tile_w;
@@ -31,6 +38,8 @@ func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database 
 		continue;
 	
 	# Create texture.
+	if atlas.has_mipmaps():
+		atlas.generate_mipmaps();
 	set_image(atlas);
 
 func _fix_alpha_border(image : Image) -> void:
@@ -40,9 +49,6 @@ func _fix_alpha_border(image : Image) -> void:
 			if pixel.a == 0:
 				var opaque : Color = _get_nearest_opaque_pixel(image, x, y);
 				image.set_pixel(x, y, Color(opaque.r, opaque.g, opaque.b, 0));
-			#pixel = image.get_pixel(x, y);
-			#pixel.a = 1;
-			#image.set_pixel(x, y, pixel);
 
 func _get_nearest_opaque_pixel(image: Image, x: int, y: int) -> Color:
 	# Get dimensions.
@@ -62,7 +68,7 @@ func _get_nearest_opaque_pixel(image: Image, x: int, y: int) -> Color:
 		for dy in range(-r, r + 1):
 			for dx in range(-r, r + 1):
 				if abs(dx) != r and abs(dy) != r:
-					continue;  # skip interior, only check perimeter
+					continue;
 				
 				var nx = x + dx;
 				var ny = y + dy;
