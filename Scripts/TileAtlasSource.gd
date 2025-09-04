@@ -84,11 +84,11 @@ func _categorize(images : Dictionary[String, Image], database : TileDatabase):
 	# Read and classify images from dictionary.
 	for key : String in images.keys():
 		if key.begins_with("PART_"):
-			parts[key.substr(4)] = images[key];
-			print("Found part: " + key.substr(4));
+			parts[key.substr(5)] = images[key];
+			print("Found part: " + key.substr(5));
 		elif key.begins_with("MASK_"):
-			part_masks[key.substr(4)] = images[key];
-			print("Found part mask: " + key.substr(4));
+			part_masks[key.substr(5)] = images[key];
+			print("Found part mask: " + key.substr(5));
 		elif database.has_tile(key):
 			standard_tiles[key] = images[key]
 			print("Found tile: " + key);

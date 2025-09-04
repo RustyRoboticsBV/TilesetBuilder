@@ -143,6 +143,8 @@ func _apply_rotate_clock(text : String) -> String:
 		"_L": "_T",
 		"_R": "_B",
 		"_B": "_L",
+		"_H": "_V",
+		"_V" : "_H",
 		"DIAG_D": "DIAG_U",
 		"DIAG_U": "DIAG_D",
 		
@@ -172,6 +174,8 @@ func _apply_rotate_counter(text : String) -> String:
 		"_L": "_B",
 		"_R": "_T",
 		"_B": "_R",
+		"_H": "_V",
+		"_V" : "_H",
 		"DIAG_D": "DIAG_U",
 		"DIAG_U": "DIAG_D",
 		

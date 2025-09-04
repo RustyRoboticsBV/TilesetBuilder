@@ -36,10 +36,13 @@ func _import(source_file: String, save_path: String, _options: Dictionary, _plat
 	
 	var source = TileAtlasSource.new();
 	source.load_from_zip(source_file, db);
+
+	var generator_parts = TileAtlasGenerator.new(source, db, true);	
+	var generator_prefabs = TileAtlasGenerator.new(source, db, false);
 	
-	var generator = TileAtlasGenerator.new(source, db);
+	var compositor = TileAtlasCompositor.new(source, generator_parts, generator_prefabs, db);
 	
-	var texture = TileAtlasTexture.new(generator, db);
+	var texture = TileAtlasTexture.new(source, compositor, db);
 	
 	# Save the resulting resource.
 	var save_file = "%s.%s" % [save_path, _get_save_extension()];

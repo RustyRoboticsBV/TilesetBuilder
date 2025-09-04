@@ -3,12 +3,16 @@ class_name TileAtlasGenerator;
 
 @warning_ignore_start("shadowed_variable_base_class")
 
-@export var standard_tiles : Dictionary[String, Image] = {};
-@export var user_tiles : Dictionary[String, Image] = {};
+@export var tiles : Dictionary[String, Image] = {};
+@export var masks : Dictionary[String, Image] = {};
 
-func _init(source : TileAtlasSource, database : TileDatabase):
-	user_tiles = source.user_tiles;
-	standard_tiles = source.standard_tiles;
+func _init(source : TileAtlasSource, database : TileDatabase, use_parts : bool):
+	if use_parts:
+		tiles = source.parts.duplicate_deep();
+		masks = source.part_masks.duplicate_deep();
+	else:
+		tiles = source.standard_tiles.duplicate_deep();
+		masks = {};
 	
 	# Try to resolve missing tiles.
 	for loop_index in 100:
@@ -16,7 +20,7 @@ func _init(source : TileAtlasSource, database : TileDatabase):
 		var _changed : bool = false;
 		
 		for key in database.keys():
-			if standard_tiles.has(key):
+			if tiles.has(key):
 				continue;
 			
 			var info = database.get_tile(key);
@@ -83,72 +87,72 @@ func _try_resolve(id : String, rules : Dictionary) -> bool:
 	return false;
 
 func _try_flip_x(target : String, source : String) -> bool:
-	if !standard_tiles.has(source):
+	if !tiles.has(source):
 		return false;
 		
 	# Create new image.
-	var copy = standard_tiles[source].duplicate();
+	var copy = tiles[source].duplicate();
 	copy.flip_x();
-	standard_tiles[target] = copy;
+	tiles[target] = copy;
 	
 	print("Derived " + target + " using flip_x(" + source + ")");
 	return true;
 
 func _try_flip_y(target : String, source : String) -> bool:
-	if !standard_tiles.has(source):
+	if !tiles.has(source):
 		return false;
 		
 	# Create new image.
-	var copy = standard_tiles[source].duplicate();
+	var copy = tiles[source].duplicate();
 	copy.flip_y();
-	standard_tiles[target] = copy;
+	tiles[target] = copy;
 	
 	print("Derived " + target + " using flip_y(" + source + ")");
 	return true;
 
 func _try_flip_xy(target : String, source : String) -> bool:
-	if !standard_tiles.has(source):
+	if !tiles.has(source):
 		return false;
 		
 	# Create new image.
-	var copy = standard_tiles[source].duplicate();
+	var copy = tiles[source].duplicate();
 	copy.flip_x().flip_y();
-	standard_tiles[target] = copy;
+	tiles[target] = copy;
 	
 	print("Derived " + target + " using flip_xy(" + source + ")");
 	return true;
 
 func _try_rotate_clock(target : String, source : String) -> bool:
-	if !standard_tiles.has(source):
+	if !tiles.has(source):
 		return false;
 		
 	# Create new image.
-	var copy = standard_tiles[source].duplicate();
+	var copy = tiles[source].duplicate();
 	copy.rotate_90(CLOCKWISE);
-	standard_tiles[target] = copy;
+	tiles[target] = copy;
 	
 	print("Derived " + target + " using rotate_clock(" + source + ")");
 	return true;
 
 func _try_rotate_counter(target : String, source : String) -> bool:
-	if !standard_tiles.has(source):
+	if !tiles.has(source):
 		return false;
 		
 	# Create new image.
-	var copy = standard_tiles[source].duplicate();
+	var copy = tiles[source].duplicate();
 	copy.rotate_90(COUNTERCLOCKWISE);
-	standard_tiles[target] = copy;
+	tiles[target] = copy;
 	
 	print("Derived " + target + " using rotate_counter(" + source + ")");
 	return true;
 
 func _try_merge_x(target : String, left : String, right : String) -> bool:
-	if !standard_tiles.has(left) or !standard_tiles.has(right):
+	if !tiles.has(left) or !tiles.has(right):
 		return false;
 	
 	# Get images.
-	var l : Image = standard_tiles[left];
-	var r : Image = standard_tiles[right];
+	var l : Image = tiles[left];
+	var r : Image = tiles[right];
 	
 	# Get dimensions.
 	if l.get_size() != r.get_size():
@@ -161,18 +165,18 @@ func _try_merge_x(target : String, left : String, right : String) -> bool:
 	# Create new image.
 	var copy = l.duplicate();
 	copy.blit_rect(r, Rect2(Vector2(half_width, 0), Vector2(half_width, height)), Vector2(half_width, 0));
-	standard_tiles[target] = copy;
+	tiles[target] = copy;
 	
 	print("Derived " + target + " using merge_x(" + left + ", " + right + ")");
 	return true;
 
 func _try_merge_y(target : String, bottom : String, top : String) -> bool:
-	if !standard_tiles.has(bottom) or !standard_tiles.has(top):
+	if !tiles.has(bottom) or !tiles.has(top):
 		return false;
 	
 	# Get images.
-	var b : Image = standard_tiles[bottom];
-	var t : Image = standard_tiles[top];
+	var b : Image = tiles[bottom];
+	var t : Image = tiles[top];
 	
 	# Get dimensions.
 	if b.get_size() != t.get_size():
@@ -185,18 +189,18 @@ func _try_merge_y(target : String, bottom : String, top : String) -> bool:
 	# Create new image.
 	var copy = b.duplicate();
 	copy.blit_rect(t, Rect2(Vector2.ZERO, Vector2(width, half_height)), Vector2.ZERO);
-	standard_tiles[target] = copy;
+	tiles[target] = copy;
 	
 	print("Derived " + target + " using merge_y(" + bottom + ", " + top + ")");
 	return true;
 
 func _try_merge_diag_d(target : String, bottom_left : String, top_right : String) -> bool:
-	if !standard_tiles.has(bottom_left) or !standard_tiles.has(top_right):
+	if !tiles.has(bottom_left) or !tiles.has(top_right):
 		return false;
 	
 	# Get images.
-	var bl : Image = standard_tiles[bottom_left];
-	var tr : Image = standard_tiles[top_right];
+	var bl : Image = tiles[bottom_left];
+	var tr : Image = tiles[top_right];
 	
 	# Get dimensions.
 	if bl.get_size() != tr.get_size():
@@ -212,18 +216,18 @@ func _try_merge_diag_d(target : String, bottom_left : String, top_right : String
 		for x in range(w):
 			if x * h > y * w:
 				copy.set_pixel(x, y, tr.get_pixel(x, y));
-	standard_tiles[target] = copy;
+	tiles[target] = copy;
 	
 	print("Derived " + target + " using merge_diag_d(" + bottom_left + ", " + top_right + ")");
 	return true;
 
 func _try_merge_diag_u(target : String, top_left : String, bottom_right : String) -> bool:
-	if !standard_tiles.has(top_left) or !standard_tiles.has(bottom_right):
+	if !tiles.has(top_left) or !tiles.has(bottom_right):
 		return false;
 	
 	# Get images.
-	var tl : Image = standard_tiles[top_left];
-	var br : Image = standard_tiles[bottom_right];
+	var tl : Image = tiles[top_left];
+	var br : Image = tiles[bottom_right];
 	
 	# Get dimensions.
 	if tl.get_size() != br.get_size():
@@ -239,20 +243,20 @@ func _try_merge_diag_u(target : String, top_left : String, bottom_right : String
 		for x in range(w):
 			if x * h > (h - 1 - y) * w:
 				copy.set_pixel(x, y, br.get_pixel(x, y));
-	standard_tiles[target] = copy;
+	tiles[target] = copy;
 	
 	print("Derived " + target + " using merge_diag_u(" + top_left + ", " + bottom_right + ")");
 	return true;
 
 func _try_merge_quad(target : String, bottom_left : String, bottom_right : String, top_left : String, top_right : String) -> bool:
-	if !standard_tiles.has(bottom_left) or !standard_tiles.has(bottom_right) or !standard_tiles.has(top_left) or !standard_tiles.has(top_right):
+	if !tiles.has(bottom_left) or !tiles.has(bottom_right) or !tiles.has(top_left) or !tiles.has(top_right):
 		return false;
 	
 	# Get images.
-	var bl : Image = standard_tiles[bottom_left];
-	var br : Image = standard_tiles[bottom_right];
-	var tl : Image = standard_tiles[top_left];
-	var tr : Image = standard_tiles[top_right];
+	var bl : Image = tiles[bottom_left];
+	var br : Image = tiles[bottom_right];
+	var tl : Image = tiles[top_left];
+	var tr : Image = tiles[top_right];
 	
 	# Get dimensions.
 	if bl.get_size() != br.get_size() or bl.get_size() != tl.get_size() or bl.get_size() != tr.get_size():
@@ -267,7 +271,7 @@ func _try_merge_quad(target : String, bottom_left : String, bottom_right : Strin
 	copy.blit_rect(br, Rect2i(Vector2i(half_width, half_height), Vector2i(half_width, half_height)), Vector2i(half_width, half_height));
 	copy.blit_rect(tl, Rect2i(Vector2i.ZERO, Vector2i(half_width, half_height)), Vector2i.ZERO);
 	copy.blit_rect(tr, Rect2i(Vector2i(half_width, 0), Vector2i(half_width, half_height)), Vector2i(half_width, 0));
-	standard_tiles[target] = copy;
+	tiles[target] = copy;
 	
 	print("Derived " + target + " using merge_quad(" + bottom_left + ", " + bottom_right + ", " + top_left + ", " + top_right + ")");
 	return true;

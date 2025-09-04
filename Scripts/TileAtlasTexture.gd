@@ -1,12 +1,12 @@
 extends ImageTexture;
 class_name TileAtlasTexture;
 
-func _init(generator : TileAtlasGenerator, database : TileDatabase):
+func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database : TileDatabase) -> void:
 	print();
 	# Find tile size.
 	var tile_w : int = 0;
 	var tile_h : int = 0;
-	for image : Image in generator.standard_tiles.values():
+	for image : Image in compositor.tiles.values():
 		if image.get_width() > tile_w:
 			tile_w = image.get_width();
 		if image.get_height() > tile_h:
@@ -15,8 +15,8 @@ func _init(generator : TileAtlasGenerator, database : TileDatabase):
 	
 	# Place tiles.
 	var atlas = Image.create(12 * tile_w, 4 * tile_h, false, Image.FORMAT_RGBA8);
-	for id in generator.standard_tiles.keys():
-		var image : Image = generator.standard_tiles[id];
+	for id in compositor.tiles.keys():
+		var image : Image = compositor.tiles[id];
 		
 		var coords : Array = database.get_tile(id)["coords"];
 		var x : int = coords[0] * tile_w;
@@ -24,6 +24,11 @@ func _init(generator : TileAtlasGenerator, database : TileDatabase):
 		
 		print("Placing " + id + " at (" + str(x) + ", " + str(y) + ")");
 		atlas.blit_rect(image, Rect2i(0, 0, tile_w, tile_h), Vector2i(x, y));
+	
+	# Add user-defined tiles.
+	for user in source.user_tiles:
+		# TODO: Implement.
+		continue;
 	
 	# Create texture.
 	set_image(atlas);
