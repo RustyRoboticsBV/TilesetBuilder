@@ -7,15 +7,16 @@ class_name TileAtlasSource;
 @export var user_tiles : Dictionary[String, Image];
 
 ## Load images from a ZIP file.
-func load_from_zip(file_path : String, database : TileDatabase):
+func load_from_zip(file_path : String, database : TileDatabase) -> void:
 	var images = _load_images_from_zip(file_path);
 	_categorize(images, database);
+
+
 
 ## Load all the images from a ZIP file and return them as a dictionary.
 ## Unrecognized file types are ignored.
 func _load_images_from_zip(path: String) -> Dictionary[String, Image]:
 	var images : Dictionary[String, Image] = {};
-	print();
 	
 	# Open the zip file.
 	var zip : ZIPReader = ZIPReader.new();
@@ -74,7 +75,7 @@ func _load_images_from_zip(path: String) -> Dictionary[String, Image]:
 	return images;
 
 ## Categorize the images in a dictionary and store them.
-func _categorize(images : Dictionary[String, Image], database : TileDatabase):
+func _categorize(images : Dictionary[String, Image], database : TileDatabase) -> void:
 	# Clear current images.
 	parts = {};
 	part_masks = {};

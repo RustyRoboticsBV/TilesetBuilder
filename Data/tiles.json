@@ -238,7 +238,7 @@
 	"GAP_T": {
 		"block": "main",
 		"coords": [9, 0],
-		"composite": ["CORNER_TL", "CORNER_TR", "CENTER"],
+		"composite": ["GAP_T", "CENTER"],
 		"derive": {
 			"0": {
 				"op": "merge_x",
@@ -281,7 +281,7 @@
 	"DIAG_U": {
 		"block": "main",
 		"coords": [9, 1],
-		"composite": ["CORNER_TL", "CORNER_BR", "CENTER"],
+		"composite": ["DIAG_U", "CENTER"],
 		"derive": {
 			"0": {
 				"op": "merge_diag_u",
@@ -311,7 +311,7 @@
 	"HUB_TL": {
 		"block": "main",
 		"coords": [7, 3],
-		"composite": ["CORNER_BL", "CORNER_TL", "CORNER_TR", "CENTER"],
+		"composite": ["HUB_TL", "CENTER"],
 		"derive": {
 			"0": {
 				"op": "merge_quad",
@@ -355,7 +355,7 @@
 	"CROSS": {
 		"block": "main",
 		"coords": [2, 1],
-		"composite": ["CORNER_TL", "CORNER_TR", "CORNER_BL", "CORNER_BR", "CENTER"],
+		"composite": ["CROSS", "CENTER"],
 		"derive": {
 			"0": {
 				"op": "merge_quad",
@@ -377,7 +377,7 @@
 	"TURN_TL": {
 		"block": "main",
 		"coords": [1, 0],
-		"composite": ["NOOK_TL", "CORNER_BR", "CENTER"],
+		"composite": ["TURN_TL", "CENTER"],
 		"derive": {
 			"0": {
 				"op": "merge_quad",
@@ -418,7 +418,7 @@
 	"JUNCTION_T": {
 		"block": "main",
 		"coords": [2, 0],
-		"composite": ["EDGE_T", "CORNER_BL", "CORNER_BR", "CENTER"],
+		"composite": ["JUNCTION_T", "CENTER"],
 		"derive": {
 			
 			"0": {
@@ -459,7 +459,7 @@
 	"EXIT_H_TL": {
 		"block": "main",
 		"coords": [5, 0],
-		"composite": ["EDGE_T", "CORNER_BL", "CENTER"],
+		"composite": ["EXIT_H_TL", "CENTER"],
 		"derive": {
 			"0": {
 				"op": "merge_y",

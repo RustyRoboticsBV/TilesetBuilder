@@ -16,7 +16,7 @@ func keys() -> Array:
 	return _dict.keys() as Array;
 
 ## Load the database from a JSON file.
-func load_from_json(file_path : String):
+func load_from_json(file_path : String) -> void:
 	var json = _load_json_from_file(file_path);
 	
 	# Expand inherited entries.

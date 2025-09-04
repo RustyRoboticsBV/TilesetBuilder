@@ -3,8 +3,7 @@ class_name TileAtlasCompositor;
 
 @export var tiles : Dictionary[String, Image] = {};
 
-func _init(source : TileAtlasSource, parts : TileAtlasGenerator, prefabs : TileAtlasGenerator, database : TileDatabase):
-	print();
+func _init(source : TileAtlasSource, parts : TileAtlasGenerator, prefabs : TileAtlasGenerator, database : TileDatabase) -> void:
 	for id in database.keys():
 		if source.standard_tiles.has(id):
 			tiles[id] = source.standard_tiles[id].duplicate();
@@ -13,6 +12,8 @@ func _init(source : TileAtlasSource, parts : TileAtlasGenerator, prefabs : TileA
 		elif !_try_composite(id, parts, database) and prefabs.tiles.has(id):
 			tiles[id] = prefabs.tiles[id].duplicate();
 			print("Could not composite " + id + ", used prefab tile instead.");
+
+
 
 func _try_composite(id : String, parts : TileAtlasGenerator, database : TileDatabase) -> bool:
 	var tile_info : Dictionary = database.get_tile(id);
@@ -23,13 +24,9 @@ func _try_composite(id : String, parts : TileAtlasGenerator, database : TileData
 	var image : Image = null;
 	for i in range(used_parts.size() - 1, -1, -1):
 		var part = used_parts[i];
-		#if image == null:
-		#	image = parts.tiles[part].duplicate();
-		#	break;
 		if !parts.tiles.has(part):
 			return false;
 		
-		print("- Compositing " + part);
 		if image == null:
 			image = parts.tiles[part].duplicate();
 		else:

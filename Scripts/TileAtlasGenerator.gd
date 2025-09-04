@@ -6,7 +6,7 @@ class_name TileAtlasGenerator;
 @export var tiles : Dictionary[String, Image] = {};
 @export var masks : Dictionary[String, Image] = {};
 
-func _init(source : TileAtlasSource, database : TileDatabase, use_parts : bool):
+func _init(source : TileAtlasSource, database : TileDatabase, use_parts : bool) -> void:
 	if use_parts:
 		tiles = source.parts.duplicate_deep();
 		masks = source.part_masks.duplicate_deep();
@@ -32,6 +32,8 @@ func _init(source : TileAtlasSource, database : TileDatabase, use_parts : bool):
 		if !_changed:
 			print("No more tiles could be derived.");
 			break;
+
+
 
 func _try_resolve(id : String, rules : Dictionary) -> bool:
 	for key in rules:

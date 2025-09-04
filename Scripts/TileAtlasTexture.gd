@@ -2,7 +2,6 @@ extends ImageTexture;
 class_name TileAtlasTexture;
 
 func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database : TileDatabase) -> void:
-	print();
 	# Find tile size.
 	var tile_w : int = 0;
 	var tile_h : int = 0;

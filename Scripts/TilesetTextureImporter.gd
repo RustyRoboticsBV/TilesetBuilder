@@ -31,17 +31,30 @@ func _import(source_file: String, save_path: String, _options: Dictionary, _plat
 	print("Importing tileset from: '%s'" % source_file);
 
 	# Create tileset.
+	print();
+	print("Loading tile database...")
 	var db = TileDatabase.new();
 	db.load_from_json("../Data/tiles.json");
 	
+	print();
+	print("Loading atlas source...");
 	var source = TileAtlasSource.new();
 	source.load_from_zip(source_file, db);
-
+	
+	print();
+	print("Generating missing parts...");
 	var generator_parts = TileAtlasGenerator.new(source, db, true);	
+	
+	print();
+	print("Generating missing prefabs...");
 	var generator_prefabs = TileAtlasGenerator.new(source, db, false);
 	
+	print();
+	print("Compositing tile images...");
 	var compositor = TileAtlasCompositor.new(source, generator_parts, generator_prefabs, db);
 	
+	print();
+	print("Building texture...");
 	var texture = TileAtlasTexture.new(source, compositor, db);
 	
 	# Save the resulting resource.
