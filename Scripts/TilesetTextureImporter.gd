@@ -43,21 +43,27 @@ func _import(source_file: String, save_path: String, _options: Dictionary, _plat
 	
 	print();
 	print("Generating missing parts...");
-	var generator_parts = TileAtlasGenerator.new(source, db, true);	
+	var generator_parts = TileAtlasGenerator.new(source, db, "parts");
+	
+	print();
+	print("Generating missing part masks...");
+	var generator_masks = TileAtlasGenerator.new(source, db, "masks");
 	
 	print();
 	print("Generating missing prefabs...");
-	var generator_prefabs = TileAtlasGenerator.new(source, db, false);
+	var generator_prefabs = TileAtlasGenerator.new(source, db, "prefabs");
 	
 	print();
 	print("Compositing tile images...");
-	var compositor = TileAtlasCompositor.new(source, generator_parts, generator_prefabs, db);
+	var compositor = TileAtlasCompositor.new(source, generator_parts, generator_masks, generator_prefabs, db);
 	
 	print();
 	print("Building texture...");
 	var texture = TileAtlasTexture.new(source, compositor, db);
 	
 	# Save the resulting resource.
+	print();
+	print("Done!");
 	var save_file = "%s.%s" % [save_path, _get_save_extension()];
 	#var err = ResourceSaver.save(source, save_file);
 	#var err = ResourceSaver.save(generator, save_file);

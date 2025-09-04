@@ -29,5 +29,27 @@ func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database 
 		# TODO: Implement.
 		continue;
 	
+	# Turn all transparent pixels to (0, 0, 0, 0).
+	const clear : Color = Color(0, 0, 0, 0);
+	print("Fixing alpha borders...");
+	for x in atlas.get_width():
+		for y in atlas.get_height():
+			var pixel = atlas.get_pixel(x, y);
+			if pixel.a == 0:
+				var left = atlas.get_pixel(x - 1, y) if x > 0 else clear;
+				var right = atlas.get_pixel(x + 1, y) if x < atlas.get_width() - 1 else clear;
+				var top = atlas.get_pixel(x, y - 1) if y > 0 else clear;
+				var bottom = atlas.get_pixel(x, y + 1) if y < atlas.get_height() - 1 else clear;
+				if left.a != 0:
+					atlas.set_pixel(x, y, Color(left.r, left.g, left.b, 0));
+				elif right.a != 0:
+					atlas.set_pixel(x, y, Color(right.r, right.g, right.b, 0));
+				elif bottom.a != 0:
+					atlas.set_pixel(x, y, Color(bottom.r, bottom.g, bottom.b, 0));
+				elif top.a != 0:
+					atlas.set_pixel(x, y, Color(top.r, top.g, top.b, 0));
+				else:
+					atlas.set_pixel(x, y, clear);
+	
 	# Create texture.
 	set_image(atlas);

@@ -4,15 +4,15 @@ class_name TileAtlasGenerator;
 @warning_ignore_start("shadowed_variable_base_class")
 
 @export var tiles : Dictionary[String, Image] = {};
-@export var masks : Dictionary[String, Image] = {};
 
-func _init(source : TileAtlasSource, database : TileDatabase, use_parts : bool) -> void:
-	if use_parts:
-		tiles = source.parts.duplicate_deep();
-		masks = source.part_masks.duplicate_deep();
-	else:
-		tiles = source.standard_tiles.duplicate_deep();
-		masks = {};
+func _init(source : TileAtlasSource, database : TileDatabase, use_image_type : String) -> void:
+	match use_image_type:
+		"parts":
+			tiles = source.parts.duplicate_deep();
+		"masks":
+			tiles = source.part_masks.duplicate_deep();
+		"prefabs":
+			tiles = source.standard_tiles.duplicate_deep();
 	
 	# Try to resolve missing tiles.
 	for loop_index in 100:
