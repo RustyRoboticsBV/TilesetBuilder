@@ -59,7 +59,7 @@ func _import(source_file: String, save_path: String, _options: Dictionary, _plat
 	
 	print();
 	print("Building texture...");
-	var texture = TileAtlasTexture.new(source, compositor, db);
+	var texture = TileAtlasTexture.new(source, compositor, db, false);
 	
 	# Save the resulting resource.
 	print();

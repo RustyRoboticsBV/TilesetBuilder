@@ -524,5 +524,406 @@
 			"from": "EXIT_V_TL",
 			"op": "flip_xy"
 		}
+	},
+	
+	"SLOPE_TL": {
+		"block": "slope",
+		"coords": [0, 0],
+		"composite": ["SLOPE_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "flip_x",
+				"src": "SLOPE_TR"
+			},
+			"1": {
+				"op": "flip_y",
+				"src": "SLOPE_BL"
+			},
+			"2": {
+				"op": "flip_xy",
+				"src": "SLOPE_BR"
+			}
+		}
+	},
+	"SLOPE_TR": {
+		"coords": [3, 0], 
+		"inherit": {
+			"from": "SLOPE_TL",
+			"op": "flip_x"
+		}
+	},
+	"SLOPE_BL": {
+		"coords": [0, 3], 
+		"inherit": {
+			"from": "SLOPE_TL",
+			"op": "flip_y"
+		}
+	},
+	"SLOPE_BR": {
+		"coords": [3, 3], 
+		"inherit": {
+			"from": "SLOPE_TL",
+			"op": "flip_xy"
+		}
+	},
+	"LINK_TL": {
+		"block": "slope",
+		"coords": [1, 1],
+		"composite": ["LINK_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "flip_x",
+				"src": "LINK_TR"
+			},
+			"1": {
+				"op": "flip_y",
+				"src": "LINK_BL"
+			},
+			"2": {
+				"op": "flip_xy",
+				"src": "LINK_BR"
+			}
+		}
+	},
+	"LINK_TR": {
+		"coords": [2, 1], 
+		"inherit": {
+			"from": "LINK_TL",
+			"op": "flip_x"
+		}
+	},
+	"LINK_BL": {
+		"coords": [1, 2], 
+		"inherit": {
+			"from": "LINK_TL",
+			"op": "flip_y"
+		}
+	},
+	"LINK_BR": {
+		"coords": [2, 2], 
+		"inherit": {
+			"from": "LINK_TL",
+			"op": "flip_xy"
+		}
+	},
+	
+	"PEAK_TL": {
+		"block": "slope",
+		"coords": [10, 0],
+		"composite": ["PEAK_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "flip_x",
+				"src": "PEAK_TR"
+			},
+			"1": {
+				"op": "flip_y",
+				"src": "PEAK_BL"
+			},
+			"2": {
+				"op": "flip_xy",
+				"src": "PEAK_BR"
+			}
+		}
+	},
+	"PEAK_TR": {
+		"coords": [9, 0], 
+		"inherit": {
+			"from": "PEAK_TL",
+			"op": "flip_x"
+		}
+	},
+	"PEAK_BL": {
+		"coords": [10, 3], 
+		"inherit": {
+			"from": "PEAK_TL",
+			"op": "flip_y"
+		}
+	},
+	"PEAK_BR": {
+		"coords": [9, 3], 
+		"inherit": {
+			"from": "PEAK_TL",
+			"op": "flip_xy"
+		}
+	},
+	"WALL_TL": {
+		"block": "slope",
+		"coords": [5, 1],
+		"composite": ["WALL_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "flip_x",
+				"src": "WALL_TR"
+			},
+			"1": {
+				"op": "flip_y",
+				"src": "WALL_BL"
+			},
+			"2": {
+				"op": "flip_xy",
+				"src": "WALL_BR"
+			}
+		}
+	},
+	"WALL_TR": {
+		"coords": [6, 1], 
+		"inherit": {
+			"from": "WALL_TL",
+			"op": "flip_x"
+		}
+	},
+	"WALL_BL": {
+		"coords": [5, 2], 
+		"inherit": {
+			"from": "WALL_TL",
+			"op": "flip_y"
+		}
+	},
+	"WALL_BR": {
+		"coords": [6, 2], 
+		"inherit": {
+			"from": "WALL_TL",
+			"op": "flip_xy"
+		}
+	},
+	"CLIFF_TL": {
+		"block": "slope",
+		"coords": [4, 0],
+		"composite": ["CLIFF_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "flip_x",
+				"src": "CLIFF_TR"
+			},
+			"1": {
+				"op": "flip_y",
+				"src": "CLIFF_BL"
+			},
+			"2": {
+				"op": "flip_xy",
+				"src": "CLIFF_BR"
+			}
+		}
+	},
+	"CLIFF_TR": {
+		"coords": [7, 0], 
+		"inherit": {
+			"from": "CLIFF_TL",
+			"op": "flip_x"
+		}
+	},
+	"CLIFF_BL": {
+		"coords": [4, 3], 
+		"inherit": {
+			"from": "CLIFF_TL",
+			"op": "flip_y"
+		}
+	},
+	"CLIFF_BR": {
+		"coords": [7, 3], 
+		"inherit": {
+			"from": "CLIFF_TL",
+			"op": "flip_xy"
+		}
+	},
+	
+	"BASE_TL": {
+		"block": "slope",
+		"coords": [9, 1],
+		"composite": ["BASE_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "flip_x",
+				"src": "BASE_TR"
+			},
+			"1": {
+				"op": "flip_y",
+				"src": "BASE_BL"
+			},
+			"2": {
+				"op": "flip_xy",
+				"src": "BASE_BR"
+			}
+		}
+	},
+	"BASE_TR": {
+		"coords": [10, 1], 
+		"inherit": {
+			"from": "BASE_TL",
+			"op": "flip_x"
+		}
+	},
+	"BASE_BL": {
+		"coords": [9, 2], 
+		"inherit": {
+			"from": "BASE_TL",
+			"op": "flip_y"
+		}
+	},
+	"BASE_BR": {
+		"coords": [10, 2], 
+		"inherit": {
+			"from": "BASE_TL",
+			"op": "flip_xy"
+		}
+	},
+	"PIT_TL": {
+		"block": "slope",
+		"coords": [8, 1],
+		"composite": ["PIT_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "flip_x",
+				"src": "PIT_TR"
+			},
+			"1": {
+				"op": "flip_y",
+				"src": "PIT_BL"
+			},
+			"2": {
+				"op": "flip_xy",
+				"src": "PIT_BR"
+			}
+		}
+	},
+	"PIT_TR": {
+		"coords": [11, 1], 
+		"inherit": {
+			"from": "PIT_TL",
+			"op": "flip_x"
+		}
+	},
+	"PIT_BL": {
+		"coords": [8, 2], 
+		"inherit": {
+			"from": "PIT_TL",
+			"op": "flip_y"
+		}
+	},
+	"PIT_BR": {
+		"coords": [11, 2], 
+		"inherit": {
+			"from": "PIT_TL",
+			"op": "flip_xy"
+		}
+	},
+	"LEDGE_TL": {
+		"block": "slope",
+		"coords": [8, 0],
+		"composite": ["LEDGE_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "flip_x",
+				"src": "LEDGE_TR"
+			},
+			"1": {
+				"op": "flip_y",
+				"src": "LEDGE_BL"
+			},
+			"2": {
+				"op": "flip_xy",
+				"src": "LEDGE_BR"
+			}
+		}
+	},
+	"LEDGE_TR": {
+		"coords": [11, 0], 
+		"inherit": {
+			"from": "LEDGE_TL",
+			"op": "flip_x"
+		}
+	},
+	"LEDGE_BL": {
+		"coords": [8, 3], 
+		"inherit": {
+			"from": "LEDGE_TL",
+			"op": "flip_y"
+		}
+	},
+	"LEDGE_BR": {
+		"coords": [11, 3], 
+		"inherit": {
+			"from": "LEDGE_TL",
+			"op": "flip_xy"
+		}
+	},
+	
+	"SUMMIT_T": {
+		"block": "slope",
+		"coords": [5, 0],
+		"composite": ["SUMMIT_T", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "merge_x",
+				"L": "PEAK_TL",
+				"R": "PEAK_TR"
+			}
+		}
+	},
+	"SUMMIT_L": {
+		"block": "slope",
+		"coords": [4, 2], 
+		"composite": ["SUMMIT_L", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "merge_y",
+				"B": "PIT_BL",
+				"T": "PIT_TL"
+			}
+		}
+	},
+	"SUMMIT_R": {
+		"coords": [7, 1], 
+		"inherit": {
+			"from": "SUMMIT_L",
+			"op": "flip_xy"
+		}
+	},
+	"SUMMIT_B": {
+		"coords": [6, 3], 
+		"inherit": {
+			"from": "SUMMIT_T",
+			"op": "flip_xy"
+		}
+	},
+	
+	"SHAFT_T": {
+		"block": "slope",
+		"coords": [6, 0],
+		"composite": ["SHAFT_T", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "merge_x",
+				"L": "WALL_TL",
+				"R": "WALL_TR"
+			}
+		}
+	},
+	"SHAFT_L": {
+		"block": "slope",
+		"coords": [4, 1],
+		"composite": ["SHAFT_L", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "merge_y",
+				"B": "BASE_BL",
+				"T": "BASE_TL"
+			}
+		}
+	},
+	"SHAFT_R": {
+		"coords": [7, 2], 
+		"inherit": {
+			"from": "SHAFT_L",
+			"op": "flip_xy"
+		}
+	},
+	"SHAFT_B": {
+		"coords": [5, 3], 
+		"inherit": {
+			"from": "SHAFT_T",
+			"op": "flip_xy"
+		}
 	}
 }
