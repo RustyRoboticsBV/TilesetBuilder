@@ -566,6 +566,7 @@
 			"op": "flip_xy"
 		}
 	},
+	
 	"LINK_TL": {
 		"block": "slope",
 		"coords": [1, 1],
@@ -603,6 +604,41 @@
 		"coords": [2, 2], 
 		"inherit": {
 			"from": "LINK_TL",
+			"op": "flip_xy"
+		}
+	},
+	"STAIRCASE_TL": {
+		"block": "slope",
+		"coords": [1, 5],
+		"composite": ["STAIRCASE_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "merge_quad",
+				"BL": "LINK_TL",
+				"BR": "CORNER_BR",
+				"TL": "LINK_TL",
+				"TR": "LINK_TL"
+			}
+		}
+	},
+	"STAIRCASE_TR": {
+		"coords": [2, 5], 
+		"inherit": {
+			"from": "STAIRCASE_TL",
+			"op": "flip_x"
+		}
+	},
+	"STAIRCASE_BL": {
+		"coords": [1, 6], 
+		"inherit": {
+			"from": "STAIRCASE_TL",
+			"op": "flip_y"
+		}
+	},
+	"STAIRCASE_BR": {
+		"coords": [2, 6], 
+		"inherit": {
+			"from": "STAIRCASE_TL",
 			"op": "flip_xy"
 		}
 	},
