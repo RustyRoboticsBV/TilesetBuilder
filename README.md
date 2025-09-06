@@ -1,10 +1,10 @@
 # ZIP Tileset Importer
-An import plugin for the Godot game engine (version 4.4). It can:
+An tileset importer / generator plugin for the Godot game engine (version 4.4). It can:
 - Create standard 47-tile "blob" tilesets from a ZIP file that contains separate tile images, so you won't have to do this manually.
 - Generate missing tiles by flipping, rotating or merging other tiles.
-- Augment the tileset with an 88-tile slope tileset, which contains various connection tiles.
+- Augment the tileset texture with an 88-tile slope tileset, which contains various connection tiles.
 
-The following image types are supported: BMP, PNG, JPG, TGA, WEBP, SVG, DDS, KTX. The images in the ZIP files must conform to specific filenames (see the image below).
+The images in the ZIP files must conform to specific filenames in order to be recognized (see the image below). Each tile can be provided as either a fully-finished image, or as "parts" images that will be used to generate the tile at import time.
 
 ## Install Guide
 1. Create a folder called `Addons/ZipTilesetImporter`.
@@ -31,7 +31,7 @@ These are the relevant filenames:
 ![The slope tiles and their identifiers.](SlopeReference.png)
 
 ### User-Defined Tiles
-You can add custom tiles by adding images with filenames that are not in the image above. These tiles are placed below the standard tileset area. For example, if you want to add slopes to your tileset you can do so in this way.
+You can add custom tiles by adding images with filenames that are not in the image above. These tiles are placed below the standard tileset area.
 
 ## Tile Generation
 Tiles can be loaded from a ZIP archive in three ways:
@@ -40,17 +40,22 @@ Tiles can be loaded from a ZIP archive in three ways:
 3. Derive it from other tiles in the tileset.
 
 ### Parts
-If you prefix your tile image with `PART_`, the importer will treat it as a tile part image. Tile parts are overlayed on top of the `CENTER` image using straightforward alpha-compositing to create the target tile image.
-	
+Often, you don't want a tile to be directly loaded from a single image, but instead use a foreground and background image. If you prefix your tile image with `PART_`, the importer will treat as a foreground image, which will get overlayed on top of a background image (which is always the `CENTER` tile).
+
+For example:
+
 ![The slope tiles and their identifiers.](Compositing.png)
 
-Here, the `EDGE_T` tile is created by overlaying the `PART_EDGE_T` image over the `PART_CENTER` image. The `MASK_EDGE_T` controls how blending is done: white pixels replace the background pixels, while black pixels are blended with it.
+Here, the `EDGE_T` tile is created by overlaying the `PART_EDGE_T` image over the `PART_CENTER` image. The `MASK_EDGE_T` controls how blending is done: white pixels replace the background pixels, while black pixels are blended with background pixels.
 
 You can mix prefab tiles and tile parts as you see fit; if a tile has both a prefab image and part images, the prefab is always used.
 
-Like prefab tiles, part images can be derived from other part images.
+### Derivation
+Missing tile images can be derived from other tile images. The same goes for part images and part masks. If a tile is present in the ZIP archive, then it is always loaded directly, even if part images are present too. If a tile is missing AND there are no parts available, it is derived from other finished tile(s).
 
 ## Planned Features
 - 1-by-2 slopes.
 - 2-by-1 slopes.
 - Adding the option for tile variants.
+- Tileset generation (with a default terrain and physics shape setup included).
+- [Better Terrain](https://github.com/Portponky/better-terrain) plugin support, as Godot 4's terrain system makes integrating slopes difficult.
