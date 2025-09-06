@@ -7,6 +7,7 @@ class_name TileAtlasTexture;
 
 @export var compositor : TileAtlasCompositor;
 @export var blocks : Dictionary[String, Image] = {};
+@export var tile_size : Vector2i;
 
 func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database : TileDatabase, use_mipmaps : bool) -> void:
 	# Debug: store compositor.
@@ -25,6 +26,7 @@ func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database 
 			tile_w = image.get_width();
 		if image.get_height() > tile_h:
 			tile_h = image.get_height();
+	tile_size = Vector2i(tile_w, tile_h);
 	print("Tile size: (" + str(tile_w) + ", " + str(tile_h) + ")")
 	
 	# Place tiles.

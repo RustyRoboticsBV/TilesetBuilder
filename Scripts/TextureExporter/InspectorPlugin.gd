@@ -1,6 +1,17 @@
 @tool
 extends EditorInspectorPlugin;
 
+enum PeeringBit {
+	TL = TileSet.CellNeighbor.CELL_NEIGHBOR_TOP_LEFT_CORNER,
+	T = TileSet.CellNeighbor.CELL_NEIGHBOR_TOP_SIDE,
+	TR = TileSet.CellNeighbor.CELL_NEIGHBOR_TOP_RIGHT_CORNER,
+	L = TileSet.CellNeighbor.CELL_NEIGHBOR_LEFT_SIDE,
+	R = TileSet.CellNeighbor.CELL_NEIGHBOR_RIGHT_SIDE,
+	BL = TileSet.CellNeighbor.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER,
+	B = TileSet.CellNeighbor.CELL_NEIGHBOR_BOTTOM_SIDE,
+	BR = TileSet.CellNeighbor.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER,
+}
+
 func _can_handle(object):
 	return object is TileAtlasTexture;
 
@@ -8,40 +19,31 @@ func _parse_begin(object : Object):
 	return;
 
 func _parse_end(object : Object):
+	# Create header.
 	add_custom_control(Label.new());
 	add_custom_control(HSeparator.new());
-	
-	# Create tools panel.
-	#var panel = PanelContainer.new();
-	#var style = StyleBoxFlat.new();
-	#style.bg_color = Color(0.1, 0.1, 0.15);
-	##style.border_color = Color(0.5, 0.5, 0.5);
-	##style.set_border_width_all(3);
-	#panel.add_theme_stylebox_override("panel", style);
-	#add_custom_control(panel);
-	
-	#var vbox = VBoxContainer.new();
-	#panel.add_child(vbox);
 	
 	var label = RichTextLabel.new();
 	label.bbcode_enabled = true;
 	label.text = "[b]Tools:[/b]";
 	label.custom_minimum_size = Vector2i(10, 25);
 	add_custom_control(label);
-	#var label = Label.new();
-	#label.text = "Tools";
-	#label.label_settings = LabelSettings.new();
-	#label.label_settings.outline_size = 1;
-	#vbox.add_child(label);
 	
 	# Create save image button.
-	var button = Button.new();
-	button.text = "Export to file";
-	button.pressed.connect(func():
+	var image_button = Button.new();
+	image_button.text = "Export to file";
+	image_button.pressed.connect(func():
 		_open_save_image_dialog(object);
 	);
-	add_custom_control(button);
-	#vbox.add_child(button);
+	add_custom_control(image_button);
+	
+	# Create create tileset button.
+	var tileset_button = Button.new();
+	tileset_button.text = "Create tileset";
+	tileset_button.pressed.connect(func():
+		_open_save_tileset_dialog(object);
+	);
+	add_custom_control(tileset_button);
 
 func _open_save_image_dialog(resource: TileAtlasTexture):
 	var dialog := EditorFileDialog.new();
@@ -53,7 +55,7 @@ func _open_save_image_dialog(resource: TileAtlasTexture):
 	dialog.file_selected.connect(func(path):
 		resource.get_image().save_png(path);
 		EditorInterface.get_resource_filesystem().scan();
-		print("Saved tile atlas texture to: ", path);
+		print("Saved tile atlas texture to: " + path);
 	);
 	
 	EditorInterface.get_base_control().add_child(dialog);
@@ -62,3 +64,82 @@ func _open_save_image_dialog(resource: TileAtlasTexture):
 	var target_size : Vector2i = screen_size * 0.75;
 	
 	dialog.popup_centered(target_size);
+
+func _open_save_tileset_dialog(resource: TileAtlasTexture):
+	var dialog := EditorFileDialog.new();
+	dialog.access = EditorFileDialog.ACCESS_FILESYSTEM;
+	dialog.file_mode = EditorFileDialog.FILE_MODE_SAVE_FILE;
+	dialog.set_current_path("res://My Tileset.tres");
+	dialog.add_filter("*.tres");
+	
+	dialog.file_selected.connect(func(path):
+		ResourceSaver.save(_create_tileset(resource), path);
+		EditorInterface.get_resource_filesystem().scan();
+		print("Saved tileset to: " + path);
+	);
+	
+	EditorInterface.get_base_control().add_child(dialog);
+	
+	var screen_size : Vector2 = EditorInterface.get_base_control().size;
+	var target_size : Vector2i = screen_size * 0.75;
+	
+	dialog.popup_centered(target_size);
+
+func _create_tileset(atlas : TileAtlasTexture) -> TileSet:
+	# Get tile database.
+	var db = TileDatabase.new();
+	db.load_from_json("../Data/tiles.json");
+	
+	# Create tileset source.
+	var source : TileSetAtlasSource = TileSetAtlasSource.new();
+	source.texture_region_size = atlas.tile_size;
+	source.texture = atlas;
+	
+	# Create tileset.
+	var tileset : TileSet = TileSet.new();
+	tileset.tile_size = source.texture_region_size;
+	tileset.add_source(source);
+	
+	# Add terrain (i.e. autotiling).
+	tileset.add_terrain_set();
+	tileset.add_terrain(0);
+	tileset.set_terrain_name(0, 0, "Main");
+	tileset.set_terrain_color(0, 0, Color.RED);
+	
+	# Create tiles.
+	for id in db.keys():
+		var tile : Dictionary = db.get_tile(id);
+		var x : int = int(tile["coords"][0]);
+		var y : int = int(tile["coords"][1]);
+		
+		var block : String = tile["block"];
+		if block == "slope":
+			y += 4;
+		
+		var peering_bits : Dictionary = tile["peering_bits"] if tile.has("peering_bits") else {};
+		
+		_create_tile(source, x, y, peering_bits);
+	
+	return tileset;
+
+func _create_tile(source : TileSetSource, x : int, y : int, peering_bits : Dictionary):
+	# Create tile.
+	source.create_tile(Vector2i(x, y));
+	var tile : TileData = source.get_tile_data(Vector2i(x, y), 0);
+	
+	# Set terrain.
+	tile.terrain_set = 0;
+	tile.terrain = 0;
+	
+	# Set peering bits.
+	_set_peering_bit(tile, PeeringBit.TL, peering_bits.has("TL"));
+	_set_peering_bit(tile, PeeringBit.T, peering_bits.has("T"));
+	_set_peering_bit(tile, PeeringBit.TR, peering_bits.has("TR"));
+	_set_peering_bit(tile, PeeringBit.L, peering_bits.has("L"));
+	_set_peering_bit(tile, PeeringBit.R, peering_bits.has("R"));
+	_set_peering_bit(tile, PeeringBit.BL, peering_bits.has("BL"));
+	_set_peering_bit(tile, PeeringBit.B, peering_bits.has("B"));
+	_set_peering_bit(tile, PeeringBit.BR, peering_bits.has("BR"));
+
+func _set_peering_bit(tile : TileData, side : PeeringBit, enabled : bool):
+	tile.set_terrain_peering_bit(side as TileSet.CellNeighbor, 0 if enabled else -1);
