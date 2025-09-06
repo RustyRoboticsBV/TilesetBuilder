@@ -2,6 +2,8 @@ extends ImageTexture;
 class_name TileAtlasTexture;
 
 @warning_ignore_start("shadowed_variable")
+@warning_ignore_start("narrowing_conversion")
+@warning_ignore_start("integer_division")
 
 @export var compositor : TileAtlasCompositor;
 @export var blocks : Dictionary[String, Image] = {};
@@ -35,6 +37,18 @@ func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database 
 		print("Placing " + id + " at (" + str(x) + ", " + str(y) + ") on block " + block);
 		blocks[block].blit_rect(image, Rect2i(0, 0, tile_w, tile_h), Vector2i(x, y));
 	
+	# Add user-defined tiles.
+	if source.user_tiles.size() > 0:
+		var user_height : int = ceili(source.user_tiles.size() / 12.0);
+		blocks["user"] = Image.create(12 * tile_w, user_height * tile_h, false, Image.FORMAT_RGBA8);
+		var i : int = 0;
+		for id in source.user_tiles:
+			var x : int = i % 12 * tile_w;
+			var y : int = i / 12 * tile_h;
+			i += 1;
+			print("Placing " + id + " at (" + str(x) + ", " + str(y) + ") on block user");
+			blocks["user"].blit_rect(source.user_tiles[id], Rect2(0, 0, tile_w, tile_h), Vector2i(x, y));
+	
 	# Merge block images into one image.
 	var total_h = 0;
 	for block : Image in blocks.values():
@@ -45,11 +59,6 @@ func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database 
 	for block : Image in blocks.values():
 		atlas.blit_rect(block, Rect2i(Vector2i.ZERO, block.get_size()), Vector2i(0, block_y));
 		block_y += block.get_height();
-	
-	# Add user-defined tiles.
-	for user in source.user_tiles:
-		# TODO: Implement.
-		continue;
 	
 	# Create texture.
 	if atlas.has_mipmaps():
