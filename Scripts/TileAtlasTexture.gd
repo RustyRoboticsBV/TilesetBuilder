@@ -20,6 +20,11 @@ func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database 
 			tile_w = image.get_width();
 		if image.get_height() > tile_h:
 			tile_h = image.get_height();
+	for image : Image in source.user_tiles.values():
+		if image.get_width() > tile_w:
+			tile_w = image.get_width();
+		if image.get_height() > tile_h:
+			tile_h = image.get_height();
 	print("Tile size: (" + str(tile_w) + ", " + str(tile_h) + ")")
 	
 	# Place tiles.
@@ -41,6 +46,7 @@ func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database 
 	if source.user_tiles.size() > 0:
 		var user_height : int = ceili(source.user_tiles.size() / 12.0);
 		blocks["user"] = Image.create(12 * tile_w, user_height * tile_h, false, Image.FORMAT_RGBA8);
+		print("Allocating block: user");
 		var i : int = 0;
 		for id in source.user_tiles:
 			var x : int = i % 12 * tile_w;
