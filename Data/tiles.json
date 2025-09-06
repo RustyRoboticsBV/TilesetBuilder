@@ -541,7 +541,8 @@
 				"op": "flip_xy",
 				"src": "SLOPE_BR"
 			}
-		}
+		},
+		"peering_bits": {}
 	},
 	"SLOPE_TR": {
 		"coords": [3, 0], 
@@ -582,6 +583,15 @@
 				"op": "flip_xy",
 				"src": "LINK_BR"
 			}
+		},
+		"peering_bits": {
+			"L": ["slope"],
+			"T": ["slope"],
+			"BL": ["solid", "slope"],
+			"B": ["solid", "slope"],
+			"BR": ["solid", "slope"],
+			"R": ["solid", "slope"],
+			"TR": ["solid", "slope"]
 		}
 	},
 	"LINK_TR": {
@@ -617,6 +627,14 @@
 				"TL": "LINK_TL",
 				"TR": "LINK_TL"
 			}
+		},
+		"peering_bits": {
+			"L": ["slope"],
+			"T": ["slope"],
+			"BL": ["solid", "slope"],
+			"B": ["solid", "slope"],
+			"R": ["solid", "slope"],
+			"TR": ["solid", "slope"]
 		}
 	},
 	"STAIRCASE_TR": {
