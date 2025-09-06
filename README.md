@@ -1,8 +1,8 @@
 # ZIP Tileset Importer
 An import plugin for the Godot game engine (version 4.4). It can:
 - Create standard 47-tile "blob" tilesets from a ZIP file that contains separate tile images, so you won't have to do this manually.
-- Generate missing tiles by combining or transposing other tiles in the tileset, reducing the number of tiles that you need to manage.
-- Import ZIP tilesets as either a `Texture2D` atlas or a `TileSet`.
+- Generate missing tiles by flipping, rotating or merging other tiles.
+- Augment the tileset with an 88-tile slope tileset, which contains various connection tiles.
 
 The following image types are supported: BMP, PNG, JPG, TGA, WEBP, SVG, DDS, KTX. The images in the ZIP files must conform to specific filenames (see the image below).
 
@@ -12,9 +12,7 @@ The following image types are supported: BMP, PNG, JPG, TGA, WEBP, SVG, DDS, KTX
 3. Enable the import plugin under `Project Settings` => `Plugins`.
 
 ## How to Use
-After installing, create a ZIP file and fill it with image files, using the filenames in the image below. You can choose between importing the ZIP file as a texture atlas or tileset under `Import` => `Import As` window.
-- When importing as a tileset, its terrain (autotiling) will automatically be set up.
-- When importing as a texture, you must create the actual tileset resource yourself, but you get more control over its properties.
+After installing, create a ZIP file and fill it with image files, using the filenames in the image below.
 
 ### Standard Tiles
 This image shows you which tile each filename maps to:
@@ -32,15 +30,27 @@ These are the relevant filenames:
 
 ![The slope tiles and their identifiers.](SlopeReference.png)
 
-The slope tileset is not complete, and is limited to some of the more common cases. This is because the total number of possible slope-to-edge connection combinations is very large, making the tileset needlessly big for how uncommon these tiles are.
-
 ### User-Defined Tiles
 You can add custom tiles by adding images with filenames that are not in the image above. These tiles are placed below the standard tileset area. For example, if you want to add slopes to your tileset you can do so in this way.
+
+## Tile Generation
+Tiles can be loaded from a ZIP archive in three ways:
+1. Load it directly from an image file.
+2. Construct it from part images.
+3. Derive it from other tiles in the tileset.
+
+### Parts
+If you prefix your tile image with `PART_`, the importer will treat it as a tile part image. Tile parts are overlayed on top of the `CENTER` image using straightforward alpha-compositing to create the target tile image.
+	
+![The slope tiles and their identifiers.](Compositing.png)
+
+Here, the `EDGE_T` tile is created by overlaying the `PART_EDGE_T` image over the `PART_CENTER` image. The `MASK_EDGE_T` controls how blending is done: white pixels replace the background pixels, while black pixels are blended with it.
+
+You can mix prefab tiles and tile parts as you see fit; if a tile has both a prefab image and part images, the prefab is always used.
+
+Like prefab tiles, part images can be derived from other part images.
 
 ## Planned Features
 - 1-by-2 slopes.
 - 2-by-1 slopes.
 - Adding the option for tile variants.
-
-## Known Issues
-Due to what seems to be an internal engine bug, when a tileset is reimported while a scene that uses is open, Godot will start spamming the console with errors that cause a huge slowdown until the scene is closed. Reopening the scene fixes this.
