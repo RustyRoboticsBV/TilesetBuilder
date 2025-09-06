@@ -569,7 +569,7 @@
 	
 	"LINK_TL": {
 		"block": "slope",
-		"coords": [1, 1],
+		"coords": [1, 0],
 		"composite": ["LINK_TL", "CENTER"],
 		"derive": {
 			"0": {
@@ -587,21 +587,21 @@
 		}
 	},
 	"LINK_TR": {
-		"coords": [2, 1], 
+		"coords": [2, 0], 
 		"inherit": {
 			"from": "LINK_TL",
 			"op": "flip_x"
 		}
 	},
 	"LINK_BL": {
-		"coords": [1, 2], 
+		"coords": [1, 3], 
 		"inherit": {
 			"from": "LINK_TL",
 			"op": "flip_y"
 		}
 	},
 	"LINK_BR": {
-		"coords": [2, 2], 
+		"coords": [2, 3], 
 		"inherit": {
 			"from": "LINK_TL",
 			"op": "flip_xy"
