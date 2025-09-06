@@ -961,5 +961,345 @@
 			"from": "SHAFT_T",
 			"op": "flip_xy"
 		}
+	},
+	
+	"CHIMNEY_TL": {
+		"block": "slope",
+		"coords": [0, 5],
+		"composite": ["CHIMNEY_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "merge_x",
+				"L": "EDGE_L",
+				"R": "WALL_TR"
+			}
+		}
+	},
+	"CHIMNEY_TR": {
+		"coords": [3, 5], 
+		"inherit": {
+			"from": "CHIMNEY_TL",
+			"op": "flip_x"
+		}
+	},
+	"CHIMNEY_BL": {
+		"coords": [0, 6], 
+		"inherit": {
+			"from": "CHIMNEY_TL",
+			"op": "flip_y"
+		}
+	},
+	"CHIMNEY_BR": {
+		"coords": [3, 6], 
+		"inherit": {
+			"from": "CHIMNEY_TL",
+			"op": "flip_xy"
+		}
+	},
+	"TUNNEL_TL": {
+		"block": "slope",
+		"coords": [1, 4],
+		"composite": ["TUNNEL_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "merge_y",
+				"B": "BASE_BL",
+				"T": "EDGE_T"
+			}
+		}
+	},
+	"TUNNEL_TR": {
+		"coords": [2, 4], 
+		"inherit": {
+			"from": "TUNNEL_TL",
+			"op": "flip_x"
+		}
+	},
+	"TUNNEL_BL": {
+		"coords": [1, 7], 
+		"inherit": {
+			"from": "TUNNEL_TL",
+			"op": "flip_y"
+		}
+	},
+	"TUNNEL_BR": {
+		"coords": [2, 7], 
+		"inherit": {
+			"from": "TUNNEL_TL",
+			"op": "flip_xy"
+		}
+	},
+	
+	
+	"SHOULDER_TL": {
+		"block": "slope",
+		"coords": [6, 4],
+		"composite": ["SHOULDER_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "merge_y",
+				"B": "CORNER_BL",
+				"T": "BASE_TL"
+			}
+		}
+	},
+	"SHOULDER_TR": {
+		"coords": [5, 4], 
+		"inherit": {
+			"from": "SHOULDER_TL",
+			"op": "flip_x"
+		}
+	},
+	"SHOULDER_BL": {
+		"coords": [6, 7], 
+		"inherit": {
+			"from": "SHOULDER_TL",
+			"op": "flip_y"
+		}
+	},
+	"SHOULDER_BR": {
+		"coords": [5, 7], 
+		"inherit": {
+			"from": "SHOULDER_TL",
+			"op": "flip_xy"
+		}
+	},
+	"PILLAR_TL": {
+		"block": "slope",
+		"coords": [4, 6],
+		"composite": ["PILLAR_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "merge_x",
+				"L": "WALL_TL",
+				"R": "CORNER_TR"
+			}
+		}
+	},
+	"PILLAR_TR": {
+		"coords": [7, 6], 
+		"inherit": {
+			"from": "PILLAR_TL",
+			"op": "flip_x"
+		}
+	},
+	"PILLAR_BL": {
+		"coords": [4, 5], 
+		"inherit": {
+			"from": "PILLAR_TL",
+			"op": "flip_y"
+		}
+	},
+	"PILLAR_BR": {
+		"coords": [7, 5], 
+		"inherit": {
+			"from": "PILLAR_TL",
+			"op": "flip_xy"
+		}
+	},
+	
+	"CAVE_H_TL": {
+		"block": "slope",
+		"coords": [10, 6],
+		"composite": ["CAVE_H_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "merge_y",
+				"B": "CORNER_BR",
+				"T": "BASE_TL"
+			}
+		}
+	},
+	"CAVE_H_TR": {
+		"coords": [9, 6], 
+		"inherit": {
+			"from": "CAVE_H_TL",
+			"op": "flip_x"
+		}
+	},
+	"CAVE_H_BL": {
+		"coords": [10, 5], 
+		"inherit": {
+			"from": "CAVE_H_TL",
+			"op": "flip_y"
+		}
+	},
+	"CAVE_H_BR": {
+		"coords": [9, 5], 
+		"inherit": {
+			"from": "CAVE_H_TL",
+			"op": "flip_xy"
+		}
+	},
+	"CAVE_V_TL": {
+		"block": "slope",
+		"coords": [6, 5],
+		"composite": ["CAVE_V_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "merge_x",
+				"L": "WALL_TL",
+				"R": "CORNER_BR"
+			}
+		}
+	},
+	"CAVE_V_TR": {
+		"coords": [5, 5], 
+		"inherit": {
+			"from": "CAVE_V_TL",
+			"op": "flip_x"
+		}
+	},
+	"CAVE_V_BL": {
+		"coords": [6, 6], 
+		"inherit": {
+			"from": "CAVE_V_TL",
+			"op": "flip_y"
+		}
+	},
+	"CAVE_V_BR": {
+		"coords": [5, 6], 
+		"inherit": {
+			"from": "CAVE_V_TL",
+			"op": "flip_xy"
+		}
+	},
+	
+	"FORK_H_TL": {
+		"block": "slope",
+		"coords": [3, 7],
+		"composite": ["FORK_H_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "merge_y",
+				"T": "GAP_T",
+				"B": "BASE_BL"
+			}
+		}
+	},
+	"FORK_H_TR": {
+		"coords": [0, 7], 
+		"inherit": {
+			"from": "FORK_H_TL",
+			"op": "flip_x"
+		}
+	},
+	"FORK_H_BL": {
+		"coords": [0, 4], 
+		"inherit": {
+			"from": "FORK_H_TL",
+			"op": "flip_xy"
+		}
+	},
+	"FORK_H_BR": {
+		"coords": [3, 4], 
+		"inherit": {
+			"from": "FORK_H_TL",
+			"op": "flip_y"
+		}
+	},
+	"FORK_V_TL": {
+		"block": "slope",
+		"coords": [11, 7],
+		"composite": ["FORK_V_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "merge_x",
+				"L": "GAP_L",
+				"R": "WALL_TR"
+			}
+		}
+	},
+	"FORK_V_TR": {
+		"coords": [8, 7], 
+		"inherit": {
+			"from": "FORK_V_TL",
+			"op": "flip_x"
+		}
+	},
+	"FORK_V_BL": {
+		"coords": [11, 4], 
+		"inherit": {
+			"from": "FORK_V_TL",
+			"op": "flip_xy"
+		}
+	},
+	"FORK_V_BR": {
+		"coords": [8, 4], 
+		"inherit": {
+			"from": "FORK_V_TL",
+			"op": "flip_y"
+		}
+	},
+	
+	"BRIDGE_TL": {
+		"block": "slope",
+		"coords": [9, 4],
+		"composite": ["BRIDGE_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "merge_quad",
+				"BL": "CORNER_BL",
+				"BR": "PEAK_TR",
+				"TL": "PEAK_TR",
+				"TR": "PEAK_TR"
+			}
+		}
+	},
+	"BRIDGE_TR": {
+		"coords": [10, 4],
+		"inherit": {
+			"from": "BRIDGE_TL",
+			"op": "flip_x"
+		}
+	},
+	"BRIDGE_BL": {
+		"coords": [9, 7], 
+		"inherit": {
+			"from": "BRIDGE_TL",
+			"op": "flip_y"
+		}
+	},
+	"BRIDGE_BR": {
+		"coords": [10, 7], 
+		"inherit": {
+			"from": "BRIDGE_TL",
+			"op": "flip_xy"
+		}
+	},
+	"DROP_TL": {
+		"block": "slope",
+		"coords": [8, 5],
+		"composite": ["BRIDGE_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "merge_quad",
+				"BL": "PIT_BL",
+				"BR": "PIT_BL",
+				"TL": "PIT_BL",
+				"TR": "CORNER_TR"
+			}
+		}
+	},
+	"DROP_TR": {
+		"coords": [11, 5],
+		"inherit": {
+			"from": "DROP_TL",
+			"op": "flip_x"
+		}
+	},
+	"DROP_BL": {
+		"coords": [8, 6], 
+		"inherit": {
+			"from": "DROP_TL",
+			"op": "flip_y"
+		}
+	},
+	"DROP_BR": {
+		"coords": [11, 6], 
+		"inherit": {
+			"from": "DROP_TL",
+			"op": "flip_xy"
+		}
 	}
 }
