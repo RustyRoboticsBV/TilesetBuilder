@@ -16,19 +16,6 @@ func _can_handle(object):
 	return object is TileAtlasTexture;
 
 func _parse_begin(object : Object):
-	return;
-
-func _parse_end(object : Object):
-	# Create header.
-	add_custom_control(Label.new());
-	add_custom_control(HSeparator.new());
-	
-	var label = RichTextLabel.new();
-	label.bbcode_enabled = true;
-	label.text = "[b]Tools:[/b]";
-	label.custom_minimum_size = Vector2i(10, 25);
-	add_custom_control(label);
-	
 	# Create save image button.
 	var image_button = Button.new();
 	image_button.text = "Export to file";
@@ -38,12 +25,27 @@ func _parse_end(object : Object):
 	add_custom_control(image_button);
 	
 	# Create create tileset button.
+	var space : Control = Control.new();
+	space.custom_minimum_size = Vector2i(4, 4);
+	add_custom_control(space);
+	
 	var tileset_button = Button.new();
 	tileset_button.text = "Create tileset";
 	tileset_button.pressed.connect(func():
 		_open_save_tileset_dialog(object);
 	);
 	add_custom_control(tileset_button);
+	
+	# Create separator.
+	space = Control.new();
+	space.custom_minimum_size = Vector2i(4, 4);
+	add_custom_control(space);
+	
+	add_custom_control(HSeparator.new());
+	
+	space = Control.new();
+	space.custom_minimum_size = Vector2i(4, 4);
+	add_custom_control(space);
 
 func _open_save_image_dialog(resource: TileAtlasTexture):
 	var dialog := EditorFileDialog.new();
@@ -111,23 +113,21 @@ func _create_tileset(atlas : TileAtlasTexture) -> TileSet:
 		var block = db.get_tile(id)["block"] if db.has_tile(id) else "user";
 		var coords = atlas.block_coords[block] + atlas.tile_coords[id];
 		var peering_bits : Dictionary = {};
-		if block != "user":
-			var tile : Dictionary = db.get_tile(id);
-			if tile.has("peering_bits") :
-				peering_bits = tile["peering_bits"];
+		if block == "main":
+			peering_bits = db.get_tile(id)["peering_bits"];
 		print("Creating tile " + id + " at " + str(coords));
-		_create_tile(source, coords.x, coords.y, peering_bits);
+		_create_tile(source, coords.x, coords.y, 0 if block == "main" else -1, peering_bits);
 	
 	return tileset;
 
-func _create_tile(source : TileSetSource, x : int, y : int, peering_bits : Dictionary):
+func _create_tile(source : TileSetSource, x : int, y : int, layer : int, peering_bits : Dictionary):
 	# Create tile.
 	source.create_tile(Vector2i(x, y));
 	var tile : TileData = source.get_tile_data(Vector2i(x, y), 0);
 	
 	# Set terrain.
 	tile.terrain_set = 0;
-	tile.terrain = 0;
+	tile.terrain = layer;
 	
 	# Set peering bits.
 	_set_peering_bit(tile, PeeringBit.TL, peering_bits.has("TL"));

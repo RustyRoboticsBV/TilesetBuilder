@@ -543,6 +543,7 @@
 				"src": "SLOPE_BR"
 			}
 		},
+		"layer": "slope",
 		"peering_bits": {}
 	},
 	"SLOPE_TR": {
@@ -585,6 +586,7 @@
 				"src": "LINK_BR"
 			}
 		},
+		"layer": "slope",
 		"peering_bits": {
 			"L": ["slope"],
 			"T": ["slope"],
@@ -629,6 +631,7 @@
 				"TR": "LINK_TL"
 			}
 		},
+		"layer": "slope",
 		"peering_bits": {
 			"L": ["slope"],
 			"T": ["slope"],
