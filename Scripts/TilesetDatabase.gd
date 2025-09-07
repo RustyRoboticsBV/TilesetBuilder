@@ -27,11 +27,14 @@ func load_from_json(file_path : String) -> void:
 			var from = tile["inherit"]["from"];
 			var operator = tile["inherit"]["op"];
 			var coords = tile["coords"];
+			var physics_shape = tile["physics_shape"] if tile.has("physics_shape") else null;
 			
 			var copy = str(json[from]);
 			copy = _apply_string(copy, operator);
 			copy = JSON.parse_string(copy);
 			copy["coords"] = coords;
+			if physics_shape != null:
+				copy["physics_shape"] = physics_shape;
 			json[key] = copy;
 	_dict = json;
 

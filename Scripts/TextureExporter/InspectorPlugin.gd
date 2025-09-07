@@ -12,6 +12,13 @@ enum PeeringBit {
 	BR = TileSet.CellNeighbor.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER,
 }
 
+const DEFAULT_PHYS_SHAPE = {
+	"0": ["-0.5", "-0.5"],
+	"1": ["0.5", "-0.5"],
+	"2": ["0.5", "0.5"],
+	"3": ["-0.5", "0.5"]
+};
+
 func _can_handle(object):
 	return object is TileAtlasTexture;
 
@@ -115,16 +122,24 @@ func _create_tileset(atlas : TileAtlasTexture) -> TileSet:
 	for id in atlas.tile_coords.keys():
 		var block = db.get_tile(id)["block"] if db.has_tile(id) else "user";
 		var coords = atlas.block_coords[block] + atlas.tile_coords[id];
+		
 		var peering_bits : Dictionary = {};
 		if block == "main":
 			peering_bits = db.get_tile(id)["peering_bits"];
+		
+		var physics_shape = DEFAULT_PHYS_SHAPE;
+		if block == "user":
+			physics_shape = {};
+		elif db.get_tile(id).has("physics_shape"):
+			physics_shape = db.get_tile(id)["physics_shape"];
+		
 		print("Creating tile " + id + " at " + str(coords));
 		_create_tile(source, coords.x, coords.y, atlas.tile_size.x, atlas.tile_size.y, \
-		  0 if block == "main" else -1, peering_bits);
+		  0 if block == "main" else -1, peering_bits, physics_shape);
 	
 	return tileset;
 
-func _create_tile(source : TileSetSource, x : int, y : int, width : int, height : int, terrain : int, peering_bits : Dictionary):
+func _create_tile(source : TileSetSource, x : int, y : int, width : int, height : int, terrain : int, peering_bits : Dictionary, physics_shape : Dictionary):
 	# Create tile.
 	source.create_tile(Vector2i(x, y));
 	var tile : TileData = source.get_tile_data(Vector2i(x, y), 0);
@@ -144,12 +159,20 @@ func _create_tile(source : TileSetSource, x : int, y : int, width : int, height 
 	_set_peering_bit(tile, PeeringBit.BR, peering_bits.has("BR"));
 	
 	# Set physics shape.
-	var physl : int = int(-width / 2.0);
-	var physr : int = int(width / 2.0);
-	var physt : int = int(-height / 2.0);
-	var physb : int = int(height / 2.0);
-	tile.set_collision_polygons_count(0, 1);
-	tile.set_collision_polygon_points(0, 0, [Vector2i(physl, physt), Vector2i(physr, physt), Vector2i(physr, physb), Vector2i(physl, physb)]);
+	if physics_shape.size() != 0:
+		tile.set_collision_polygons_count(0, 1);
+		tile.set_collision_polygon_points(0, 0, _scale_shape(physics_shape, width, height));
+		#tile.set_collision_polygon_points(0, 0, [Vector2(-32.0, -32.0), Vector2(32.0, -32.0), Vector2(32.0, 32.0), Vector2(-32.0, 32.0)]);
 
 func _set_peering_bit(tile : TileData, side : PeeringBit, enabled : bool):
 	tile.set_terrain_peering_bit(side as TileSet.CellNeighbor, 0 if enabled else -1);
+
+func _scale_shape(shape : Dictionary, width : int, height : int) -> PackedVector2Array:
+	print(shape);
+	var result : PackedVector2Array = [];
+	for value in shape.values():
+		var x : float = float(value[0]) * width;
+		var y : float = float(value[1]) * height;
+		result.append(Vector2(x, y));
+	print(result);
+	return result;
