@@ -1,0 +1,14 @@
+[remap]
+
+importer="tile_atlas_builder"
+type="Texture2D"
+uid="uid://c7xv13mqifxyn"
+path="res://.godot/imported/bricks.zip-d04f7ca057f32a4127b7755dd8ea1811.res"
+
+[deps]
+
+source_file="res://Addons/TilesetMaker/Demo/bricks.zip"
+dest_files=["res://.godot/imported/bricks.zip-d04f7ca057f32a4127b7755dd8ea1811.res"]
+
+[params]
+
