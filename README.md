@@ -1,21 +1,23 @@
 # Tileset Builder
 A ZIP tileset texture importer & tile generator plugin for the Godot game engine (version 4.4). It can:
-- Create standard 47-tile "blob" tilesets from a ZIP file that contains separate tile images, so you won't have to do this manually.
+- Create standard 47-tile "blob" tileset textures from a ZIP file (containing tile images).
 - Generate missing tiles by flipping, rotating or merging other tiles.
-- Augment the tileset texture with an 88-tile slope tileset, which contains various connection tiles.
-- Create tileset resources from imported ZIP archives with standard peering bits and physics shapes.
+- Augment the tileset texture with an 88-tile slope tileset.
+- Generate tileset resources with painted terrain and physics shapes.
 
-The images in the ZIP files must conform to specific filenames in order to be recognized (see the image below). Each tile can be provided as either a fully-finished image, or as "parts" images that will be used to generate the tile at import time.
+Each image in the ZIP corresponds to one tile. In order to be recognized, their filenames must conform to specific values (see the images below). Each tile can be provided as either a fully-finished image, or as a part image that will be used to build the tile at import time.
 
 ## Install Guide
-1. Create a folder called `Addons/ZipTilesetImporter`.
+1. Create a folder called `Addons/TilesetBuilder`.
 2. Extract the contents of this repository to that folder.
-3. Enable the import plugin under `Project Settings` => `Plugins`.
+3. Enable the plugin under `Project Settings` => `Plugins`.
 
 ## How to Use
-After installing, create a ZIP file and fill it with image files, using the filenames in the image below.
+After installing, create a ZIP file and fill it with image files, using the filenames in the images below.
 
-Textures can be exported by clicking the "Export to file" button in the texture's inspector. You can also create a tileset from your imported texture by clicking the "Create tileset" button.
+The tile texture inspector contains two buttons:
+- Export to file: saves the generated texture to a PNG file, so you can inspect or share it.
+- Create tileset: creates a tileset resource from your texture, with default terrain and physics shapes already set up.
 
 ### Standard Tiles
 This image shows you which tile each filename maps to:
