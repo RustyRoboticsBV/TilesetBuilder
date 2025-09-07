@@ -86,6 +86,14 @@ func _try_resolve(id : String, rules : Dictionary) -> bool:
 				var top_right = rules[key]["TR"];
 				if _try_merge_quad(id, bottom_left, bottom_right, top_left, top_right):
 					return true;
+			"merge_complex":
+				var background = rules[key]["bg"];
+				var background_corner = rules[key]["bg_corner"];
+				var foreground = rules[key]["fg"];
+				var foreground_corner = rules[key]["fg_corner"];
+				print(operator);
+				if _try_merge_complex(id, foreground, foreground_corner, background, background_corner):
+					return true;
 	return false;
 
 func _try_flip_x(target : String, source : String) -> bool:
@@ -277,3 +285,41 @@ func _try_merge_quad(target : String, bottom_left : String, bottom_right : Strin
 	
 	print("Derived " + target + " using merge_quad(" + bottom_left + ", " + bottom_right + ", " + top_left + ", " + top_right + ")");
 	return true;
+
+func _try_merge_complex(target : String, foreground : String, foreground_corner : String, background : String, background_corner : String) -> bool:
+	if !tiles.has(foreground) or !tiles.has(background):
+		return false;
+	
+	# Get corner sub-imag.
+	var c : Image = _cut_corner(tiles[foreground], foreground_corner);
+	
+	# Get target background.
+	var result : Image = tiles[background].duplicate();
+	print(c.get_size());
+	match background_corner:
+		"TL":
+			result.blit_rect(c, Rect2i(Vector2i.ZERO, c.get_size()), Vector2i.ZERO);
+		"TR":
+			result.blit_rect(c, Rect2i(Vector2i.ZERO, c.get_size()), Vector2i(1, 0));
+		"BL":
+			result.blit_rect(c, Rect2i(Vector2i.ZERO, c.get_size()), Vector2i(0, 1));
+		"BR":
+			result.blit_rect(c, Rect2i(Vector2i.ZERO, c.get_size()), Vector2i.ONE);
+	
+	print("Derived " + target + " using merge_complex(" + foreground + ", " + foreground_corner + ", " + background + ", " + background_corner + ")");
+	tiles[target] = result;
+	return true;
+
+func _cut_corner(image : Image, corner : String) -> Image:
+	var half_width = int(image.get_width() / 2.0);
+	var half_height = int(image.get_height() / 2.0);
+	var rect : Rect2i = Rect2i(0, 0, half_width, half_height);
+	match corner:
+		"TR":
+			rect.position.x = half_width;
+		"BL":
+			rect.position.y = half_height;
+		"BR":
+			rect.position.x = half_width;
+			rect.position.y = half_height;
+	return image.get_region(rect);

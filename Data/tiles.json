@@ -604,6 +604,13 @@
 			"2": {
 				"op": "flip_xy",
 				"src": "LINK_BR"
+			},
+			"3": {
+				"op": "merge_complex",
+				"bg": "CENTER",
+				"bg_corner": "TL",
+				"fg": "SLOPE_TL",
+				"fg_corner": "BR"
 			}
 		},
 		"layer": "slope",
