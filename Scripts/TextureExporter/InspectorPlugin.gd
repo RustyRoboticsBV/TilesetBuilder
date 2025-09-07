@@ -9,7 +9,7 @@ enum PeeringBit {
 	R = TileSet.CellNeighbor.CELL_NEIGHBOR_RIGHT_SIDE,
 	BL = TileSet.CellNeighbor.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER,
 	B = TileSet.CellNeighbor.CELL_NEIGHBOR_BOTTOM_SIDE,
-	BR = TileSet.CellNeighbor.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER,
+	BR = TileSet.CellNeighbor.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER
 }
 
 const DEFAULT_PHYS_SHAPE = {
@@ -62,9 +62,10 @@ func _open_save_image_dialog(resource: TileAtlasTexture):
 	dialog.add_filter("*.png");
 	
 	dialog.file_selected.connect(func(path):
-		resource.get_image().save_png(path);
-		EditorInterface.get_resource_filesystem().scan();
-		print("Saved tile atlas texture to: " + path);
+		var error = resource.get_image().save_png(path);
+		if error == OK:
+			EditorInterface.get_resource_filesystem().scan();
+			print("Saved tile atlas texture to: " + path);
 	);
 	
 	EditorInterface.get_base_control().add_child(dialog);
@@ -82,9 +83,10 @@ func _open_save_tileset_dialog(resource: TileAtlasTexture):
 	dialog.add_filter("*.tres");
 	
 	dialog.file_selected.connect(func(path):
-		ResourceSaver.save(_create_tileset(resource), path);
-		EditorInterface.get_resource_filesystem().scan();
-		print("Saved tileset to: " + path);
+		var error = ResourceSaver.save(_create_tileset(resource), path);
+		if error == OK:
+			EditorInterface.get_resource_filesystem().scan();
+			print("Saved tileset to: " + path);
 	);
 	
 	EditorInterface.get_base_control().add_child(dialog);
@@ -148,8 +150,11 @@ func _create_tileset(atlas : TileAtlasTexture) -> TileSet:
 		bt.add_terrain(tileset, "Solid", Color.RED, 0);
 		bt.add_terrain(tileset, "Slope TL", Color.GREEN, 0);
 		bt.add_terrain(tileset, "Slope TR", Color.BLUE, 0);
-		bt.add_terrain(tileset, "SLope BL", Color.YELLOW, 0);
+		bt.add_terrain(tileset, "Slope BL", Color.YELLOW, 0);
 		bt.add_terrain(tileset, "Slope BR", Color.CYAN, 0);
+		var tile_data = source.get_tile_data(Vector2i(0, 0), 0);
+		bt.set_tile_terrain_type(tileset, tile_data, 0);
+		bt.add_tile_peering_type(tileset, tile_data, TileSet.CellNeighbor.CELL_NEIGHBOR_BOTTOM_SIDE, 0);
 	
 	return tileset;
 
