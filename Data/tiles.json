@@ -130,7 +130,8 @@
 			"B": ["solid"],
 			"BR": ["solid"],
 			"R": ["solid"],
-			"TR": ["solid"]
+			"TR": ["solid"],
+			"T": ["solid"]
 		}
 	},
 	"CORNER_TR": {
@@ -389,7 +390,7 @@
 		},
 		"layer": "solid",
 		"peering_bits": {
-			"L": ["solid"],
+			"B": ["solid"],
 			"R": ["solid"]
 		}
 	},

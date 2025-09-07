@@ -107,18 +107,16 @@ func _create_tileset(atlas : TileAtlasTexture) -> TileSet:
 	tileset.set_terrain_color(0, 0, Color.RED);
 	
 	# Create tiles.
-	for id in db.keys():
-		var tile : Dictionary = db.get_tile(id);
-		var x : int = int(tile["coords"][0]);
-		var y : int = int(tile["coords"][1]);
-		
-		var block : String = tile["block"];
-		if block == "slope":
-			y += 4;
-		
-		var peering_bits : Dictionary = tile["peering_bits"] if tile.has("peering_bits") else {};
-		
-		_create_tile(source, x, y, peering_bits);
+	for id in atlas.tile_coords.keys():
+		var block = db.get_tile(id)["block"] if db.has_tile(id) else "user";
+		var coords = atlas.block_coords[block] + atlas.tile_coords[id];
+		var peering_bits : Dictionary = {};
+		if block != "user":
+			var tile : Dictionary = db.get_tile(id);
+			if tile.has("peering_bits") :
+				peering_bits = tile["peering_bits"];
+		print("Creating tile " + id + " at " + str(coords));
+		_create_tile(source, coords.x, coords.y, peering_bits);
 	
 	return tileset;
 
