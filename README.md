@@ -3,6 +3,7 @@ A ZIP tileset texture importer & tile generator plugin for the Godot game engine
 - Create standard 47-tile "blob" tilesets from a ZIP file that contains separate tile images, so you won't have to do this manually.
 - Generate missing tiles by flipping, rotating or merging other tiles.
 - Augment the tileset texture with an 88-tile slope tileset, which contains various connection tiles.
+- Create tileset resources from imported ZIP archives with standard peering bits and physics shapes.
 
 The images in the ZIP files must conform to specific filenames in order to be recognized (see the image below). Each tile can be provided as either a fully-finished image, or as "parts" images that will be used to generate the tile at import time.
 
@@ -13,6 +14,8 @@ The images in the ZIP files must conform to specific filenames in order to be re
 
 ## How to Use
 After installing, create a ZIP file and fill it with image files, using the filenames in the image below.
+
+Textures can be exported by clicking the "Export to file" button in the texture's inspector. You can also create a tileset from your imported texture by clicking the "Create tileset" button.
 
 ### Standard Tiles
 This image shows you which tile each filename maps to:
@@ -29,7 +32,7 @@ These are the relevant filenames:
 ![The slope tiles and their identifiers.](SlopeReference.png)
 
 ### User-Defined Tiles
-You can add custom tiles by adding images with filenames that are not in the image above. These tiles are placed below the standard tileset area.
+You can add custom tiles by adding images with filenames that are not in the image above. These tiles are placed below the standard tileset area. When you generate a tileset resource, user-defined tiles will not get their terrain or physics shape painted.
 
 ## Tile Generation
 Tiles can be loaded from a ZIP archive in four ways, in the following order:
@@ -53,7 +56,6 @@ Your tileset archives can have both prefab tiles and part images. If a tile has 
 
 ## Planned Features
 In order of priority:
-- Tileset generation (with a default terrain and physics shape setup included).
 - [Better Terrain](https://github.com/Portponky/better-terrain) terrain generation, as Godot 4's terrain system does not support slope autotiling.
 - 1-by-2 slopes.
 - 2-by-1 slopes.
