@@ -137,6 +137,20 @@ func _create_tileset(atlas : TileAtlasTexture) -> TileSet:
 		_create_tile(source, coords.x, coords.y, atlas.tile_size.x, atlas.tile_size.y, \
 		  0 if block == "main" else -1, peering_bits, physics_shape);
 	
+	# Better terrain support.
+	if ProjectSettings.has_setting("autoload/BetterTerrain"):
+		var script_path : String = ProjectSettings.get_setting("autoload/BetterTerrain");
+		script_path = script_path.substr(1);
+		print("Better-terrain plugin located at: " + script_path);
+		
+		print("Generating better terrain data...");
+		var bt = load(script_path).new();
+		bt.add_terrain(tileset, "Solid", Color.RED, 0);
+		bt.add_terrain(tileset, "Slope TL", Color.GREEN, 0);
+		bt.add_terrain(tileset, "Slope TR", Color.BLUE, 0);
+		bt.add_terrain(tileset, "SLope BL", Color.YELLOW, 0);
+		bt.add_terrain(tileset, "Slope BR", Color.CYAN, 0);
+	
 	return tileset;
 
 func _create_tile(source : TileSetSource, x : int, y : int, width : int, height : int, terrain : int, peering_bits : Dictionary, physics_shape : Dictionary):
@@ -162,17 +176,14 @@ func _create_tile(source : TileSetSource, x : int, y : int, width : int, height 
 	if physics_shape.size() != 0:
 		tile.set_collision_polygons_count(0, 1);
 		tile.set_collision_polygon_points(0, 0, _scale_shape(physics_shape, width, height));
-		#tile.set_collision_polygon_points(0, 0, [Vector2(-32.0, -32.0), Vector2(32.0, -32.0), Vector2(32.0, 32.0), Vector2(-32.0, 32.0)]);
 
 func _set_peering_bit(tile : TileData, side : PeeringBit, enabled : bool):
 	tile.set_terrain_peering_bit(side as TileSet.CellNeighbor, 0 if enabled else -1);
 
 func _scale_shape(shape : Dictionary, width : int, height : int) -> PackedVector2Array:
-	print(shape);
 	var result : PackedVector2Array = [];
 	for value in shape.values():
 		var x : float = float(value[0]) * width;
 		var y : float = float(value[1]) * height;
 		result.append(Vector2(x, y));
-	print(result);
 	return result;
