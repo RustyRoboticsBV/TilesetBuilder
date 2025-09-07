@@ -108,6 +108,9 @@ func _create_tileset(atlas : TileAtlasTexture) -> TileSet:
 	tileset.set_terrain_name(0, 0, "Main");
 	tileset.set_terrain_color(0, 0, Color.RED);
 	
+	# Add physics layers.
+	tileset.add_physics_layer();
+	
 	# Create tiles.
 	for id in atlas.tile_coords.keys():
 		var block = db.get_tile(id)["block"] if db.has_tile(id) else "user";
@@ -116,18 +119,19 @@ func _create_tileset(atlas : TileAtlasTexture) -> TileSet:
 		if block == "main":
 			peering_bits = db.get_tile(id)["peering_bits"];
 		print("Creating tile " + id + " at " + str(coords));
-		_create_tile(source, coords.x, coords.y, 0 if block == "main" else -1, peering_bits);
+		_create_tile(source, coords.x, coords.y, atlas.tile_size.x, atlas.tile_size.y, \
+		  0 if block == "main" else -1, peering_bits);
 	
 	return tileset;
 
-func _create_tile(source : TileSetSource, x : int, y : int, layer : int, peering_bits : Dictionary):
+func _create_tile(source : TileSetSource, x : int, y : int, width : int, height : int, terrain : int, peering_bits : Dictionary):
 	# Create tile.
 	source.create_tile(Vector2i(x, y));
 	var tile : TileData = source.get_tile_data(Vector2i(x, y), 0);
 	
 	# Set terrain.
 	tile.terrain_set = 0;
-	tile.terrain = layer;
+	tile.terrain = terrain;
 	
 	# Set peering bits.
 	_set_peering_bit(tile, PeeringBit.TL, peering_bits.has("TL"));
@@ -138,6 +142,14 @@ func _create_tile(source : TileSetSource, x : int, y : int, layer : int, peering
 	_set_peering_bit(tile, PeeringBit.BL, peering_bits.has("BL"));
 	_set_peering_bit(tile, PeeringBit.B, peering_bits.has("B"));
 	_set_peering_bit(tile, PeeringBit.BR, peering_bits.has("BR"));
+	
+	# Set physics shape.
+	var physl : int = int(-width / 2.0);
+	var physr : int = int(width / 2.0);
+	var physt : int = int(-height / 2.0);
+	var physb : int = int(height / 2.0);
+	tile.set_collision_polygons_count(0, 1);
+	tile.set_collision_polygon_points(0, 0, [Vector2i(physl, physt), Vector2i(physr, physt), Vector2i(physr, physb), Vector2i(physl, physb)]);
 
 func _set_peering_bit(tile : TileData, side : PeeringBit, enabled : bool):
 	tile.set_terrain_peering_bit(side as TileSet.CellNeighbor, 0 if enabled else -1);
