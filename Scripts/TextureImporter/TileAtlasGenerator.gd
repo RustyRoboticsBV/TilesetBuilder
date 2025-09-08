@@ -91,7 +91,6 @@ func _try_resolve(id : String, rules : Dictionary) -> bool:
 				var background_corner = rules[key]["bg_corner"];
 				var foreground = rules[key]["fg"];
 				var foreground_corner = rules[key]["fg_corner"];
-				print(operator);
 				if _try_merge_complex(id, foreground, foreground_corner, background, background_corner):
 					return true;
 	return false;

@@ -62,3 +62,6 @@ Your tileset archives can have both prefab tiles and part images. If a tile has 
 - 2-by-1 (long) slopes.
 - 1-by-2 (tall) slopes.
 - Adding support for tile variants.
+
+## Known Issues
+When you create a tileset resource, delete it, and then create a different tileset with the same filename, the tileset window will still display the old tileset. Reloading the project fixes this.

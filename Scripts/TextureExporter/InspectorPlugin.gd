@@ -141,7 +141,6 @@ func _create_tileset(atlas : TileAtlasTexture) -> TileSet:
 	
 	# Better terrain support.
 	if ProjectSettings.has_setting("autoload/BetterTerrain"):
-		print(db._dict);
 		var script_path : String = ProjectSettings.get_setting("autoload/BetterTerrain");
 		script_path = script_path.substr(1);
 		print("Better-terrain plugin located at: " + script_path);
