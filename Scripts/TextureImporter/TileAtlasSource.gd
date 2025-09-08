@@ -118,3 +118,8 @@ func _categorize(images : Dictionary[String, Image], database : TileDatabase) ->
 		else:
 			user_tiles[key] = images[key];
 			print("Found user-defined tile: " + key);
+	
+	# Special case: if the CENTER tile's part image is not present, but the prefab image is, use the prefab as the part.
+	if parts.size() > 0 and prefabs.has("CENTER") and !parts.has("CENTER"):
+		parts["CENTER"] = prefabs["CENTER"].duplicate();
+		print("Used CENTER prefab as CENTER part.");

@@ -2,8 +2,6 @@ extends Object;
 
 const FileDialogUtility = preload("FileDialogUtility.gd");
 
-var dialog : EditorFileDialog;
-
 static func open_save_image_dialog(resource: TileAtlasTexture):
 	FileDialogUtility.get_file_dialog("Save Image", "*.png", "res://My Tile Atlas Texture.png", \
 	  func(path):
