@@ -1329,7 +1329,7 @@
 			"L": ["slope_bl"],
 			"TL": ["solid", "slope_tl"],
 			"T": ["solid"],
-			"B:": ["solid"],
+			"B": ["solid"],
 			"BR": ["solid", "slope_br"],
 			"R": ["solid"]
 		}
