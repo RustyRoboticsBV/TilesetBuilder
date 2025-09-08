@@ -98,7 +98,10 @@ func _apply_flip_x(text : String) -> String:
 		"_clock": "_counter",
 		"_counter": "_clock",
 		"_diag_d": "_diag_u",
-		"_diag_u": "_diag_d"
+		"_diag_u": "_diag_d",
+		
+		"_tl": "_tr",
+		"_tr": "_tl"
 	};
 	return _apply_replace(text, mapping);
 
@@ -123,7 +126,10 @@ func _apply_flip_y(text : String) -> String:
 		"_clock": "_counter",
 		"_counter": "_clock",
 		"_diag_d": "_diag_u",
-		"_diag_u": "_diag_d"
+		"_diag_u": "_diag_d",
+		
+		"_tl": "_bl",
+		"_tr": "_br"
 	};
 	return _apply_replace(text, mapping);
 
@@ -154,7 +160,12 @@ func _apply_rotate_clock(text : String) -> String:
 		"_x" : "_y",
 		"_y" : "_x",
 		"_diag_d": "_diag_u",
-		"_diag_u": "_diag_d"
+		"_diag_u": "_diag_d",
+		
+		"_tl": "_tr",
+		"_tr": "_br",
+		"_br": "_bl",
+		"_bl": "_tl"
 	};
 	return _apply_replace(text, mapping);
 
@@ -185,7 +196,12 @@ func _apply_rotate_counter(text : String) -> String:
 		"_x" : "_y",
 		"_y" : "_x",
 		"_diag_d": "_diag_u",
-		"_diag_u": "_diag_d"
+		"_diag_u": "_diag_d",
+		
+		"_tl": "_bl",
+		"_tr": "_tl",
+		"_br": "_tr",
+		"_bl": "_br"
 	};
 	return _apply_replace(text, mapping);
 

@@ -147,14 +147,34 @@ func _create_tileset(atlas : TileAtlasTexture) -> TileSet:
 		
 		print("Generating better terrain data...");
 		var bt = load(script_path).new();
-		bt.add_terrain(tileset, "Solid", Color.RED, 0);
-		bt.add_terrain(tileset, "Slope TL", Color.GREEN, 0);
-		bt.add_terrain(tileset, "Slope TR", Color.BLUE, 0);
-		bt.add_terrain(tileset, "Slope BL", Color.YELLOW, 0);
-		bt.add_terrain(tileset, "Slope BR", Color.CYAN, 0);
-		var tile_data = source.get_tile_data(Vector2i(0, 0), 0);
-		bt.set_tile_terrain_type(tileset, tile_data, 0);
-		bt.add_tile_peering_type(tileset, tile_data, TileSet.CellNeighbor.CELL_NEIGHBOR_BOTTOM_SIDE, 0);
+		
+		var layers = _get_layers(atlas, db);
+		for layer in layers:
+			print("EEEEE " + layer);
+			bt.add_terrain(tileset, _get_layer_name(layer), _get_layer_color(layer), 0);
+		for id in atlas.tile_coords.keys():
+			if !db.has_tile(id):
+				continue;
+			var db_data = db.get_tile(id);
+				
+			var block_id : String = db_data["block"];
+			var block_coords : Vector2i = atlas.block_coords[block_id];
+			var tile_coords : Vector2i = block_coords + atlas.tile_coords[id];
+			var tile_data : TileData = source.get_tile_data(tile_coords, 0);
+			
+			# Set tile terrain layer.
+			print("WHOOOO " + id);
+			var tile_layer = layers.find(_get_tile_layer(id, db));
+			bt.set_tile_terrain_type(tileset, tile_data, tile_layer);
+			
+			# Set peering bits.
+			print("WHOOOO2 " + id);
+			if db_data.has("peering_bits"):
+				for direction in db_data["peering_bits"].keys():
+					var side = _get_peering_bit_side(direction);
+					for bit_layer in db_data["peering_bits"][direction]:
+						var layer = layers.find(bit_layer);
+						bt.add_tile_peering_type(tileset, tile_data, side, layer);
 	
 	return tileset;
 
@@ -192,3 +212,71 @@ func _scale_shape(shape : Dictionary, width : int, height : int) -> PackedVector
 		var y : float = float(value[1]) * height;
 		result.append(Vector2(x, y));
 	return result;
+
+static func _get_layers(texture : TileAtlasTexture, database : TileDatabase) -> Array[String]:
+	var result : Array[String] = [];
+	for id in texture.tile_coords.keys():
+		if database.has_tile(id):
+			var tile = database.get_tile(id);
+			if tile.has("layer") and !result.has(tile["layer"]):
+				result.append(tile["layer"]);
+	return result;
+
+static func _get_layer_color(layer : String) -> Color:
+	match layer:
+		"solid":
+			return Color.RED;
+		"slope_tl":
+			return Color.GREEN;
+		"slope_tr":
+			return Color.BLUE;
+		"slope_bl":
+			return Color.YELLOW;
+		"slope_br":
+			return Color.CYAN;
+	return Color.BLACK;
+
+static func _get_layer_name(layer : String) -> String:
+	match layer:
+		"solid":
+			return "Solid";
+		"slope_tl":
+			return "Solid (top-left)";
+		"slope_tr":
+			return "Slope (top-right)";
+		"slope_bl":
+			return "Slope (bottom-left)";
+		"slope_br":
+			return "Slope (bottom-right)";
+	return "???";
+
+static func _get_peering_bit_side(side : String) -> TileSet.CellNeighbor:
+	match side:
+		"TL":
+			return TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER;
+		"T":
+			return TileSet.CELL_NEIGHBOR_TOP_SIDE;
+		"TR":
+			return TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER;
+		"L":
+			return TileSet.CELL_NEIGHBOR_LEFT_SIDE;
+		"R":
+			return TileSet.CELL_NEIGHBOR_RIGHT_SIDE;
+		"BL":
+			return TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER;
+		"B":
+			return TileSet.CELL_NEIGHBOR_BOTTOM_SIDE;
+		"BR":
+			return TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER;
+	@warning_ignore("int_as_enum_without_match", "int_as_enum_without_cast")
+	return -1;
+
+func _get_tile_layer(id : String, db : TileDatabase) -> String:
+		if db.has_tile(id):
+			var tile : Dictionary = db.get_tile(id);
+			if tile.has("layer"):
+				return tile["layer"];
+			else:
+				return "none";
+		else:
+			return "none";
