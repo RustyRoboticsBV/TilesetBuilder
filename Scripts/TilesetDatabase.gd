@@ -101,7 +101,9 @@ func _apply_flip_x(text : String) -> String:
 		"_diag_u": "_diag_d",
 		
 		"_tl": "_tr",
-		"_tr": "_tl"
+		"_bl": "_br",
+		"_tr": "_tl",
+		"_br": "_bl"
 	};
 	return _apply_replace(text, mapping);
 
@@ -129,7 +131,9 @@ func _apply_flip_y(text : String) -> String:
 		"_diag_u": "_diag_d",
 		
 		"_tl": "_bl",
-		"_tr": "_br"
+		"_tr": "_br",
+		"_bl": "_tl",
+		"_br": "_tr"
 	};
 	return _apply_replace(text, mapping);
 
@@ -199,9 +203,9 @@ func _apply_rotate_counter(text : String) -> String:
 		"_diag_u": "_diag_d",
 		
 		"_tl": "_bl",
-		"_tr": "_tl",
+		"_bl": "_br",
 		"_br": "_tr",
-		"_bl": "_br"
+		"_tr": "_tl"
 	};
 	return _apply_replace(text, mapping);
 

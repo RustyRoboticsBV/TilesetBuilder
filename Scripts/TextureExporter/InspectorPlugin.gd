@@ -141,6 +141,7 @@ func _create_tileset(atlas : TileAtlasTexture) -> TileSet:
 	
 	# Better terrain support.
 	if ProjectSettings.has_setting("autoload/BetterTerrain"):
+		print(db._dict);
 		var script_path : String = ProjectSettings.get_setting("autoload/BetterTerrain");
 		script_path = script_path.substr(1);
 		print("Better-terrain plugin located at: " + script_path);
@@ -150,7 +151,6 @@ func _create_tileset(atlas : TileAtlasTexture) -> TileSet:
 		
 		var layers = _get_layers(atlas, db);
 		for layer in layers:
-			print("EEEEE " + layer);
 			bt.add_terrain(tileset, _get_layer_name(layer), _get_layer_color(layer), 0);
 		for id in atlas.tile_coords.keys():
 			if !db.has_tile(id):
@@ -163,12 +163,10 @@ func _create_tileset(atlas : TileAtlasTexture) -> TileSet:
 			var tile_data : TileData = source.get_tile_data(tile_coords, 0);
 			
 			# Set tile terrain layer.
-			print("WHOOOO " + id);
 			var tile_layer = layers.find(_get_tile_layer(id, db));
 			bt.set_tile_terrain_type(tileset, tile_data, tile_layer);
 			
 			# Set peering bits.
-			print("WHOOOO2 " + id);
 			if db_data.has("peering_bits"):
 				for direction in db_data["peering_bits"].keys():
 					var side = _get_peering_bit_side(direction);

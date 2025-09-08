@@ -13,16 +13,16 @@
 		"layer": "solid",
 		"peering_bits": {
 			"L": ["solid"],
-			"BL": ["solid"],
+			"BL": ["solid", "slope_bl"],
 			"B": ["solid"],
-			"BR": ["solid"],
+			"BR": ["solid", "slope_br"],
 			"R": ["solid"],
-			"TR": ["solid"],
+			"TR": ["solid", "slope_tr"],
 			"T": ["solid"],
-			"TL": ["solid"]
+			"TL": ["solid", "slope_tl"]
 		}
 	},
-
+	
 	"EDGE_T": {
 		"block": "main",
 		"coords": [10, 0],
@@ -44,9 +44,9 @@
 		"layer": "solid",
 		"peering_bits": {
 			"L": ["solid"],
-			"BL": ["solid"],
+			"BL": ["solid", "slope_bl"],
 			"B": ["solid"],
-			"BR": ["solid"],
+			"BR": ["solid", "slope_br"],
 			"R": ["solid"]
 		}
 	},
@@ -86,7 +86,7 @@
 		"layer": "solid",
 		"peering_bits": {
 			"B": ["solid"],
-			"BR": ["solid"],
+			"BR": ["solid", "slope_br"],
 			"R": ["solid"]
 		}
 	},
@@ -126,11 +126,11 @@
 		"layer": "solid",
 		"peering_bits": {
 			"L": ["solid"],
-			"BL": ["solid"],
+			"BL": ["solid", "slope_bl"],
 			"B": ["solid"],
-			"BR": ["solid"],
+			"BR": ["solid", "slope_br"],
 			"R": ["solid"],
-			"TR": ["solid"],
+			"TR": ["solid", "slope_tr"],
 			"T": ["solid"]
 		}
 	},
@@ -250,9 +250,9 @@
 		"layer": "solid",
 		"peering_bits": {
 			"L": ["solid"],
-			"BL": ["solid"],
+			"BL": ["solid", "slope_bl"],
 			"B": ["solid"],
-			"BR": ["solid"],
+			"BR": ["solid", "slope_br"],
 			"R": ["solid"],
 			"T": ["solid"]
 		}
@@ -293,10 +293,10 @@
 		"layer": "solid",
 		"peering_bits": {
 			"L": ["solid"],
-			"BL": ["solid"],
+			"BL": ["solid", "slope_bl"],
 			"B": ["solid"],
 			"T": ["solid"],
-			"TR": ["solid"],
+			"TR": ["solid", "slope_tr"],
 			"R": ["solid"]
 		}
 	},
@@ -325,7 +325,7 @@
 		"layer": "solid",
 		"peering_bits": {
 			"B": ["solid"],
-			"BR": ["solid"],
+			"BR": ["solid", "slope_br"],
 			"R": ["solid"],
 			"T": ["solid"],
 			"L": ["solid"]
@@ -470,7 +470,7 @@
 		"layer": "solid",
 		"peering_bits": {
 			"B": ["solid"],
-			"BR": ["solid"],
+			"BR": ["solid", "slope_br"],
 			"R": ["solid"],
 			"L": ["solid"]
 		}
@@ -712,6 +712,14 @@
 				"BL": "LINK_TL",
 				"TR": "EDGE_T"
 			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"L": ["slope_tl"],
+			"BL": ["solid"],
+			"B": ["solid"],
+			"BR": ["solid"],
+			"R": ["solid"]
 		}
 	},
 	"PEAK_TR": {
@@ -752,6 +760,16 @@
 				"op": "flip_xy",
 				"src": "WALL_BR"
 			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"L": ["slope_tl"],
+			"BL": ["solid"],
+			"B": ["solid"],
+			"BR": ["solid"],
+			"R": ["solid"],
+			"TR": ["solid"],
+			"T": ["solid"]
 		}
 	},
 	"WALL_TR": {
@@ -785,6 +803,12 @@
 				"L": "NOOK_TL",
 				"R": "PEAK_TR"
 			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"R": ["slope_tr"],
+			"BR": ["solid", "slope_br"],
+			"B": ["solid"]
 		}
 	},
 	"CLIFF_TR": {
@@ -831,6 +855,16 @@
 				"BL": "CORNER_TL",
 				"TR": "LINK_TL"
 			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"T": ["slope_tl"],
+			"L": ["solid"],
+			"BL": ["solid", "slope_bl"],
+			"B": ["solid"],
+			"BR": ["solid", "slope_br"],
+			"R": ["solid"],
+			"TR": ["solid"]
 		}
 	},
 	"BASE_TR": {
@@ -876,6 +910,14 @@
 				"BL": "EDGE_L",
 				"TR": "LINK_TL"
 			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"T": ["slope_tl"],
+			"B": ["solid"],
+			"BR": ["solid", "slope_br"],
+			"R": ["solid"],
+			"TR": ["solid"]
 		}
 	},
 	"PIT_TR": {
@@ -921,6 +963,12 @@
 				"B": "PIT_BL",
 				"T": "NOOK_TL"
 			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"R": ["solid"],
+			"BR": ["solid", "slope_br"],
+			"B": ["slope_bl"]
 		}
 	},
 	"LEDGE_TR": {
@@ -955,6 +1003,14 @@
 				"L": "PEAK_TL",
 				"R": "PEAK_TR"
 			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"L": ["slope_tl"],
+			"R": ["slope_tr"],
+			"BL": ["solid", "slope_bl"],
+			"B": ["solid"],
+			"BR": ["solid", "slope_br"]
 		}
 	},
 	"SUMMIT_L": {
@@ -967,6 +1023,14 @@
 				"B": "PIT_BL",
 				"T": "PIT_TL"
 			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"B": ["slope_bl"],
+			"T": ["slope_tl"],
+			"BR": ["solid", "slope_br"],
+			"R": ["solid"],
+			"TR": ["solid", "slope_tr"]
 		}
 	},
 	"SUMMIT_R": {
@@ -993,6 +1057,15 @@
 				"L": "WALL_TL",
 				"R": "WALL_TR"
 			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"L": ["slope_tl"],
+			"R": ["slope_tr"],
+			"BL": ["solid", "slope_bl"],
+			"B": ["solid"],
+			"BR": ["solid", "slope_br"],
+			"T": ["solid"]
 		}
 	},
 	"SHAFT_L": {
@@ -1005,6 +1078,15 @@
 				"B": "BASE_BL",
 				"T": "BASE_TL"
 			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"B": ["slope_bl"],
+			"T": ["slope_tl"],
+			"BR": ["solid", "slope_br"],
+			"R": ["solid"],
+			"TR": ["solid", "slope_tr"],
+			"L": ["solid"]
 		}
 	},
 	"SHAFT_R": {
@@ -1032,6 +1114,13 @@
 				"L": "EDGE_L",
 				"R": "WALL_TR"
 			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"R": ["slope_tr"],
+			"BR": ["solid", "slope_br"],
+			"B": ["solid"],
+			"T": ["solid"]
 		}
 	},
 	"CHIMNEY_TR": {
@@ -1065,6 +1154,13 @@
 				"B": "BASE_BL",
 				"T": "EDGE_T"
 			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"B": ["slope_bl"],
+			"BR": ["solid", "slope_br"],
+			"L": ["solid"],
+			"R": ["solid"]
 		}
 	},
 	"TUNNEL_TR": {
@@ -1100,6 +1196,15 @@
 				"B": "CORNER_BL",
 				"T": "BASE_TL"
 			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"T": ["slope_tl"],
+			"TR": ["solid", "slope_tr"],
+			"R": ["solid"],
+			"BR": ["solid", "slope_br"],
+			"B": ["solid"],
+			"L": ["solid"]
 		}
 	},
 	"SHOULDER_TR": {
@@ -1133,6 +1238,15 @@
 				"L": "WALL_TL",
 				"R": "CORNER_TR"
 			}
+		},
+		"layer": "solid",
+		"peering_bits":{
+			"L": ["slope_tl"],
+			"BL": ["solid", "slope_bl"],
+			"B": ["solid"],
+			"BR": ["solid", "slope_br"],
+			"R": ["solid"],
+			"T": ["solid"]
 		}
 	},
 	"PILLAR_TR": {
@@ -1159,32 +1273,41 @@
 	
 	"CAVE_H_TL": {
 		"block": "slope",
-		"coords": [10, 6],
+		"coords": [9, 6],
 		"composite": ["CAVE_H_TL", "CENTER"],
 		"derive": {
 			"0": {
 				"op": "merge_y",
-				"B": "CORNER_BR",
-				"T": "BASE_TL"
+				"B": "CORNER_BL",
+				"T": "BASE_TR"
 			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"T": ["slope_tr"],
+			"TL": ["solid", "slope_tl"],
+			"L": ["solid"],
+			"B": ["solid"],
+			"BR": ["solid", "slope_br"],
+			"R": ["solid"]
 		}
 	},
 	"CAVE_H_TR": {
-		"coords": [9, 6], 
+		"coords": [10, 6], 
 		"inherit": {
 			"from": "CAVE_H_TL",
 			"op": "flip_x"
 		}
 	},
 	"CAVE_H_BL": {
-		"coords": [10, 5], 
+		"coords": [9, 5], 
 		"inherit": {
 			"from": "CAVE_H_TL",
 			"op": "flip_y"
 		}
 	},
 	"CAVE_H_BR": {
-		"coords": [9, 5], 
+		"coords": [10, 5], 
 		"inherit": {
 			"from": "CAVE_H_TL",
 			"op": "flip_xy"
@@ -1192,38 +1315,46 @@
 	},
 	"CAVE_V_TL": {
 		"block": "slope",
-		"coords": [6, 5],
+		"coords": [6, 6],
 		"composite": ["CAVE_V_TL", "CENTER"],
 		"derive": {
 			"0": {
 				"op": "merge_x",
-				"L": "WALL_TL",
-				"R": "CORNER_BR"
+				"L": "WALL_BL",
+				"R": "CORNER_TR"
 			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"L": ["slope_bl"],
+			"TL": ["solid", "slope_tl"],
+			"T": ["solid"],
+			"B:": ["solid"],
+			"BR": ["solid", "slope_br"],
+			"R": ["solid"]
 		}
 	},
 	"CAVE_V_TR": {
-		"coords": [5, 5], 
+		"coords": [5, 6], 
 		"inherit": {
 			"from": "CAVE_V_TL",
 			"op": "flip_x"
 		}
 	},
 	"CAVE_V_BL": {
-		"coords": [6, 6], 
+		"coords": [6, 5], 
 		"inherit": {
 			"from": "CAVE_V_TL",
 			"op": "flip_y"
 		}
 	},
 	"CAVE_V_BR": {
-		"coords": [5, 6], 
+		"coords": [5, 5], 
 		"inherit": {
 			"from": "CAVE_V_TL",
 			"op": "flip_xy"
 		}
 	},
-	
 	"FORK_H_TL": {
 		"block": "slope",
 		"coords": [3, 7],
@@ -1234,6 +1365,14 @@
 				"T": "GAP_T",
 				"B": "BASE_BL"
 			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"B": ["slope_bl"],
+			"BR": ["solid", "slope_br"],
+			"R": ["solid"],
+			"T": ["solid"],
+			"L": ["solid"]
 		}
 	},
 	"FORK_H_TR": {
@@ -1244,17 +1383,17 @@
 		}
 	},
 	"FORK_H_BL": {
-		"coords": [0, 4], 
-		"inherit": {
-			"from": "FORK_H_TL",
-			"op": "flip_xy"
-		}
-	},
-	"FORK_H_BR": {
 		"coords": [3, 4], 
 		"inherit": {
 			"from": "FORK_H_TL",
 			"op": "flip_y"
+		}
+	},
+	"FORK_H_BR": {
+		"coords": [0, 4], 
+		"inherit": {
+			"from": "FORK_H_TL",
+			"op": "flip_xy"
 		}
 	},
 	"FORK_V_TL": {
@@ -1267,6 +1406,14 @@
 				"L": "GAP_L",
 				"R": "WALL_TR"
 			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"R": ["slope_tr"],
+			"BR": ["solid", "slope_br"],
+			"B": ["solid"],
+			"L": ["solid"],
+			"T": ["solid"]
 		}
 	},
 	"FORK_V_TR": {
@@ -1303,6 +1450,13 @@
 				"TL": "PEAK_TR",
 				"TR": "PEAK_TR"
 			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"R": ["slope_tr"],
+			"BR": ["solid", "slope_br"],
+			"B": ["solid"],
+			"L": ["solid"]
 		}
 	},
 	"BRIDGE_TR": {
@@ -1338,6 +1492,13 @@
 				"TL": "PIT_BL",
 				"TR": "CORNER_TR"
 			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"B": ["slope_bl"],
+			"BR": ["solid", "slope_br"],
+			"R": ["solid"],
+			"T": ["solid"]
 		}
 	},
 	"DROP_TR": {
