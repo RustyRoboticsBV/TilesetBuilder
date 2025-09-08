@@ -71,7 +71,7 @@
 			"from": "EDGE_T"
 		}
 	},
-
+	
 	"NOOK_TL": {
 		"block": "main",
 		"coords": [8, 0],
@@ -111,7 +111,7 @@
 			"from": "NOOK_TL"
 		}
 	},
-
+	
 	"CORNER_TL": {
 		"block": "main",
 		"coords": [5, 1],
@@ -155,7 +155,7 @@
 			"from": "CORNER_BL"
 		}
 	},
-
+	
 	"CAP_T": {
 		"block": "main",
 		"coords": [0, 0],
@@ -193,7 +193,7 @@
 			"from": "CAP_T"
 		}
 	},
-
+	
 	"MIDDLE_V": {
 		"block": "main",
 		"coords": [0, 1],
@@ -218,7 +218,7 @@
 			"from": "MIDDLE_V"
 		}
 	},
-
+	
 	"SINGLE": {
 		"block": "main",
 		"coords": [0, 3],
@@ -235,7 +235,7 @@
 		"layer": "solid",
 		"peering_bits": {}
 	},
-
+	
 	"GAP_T": {
 		"block": "main",
 		"coords": [9, 0],
@@ -278,7 +278,7 @@
 			"from": "GAP_T"
 		}
 	},
-
+	
 	"DIAG_U": {
 		"block": "main",
 		"coords": [9, 1],
@@ -308,7 +308,7 @@
 			"op": "rotate_clock"
 		}
 	},
-
+	
 	"HUB_TL": {
 		"block": "main",
 		"coords": [7, 3],
@@ -352,7 +352,7 @@
 			"op": "flip_xy"
 		}
 	},
-
+	
 	"CROSS": {
 		"block": "main",
 		"coords": [2, 1],
@@ -374,7 +374,7 @@
 			"B": ["solid"]
 		}
 	},
-
+	
 	"TURN_TL": {
 		"block": "main",
 		"coords": [1, 0],
@@ -415,7 +415,7 @@
 			"op": "flip_xy"
 		}
 	},
-
+	
 	"JUNCTION_T": {
 		"block": "main",
 		"coords": [2, 0],
@@ -455,7 +455,7 @@
 			"op": "flip_y"
 		}
 	},
-
+	
 	"EXIT_H_TL": {
 		"block": "main",
 		"coords": [5, 0],
@@ -621,7 +621,7 @@
 			"B": ["solid"],
 			"BR": ["solid", "slope_br"],
 			"R": ["solid"],
-			"TR": ["solid", "slope_tr]"]
+			"TR": ["solid", "slope_tr"]
 		}
 	},
 	"LINK_TR": {
