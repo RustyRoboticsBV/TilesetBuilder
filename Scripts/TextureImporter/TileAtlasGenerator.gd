@@ -2,17 +2,20 @@ extends Resource;
 class_name TileAtlasGenerator;
 
 @warning_ignore_start("shadowed_variable_base_class")
+@warning_ignore_start("shadowed_variable")
 
+@export var source : TileAtlasSource;
 @export var tiles : Dictionary[String, Image] = {};
 
 func _init(source : TileAtlasSource, database : TileDatabase, use_image_type : String) -> void:
+	self.source = source;
 	match use_image_type:
 		"parts":
-			tiles = source.parts.duplicate_deep();
+			tiles = source.parts.duplicate();
 		"masks":
-			tiles = source.part_masks.duplicate_deep();
+			tiles = source.part_masks.duplicate();
 		"prefabs":
-			tiles = source.standard_tiles.duplicate_deep();
+			tiles = source.prefabs.duplicate();
 	
 	# Try to resolve missing tiles.
 	for loop_index in 100:
@@ -164,16 +167,13 @@ func _try_merge_x(target : String, left : String, right : String) -> bool:
 	var r : Image = tiles[right];
 	
 	# Get dimensions.
-	if l.get_size() != r.get_size():
-		push_error("Cannot create tilesets from images with varying sizes!");
-		return false;
-	
 	var half_width : int = floor(l.get_width() / 2.0);
 	var height : int = l.get_height();
 	
 	# Create new image.
-	var copy = l.duplicate();
-	copy.blit_rect(r, Rect2(Vector2(half_width, 0), Vector2(half_width, height)), Vector2(half_width, 0));
+	var copy = _get_empty();
+	copy.blit_rect(l, Rect2(Vector2i.ZERO, Vector2i(half_width, height)), Vector2i.ZERO);
+	copy.blit_rect(r, Rect2(Vector2i(half_width, 0), Vector2i(half_width, height)), Vector2i(half_width, 0));
 	tiles[target] = copy;
 	
 	print("Derived " + target + " using merge_x(" + left + ", " + right + ")");
@@ -188,16 +188,13 @@ func _try_merge_y(target : String, bottom : String, top : String) -> bool:
 	var t : Image = tiles[top];
 	
 	# Get dimensions.
-	if b.get_size() != t.get_size():
-		push_error("Cannot create tilesets from images with varying sizes!");
-		return false;
-	
 	var width : int = b.get_width();
 	var half_height : int = floor(b.get_height() / 2.0);
 	
 	# Create new image.
-	var copy = b.duplicate();
-	copy.blit_rect(t, Rect2(Vector2.ZERO, Vector2(width, half_height)), Vector2.ZERO);
+	var copy = _get_empty();
+	copy.blit_rect(t, Rect2i(Vector2i.ZERO, Vector2i(width, half_height)), Vector2.ZERO);
+	copy.blit_rect(b, Rect2i(Vector2i(0, half_height), Vector2i(width, half_height)), Vector2i(0, half_height));
 	tiles[target] = copy;
 	
 	print("Derived " + target + " using merge_y(" + bottom + ", " + top + ")");
@@ -322,3 +319,6 @@ func _cut_corner(image : Image, corner : String) -> Image:
 			rect.position.x = half_width;
 			rect.position.y = half_height;
 	return image.get_region(rect);
+
+func _get_empty() -> Image:
+	return Image.create(source.tile_w, source.tile_h, false, Image.FORMAT_RGBA8);

@@ -3,8 +3,10 @@ class_name TileAtlasSource;
 
 @export var parts : Dictionary[String, Image];
 @export var part_masks : Dictionary[String, Image];
-@export var standard_tiles : Dictionary[String, Image];
+@export var prefabs : Dictionary[String, Image];
 @export var user_tiles : Dictionary[String, Image];
+@export var tile_w : int;
+@export var tile_h : int;
 
 ## Load images from a ZIP file.
 func load_from_zip(file_path : String, database : TileDatabase) -> void:
@@ -79,11 +81,16 @@ func _categorize(images : Dictionary[String, Image], database : TileDatabase) ->
 	# Clear current images.
 	parts = {};
 	part_masks = {};
-	standard_tiles = {};
+	prefabs = {};
 	user_tiles = {};
 	
 	# Read and classify images from dictionary.
 	for key : String in images.keys():
+		if images[key].get_width() > tile_w:
+			tile_w = images[key].get_width();
+		if images[key].get_height() > tile_h:
+			tile_h = images[key].get_height();
+		
 		if key.begins_with("PART_"):
 			parts[key.substr(5)] = images[key];
 			print("Found part: " + key.substr(5));
@@ -91,7 +98,7 @@ func _categorize(images : Dictionary[String, Image], database : TileDatabase) ->
 			part_masks[key.substr(5)] = images[key];
 			print("Found part mask: " + key.substr(5));
 		elif database.has_tile(key):
-			standard_tiles[key] = images[key]
+			prefabs[key] = images[key]
 			print("Found tile: " + key);
 		else:
 			user_tiles[key] = images[key];

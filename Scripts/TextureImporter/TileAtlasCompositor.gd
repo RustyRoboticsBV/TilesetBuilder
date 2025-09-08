@@ -16,8 +16,8 @@ func _init(source : TileAtlasSource, parts : TileAtlasGenerator, part_masks : Ti
 	self.prefabs_generator = prefabs;
 	
 	for id in database.keys():
-		if source.standard_tiles.has(id):
-			tiles[id] = source.standard_tiles[id].duplicate();
+		if source.prefabs.has(id):
+			tiles[id] = source.prefabs[id].duplicate();
 			print("No composite needed for " + id + ".");
 		
 		elif !_try_composite(id, parts, part_masks, database) and prefabs.tiles.has(id):
