@@ -24,6 +24,12 @@ func _get_resource_type() -> String:
 func _get_priority() -> float:
 	return 2.0;
 
+func _get_preset_count() -> int:
+	return 0;
+
+func _get_import_order() -> int:
+	return 0;
+
 func _get_save_extension() -> String:
 	return "res";
 
