@@ -209,19 +209,17 @@ func _try_merge_diag_d(target : String, bottom_left : String, top_right : String
 	var tr : Image = tiles[top_right];
 	
 	# Get dimensions.
-	if bl.get_size() != tr.get_size():
-		push_error("Cannot create tilesets from images with varying sizes!");
-		return false;
-	
 	var w = bl.get_width();
 	var h = bl.get_height();
 	
 	# Create new image.
-	var copy : Image = bl.duplicate();
+	var copy : Image = _get_empty();
 	for y in range(h):
 		for x in range(w):
 			if x * h > y * w:
 				copy.set_pixel(x, y, tr.get_pixel(x, y));
+			else:
+				copy.set_pixel(x, y, bl.get_pixel(x, y));
 	tiles[target] = copy;
 	
 	print("Derived " + target + " using merge_diag_d(" + bottom_left + ", " + top_right + ")");
@@ -236,19 +234,17 @@ func _try_merge_diag_u(target : String, top_left : String, bottom_right : String
 	var br : Image = tiles[bottom_right];
 	
 	# Get dimensions.
-	if tl.get_size() != br.get_size():
-		push_error("Cannot create tilesets from images with varying sizes!");
-		return false;
-	
 	var w = tl.get_width();
 	var h = tl.get_height();
 	
 	# Create new image.
-	var copy : Image = tl.duplicate();
+	var copy : Image = _get_empty();
 	for y in range(h):
 		for x in range(w):
 			if x * h > (h - 1 - y) * w:
 				copy.set_pixel(x, y, br.get_pixel(x, y));
+			else:
+				copy.set_pixel(x, y, tl.get_pixel(x, y));
 	tiles[target] = copy;
 	
 	print("Derived " + target + " using merge_diag_u(" + top_left + ", " + bottom_right + ")");
@@ -265,15 +261,12 @@ func _try_merge_quad(target : String, bottom_left : String, bottom_right : Strin
 	var tr : Image = tiles[top_right];
 	
 	# Get dimensions.
-	if bl.get_size() != br.get_size() or bl.get_size() != tl.get_size() or bl.get_size() != tr.get_size():
-		push_error("Cannot create tilesets from images with varying sizes!");
-		return false;
-	
 	var half_width : int = floor(bl.get_width() / 2.0);
 	var half_height : int = floor(bl.get_height() / 2.0);
 	
 	# Create new image.
-	var copy = bl.duplicate();
+	var copy = _get_empty();
+	copy.blit_rect(bl, Rect2i(Vector2i(0, half_height), Vector2i(half_width, half_height)), Vector2i(0, half_height));
 	copy.blit_rect(br, Rect2i(Vector2i(half_width, half_height), Vector2i(half_width, half_height)), Vector2i(half_width, half_height));
 	copy.blit_rect(tl, Rect2i(Vector2i.ZERO, Vector2i(half_width, half_height)), Vector2i.ZERO);
 	copy.blit_rect(tr, Rect2i(Vector2i(half_width, 0), Vector2i(half_width, half_height)), Vector2i(half_width, 0));

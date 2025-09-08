@@ -16,21 +16,10 @@ var blocks : Dictionary[String, Image] = {};
 func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database : TileDatabase, use_mipmaps : bool) -> void:
 	self.compositor = compositor;
 	
-	# Find tile size.
-	var tile_w : int = 0;
-	var tile_h : int = 0;
-	for image : Image in compositor.tiles.values():
-		if image.get_width() > tile_w:
-			tile_w = image.get_width();
-		if image.get_height() > tile_h:
-			tile_h = image.get_height();
-	for image : Image in source.user_tiles.values():
-		if image.get_width() > tile_w:
-			tile_w = image.get_width();
-		if image.get_height() > tile_h:
-			tile_h = image.get_height();
-	tile_size = Vector2i(tile_w, tile_h);
-	print("Tile size: (" + str(tile_w) + ", " + str(tile_h) + ")")
+	# Store tile size.
+	tile_size = Vector2i(source.tile_w, source.tile_h);
+	var tile_w = tile_size.x;
+	var tile_h = tile_size.y;
 	
 	# Place tiles.
 	for id in compositor.tiles.keys():

@@ -10,7 +10,27 @@ class_name TileAtlasSource;
 
 ## Load images from a ZIP file.
 func load_from_zip(file_path : String, database : TileDatabase) -> void:
-	var images = _load_images_from_zip(file_path);
+	# Load images from ZIP.
+	var images : Dictionary[String, Image] = _load_images_from_zip(file_path);
+	
+	# Find tile size.
+	for image : Image in images.values():
+		if image.get_width() > tile_w:
+			tile_w = image.get_width();
+		if image.get_height() > tile_h:
+			tile_h = image.get_height();
+	print("Tile size: (" + str(tile_w) + ", " + str(tile_h) + ")");
+	
+	# Equalize image sizes.
+	for key : String in images:
+		var image : Image = images[key];
+		if image.get_width() != tile_w or image.get_height() != tile_h:
+			var resized = Image.create(tile_w, tile_h, false, Image.FORMAT_RGBA8);
+			resized.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO); 
+			images[key] = resized;
+			print("Resized " + key);
+	
+	# Categorize images.
 	_categorize(images, database);
 
 
@@ -86,11 +106,6 @@ func _categorize(images : Dictionary[String, Image], database : TileDatabase) ->
 	
 	# Read and classify images from dictionary.
 	for key : String in images.keys():
-		if images[key].get_width() > tile_w:
-			tile_w = images[key].get_width();
-		if images[key].get_height() > tile_h:
-			tile_h = images[key].get_height();
-		
 		if key.begins_with("PART_"):
 			parts[key.substr(5)] = images[key];
 			print("Found part: " + key.substr(5));
