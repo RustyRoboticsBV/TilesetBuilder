@@ -6,32 +6,39 @@ extends EditorImportPlugin;
 func _get_importer_name() -> String:
 	return "tile_atlas_builder";
 
-func _get_import_options(path : String, preset : int) -> Array[Dictionary]:
-	return [];
-
 func _get_visible_name() -> String:
 	return "ZIP Tile Texture Atlas";
 
 func _get_recognized_extensions() -> PackedStringArray:
 	return ["zip"];
-
-func _get_preset_name(index : int) -> String:
-	return "Default";
 	
 func _get_resource_type() -> String:
 	return "Texture2D";
 
+func _get_save_extension() -> String:
+	return "res";
+
 func _get_priority() -> float:
 	return 2.0;
-
-func _get_preset_count() -> int:
-	return 0;
 
 func _get_import_order() -> int:
 	return 0;
 
-func _get_save_extension() -> String:
-	return "res";
+func _get_preset_count() -> int:
+	return 1;
+
+func _get_preset_name(index : int) -> String:
+	match index:
+		0:
+			return "Default";
+		_:
+			return "";
+
+func _get_import_options(path : String, preset : int) -> Array[Dictionary]:
+	return [];
+
+func _get_option_visibility(path, option_name, options):
+	return true;
 
 func _import(source_file: String, save_path: String, _options: Dictionary, _platform_variants: Array, _gen_files: Array) -> int:
 	print("Importing tileset from: '%s'" % source_file);
