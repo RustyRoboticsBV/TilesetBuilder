@@ -1,4 +1,3 @@
-@tool
 extends Object;
 
 const FileDialogUtility = preload("FileDialogUtility.gd");
