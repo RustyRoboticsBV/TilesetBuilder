@@ -1,6 +1,8 @@
 @tool
 extends EditorInspectorPlugin;
 
+const TextureExporter = preload("TextureExporter.gd");
+
 enum PeeringBit {
 	TL = TileSet.CellNeighbor.CELL_NEIGHBOR_TOP_LEFT_CORNER,
 	T = TileSet.CellNeighbor.CELL_NEIGHBOR_TOP_SIDE,
@@ -29,7 +31,7 @@ func _parse_begin(object : Object):
 	var image_button = Button.new();
 	image_button.text = "Export to file";
 	image_button.pressed.connect(func():
-		_open_save_image_dialog(object);
+		TextureExporter.open_save_image_dialog(object);
 	);
 	add_custom_control(image_button);
 	
@@ -55,15 +57,6 @@ func _parse_begin(object : Object):
 	space = Control.new();
 	space.custom_minimum_size = Vector2i(4, 4);
 	add_custom_control(space);
-
-func _open_save_image_dialog(resource: TileAtlasTexture):
-	_get_file_dialog("Save Image", "*.png", "res://My Tile Atlas Texture.png", \
-	  func(path):
-		var error = resource.get_image().save_png(path);
-		if error == OK:
-			EditorInterface.get_resource_filesystem().scan();
-			print("Saved tile atlas texture to: " + path);
-	);
 
 func _open_save_tileset_dialog(resource: TileAtlasTexture):
 	_get_file_dialog("Save Tileset", "*.tres", "res://My Tileset.tres", \
