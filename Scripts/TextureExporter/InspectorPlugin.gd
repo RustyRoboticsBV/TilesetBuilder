@@ -163,7 +163,8 @@ func _create_tileset(atlas : TileAtlasTexture) -> TileSet:
 			
 			# Set tile terrain layer.
 			var tile_layer = layers.find(_get_tile_layer(id, db));
-			bt.set_tile_terrain_type(tileset, tile_data, tile_layer);
+			if tile_layer != -1:
+				bt.set_tile_terrain_type(tileset, tile_data, tile_layer);
 			
 			# Set peering bits.
 			if db_data.has("peering_bits"):
@@ -171,7 +172,8 @@ func _create_tileset(atlas : TileAtlasTexture) -> TileSet:
 					var side = _get_peering_bit_side(direction);
 					for bit_layer in db_data["peering_bits"][direction]:
 						var layer = layers.find(bit_layer);
-						bt.add_tile_peering_type(tileset, tile_data, side, layer);
+						if layer != -1:
+							bt.add_tile_peering_type(tileset, tile_data, side, layer);
 	
 	return tileset;
 
