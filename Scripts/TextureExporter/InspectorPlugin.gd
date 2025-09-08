@@ -19,6 +19,8 @@ const DEFAULT_PHYS_SHAPE = {
 	"3": ["-0.5", "0.5"]
 };
 
+var dialog : EditorFileDialog;
+
 func _can_handle(object):
 	return object is TileAtlasTexture;
 
@@ -55,46 +57,50 @@ func _parse_begin(object : Object):
 	add_custom_control(space);
 
 func _open_save_image_dialog(resource: TileAtlasTexture):
-	var dialog := EditorFileDialog.new();
-	dialog.access = EditorFileDialog.ACCESS_FILESYSTEM;
-	dialog.file_mode = EditorFileDialog.FILE_MODE_SAVE_FILE;
-	dialog.set_current_path("res://My Tile Atlas Texture.png");
-	dialog.add_filter("*.png");
-	
-	dialog.file_selected.connect(func(path):
+	_get_file_dialog("Save Image", "*.png", "res://My Tile Atlas Texture.png", \
+	  func(path):
 		var error = resource.get_image().save_png(path);
 		if error == OK:
 			EditorInterface.get_resource_filesystem().scan();
 			print("Saved tile atlas texture to: " + path);
 	);
-	
-	EditorInterface.get_base_control().add_child(dialog);
-	
-	var screen_size : Vector2 = EditorInterface.get_base_control().size;
-	var target_size : Vector2i = screen_size * 0.75;
-	
-	dialog.popup_centered(target_size);
 
 func _open_save_tileset_dialog(resource: TileAtlasTexture):
-	var dialog := EditorFileDialog.new();
-	dialog.access = EditorFileDialog.ACCESS_FILESYSTEM;
-	dialog.file_mode = EditorFileDialog.FILE_MODE_SAVE_FILE;
-	dialog.set_current_path("res://My Tileset.tres");
-	dialog.add_filter("*.tres");
-	
-	dialog.file_selected.connect(func(path):
+	_get_file_dialog("Save Tileset", "*.tres", "res://My Tileset.tres", \
+	  func(path):
 		var error = ResourceSaver.save(_create_tileset(resource), path);
 		if error == OK:
 			EditorInterface.get_resource_filesystem().scan();
 			print("Saved tileset to: " + path);
 	);
+
+func _get_file_dialog(title : String, filter : String, current_path : String, callback : Callable) -> EditorFileDialog:
+	# Delete old dialog if necessary.
+	if dialog != null:
+		EditorInterface.get_base_control().remove_child(dialog);
 	
+	# Create dialog.
+	dialog = EditorFileDialog.new();
+	
+	# Hook up callback.
+	dialog.file_selected.connect(callback);
+	
+	# Add to scene.
 	EditorInterface.get_base_control().add_child(dialog);
 	
+	# Set dialog values.
+	dialog.title = title;
+	dialog.access = EditorFileDialog.ACCESS_FILESYSTEM;
+	dialog.file_mode = EditorFileDialog.FILE_MODE_SAVE_FILE;
+	dialog.set_current_path(current_path);
+	dialog.add_filter(filter);
+	
+	# Set position and size.
 	var screen_size : Vector2 = EditorInterface.get_base_control().size;
 	var target_size : Vector2i = screen_size * 0.75;
-	
 	dialog.popup_centered(target_size);
+	
+	return dialog;
 
 func _create_tileset(atlas : TileAtlasTexture) -> TileSet:
 	# Get tile database.
