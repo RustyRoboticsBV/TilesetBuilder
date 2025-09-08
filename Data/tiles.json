@@ -617,11 +617,11 @@
 		"peering_bits": {
 			"L": ["slope_tl"],
 			"T": ["slope_tl"],
-			"BL": ["solid"],
+			"BL": ["solid", "slope_bl"],
 			"B": ["solid"],
-			"BR": ["solid"],
+			"BR": ["solid", "slope_br"],
 			"R": ["solid"],
-			"TR": ["solid"]
+			"TR": ["solid", "slope_tr]"]
 		}
 	},
 	"LINK_TR": {
@@ -662,10 +662,10 @@
 		"peering_bits": {
 			"L": ["slope_tl"],
 			"T": ["slope_tl"],
-			"BL": ["solid"],
+			"BL": ["solid", "slope_bl"],
 			"B": ["solid"],
 			"R": ["solid"],
-			"TR": ["solid"]
+			"TR": ["solid", "slope_tr"]
 		}
 	},
 	"STAIRCASE_TR": {
@@ -716,9 +716,9 @@
 		"layer": "solid",
 		"peering_bits": {
 			"L": ["slope_tl"],
-			"BL": ["solid"],
+			"BL": ["solid", "slope_bl"],
 			"B": ["solid"],
-			"BR": ["solid"],
+			"BR": ["solid", "slope_br"],
 			"R": ["solid"]
 		}
 	},
@@ -764,11 +764,11 @@
 		"layer": "solid",
 		"peering_bits": {
 			"L": ["slope_tl"],
-			"BL": ["solid"],
+			"BL": ["solid", "slope_bl"],
 			"B": ["solid"],
-			"BR": ["solid"],
+			"BR": ["solid", "slope_br"],
 			"R": ["solid"],
-			"TR": ["solid"],
+			"TR": ["solid", "slope_tr"],
 			"T": ["solid"]
 		}
 	},
@@ -864,7 +864,7 @@
 			"B": ["solid"],
 			"BR": ["solid", "slope_br"],
 			"R": ["solid"],
-			"TR": ["solid"]
+			"TR": ["solid", "slope_tr"]
 		}
 	},
 	"BASE_TR": {
@@ -917,7 +917,7 @@
 			"B": ["solid"],
 			"BR": ["solid", "slope_br"],
 			"R": ["solid"],
-			"TR": ["solid"]
+			"TR": ["solid", "slope_tr"]
 		}
 	},
 	"PIT_TR": {
