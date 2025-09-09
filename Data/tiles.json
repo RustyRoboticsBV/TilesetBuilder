@@ -528,7 +528,7 @@
 	
 	
 	"SLOPE_TL": {
-		"block": "long_slope",
+		"block": "slope",
 		"coords": [0, 0],
 		"composite": ["SLOPE_TL", "CENTER"],
 		"derive": {
