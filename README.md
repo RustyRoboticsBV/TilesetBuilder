@@ -36,6 +36,11 @@ The slope tile filenames are as follows:
 
 ![The slope tiles and their identifiers.](SlopeReference.png)
 
+### Long Slope Tiles
+Long slopes (or 2-by-1 slopes) use similar names to the slope tiles. These mostly work the same as regular 1-by-1 slopes with a few differences:
+- All filenames must be prefixed with `LONG_`. So you use `LONG_LINK_TL` instead of `LINK_TL`.
+- The main slopes are each divided into two tiles: `LONG_SLOPE_LOW_x` and `LONG_SLOPE_HI_x`, representing the bottom half and the top half respectively.
+
 ### User-Defined Tiles
 You can add custom tiles by adding images with filenames that are not in the image above. These tiles are placed below the standard tileset area. When you generate a tileset resource, user-defined tiles will not get their terrain or physics shape painted.
 
@@ -60,7 +65,6 @@ Here, the `EDGE_T` tile is created by overlaying the `PART_EDGE_T` image over th
 Your tileset archives can have both prefab tiles and part images. If a tile has both a prefab image and part images available, then the prefab is always used (but the parts may still be used to generate other tiles).
 
 ## Planned Features
-- 2-by-1 (long) slopes *(work in progress)*.
 - 1-by-2 (tall) slopes.
 - Adding support for tile variants.
 - Making the generation process configurable in the import window: currently the process is completely fixed and untransparent, limiting its usefulness.
