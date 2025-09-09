@@ -8,9 +8,10 @@ A ZIP tileset texture importer & tile generator plugin for the Godot game engine
 Each image in the ZIP corresponds to one tile. In order to be recognized, their filenames must conform to specific values (see the images below). Each tile can be provided as either a fully-finished image, or as a part image that will be used to build the tile at import time.
 
 ## Install Guide
-1. Create a folder called `Addons/TilesetBuilder`.
-2. Extract the contents of this repository to that folder.
-3. Enable the plugin under `Project Settings` => `Plugins` => `Tileset Builder`.
+1. Download the latest release from the 'Releases' page.
+2. Create a folder called `Addons/TilesetBuilder`.
+3. Extract the downloaded archive's contents to that folder.
+4. Enable the plugin under `Project Settings` => `Plugins` => `Tileset Builder`.
 
 ## How to Use
 After installing, create a ZIP file and fill it with image files, using the filenames in the images below.
@@ -59,7 +60,7 @@ Here, the `EDGE_T` tile is created by overlaying the `PART_EDGE_T` image over th
 Your tileset archives can have both prefab tiles and part images. If a tile has both a prefab image and part images available, then the prefab is always used (but the parts may still be used to generate other tiles).
 
 ## Planned Features
-- 2-by-1 (long) slopes.
+- 2-by-1 (long) slopes *(work in progress)*.
 - 1-by-2 (tall) slopes.
 - Adding support for tile variants.
 - Making the generation process configurable in the import window: currently the process is completely fixed and untransparent, limiting its usefulness.
