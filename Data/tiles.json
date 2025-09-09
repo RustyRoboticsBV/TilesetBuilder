@@ -1681,11 +1681,11 @@
 				"src": "LONG_LINK_BR"
 			},
 			"3": {
-				"op": "merge_complex",
+				"op": "merge_side",
 				"bg": "CENTER",
-				"bg_corner": "TL",
+				"bg_side": "T",
 				"fg": "LONG_SLOPE_HI_TL",
-				"fg_corner": "BL"
+				"fg_side": "B"
 			}
 		},
 		"layer": "solid",

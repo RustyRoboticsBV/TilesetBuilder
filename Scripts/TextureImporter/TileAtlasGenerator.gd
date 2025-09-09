@@ -89,6 +89,13 @@ func _try_resolve(id : String, rules : Dictionary) -> bool:
 				var top_right = rules[key]["TR"];
 				if _try_merge_quad(id, bottom_left, bottom_right, top_left, top_right):
 					return true;
+			"merge_side":
+				var background = rules[key]["bg"];
+				var background_side = rules[key]["bg_side"];
+				var foreground = rules[key]["fg"];
+				var foreground_side = rules[key]["fg_side"];
+				if _try_merge_side(id, foreground, foreground_side, background, background_side):
+					return true;
 			"merge_complex":
 				var background = rules[key]["bg"];
 				var background_corner = rules[key]["bg_corner"];
@@ -273,7 +280,7 @@ func _try_merge_complex(target : String, foreground : String, foreground_corner 
 		return false;
 	
 	# Get corner sub-imag.
-	var c : Image = _cut_corner(tiles[foreground], foreground_corner);
+	var c : Image = _cut_part(tiles[foreground], foreground_corner);
 	
 	# Get target background.
 	var result : Image = tiles[background].duplicate();
@@ -291,7 +298,28 @@ func _try_merge_complex(target : String, foreground : String, foreground_corner 
 	tiles[target] = result;
 	return true;
 
-func _cut_corner(image : Image, corner : String) -> Image:
+func _try_merge_side(target : String, foreground : String, foreground_side : String, background : String, background_side : String) -> bool:
+	if !tiles.has(foreground) or !tiles.has(background):
+		return false;
+	
+	# Get corner sub-imag.
+	var s : Image = _cut_part(tiles[foreground], foreground_side);
+	
+	# Get target background.
+	var result : Image = tiles[background].duplicate();
+	match background_side:
+		"L", "T":
+			result.blit_rect(s, Rect2i(Vector2i.ZERO, s.get_size()), Vector2i.ZERO);
+		"R":
+			result.blit_rect(s, Rect2i(Vector2i.ZERO, s.get_size()), Vector2i(result.get_width() - s.get_width(), 0));
+		"B":
+			result.blit_rect(s, Rect2i(Vector2i.ZERO, s.get_size()), Vector2i(0, result.get_height() - s.get_height()));
+	
+	print("Derived " + target + " using merge_side(" + foreground + ", " + foreground_side + ", " + background + ", " + background_side + ")");
+	tiles[target] = result;
+	return true;
+
+func _cut_part(image : Image, corner : String) -> Image:
 	var half_width = int(image.get_width() / 2.0);
 	var half_height = int(image.get_height() / 2.0);
 	var rect : Rect2i = Rect2i(0, 0, half_width, half_height);
@@ -303,4 +331,14 @@ func _cut_corner(image : Image, corner : String) -> Image:
 		"BR":
 			rect.position.x = half_width;
 			rect.position.y = half_height;
+		"T":
+			rect.size.x *= 2;
+		"B":
+			rect.size.x *= 2;
+			rect.position.y = half_height;
+		"L":
+			rect.size.y *= 2;
+		"R":
+			rect.size.y *= 2;
+			rect.position.y = half_width;
 	return image.get_region(rect);
