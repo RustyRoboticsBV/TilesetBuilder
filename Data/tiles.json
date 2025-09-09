@@ -127,7 +127,7 @@
 		"peering_bits": {
 			"L": ["solid"],
 			"BL": ["solid", "slope_bl", "long_slope_bl", "tall_slope_bl"],
-			"B": ["solid"],
+			"B": ["solid", "long_slope_bl", "long_slope_br"],
 			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"],
 			"TR": ["solid", "slope_tr", "long_slope_tr", "tall_slope_tr"],
@@ -251,7 +251,7 @@
 		"peering_bits": {
 			"L": ["solid"],
 			"BL": ["solid", "slope_bl", "long_slope_bl", "tall_slope_bl"],
-			"B": ["solid"],
+			"B": ["solid", "long_slope_bl", "long_slope_br"],
 			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"],
 			"T": ["solid"]
@@ -1946,7 +1946,7 @@
 			"B": ["solid"],
 			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"],
-			"TR": ["solid", "slope_tr", "long_slope_tr", "tall_slope_tr"]
+			"TR": ["solid", "long_slope_tl", "slope_tr", "long_slope_tr", "tall_slope_tr"]
 		}
 	},
 	"LONG_BASE_TR": {
@@ -2397,7 +2397,7 @@
 	"LONG_CAVE_V_TL": {
 		"block": "long_slope",
 		"coords": [6, 6],
-		"composite": ["CAVE_V_TL", "CENTER"],
+		"composite": ["LONG_CAVE_V_TL", "CENTER"],
 		"derive": {
 			"0": {
 				"op": "merge_x",

@@ -58,6 +58,7 @@ static func _create_tileset(atlas : TileAtlasTexture) -> TileSet:
 		var block = db.get_tile(id)["block"] if db.has_tile(id) else "user";
 		var coords = atlas.block_coords[block] + atlas.tile_coords[id];
 		
+		# Only set built-in terrain peering bits for tiles in the main block.
 		var peering_bits : Dictionary = {};
 		if block == "main":
 			peering_bits = db.get_tile(id)["peering_bits"];

@@ -37,6 +37,13 @@ func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database 
 		tile_coords[id] = Vector2i(x, y);
 		blocks[block].blit_rect(image, Rect2i(0, 0, tile_w, tile_h), Vector2i(x * tile_w, y * tile_h));
 	
+	# Determine block coords.
+	var current_h : float = 0;
+	for id in blocks.keys():
+		block_coords[id] = Vector2i(0, current_h);
+		current_h += _get_block_size(id).y;
+	block_coords["user"] = Vector2i(0, current_h);
+	
 	# Add user-defined tiles.
 	if source.user_tiles.size() > 0:
 		var user_height : int = ceili(source.user_tiles.size() / 12.0);
@@ -80,15 +87,24 @@ func _allocate_block(name : String, tile_w : int, tile_h : int) -> void:
 	match name:
 		"main":
 			blocks["main"] = Image.create(12 * tile_w, 4 * tile_h, false, Image.FORMAT_RGBA8);
-			block_coords["main"] = Vector2i(0, 0);
 		"slope":
 			blocks["slope"] = Image.create(12 * tile_w, 8 * tile_h, false, Image.FORMAT_RGBA8);
-			block_coords["slope"] = Vector2i(0, 4);
 		"long_slope":
 			blocks["long_slope"] = Image.create(12 * tile_w, 8 * tile_h, false, Image.FORMAT_RGBA8);
-			block_coords["long_slope"] = Vector2i(0, 4);
 		_:
 			push_error("Illegal block name: " + name);
+
+static func _get_block_size(name : String) -> Vector2i:
+	match name:
+		"main":
+			return Vector2i(12, 4);
+		"slope":
+			return Vector2i(12, 8);
+		"long_slope":
+			return Vector2i(12, 8);
+		_:
+			push_error("Illegal block name: " + name);
+	return Vector2i(0, 0);
 
 func _fix_alpha_border(image : Image) -> void:
 	for x in image.get_width():
