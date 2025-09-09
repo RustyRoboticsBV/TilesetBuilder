@@ -13,13 +13,13 @@
 		"layer": "solid",
 		"peering_bits": {
 			"L": ["solid"],
-			"BL": ["solid", "slope_bl"],
-			"B": ["solid"],
-			"BR": ["solid", "slope_br"],
+			"BL": ["solid", "slope_bl", "long_slope_bl", "tall_slope_bl"],
+			"B": ["solid", "long_slope_bl", "long_slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"],
-			"TR": ["solid", "slope_tr"],
-			"T": ["solid"],
-			"TL": ["solid", "slope_tl"]
+			"TR": ["solid", "slope_tr", "long_slope_tr", "tall_slope_tr"],
+			"T": ["solid", "long_slope_tl", "long_slope_tr"],
+			"TL": ["solid", "slope_tl", "long_slope_tl", "tall_slope_tl"]
 		}
 	},
 	
@@ -44,9 +44,9 @@
 		"layer": "solid",
 		"peering_bits": {
 			"L": ["solid"],
-			"BL": ["solid", "slope_bl"],
+			"BL": ["solid", "slope_bl", "long_slope_bl", "tall_slope_bl"],
 			"B": ["solid"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"]
 		}
 	},
@@ -86,7 +86,7 @@
 		"layer": "solid",
 		"peering_bits": {
 			"B": ["solid"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"]
 		}
 	},
@@ -126,11 +126,11 @@
 		"layer": "solid",
 		"peering_bits": {
 			"L": ["solid"],
-			"BL": ["solid", "slope_bl"],
+			"BL": ["solid", "slope_bl", "long_slope_bl", "tall_slope_bl"],
 			"B": ["solid"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"],
-			"TR": ["solid", "slope_tr"],
+			"TR": ["solid", "slope_tr", "long_slope_tr", "tall_slope_tr"],
 			"T": ["solid"]
 		}
 	},
@@ -250,9 +250,9 @@
 		"layer": "solid",
 		"peering_bits": {
 			"L": ["solid"],
-			"BL": ["solid", "slope_bl"],
+			"BL": ["solid", "slope_bl", "long_slope_bl", "tall_slope_bl"],
 			"B": ["solid"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"],
 			"T": ["solid"]
 		}
@@ -293,10 +293,10 @@
 		"layer": "solid",
 		"peering_bits": {
 			"L": ["solid"],
-			"BL": ["solid", "slope_bl"],
+			"BL": ["solid", "slope_bl", "long_slope_bl", "tall_slope_bl"],
 			"B": ["solid"],
 			"T": ["solid"],
-			"TR": ["solid", "slope_tr"],
+			"TR": ["solid", "slope_tr", "long_slope_tr", "tall_slope_tr"],
 			"R": ["solid"]
 		}
 	},
@@ -325,7 +325,7 @@
 		"layer": "solid",
 		"peering_bits": {
 			"B": ["solid"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"],
 			"T": ["solid"],
 			"L": ["solid"]
@@ -470,7 +470,7 @@
 		"layer": "solid",
 		"peering_bits": {
 			"B": ["solid"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"],
 			"L": ["solid"]
 		}
@@ -524,6 +524,8 @@
 			"op": "flip_xy"
 		}
 	},
+	
+	
 	
 	"SLOPE_TL": {
 		"block": "slope",
@@ -617,11 +619,11 @@
 		"peering_bits": {
 			"L": ["slope_tl"],
 			"T": ["slope_tl"],
-			"BL": ["solid", "slope_bl"],
+			"BL": ["solid", "slope_bl", "long_slope_bl", "tall_slope_bl"],
 			"B": ["solid"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"],
-			"TR": ["solid", "slope_tr"]
+			"TR": ["solid", "slope_tr", "long_slope_tr", "tall_slope_tr"]
 		}
 	},
 	"LINK_TR": {
@@ -662,10 +664,10 @@
 		"peering_bits": {
 			"L": ["slope_tl"],
 			"T": ["slope_tl"],
-			"BL": ["solid", "slope_bl"],
+			"BL": ["solid", "slope_bl", "long_slope_bl", "tall_slope_bl"],
 			"B": ["solid"],
 			"R": ["solid"],
-			"TR": ["solid", "slope_tr"]
+			"TR": ["solid", "slope_tr", "long_slope_tr", "tall_slope_tr"]
 		}
 	},
 	"STAIRCASE_TR": {
@@ -716,9 +718,9 @@
 		"layer": "solid",
 		"peering_bits": {
 			"L": ["slope_tl"],
-			"BL": ["solid", "slope_bl"],
+			"BL": ["solid", "slope_bl", "long_slope_bl", "tall_slope_bl"],
 			"B": ["solid"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"]
 		}
 	},
@@ -764,11 +766,11 @@
 		"layer": "solid",
 		"peering_bits": {
 			"L": ["slope_tl"],
-			"BL": ["solid", "slope_bl"],
+			"BL": ["solid", "slope_bl", "long_slope_bl", "tall_slope_bl"],
 			"B": ["solid"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"],
-			"TR": ["solid", "slope_tr"],
+			"TR": ["solid", "slope_tr", "long_slope_tr", "tall_slope_tr"],
 			"T": ["solid"]
 		}
 	},
@@ -807,7 +809,7 @@
 		"layer": "solid",
 		"peering_bits": {
 			"R": ["slope_tr"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"B": ["solid"]
 		}
 	},
@@ -860,11 +862,11 @@
 		"peering_bits": {
 			"T": ["slope_tl"],
 			"L": ["solid"],
-			"BL": ["solid", "slope_bl"],
+			"BL": ["solid", "slope_bl", "long_slope_bl", "tall_slope_bl"],
 			"B": ["solid"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"],
-			"TR": ["solid", "slope_tr"]
+			"TR": ["solid", "slope_tr", "long_slope_tr", "tall_slope_tr"]
 		}
 	},
 	"BASE_TR": {
@@ -915,9 +917,9 @@
 		"peering_bits": {
 			"T": ["slope_tl"],
 			"B": ["solid"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"],
-			"TR": ["solid", "slope_tr"]
+			"TR": ["solid", "slope_tr", "long_slope_tr", "tall_slope_tr"]
 		}
 	},
 	"PIT_TR": {
@@ -967,7 +969,7 @@
 		"layer": "solid",
 		"peering_bits": {
 			"R": ["solid"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"B": ["slope_bl"]
 		}
 	},
@@ -1008,9 +1010,9 @@
 		"peering_bits": {
 			"L": ["slope_tl"],
 			"R": ["slope_tr"],
-			"BL": ["solid", "slope_bl"],
+			"BL": ["solid", "slope_bl", "long_slope_bl", "tall_slope_bl"],
 			"B": ["solid"],
-			"BR": ["solid", "slope_br"]
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"]
 		}
 	},
 	"SUMMIT_L": {
@@ -1028,9 +1030,9 @@
 		"peering_bits": {
 			"B": ["slope_bl"],
 			"T": ["slope_tl"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"],
-			"TR": ["solid", "slope_tr"]
+			"TR": ["solid", "slope_tr", "long_slope_tr", "tall_slope_tr"]
 		}
 	},
 	"SUMMIT_R": {
@@ -1062,9 +1064,9 @@
 		"peering_bits": {
 			"L": ["slope_tl"],
 			"R": ["slope_tr"],
-			"BL": ["solid", "slope_bl"],
+			"BL": ["solid", "slope_bl", "long_slope_bl", "tall_slope_bl"],
 			"B": ["solid"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"T": ["solid"]
 		}
 	},
@@ -1083,9 +1085,9 @@
 		"peering_bits": {
 			"B": ["slope_bl"],
 			"T": ["slope_tl"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"],
-			"TR": ["solid", "slope_tr"],
+			"TR": ["solid", "slope_tr", "long_slope_tr", "tall_slope_tr"],
 			"L": ["solid"]
 		}
 	},
@@ -1118,7 +1120,7 @@
 		"layer": "solid",
 		"peering_bits": {
 			"R": ["slope_tr"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"B": ["solid"],
 			"T": ["solid"]
 		}
@@ -1158,7 +1160,7 @@
 		"layer": "solid",
 		"peering_bits": {
 			"B": ["slope_bl"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"L": ["solid"],
 			"R": ["solid"]
 		}
@@ -1200,9 +1202,9 @@
 		"layer": "solid",
 		"peering_bits": {
 			"T": ["slope_tl"],
-			"TR": ["solid", "slope_tr"],
+			"TR": ["solid", "slope_tr", "long_slope_tr", "tall_slope_tr"],
 			"R": ["solid"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"B": ["solid"],
 			"L": ["solid"]
 		}
@@ -1242,9 +1244,9 @@
 		"layer": "solid",
 		"peering_bits":{
 			"L": ["slope_tl"],
-			"BL": ["solid", "slope_bl"],
+			"BL": ["solid", "slope_bl", "long_slope_bl", "tall_slope_bl"],
 			"B": ["solid"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"],
 			"T": ["solid"]
 		}
@@ -1285,10 +1287,10 @@
 		"layer": "solid",
 		"peering_bits": {
 			"T": ["slope_tr"],
-			"TL": ["solid", "slope_tl"],
+			"TL": ["solid", "slope_tl", "long_slope_tl", "tall_slope_tl"],
 			"L": ["solid"],
 			"B": ["solid"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"]
 		}
 	},
@@ -1327,10 +1329,10 @@
 		"layer": "solid",
 		"peering_bits": {
 			"L": ["slope_bl"],
-			"TL": ["solid", "slope_tl"],
+			"TL": ["solid", "slope_tl", "long_slope_tl", "tall_slope_tl"],
 			"T": ["solid"],
 			"B": ["solid"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"]
 		}
 	},
@@ -1369,7 +1371,7 @@
 		"layer": "solid",
 		"peering_bits": {
 			"B": ["slope_bl"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"],
 			"T": ["solid"],
 			"L": ["solid"]
@@ -1410,7 +1412,7 @@
 		"layer": "solid",
 		"peering_bits": {
 			"R": ["slope_tr"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"B": ["solid"],
 			"L": ["solid"],
 			"T": ["solid"]
@@ -1454,7 +1456,7 @@
 		"layer": "solid",
 		"peering_bits": {
 			"R": ["slope_tr"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"B": ["solid"],
 			"L": ["solid"]
 		}
@@ -1496,7 +1498,7 @@
 		"layer": "solid",
 		"peering_bits": {
 			"B": ["slope_bl"],
-			"BR": ["solid", "slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"],
 			"T": ["solid"]
 		}
@@ -1521,5 +1523,240 @@
 			"from": "DROP_TL",
 			"op": "flip_xy"
 		}
-	}
+	},
+	
+	
+	
+	"LONG_SLOPE_LOW_TL": {
+		"block": "long_slope",
+		"coords": [0, 0],
+		"composite": ["LONG_SLOPE_LOW_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "flip_x",
+				"src": "LONG_SLOPE_LOW_TR"
+			},
+			"1": {
+				"op": "flip_y",
+				"src": "LONG_SLOPE_LOW_BL"
+			},
+			"2": {
+				"op": "flip_xy",
+				"src": "LONG_SLOPE_LOW_BR"
+			}
+		},
+		"layer": "long_slope_tl",
+		"peering_bits": {},
+		"physics_shape": {
+			"0": ["-0.5", "0.5"],
+			"1": ["0.5", "0"],
+			"2": ["0.5", "0.5"]
+		}
+	},
+	"LONG_SLOPE_LOW_TR": {
+		"coords": [3, 0], 
+		"inherit": {
+			"from": "LONG_SLOPE_LOW_TL",
+			"op": "flip_x"
+		},
+		"physics_shape": {
+			"0": ["0.5", "0.5"],
+			"1": ["-0.5", "0"],
+			"2": ["-0.5", "0.5"]
+		}
+	},
+	"LONG_SLOPE_LOW_BL": {
+		"coords": [0, 3], 
+		"inherit": {
+			"from": "LONG_SLOPE_LOW_TL",
+			"op": "flip_y"
+		},
+		"physics_shape": {
+			"0": ["-0.5", "-0.5"],
+			"1": ["0.5", "0"],
+			"2": ["0.5", "-0.5"]
+		}
+	},
+	"LONG_SLOPE_LOW_BR": {
+		"coords": [3, 3], 
+		"inherit": {
+			"from": "LONG_SLOPE_LOW_TL",
+			"op": "flip_xy"
+		},
+		"physics_shape": {
+			"0": ["0.5", "-0.5"],
+			"1": ["-0.5", "0"],
+			"2": ["-0.5", "-0.5"]
+		}
+	},
+	"LONG_SLOPE_HI_TL": {
+		"block": "long_slope",
+		"coords": [1, 0],
+		"composite": ["LONG_SLOPE_HI_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "flip_x",
+				"src": "LONG_SLOPE_HI_TR"
+			},
+			"1": {
+				"op": "flip_y",
+				"src": "LONG_SLOPE_HI_BL"
+			},
+			"2": {
+				"op": "flip_xy",
+				"src": "LONG_SLOPE_HI_BR"
+			}
+		},
+		"layer": "long_slope_tl",
+		"peering_bits": {
+			"L": ["long_slope_tl"]
+		},
+		"physics_shape": {
+			"0": ["-0.5", "0"],
+			"1": ["0.5", "-0.5"],
+			"2": ["0.5", "0.5"],
+			"3": ["-0.5", "0.5"]
+		}
+	},
+	"LONG_SLOPE_HI_TR": {
+		"coords": [2, 0], 
+		"inherit": {
+			"from": "LONG_SLOPE_HI_TL",
+			"op": "flip_x"
+		},
+		"physics_shape": {
+			"0": ["0.5", "0"],
+			"1": ["-0.5", "-0.5"],
+			"2": ["-0.5", "0.5"],
+			"3": ["0.5", "0.5"]
+		}
+	},
+	"LONG_SLOPE_HI_BL": {
+		"coords": [1, 3], 
+		"inherit": {
+			"from": "LONG_SLOPE_HI_TL",
+			"op": "flip_y"
+		},
+		"physics_shape": {
+			"0": ["-0.5", "0"],
+			"1": ["0.5", "0.5"],
+			"2": ["0.5", "-0.5"],
+			"3": ["-0.5", "-0.5"]
+		}
+	},
+	"LONG_SLOPE_HI_BR": {
+		"coords": [2, 3], 
+		"inherit": {
+			"from": "LONG_SLOPE_HI_TL",
+			"op": "flip_xy"
+		},
+		"physics_shape": {
+			"0": ["0.5", "0"],
+			"1": ["-0.5", "0.5"],
+			"2": ["-0.5", "-0.5"],
+			"3": ["0.5", "-0.5"]
+		}
+	},
+	
+	"LONG_LINK_TL": {
+		"block": "long_slope",
+		"coords": [0, 1],
+		"composite": ["LONG_LINK_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "flip_x",
+				"src": "LONG_LINK_TR"
+			},
+			"1": {
+				"op": "flip_y",
+				"src": "LONG_LINK_BL"
+			},
+			"2": {
+				"op": "flip_xy",
+				"src": "LONG_LINK_BR"
+			},
+			"3": {
+				"op": "merge_complex",
+				"bg": "CENTER",
+				"bg_corner": "TL",
+				"fg": "LONG_SLOPE_HI_TL",
+				"fg_corner": "BL"
+			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"L": ["long_slope_tl"],
+			"T": ["long_slope_tl"],
+			"BL": ["solid", "slope_bl", "long_slope_bl", "tall_slope_bl"],
+			"B": ["solid"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
+			"R": ["solid"],
+			"TR": ["solid", "long_slope_tl", "slope_tr", "long_slope_tr", "tall_slope_tr"]
+		}
+	},
+	"LONG_LINK_TR": {
+		"coords": [3, 1], 
+		"inherit": {
+			"from": "LONG_LINK_TL",
+			"op": "flip_x"
+		}
+	},
+	"LONG_LINK_BL": {
+		"coords": [0, 2], 
+		"inherit": {
+			"from": "LONG_LINK_TL",
+			"op": "flip_y"
+		}
+	},
+	"LONG_LINK_BR": {
+		"coords": [3, 2], 
+		"inherit": {
+			"from": "LONG_LINK_TL",
+			"op": "flip_xy"
+		}
+	},
+	"LONG_STAIRCASE_TL": {
+		"block": "long_slope",
+		"coords": [1, 5],
+		"composite": ["LONG_STAIRCASE_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "merge_quad",
+				"BL": "LONG_LINK_TL",
+				"BR": "CORNER_BR",
+				"TL": "LONG_LINK_TL",
+				"TR": "LONG_LINK_TL"
+			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"L": ["long_slope_tl"],
+			"T": ["long_slope_tl"],
+			"BL": ["solid", "slope_bl", "long_slope_bl", "tall_slope_bl"],
+			"B": ["solid"],
+			"R": ["solid"],
+			"TR": ["solid", "long_slope_tl", "slope_tr", "long_slope_tr", "tall_slope_tr"]
+		}
+	},
+	"LONG_STAIRCASE_TR": {
+		"coords": [2, 5], 
+		"inherit": {
+			"from": "LONG_STAIRCASE_TL",
+			"op": "flip_x"
+		}
+	},
+	"LONG_STAIRCASE_BL": {
+		"coords": [1, 6], 
+		"inherit": {
+			"from": "LONG_STAIRCASE_TL",
+			"op": "flip_y"
+		}
+	},
+	"LONG_STAIRCASE_BR": {
+		"coords": [2, 6], 
+		"inherit": {
+			"from": "LONG_STAIRCASE_TL",
+			"op": "flip_xy"
+		}
+	},
 }

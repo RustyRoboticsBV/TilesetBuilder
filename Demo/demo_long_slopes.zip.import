@@ -1,0 +1,14 @@
+[remap]
+
+importer="tile_atlas_builder"
+type="Texture2D"
+uid="uid://clymivrncfuc5"
+path="res://.godot/imported/demo_long_slopes.zip-660108739db0111990292cb18076de50.res"
+
+[deps]
+
+source_file="res://Addons/TilesetMaker/Demo/demo_long_slopes.zip"
+dest_files=["res://.godot/imported/demo_long_slopes.zip-660108739db0111990292cb18076de50.res"]
+
+[params]
+

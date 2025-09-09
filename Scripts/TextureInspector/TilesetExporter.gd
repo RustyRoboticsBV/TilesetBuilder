@@ -166,6 +166,14 @@ static func _get_layer_color(layer : String) -> Color:
 			return Color.YELLOW;
 		"slope_br":
 			return Color.CYAN;
+		"long_slope_tl":
+			return Color.MAGENTA;
+		"long_slope_tr":
+			return Color.ORANGE;
+		"long_slope_bl":
+			return Color.BLUE_VIOLET;
+		"long_slope_br":
+			return Color.CHARTREUSE;
 	return Color.BLACK;
 
 static func _get_layer_name(layer : String) -> String:
@@ -180,6 +188,14 @@ static func _get_layer_name(layer : String) -> String:
 			return "Slope (bottom-left)";
 		"slope_br":
 			return "Slope (bottom-right)";
+		"long_slope_tl":
+			return "Long Solid (top-left)";
+		"long_slope_tr":
+			return "Long Slope (top-right)";
+		"long_slope_bl":
+			return "Long Slope (bottom-left)";
+		"long_slope_br":
+			return "Long Slope (bottom-right)";
 	return "???";
 
 static func _get_peering_bit_side(side : String) -> TileSet.CellNeighbor:

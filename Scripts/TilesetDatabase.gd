@@ -37,6 +37,7 @@ func load_from_json(file_path : String) -> void:
 				copy["physics_shape"] = physics_shape;
 			json[key] = copy;
 	_dict = json;
+	print(json);
 
 
 
@@ -79,6 +80,10 @@ func _apply_string(text : String, operator : String) -> String:
 
 func _apply_flip_x(text : String) -> String:
 	var mapping : Dictionary[String, String] = {
+		"_LO": "_LO",
+		"_HI": "_HI",
+		"_LI": "_LI",
+		
 		'"TL"': '"TR"',
 		'"TR"': '"TL"',
 		'"BL"': '"BR"',
@@ -109,6 +114,10 @@ func _apply_flip_x(text : String) -> String:
 
 func _apply_flip_y(text : String) -> String:
 	var mapping : Dictionary[String, String] = {
+		"_LO": "_LO",
+		"_HI": "_HI",
+		"_LI": "_LI",
+		
 		'"TL"': '"BL"',
 		'"T"': '"B"',
 		'"TR"': '"BR"',
@@ -139,6 +148,10 @@ func _apply_flip_y(text : String) -> String:
 
 func _apply_rotate_clock(text : String) -> String:
 	var mapping : Dictionary[String, String] = {
+		"_LO": "_LO",
+		"_HI": "_HI",
+		"_LI": "_LI",
+		
 		'"TL"': '"TR"',
 		'"TR"': '"BR"',
 		'"BL"': '"TL"',
@@ -175,6 +188,10 @@ func _apply_rotate_clock(text : String) -> String:
 
 func _apply_rotate_counter(text : String) -> String:
 	var mapping : Dictionary[String, String] = {
+		"_LO": "_LO",
+		"_HI": "_HI",
+		"_LI": "_LI",
+		
 		'"TL"': '"BL"',
 		'"TR"': '"TL"',
 		'"BR"': '"TR"',

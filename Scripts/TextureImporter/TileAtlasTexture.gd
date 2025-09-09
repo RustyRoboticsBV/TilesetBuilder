@@ -84,6 +84,9 @@ func _allocate_block(name : String, tile_w : int, tile_h : int) -> void:
 		"slope":
 			blocks["slope"] = Image.create(12 * tile_w, 8 * tile_h, false, Image.FORMAT_RGBA8);
 			block_coords["slope"] = Vector2i(0, 4);
+		"long_slope":
+			blocks["long_slope"] = Image.create(12 * tile_w, 8 * tile_h, false, Image.FORMAT_RGBA8);
+			block_coords["long_slope"] = Vector2i(0, 4);
 		_:
 			push_error("Illegal block name: " + name);
 
