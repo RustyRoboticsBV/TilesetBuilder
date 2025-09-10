@@ -5,7 +5,7 @@ A ZIP tileset texture importer & tile generator plugin for the Godot game engine
 - Augment the tileset texture with an 88-tile slope tileset.
 - Generate tileset resources with painted terrain and physics shapes. Supports the [better terrain](https://github.com/Portponky/better-terrain) plugin.
 
-Each image in the ZIP corresponds to one tile. In order to be recognized, their filenames must conform to specific values (see the images below). Each tile can be provided as either a fully-finished image, or as a part image that will be used to build the tile at import time.
+Each image in the ZIP corresponds to one tile. In order to be recognized, their filenames must conform to specific values (see the images below). Each tile can be provided as either a fully-finished image, or as a part + mask image pair that will be used to build the tile at import time.
 
 ## Install Guide
 1. Download the latest release from the 'Releases' page.
@@ -19,6 +19,8 @@ After installing, create a ZIP file and fill it with image files, using the file
 The tile texture inspector contains two buttons:
 - Export to file: saves the generated texture to a PNG file, so you can inspect or share it.
 - Create tileset: creates a tileset resource from your texture, with default terrain and physics shapes already set up.
+
+The `Demo` folder contains several example ZIP tilesets that you can take a look at.
 
 ### Standard Tiles
 This image shows you which tile each filename maps to:
@@ -37,7 +39,7 @@ The slope tile filenames are as follows:
 ![The slope tiles and their identifiers.](SlopeReference.png)
 
 ### Long Slope Tiles
-Long slopes (or 2-by-1 slopes) use similar names to the slope tiles. These mostly work the same as regular 1-by-1 slopes with a few differences:
+Long slopes (or 2-by-1 slopes) use similar names as the regular slope tiles, with a few differences:
 - All filenames must be prefixed with `LONG_`. So you use `LONG_LINK_TL` instead of `LINK_TL`.
 - The main slopes are each divided into two tiles: `LONG_SLOPE_LOW_x` and `LONG_SLOPE_HI_x`, representing the bottom half and the top half respectively.
 
@@ -51,7 +53,7 @@ Tiles can be loaded from a ZIP archive in four ways, in the following order:
 3. If its parts can be derived from other parts: construct it from derived parts.
 4. If possible, derive it from other loaded tiles in the tileset.
 
-This allows you to make your archive as complex as it needs to be. Please view the `Demo` folder for various tileset examples.
+This allows you to make your archive as complex as it needs to be.
 
 ### Parts
 Often, you don't want a tile to be directly loaded from a single image, but instead use a foreground and background image. If you prefix your tile image with `PART_`, the importer will treat as a foreground image, which will get overlayed on top of a background image (which is always the `CENTER` tile). You can control the compositing process on a per-pixel basis using a `MASK_` image.
@@ -60,7 +62,7 @@ For example:
 
 ![The slope tiles and their identifiers.](Compositing.png)
 
-Here, the `EDGE_T` tile is created by overlaying the `PART_EDGE_T` image over the `PART_CENTER` image. The `MASK_EDGE_T` controls how blending is done: white pixels replace the background pixels, while black pixels are alpha-blended with the background pixels.
+Here, the `EDGE_T` tile is created by overlaying the `PART_EDGE_T` image over the `PART_CENTER` image. The `MASK_EDGE_T` controls how blending is done: white pixels replace the background pixels, and black pixels are alpha-blended with the background pixels.
 
 Your tileset archives can have both prefab tiles and part images. If a tile has both a prefab image and part images available, then the prefab is always used (but the parts may still be used to generate other tiles).
 
