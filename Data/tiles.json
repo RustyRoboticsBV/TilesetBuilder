@@ -2958,8 +2958,8 @@
 		},
 		"layer": "solid",
 		"peering_bits": {
-			"R": ["tall_slope_tl"],
-			"BR": ["solid", "tall_slope_tl", "slope_br", "long_slope_br", "tall_slope_br"],
+			"R": ["tall_slope_tr"],
+			"BR": ["tall_slope_tr", "solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"B": ["solid"]
 		}
 	},
@@ -3598,15 +3598,15 @@
 			"0": {
 				"op": "merge_quad",
 				"BL": "CORNER_BL",
-				"BR": "PEAK_TR",
-				"TL": "PEAK_TR",
-				"TR": "PEAK_TR"
+				"BR": "TALL_PEAK_TR",
+				"TL": "TALL_PEAK_TR",
+				"TR": "TALL_PEAK_TR"
 			}
 		},
 		"layer": "solid",
 		"peering_bits": {
 			"R": ["tall_slope_tr"],
-			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
+			"BR": ["tall_slope_tr", "solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"B": ["solid"],
 			"L": ["solid"]
 		}

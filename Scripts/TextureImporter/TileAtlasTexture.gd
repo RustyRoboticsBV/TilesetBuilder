@@ -28,11 +28,12 @@ func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database 
 		var image : Image = compositor.tiles[id].duplicate();
 		_fix_alpha_border(image);
 		
-		var tile : Dictionary = database.get_tile(id);
-		var x : int = tile["coords"][0];
-		var y : int = tile["coords"][1];
+		# Retrieve information about tile from database.
+		var tile_info : Dictionary = database.get_tile(id);
+		var x : int = tile_info["coords"][0];
+		var y : int = tile_info["coords"][1];
 		
-		var block : String = tile["block"];
+		var block : String = tile_info["block"];
 		_allocate_block(block, tile_w, tile_h);
 		
 		print("Placing " + id + " at (" + str(x) + ", " + str(y) + ") on block " + block);
@@ -81,23 +82,32 @@ func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database 
 
 
 
+## Create a block texture and store it. Does nothing if the block had already been allocated.
 func _allocate_block(name : String, tile_w : int, tile_h : int) -> void:
+	# Do nothing if the block has already been allocated.
 	if blocks.has(name):
 		return;
 	
+	# Get block size.
+	var block_size = _get_block_size(name);
+	var width : int = block_size.x * tile_w;
+	var height : int = block_size.y * tile_h;
+	
+	# Allocate block image.
 	print("Allocating block: " + name);
 	match name:
 		"main":
-			blocks["main"] = Image.create(12 * tile_w, 4 * tile_h, false, Image.FORMAT_RGBA8);
+			blocks["main"] = Image.create(width, height, false, Image.FORMAT_RGBA8);
 		"slope":
-			blocks["slope"] = Image.create(12 * tile_w, 8 * tile_h, false, Image.FORMAT_RGBA8);
+			blocks["slope"] = Image.create(width, height, false, Image.FORMAT_RGBA8);
 		"long_slope":
-			blocks["long_slope"] = Image.create(12 * tile_w, 8 * tile_h, false, Image.FORMAT_RGBA8);
+			blocks["long_slope"] = Image.create(width, height, false, Image.FORMAT_RGBA8);
 		"tall_slope":
-			blocks["tall_slope"] = Image.create(12 * tile_w, 8 * tile_h, false, Image.FORMAT_RGBA8);
+			blocks["tall_slope"] = Image.create(width, height, false, Image.FORMAT_RGBA8);
 		_:
 			push_error("Illegal block name: " + name);
 
+## Get the size of one of the hard-coded tile blocks.
 static func _get_block_size(name : String) -> Vector2i:
 	match name:
 		"main":
@@ -112,6 +122,10 @@ static func _get_block_size(name : String) -> Vector2i:
 			push_error("Illegal block name: " + name);
 	return Vector2i(0, 0);
 
+## Return a copy of an image with corrected transparent pixels.
+##
+## Transparent pixels have color in their RGB channels, which can lead to weird edges when these images are scaled.
+## This function fixes that by filling the RGB channels of transparent pixels with the nearest non-transparent pixel's color, while preserving alpha.
 func _fix_alpha_border(image : Image) -> void:
 	for x in image.get_width():
 		for y in image.get_height():
@@ -121,6 +135,7 @@ func _fix_alpha_border(image : Image) -> void:
 				opaque.a = 0;
 				image.set_pixel(x, y, opaque);
 
+## Return the nearest opaque pixel on an image relative to some pixel coordinate.
 func _get_nearest_opaque_pixel(image: Image, x: int, y: int) -> Color:
 	# Get dimensions.
 	var width : int = image.get_width();
