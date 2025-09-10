@@ -3479,7 +3479,7 @@
 		"layer": "solid",
 		"peering_bits": {
 			"L": ["tall_slope_bl"],
-			"TL": ["solid", "slope_tl", "long_slope_tl", "tall_slope_tl"],
+			"TL": ["tall_slope_bl", "solid", "slope_tl", "long_slope_tl", "tall_slope_tl"],
 			"T": ["solid"],
 			"B": ["solid"],
 			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
@@ -3562,7 +3562,7 @@
 		"layer": "solid",
 		"peering_bits": {
 			"R": ["tall_slope_tr"],
-			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
+			"BR": ["tall_slope_tr", "solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"B": ["solid"],
 			"L": ["solid"],
 			"T": ["solid"]
