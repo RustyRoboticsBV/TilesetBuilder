@@ -2604,4 +2604,239 @@
 			"op": "flip_xy"
 		}
 	},
+	
+	
+	
+	"TALL_SLOPE_HI_TL": {
+		"block": "tall_slope",
+		"coords": [0, 0],
+		"composite": ["TALL_SLOPE_HI_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "flip_x",
+				"src": "TALL_SLOPE_HI_TR"
+			},
+			"1": {
+				"op": "flip_y",
+				"src": "TALL_SLOPE_HI_BL"
+			},
+			"2": {
+				"op": "flip_xy",
+				"src": "TALL_SLOPE_HI_BR"
+			}
+		},
+		"layer": "tall_slope_tl",
+		"peering_bits": { },
+		"physics_shape": {
+			"0": ["0", "0.5"],
+			"1": ["0.5", "-0.5"],
+			"2": ["0.5", "0.5"]
+		}
+	},
+	"TALL_SLOPE_HI_TR": {
+		"coords": [3, 0],
+		"inherit": {
+			"from": "TALL_SLOPE_HI_TL",
+			"op": "flip_x"
+		},
+		"physics_shape": {
+			"0": ["0", "0.5"],
+			"1": ["-0.5", "-0.5"],
+			"2": ["-0.5", "0.5"]
+		}
+	},
+	"TALL_SLOPE_HI_BL": {
+		"coords": [0, 3],
+		"inherit": {
+			"from": "TALL_SLOPE_HI_TL",
+			"op": "flip_y"
+		},
+		"physics_shape": {
+			"0": ["0", "-0.5"],
+			"1": ["0.5", "0.5"],
+			"2": ["0.5", "-0.5"]
+		}
+	},
+	"TALL_SLOPE_HI_BR": {
+		"coords": [3, 3],
+		"inherit": {
+			"from": "TALL_SLOPE_HI_TL",
+			"op": "flip_xy"
+		},
+		"physics_shape": {
+			"0": ["0", "-0.5"],
+			"1": ["-0.5", "0.5"],
+			"2": ["-0.5", "-0.5"]
+		}
+	},
+	"TALL_SLOPE_LOW_TL": {
+		"block": "tall_slope",
+		"coords": [0, 1],
+		"composite": ["TALL_SLOPE_LOW_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "flip_x",
+				"src": "TALL_SLOPE_LOW_TR"
+			},
+			"1": {
+				"op": "flip_y",
+				"src": "TALL_SLOPE_LOW_BL"
+			},
+			"2": {
+				"op": "flip_xy",
+				"src": "TALL_SLOPE_LOW_BR"
+			}
+		},
+		"layer": "tall_slope_tl",
+		"peering_bits": {
+			"T": ["tall_slope_tl"]
+		},
+		"physics_shape": {
+			"0": ["-0.5", "0.5"],
+			"1": ["0", "-0.5"],
+			"2": ["0.5", "-0.5"],
+			"3": ["0.5", "0.5"]
+		}
+	},
+	"TALL_SLOPE_LOW_TR": {
+		"coords": [3, 1],
+		"inherit": {
+			"from": "TALL_SLOPE_LOW_TL",
+			"op": "flip_x"
+		},
+		"physics_shape": {
+			"0": ["0.5", "0.5"],
+			"1": ["0", "-0.5"],
+			"2": ["-0.5", "-0.5"],
+			"3": ["-0.5", "0.5"]
+		}
+	},
+	"TALL_SLOPE_LOW_BL": {
+		"coords": [0, 2], 
+		"inherit": {
+			"from": "TALL_SLOPE_LOW_TL",
+			"op": "flip_y"
+		},
+		"physics_shape": {
+			"0": ["-0.5", "-0.5"],
+			"1": ["0", "0.5"],
+			"2": ["0.5", "0.5"],
+			"3": ["0.5", "-0.5"]
+		}
+	},
+	"TALL_SLOPE_LOW_BR": {
+		"coords": [3, 2], 
+		"inherit": {
+			"from": "TALL_SLOPE_LOW_TL",
+			"op": "flip_xy"
+		},
+		"physics_shape": {
+			"0": ["0.5", "-0.5"],
+			"1": ["0", "0.5"],
+			"2": ["-0.5", "0.5"],
+			"3": ["-0.5", "-0.5"]
+		}
+	},
+	
+	"TALL_LINK_TL": {
+		"block": "tall_slope",
+		"coords": [1, 0],
+		"composite": ["TALL_LINK_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "flip_x",
+				"src": "TALL_LINK_TR"
+			},
+			"1": {
+				"op": "flip_y",
+				"src": "TALL_LINK_BL"
+			},
+			"2": {
+				"op": "flip_xy",
+				"src": "TALL_LINK_BR"
+			},
+			"3": {
+				"op": "merge_side",
+				"bg": "CENTER",
+				"bg_side": "L",
+				"fg": "TALL_SLOPE_LOW_TL",
+				"fg_side": "R"
+			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"L": ["tall_slope_tl"],
+			"T": ["tall_slope_tl"],
+			"BL": ["solid", "tall_slope_tl", "slope_bl", "long_slope_bl", "tall_slope_bl"],
+			"B": ["solid"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
+			"R": ["solid"],
+			"TR": ["solid", "long_slope_tl", "slope_tr", "long_slope_tr", "tall_slope_tr"]
+		}
+	},
+	"TALL_LINK_TR": {
+		"coords": [2, 0], 
+		"inherit": {
+			"from": "TALL_LINK_TL",
+			"op": "flip_x"
+		}
+	},
+	"TALL_LINK_BL": {
+		"coords": [1, 3], 
+		"inherit": {
+			"from": "TALL_LINK_TL",
+			"op": "flip_y"
+		}
+	},
+	"TALL_LINK_BR": {
+		"coords": [2, 3], 
+		"inherit": {
+			"from": "TALL_LINK_TL",
+			"op": "flip_xy"
+		}
+	},
+	"TALL_STAIRCASE_TL": {
+		"block": "tall_slope",
+		"coords": [1, 5],
+		"composite": ["TALL_STAIRCASE_TL", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "merge_quad",
+				"BL": "TALL_LINK_TL",
+				"BR": "CORNER_BR",
+				"TL": "TALL_LINK_TL",
+				"TR": "TALL_LINK_TL"
+			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"L": ["tall_slope_tl"],
+			"T": ["tall_slope_tl"],
+			"BL": ["solid", "tall_slope_tl", "slope_bl", "long_slope_bl", "tall_slope_bl"],
+			"B": ["solid"],
+			"R": ["solid"],
+			"TR": ["solid", "tall_slope_tl", "slope_tr", "long_slope_tr", "tall_slope_tr"]
+		}
+	},
+	"TALL_STAIRCASE_TR": {
+		"coords": [2, 5], 
+		"inherit": {
+			"from": "TALL_STAIRCASE_TL",
+			"op": "flip_x"
+		}
+	},
+	"TALL_STAIRCASE_BL": {
+		"coords": [1, 6], 
+		"inherit": {
+			"from": "TALL_STAIRCASE_TL",
+			"op": "flip_y"
+		}
+	},
+	"TALL_STAIRCASE_BR": {
+		"coords": [2, 6], 
+		"inherit": {
+			"from": "TALL_STAIRCASE_TL",
+			"op": "flip_xy"
+		}
+	},
 }

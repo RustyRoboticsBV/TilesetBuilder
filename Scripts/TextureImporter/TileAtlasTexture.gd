@@ -12,6 +12,7 @@ var blocks : Dictionary[String, Image] = {};
 @export var tile_size : Vector2i;
 @export var tile_coords : Dictionary[String, Vector2i] = {};
 @export var block_coords : Dictionary[String, Vector2i] = {};
+@export var margin : int;
 
 func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database : TileDatabase, use_mipmaps : bool) -> void:
 	self.compositor = compositor;
@@ -20,6 +21,7 @@ func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database 
 	tile_size = Vector2i(source.tile_w, source.tile_h);
 	var tile_w = tile_size.x;
 	var tile_h = tile_size.y;
+	margin = source.margin;
 	
 	# Place tiles.
 	for id in compositor.tiles.keys():
@@ -91,6 +93,8 @@ func _allocate_block(name : String, tile_w : int, tile_h : int) -> void:
 			blocks["slope"] = Image.create(12 * tile_w, 8 * tile_h, false, Image.FORMAT_RGBA8);
 		"long_slope":
 			blocks["long_slope"] = Image.create(12 * tile_w, 8 * tile_h, false, Image.FORMAT_RGBA8);
+		"tall_slope":
+			blocks["tall_slope"] = Image.create(12 * tile_w, 8 * tile_h, false, Image.FORMAT_RGBA8);
 		_:
 			push_error("Illegal block name: " + name);
 
@@ -101,6 +105,8 @@ static func _get_block_size(name : String) -> Vector2i:
 		"slope":
 			return Vector2i(12, 8);
 		"long_slope":
+			return Vector2i(12, 8);
+		"tall_slope":
 			return Vector2i(12, 8);
 		_:
 			push_error("Illegal block name: " + name);

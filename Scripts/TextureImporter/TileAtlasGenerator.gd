@@ -340,5 +340,5 @@ func _cut_part(image : Image, corner : String) -> Image:
 			rect.size.y *= 2;
 		"R":
 			rect.size.y *= 2;
-			rect.position.y = half_width;
+			rect.position.x = half_width;
 	return image.get_region(rect);
