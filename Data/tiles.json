@@ -35,10 +35,6 @@
 			"1": {
 				"op": "rotate_clock",
 				"src": "EDGE_L"
-			},
-			"2": {
-				"op": "rotate_counter",
-				"src": "EDGE_R"
 			}
 		},
 		"layer": "solid",
@@ -51,17 +47,33 @@
 		}
 	},
 	"EDGE_L": {
+		"block": "main",
 		"coords": [8, 1],
-		"inherit": {
-			"op": "rotate_counter",
-			"from": "EDGE_T"
+		"composite": ["EDGE_T", "CENTER"],
+		"derive": {
+			"0": {
+				"op": "flip_x",
+				"src": "EDGE_R"
+			},
+			"1": {
+				"op": "rotate_counter",
+				"src": "EDGE_T"
+			}
+		},
+		"layer": "solid",
+		"peering_bits": {
+			"T": ["solid"],
+			"TR": ["solid", "slope_tr", "long_slope_tr", "tall_slope_tr"],
+			"R": ["solid", "tall_slope_tr", "tall_slope_br"],
+			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
+			"B": ["solid"]
 		}
 	},
 	"EDGE_R": {
 		"coords": [11, 2],
 		"inherit": {
-			"op": "rotate_clock",
-			"from": "EDGE_T"
+			"op": "flip_x",
+			"from": "EDGE_L"
 		}
 	},
 	"EDGE_B": {

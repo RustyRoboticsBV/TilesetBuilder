@@ -55,7 +55,7 @@ texture_region_size = Vector2i(64, 64)
 8:1/0/terrains_peering_bit/top_side = 0
 8:1/0/terrains_peering_bit/top_right_corner = 0
 8:1/0/metadata/_better_terrain = {
-0: [0, 8, 6],
+0: [0, 10, 12],
 3: [0, 4, 8, 12],
 4: [0],
 12: [0],
@@ -74,7 +74,7 @@ texture_region_size = Vector2i(64, 64)
 11:2/0/metadata/_better_terrain = {
 4: [0],
 7: [0, 3, 7, 11],
-8: [0, 5, 7],
+8: [0, 9, 11],
 11: [0, 1, 5, 9],
 12: [0],
 &"type": 0
