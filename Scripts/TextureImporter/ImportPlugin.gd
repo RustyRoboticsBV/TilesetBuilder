@@ -52,7 +52,7 @@ func _import(source_file: String, save_path: String, _options: Dictionary, _plat
 	print();
 	print("Loading atlas source...");
 	var source = TileAtlasSource.new();
-	source.load_from_zip(source_file, db);
+	source.load_from_zip(source_file, db, 0);
 	
 	print();
 	print("Generating missing parts...");

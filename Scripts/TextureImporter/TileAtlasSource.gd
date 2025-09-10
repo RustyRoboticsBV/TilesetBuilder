@@ -1,15 +1,18 @@
 extends Resource
 class_name TileAtlasSource;
 
+@warning_ignore_start("shadowed_variable")
+
 @export var parts : Dictionary[String, Image];
 @export var part_masks : Dictionary[String, Image];
 @export var prefabs : Dictionary[String, Image];
 @export var user_tiles : Dictionary[String, Image];
 @export var tile_w : int;
 @export var tile_h : int;
+@export var margin : int;
 
 ## Load images from a ZIP file.
-func load_from_zip(file_path : String, database : TileDatabase) -> void:
+func load_from_zip(file_path : String, database : TileDatabase, margin : int) -> void:
 	# Load images from ZIP.
 	var images : Dictionary[String, Image] = _load_images_from_zip(file_path);
 	
@@ -29,6 +32,14 @@ func load_from_zip(file_path : String, database : TileDatabase) -> void:
 			resized.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO); 
 			images[key] = resized;
 			print("Resized " + key);
+	
+	# Add margins.
+	if margin > 0:
+		for key : String in images:
+			images[key] = _add_margins(images[key], margin);
+		tile_w += margin * 2;
+		tile_h += margin * 2;
+		self.margin = margin;
 	
 	# Categorize images.
 	_categorize(images, database);
@@ -53,7 +64,7 @@ func _load_images_from_zip(path: String) -> Dictionary[String, Image]:
 		var lowercase : String = file_name.to_lower();
 		
 		# Load file into buffer.
-		var bytes = zip.read_file(file_name);
+		var bytes : PackedByteArray = zip.read_file(file_name);
 		
 		# Read image from buffer.
 		var image : Image = Image.new();
@@ -95,6 +106,48 @@ func _load_images_from_zip(path: String) -> Dictionary[String, Image]:
 	
 	print("Images in ZIP: " + str(images.keys()));
 	return images;
+
+## Return a copy of an image that has margins added to it.
+func _add_margins(source_image: Image, margin: int) -> Image:
+
+	var src_width = source_image.get_width();
+	var src_height = source_image.get_height();
+
+	var new_width = src_width + margin * 2;
+	var new_height = src_height + margin * 2;
+
+	# Create a new image and fill it with transparent pixels first.
+	var new_image = Image.create(new_width, new_height, false, source_image.get_format());
+	
+	# Copy the original image into the center.
+	for y in src_height:
+		for x in src_width:
+			var color = source_image.get_pixel(x, y);
+			new_image.set_pixel(x + margin, y + margin, color);
+	
+	# Fill top and bottom margins.
+	for x in src_width:
+		var left_x = x + margin;
+		var top_color = source_image.get_pixel(x, 0);
+		var bottom_color = source_image.get_pixel(x, src_height - 1);
+		
+		for y in range(margin):
+			new_image.set_pixel(left_x, y, top_color);
+		for y in range(margin):
+			new_image.set_pixel(left_x, new_height - 1 - y, bottom_color);
+	
+	# Fill left and right margins.
+	for y in new_height:
+		var src_y = clamp(y - margin, 0, src_height - 1);
+		var left_color = source_image.get_pixel(0, src_y);
+		var right_color = source_image.get_pixel(src_width - 1, src_y);
+		
+		for x in range(margin):
+			new_image.set_pixel(x, y, left_color);
+		for x in range(margin):
+			new_image.set_pixel(new_width - 1 - x, y, right_color);
+	
+	return new_image;
 
 ## Categorize the images in a dictionary and store them.
 func _categorize(images : Dictionary[String, Image], database : TileDatabase) -> void:
