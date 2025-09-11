@@ -46,6 +46,13 @@ Long slopes (or 2-by-1 slopes) use similar names as the regular slope tiles, wit
 
 Tall slopes (or 2-by-1 slopes) work the same, but you use the prefix `TALL_` instead.
 
+### Inter-Slope Link Tiles
+When two or more types of slopes are included in the tileset, an extra block for is generated for connections between slopes of different types.
+
+Their filenames are as follows:
+
+![The inter-slope link tiles and their identifiers.](LinkMixReference.png)
+
 ### User-Defined Tiles
 You can add custom tiles by adding images with filenames that are not in the image above. These tiles are placed below the standard tileset area. When you generate a tileset resource, user-defined tiles will not get their terrain or physics shape painted.
 
@@ -70,7 +77,6 @@ Here, the `EDGE_T` tile is created by overlaying the `PART_EDGE_T` image over th
 Your tileset archives can have both prefab tiles and part images. If a tile has both a prefab image and part images available, then the prefab is always used (but the parts may still be used to generate other tiles).
 
 ## Planned Features
-- Adding transition / link tiles between slopes, long slopes and tall slopes.
 - Adding support for tile variants.
 - Making the generation process configurable in the import window: currently the process is completely fixed and untransparent, limiting its usefulness.
 
