@@ -87,6 +87,7 @@ func _apply_flip_x(text : String) -> String:
 		"_BA": "_BA",
 		"_BRI": "_BRI",
 		"_TU": "_TU",
+		"_RI": "_RI",
 		
 		'"TL"': '"TR"',
 		'"TR"': '"TL"',
@@ -125,6 +126,7 @@ func _apply_flip_y(text : String) -> String:
 		"_BA": "_BA",
 		"_BRI": "_BRI",
 		"_TU": "_TU",
+		"_RI": "_RI",
 		
 		'"TL"': '"BL"',
 		'"T"': '"B"',
@@ -163,6 +165,7 @@ func _apply_rotate_clock(text : String) -> String:
 		"_BA": "_BA",
 		"_BRI": "_BRI",
 		"_TU": "_TU",
+		"_RI": "_RI",
 		
 		'"TL"': '"TR"',
 		'"TR"': '"BR"',
@@ -207,6 +210,7 @@ func _apply_rotate_counter(text : String) -> String:
 		"_BA": "_BA",
 		"_BRI": "_BRI",
 		"_TU": "_TU",
+		"_RI": "_RI",
 		
 		'"TL"': '"BL"',
 		'"TR"': '"TL"',

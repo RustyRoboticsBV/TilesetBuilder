@@ -104,6 +104,8 @@ func _allocate_block(name : String, tile_w : int, tile_h : int) -> void:
 			blocks["long_slope"] = Image.create(width, height, false, Image.FORMAT_RGBA8);
 		"tall_slope":
 			blocks["tall_slope"] = Image.create(width, height, false, Image.FORMAT_RGBA8);
+		"slope_mix":
+			blocks["slope_mix"] = Image.create(width, height, false, Image.FORMAT_RGBA8);
 		_:
 			push_error("Illegal block name: " + name);
 
@@ -118,6 +120,8 @@ static func _get_block_size(name : String) -> Vector2i:
 			return Vector2i(12, 8);
 		"tall_slope":
 			return Vector2i(12, 8);
+		"slope_mix":
+			return Vector2i(12, 4);
 		_:
 			push_error("Illegal block name: " + name);
 	return Vector2i(0, 0);
