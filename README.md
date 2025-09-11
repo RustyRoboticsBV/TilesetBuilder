@@ -2,7 +2,8 @@
 A ZIP tileset texture importer & tile generator plugin for the Godot game engine (version 4.4). It can:
 - Create standard 47-tile "blob" tileset textures from a ZIP file (containing tile images).
 - Generate missing tiles by flipping, rotating or merging other tiles.
-- Augment the tileset texture with an 88-tile slope tileset.
+- Augment the tileset texture with an 88-tile slope block. Long and tall slopes are also supported.
+- Export generated textures as PNG files.
 - Generate tileset resources with painted terrain and physics shapes. Supports the [better terrain](https://github.com/Portponky/better-terrain) plugin.
 
 Each image in the ZIP corresponds to one tile. In order to be recognized, their filenames must conform to specific values (see the images below). Each tile can be provided as either a fully-finished image, or as a part + mask image pair that will be used to build the tile at import time.
@@ -38,10 +39,12 @@ The slope tile filenames are as follows:
 
 ![The slope tiles and their identifiers.](SlopeReference.png)
 
-### Long Slope Tiles
+### Long & Tall Slope Tiles
 Long slopes (or 2-by-1 slopes) use similar names as the regular slope tiles, with a few differences:
 - All filenames must be prefixed with `LONG_`. So you use `LONG_LINK_TL` instead of `LINK_TL`.
 - The main slopes are each divided into two tiles: `LONG_SLOPE_LOW_x` and `LONG_SLOPE_HI_x`, representing the bottom half and the top half respectively.
+
+Tall slopes (or 2-by-1 slopes) work the same, but you use the prefix `TALL_` instead.
 
 ### User-Defined Tiles
 You can add custom tiles by adding images with filenames that are not in the image above. These tiles are placed below the standard tileset area. When you generate a tileset resource, user-defined tiles will not get their terrain or physics shape painted.
@@ -67,7 +70,7 @@ Here, the `EDGE_T` tile is created by overlaying the `PART_EDGE_T` image over th
 Your tileset archives can have both prefab tiles and part images. If a tile has both a prefab image and part images available, then the prefab is always used (but the parts may still be used to generate other tiles).
 
 ## Planned Features
-- 1-by-2 (tall) slopes.
+- Adding transition / link tiles between slopes, long slopes and tall slopes.
 - Adding support for tile variants.
 - Making the generation process configurable in the import window: currently the process is completely fixed and untransparent, limiting its usefulness.
 
