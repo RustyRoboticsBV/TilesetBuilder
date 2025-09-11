@@ -2,9 +2,11 @@
 A ZIP tileset texture importer & tile generator plugin for the Godot game engine (version 4.4). It can:
 - Create standard 47-tile "blob" tileset textures from a ZIP file (containing tile images).
 - Generate missing tiles by flipping, rotating or merging other tiles.
-- Augment the tileset texture with an 88-tile slope block. Long and tall slopes are also supported.
+- Augment the tileset texture with an 88-tile slope block.
+  - Long and tall slopes are also supported, as well as connections between different slope types.
 - Export generated textures as PNG files.
-- Generate tileset resources with painted terrain and physics shapes. Supports the [better terrain](https://github.com/Portponky/better-terrain) plugin.
+- Generate tileset resources with painted terrain and physics shapes.
+  - Supports the [better terrain](https://github.com/Portponky/better-terrain) plugin.
 
 Each image in the ZIP corresponds to one tile. In order to be recognized, their filenames must conform to specific values (see the images below). Each tile can be provided as either a fully-finished image, or as a part + mask image pair that will be used to build the tile at import time.
 
@@ -76,9 +78,9 @@ Here, the `EDGE_T` tile is created by overlaying the `PART_EDGE_T` image over th
 
 Your tileset archives can have both prefab tiles and part images. If a tile has both a prefab image and part images available, then the prefab is always used (but the parts may still be used to generate other tiles).
 
-## Planned Features
+## Planned Featuress
 - Adding support for tile variants.
 - Making the generation process configurable in the import window: currently the process is completely fixed and untransparent, limiting its usefulness.
 
 ## Known Issues
-When you create a tileset resource, delete it, and then create a different tileset with the same filename, the tileset window will still display the old tileset. Reloading the project fixes this.
+When you create a tileset resource, delete it, and then create a different tileset with the same filename, the old tileset will still be used by the engine. Reloading the project fixes this.
