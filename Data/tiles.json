@@ -1835,7 +1835,7 @@
 			"BL": ["solid", "slope_bl", "long_slope_bl", "tall_slope_bl"],
 			"B": ["solid"],
 			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
-			"R": ["solid"],
+			"R": ["solid", "tall_slope_tr", "tall_slope_br"],
 			"TR": ["solid", "slope_tr", "long_slope_tr", "tall_slope_tr"],
 			"T": ["solid"]
 		}
@@ -1928,7 +1928,7 @@
 			"T": ["long_slope_tl"],
 			"L": ["solid"],
 			"BL": ["solid", "slope_bl", "long_slope_bl", "tall_slope_bl"],
-			"B": ["solid"],
+			"B": ["solid", "long_slope_bl", "long_slope_br"],
 			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"],
 			"TR": ["solid", "long_slope_tl", "slope_tr", "long_slope_tr", "tall_slope_tr"]
@@ -2895,10 +2895,10 @@
 		"layer": "solid",
 		"peering_bits": {
 			"L": ["tall_slope_tl"],
-			"BL": ["solid", "tall_slope_tl", "slope_bl", "long_slope_bl", "tall_slope_bl"],
+			"BL": ["tall_slope_tl","solid",  "slope_bl", "long_slope_bl", "tall_slope_bl"],
 			"B": ["solid"],
 			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
-			"R": ["solid"],
+			"R": ["solid", "tall_slope_tr", "tall_slope_br"],
 			"TR": ["solid", "slope_tr", "long_slope_tr", "tall_slope_tr"],
 			"T": ["solid"]
 		}
@@ -2991,7 +2991,7 @@
 			"T": ["tall_slope_tl"],
 			"L": ["solid"],
 			"BL": ["solid", "slope_bl", "long_slope_bl", "tall_slope_bl"],
-			"B": ["solid"],
+			"B": ["solid", "long_slope_bl", "long_slope_br"],
 			"BR": ["solid", "slope_br", "long_slope_br", "tall_slope_br"],
 			"R": ["solid"],
 			"TR": ["solid", "slope_tr", "long_slope_tr", "tall_slope_tr"]
