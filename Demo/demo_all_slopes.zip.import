@@ -12,3 +12,5 @@ dest_files=["res://.godot/imported/demo_all_slopes.zip-527aedc2efe0d37636b986f05
 
 [params]
 
+margin_size=0
+use_mipmaps=false

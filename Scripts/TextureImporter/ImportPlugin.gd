@@ -34,13 +34,24 @@ func _get_preset_name(index : int) -> String:
 		_:
 			return "";
 
-func _get_import_options(path : String, preset : int) -> Array[Dictionary]:
-	return [];
+func _get_import_options(path : String, preset_index : int) -> Array[Dictionary]:
+	match preset_index:
+		0:
+			return [{
+					   "name": "margin_size",
+					   "default_value": 0
+					},
+					{
+					   "name": "use_mipmaps",
+					   "default_value": false
+					}];
+		_:
+			return [];
 
 func _get_option_visibility(path, option_name, options):
 	return true;
 
-func _import(source_file: String, save_path: String, _options: Dictionary, _platform_variants: Array, _gen_files: Array) -> int:
+func _import(source_file: String, save_path: String, options: Dictionary, _platform_variants: Array, _gen_files: Array) -> int:
 	print("Importing tileset from: '%s'" % source_file);
 
 	# Create tileset.
@@ -52,7 +63,7 @@ func _import(source_file: String, save_path: String, _options: Dictionary, _plat
 	print();
 	print("Loading atlas source...");
 	var source = TileAtlasSource.new();
-	source.load_from_zip(source_file, db, 0);
+	source.load_from_zip(source_file, db, options["margin_size"]);
 	
 	print();
 	print("Generating missing parts...");
@@ -72,7 +83,7 @@ func _import(source_file: String, save_path: String, _options: Dictionary, _plat
 	
 	print();
 	print("Building texture...");
-	var texture = TileAtlasTexture.new(source, compositor, db, false);
+	var texture = TileAtlasTexture.new(source, compositor, db, options["use_mipmaps"]);
 	
 	# Save the resulting resource.
 	print();

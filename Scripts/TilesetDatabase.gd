@@ -37,7 +37,6 @@ func load_from_json(file_path : String) -> void:
 				copy["physics_shape"] = physics_shape;
 			json[key] = copy;
 	_dict = json;
-	print(json);
 
 
 

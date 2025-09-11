@@ -12,3 +12,5 @@ dest_files=["res://.godot/imported/bubble_clouds.zip-5f219eb9e9253feab2c7fd4392c
 
 [params]
 
+margin_size=0
+use_mipmaps=false

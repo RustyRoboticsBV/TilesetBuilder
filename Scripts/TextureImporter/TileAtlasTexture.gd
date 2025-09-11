@@ -12,7 +12,7 @@ var blocks : Dictionary[String, Image] = {};
 @export var tile_size : Vector2i;
 @export var tile_coords : Dictionary[String, Vector2i] = {};
 @export var block_coords : Dictionary[String, Vector2i] = {};
-@export var margin : int;
+@export var margin_size : int;
 
 func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database : TileDatabase, use_mipmaps : bool) -> void:
 	self.compositor = compositor;
@@ -21,7 +21,7 @@ func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database 
 	tile_size = Vector2i(source.tile_w, source.tile_h);
 	var tile_w = tile_size.x;
 	var tile_h = tile_size.y;
-	margin = source.margin;
+	margin_size = source.margin;
 	
 	# Place tiles.
 	for id in compositor.tiles.keys():
@@ -73,6 +73,10 @@ func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database 
 	for block : Image in blocks.values():
 		atlas.blit_rect(block, Rect2i(Vector2i.ZERO, block.get_size()), Vector2i(0, block_y));
 		block_y += block.get_height();
+	
+	# Substract margins from tile size.
+	tile_size.x -= margin_size * 2;
+	tile_size.y -= margin_size * 2;
 	
 	# Create texture.
 	if atlas.has_mipmaps():

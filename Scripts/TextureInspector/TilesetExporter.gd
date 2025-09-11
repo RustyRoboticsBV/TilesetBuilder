@@ -38,6 +38,8 @@ static func _create_tileset(atlas : TileAtlasTexture) -> TileSet:
 	var source : TileSetAtlasSource = TileSetAtlasSource.new();
 	source.texture_region_size = atlas.tile_size;
 	source.texture = atlas;
+	source.margins = Vector2i.ONE * atlas.margin_size;
+	source.separation = Vector2i.ONE * atlas.margin_size * 2;
 	
 	# Create tileset.
 	var tileset : TileSet = TileSet.new();
@@ -54,9 +56,11 @@ static func _create_tileset(atlas : TileAtlasTexture) -> TileSet:
 	tileset.add_physics_layer();
 	
 	# Create tiles.
+	var tile_w : int = atlas.tile_size.x;
+	var tile_h : int = atlas.tile_size.y;
 	for id in atlas.tile_coords.keys():
-		var block = db.get_tile(id)["block"] if db.has_tile(id) else "user";
-		var coords = atlas.block_coords[block] + atlas.tile_coords[id];
+		var block : String = db.get_tile(id)["block"] if db.has_tile(id) else "user";
+		var coords : Vector2i = atlas.block_coords[block] + atlas.tile_coords[id];
 		
 		# Only set built-in terrain peering bits for tiles in the main block.
 		var peering_bits : Dictionary = {};
@@ -70,7 +74,7 @@ static func _create_tileset(atlas : TileAtlasTexture) -> TileSet:
 			physics_shape = db.get_tile(id)["physics_shape"];
 		
 		print("Creating tile " + id + " at " + str(coords));
-		_create_tile(source, coords.x, coords.y, atlas.tile_size.x, atlas.tile_size.y, \
+		_create_tile(source, coords.x, coords.y, tile_w, tile_h, \
 		  0 if block == "main" else -1, peering_bits, physics_shape);
 	
 	# Better terrain support.

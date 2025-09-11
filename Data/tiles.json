@@ -1,10 +1,7 @@
 {
 	"CENTER": {
 		"block": "main",
-		"coords": [
-			9.0,
-			2.0
-		],
+		"coords": [9, 2],
 		"composite": [
 			"CENTER"
 		],
@@ -65,10 +62,7 @@
 	},
 	"EDGE_T": {
 		"block": "main",
-		"coords": [
-			10.0,
-			0.0
-		],
+		"coords": [10, 0],
 		"composite": [
 			"EDGE_T",
 			"CENTER"
@@ -112,12 +106,9 @@
 	},
 	"EDGE_L": {
 		"block": "main",
-		"coords": [
-			8.0,
-			1.0
-		],
+		"coords": [8, 1],
 		"composite": [
-			"EDGE_T",
+			"EDGE_L",
 			"CENTER"
 		],
 		"derive": {
@@ -158,20 +149,14 @@
 		}
 	},
 	"EDGE_R": {
-		"coords": [
-			11.0,
-			2.0
-		],
+		"coords": [11, 2],
 		"inherit": {
 			"op": "flip_x",
 			"from": "EDGE_L"
 		}
 	},
 	"EDGE_B": {
-		"coords": [
-			9.0,
-			3.0
-		],
+		"coords": [9, 3],
 		"inherit": {
 			"op": "flip_y",
 			"from": "EDGE_T"
@@ -179,10 +164,7 @@
 	},
 	"NOOK_TL": {
 		"block": "main",
-		"coords": [
-			8.0,
-			0.0
-		],
+		"coords": [8, 0],
 		"composite": [
 			"NOOK_TL",
 			"CENTER"
@@ -211,30 +193,21 @@
 		}
 	},
 	"NOOK_TR": {
-		"coords": [
-			11.0,
-			0.0
-		],
+		"coords": [11, 0],
 		"inherit": {
 			"op": "rotate_clock",
 			"from": "NOOK_TL"
 		}
 	},
 	"NOOK_BL": {
-		"coords": [
-			8.0,
-			3.0
-		],
+		"coords": [8, 3],
 		"inherit": {
 			"op": "rotate_counter",
 			"from": "NOOK_TL"
 		}
 	},
 	"NOOK_BR": {
-		"coords": [
-			11.0,
-			3.0
-		],
+		"coords": [11, 3],
 		"inherit": {
 			"op": "flip_xy",
 			"from": "NOOK_TL"
@@ -242,10 +215,7 @@
 	},
 	"CORNER_TL": {
 		"block": "main",
-		"coords": [
-			5.0,
-			1.0
-		],
+		"coords": [5, 1],
 		"composite": [
 			"CORNER_TL",
 			"CENTER"
@@ -296,30 +266,21 @@
 		}
 	},
 	"CORNER_TR": {
-		"coords": [
-			6.0,
-			1.0
-		],
+		"coords": [6, 1],
 		"inherit": {
 			"op": "flip_x",
 			"from": "CORNER_TL"
 		}
 	},
 	"CORNER_BL": {
-		"coords": [
-			5.0,
-			2.0
-		],
+		"coords": [5, 2],
 		"inherit": {
 			"op": "flip_y",
 			"from": "CORNER_TL"
 		}
 	},
 	"CORNER_BR": {
-		"coords": [
-			6.0,
-			2.0
-		],
+		"coords": [6, 2],
 		"inherit": {
 			"op": "flip_x",
 			"from": "CORNER_BL"
@@ -327,10 +288,7 @@
 	},
 	"CAP_T": {
 		"block": "main",
-		"coords": [
-			0.0,
-			0.0
-		],
+		"coords": [0, 0],
 		"composite": [
 			"CAP_T",
 			"CENTER"
@@ -350,30 +308,21 @@
 		}
 	},
 	"CAP_L": {
-		"coords": [
-			1.0,
-			3.0
-		],
+		"coords": [1, 3],
 		"inherit": {
 			"op": "rotate_counter",
 			"from": "CAP_T"
 		}
 	},
 	"CAP_R": {
-		"coords": [
-			3.0,
-			3.0
-		],
+		"coords": [3, 3],
 		"inherit": {
 			"op": "flip_x",
 			"from": "CAP_L"
 		}
 	},
 	"CAP_B": {
-		"coords": [
-			0.0,
-			2.0
-		],
+		"coords": [0, 2],
 		"inherit": {
 			"op": "flip_y",
 			"from": "CAP_T"
@@ -381,10 +330,7 @@
 	},
 	"MIDDLE_V": {
 		"block": "main",
-		"coords": [
-			0.0,
-			1.0
-		],
+		"coords": [0, 1],
 		"composite": [
 			"MIDDLE_V",
 			"CENTER"
@@ -407,10 +353,7 @@
 		}
 	},
 	"MIDDLE_H": {
-		"coords": [
-			2.0,
-			3.0
-		],
+		"coords": [2, 3],
 		"inherit": {
 			"op": "rotate_counter",
 			"from": "MIDDLE_V"
@@ -418,10 +361,7 @@
 	},
 	"SINGLE": {
 		"block": "main",
-		"coords": [
-			0.0,
-			3.0
-		],
+		"coords": [0, 3],
 		"composite": [
 			"SINGLE",
 			"CENTER"
@@ -442,10 +382,7 @@
 	},
 	"GAP_T": {
 		"block": "main",
-		"coords": [
-			9.0,
-			0.0
-		],
+		"coords": [9, 0],
 		"composite": [
 			"GAP_T",
 			"CENTER"
@@ -488,30 +425,21 @@
 		}
 	},
 	"GAP_L": {
-		"coords": [
-			8.0,
-			2.0
-		],
+		"coords": [8, 2],
 		"inherit": {
 			"op": "rotate_counter",
 			"from": "GAP_T"
 		}
 	},
 	"GAP_R": {
-		"coords": [
-			11.0,
-			1.0
-		],
+		"coords": [11, 1],
 		"inherit": {
 			"op": "rotate_clock",
 			"from": "GAP_T"
 		}
 	},
 	"GAP_B": {
-		"coords": [
-			10.0,
-			3.0
-		],
+		"coords": [10, 3],
 		"inherit": {
 			"op": "flip_y",
 			"from": "GAP_T"
@@ -519,10 +447,7 @@
 	},
 	"DIAG_U": {
 		"block": "main",
-		"coords": [
-			9.0,
-			1.0
-		],
+		"coords": [9, 1],
 		"composite": [
 			"DIAG_U",
 			"CENTER"
@@ -564,10 +489,7 @@
 	},
 	"DIAG_D": {
 		"block": "main",
-		"coords": [
-			10.0,
-			2.0
-		],
+		"coords": [10, 2],
 		"inherit": {
 			"from": "DIAG_U",
 			"op": "rotate_clock"
@@ -575,10 +497,7 @@
 	},
 	"HUB_TL": {
 		"block": "main",
-		"coords": [
-			7.0,
-			3.0
-		],
+		"coords": [7, 3],
 		"composite": [
 			"HUB_TL",
 			"CENTER"
@@ -615,30 +534,21 @@
 		}
 	},
 	"HUB_TR": {
-		"coords": [
-			4.0,
-			3.0
-		],
+		"coords": [4, 3],
 		"inherit": {
 			"from": "HUB_TL",
 			"op": "flip_x"
 		}
 	},
 	"HUB_BL": {
-		"coords": [
-			7.0,
-			0.0
-		],
+		"coords": [7, 0],
 		"inherit": {
 			"from": "HUB_TL",
 			"op": "flip_y"
 		}
 	},
 	"HUB_BR": {
-		"coords": [
-			4.0,
-			0.0
-		],
+		"coords": [4, 0],
 		"inherit": {
 			"from": "HUB_TL",
 			"op": "flip_xy"
@@ -646,10 +556,7 @@
 	},
 	"CROSS": {
 		"block": "main",
-		"coords": [
-			2.0,
-			1.0
-		],
+		"coords": [2, 1],
 		"composite": [
 			"CROSS",
 			"CENTER"
@@ -681,10 +588,7 @@
 	},
 	"TURN_TL": {
 		"block": "main",
-		"coords": [
-			1.0,
-			0.0
-		],
+		"coords": [1, 0],
 		"composite": [
 			"TURN_TL",
 			"CENTER"
@@ -709,30 +613,21 @@
 		}
 	},
 	"TURN_TR": {
-		"coords": [
-			3.0,
-			0.0
-		],
+		"coords": [3, 0],
 		"inherit": {
 			"from": "TURN_TL",
 			"op": "flip_x"
 		}
 	},
 	"TURN_BL": {
-		"coords": [
-			1.0,
-			2.0
-		],
+		"coords": [1, 2],
 		"inherit": {
 			"from": "TURN_TL",
 			"op": "flip_y"
 		}
 	},
 	"TURN_BR": {
-		"coords": [
-			3.0,
-			2.0
-		],
+		"coords": [3, 2],
 		"inherit": {
 			"from": "TURN_TL",
 			"op": "flip_xy"
@@ -740,10 +635,7 @@
 	},
 	"JUNCTION_T": {
 		"block": "main",
-		"coords": [
-			2.0,
-			0.0
-		],
+		"coords": [2, 0],
 		"composite": [
 			"JUNCTION_T",
 			"CENTER"
@@ -769,30 +661,21 @@
 		}
 	},
 	"JUNCTION_L": {
-		"coords": [
-			1.0,
-			1.0
-		],
+		"coords": [1, 1],
 		"inherit": {
 			"from": "JUNCTION_T",
 			"op": "rotate_counter"
 		}
 	},
 	"JUNCTION_R": {
-		"coords": [
-			3.0,
-			1.0
-		],
+		"coords": [3, 1],
 		"inherit": {
 			"from": "JUNCTION_T",
 			"op": "rotate_clock"
 		}
 	},
 	"JUNCTION_B": {
-		"coords": [
-			2.0,
-			2.0
-		],
+		"coords": [2, 2],
 		"inherit": {
 			"from": "JUNCTION_T",
 			"op": "flip_y"
@@ -800,10 +683,7 @@
 	},
 	"EXIT_H_TL": {
 		"block": "main",
-		"coords": [
-			5.0,
-			0.0
-		],
+		"coords": [5, 0],
 		"composite": [
 			"EXIT_H_TL",
 			"CENTER"
@@ -835,70 +715,49 @@
 		}
 	},
 	"EXIT_H_TR": {
-		"coords": [
-			6.0,
-			0.0
-		],
+		"coords": [6, 0],
 		"inherit": {
 			"from": "EXIT_H_TL",
 			"op": "flip_x"
 		}
 	},
 	"EXIT_H_BL": {
-		"coords": [
-			5.0,
-			3.0
-		],
+		"coords": [5, 3],
 		"inherit": {
 			"from": "EXIT_H_TL",
 			"op": "flip_y"
 		}
 	},
 	"EXIT_H_BR": {
-		"coords": [
-			6.0,
-			3.0
-		],
+		"coords": [6, 3],
 		"inherit": {
 			"from": "EXIT_H_TL",
 			"op": "flip_xy"
 		}
 	},
 	"EXIT_V_TL": {
-		"coords": [
-			4.0,
-			1.0
-		],
+		"coords": [4, 1],
 		"inherit": {
 			"from": "EXIT_H_TL",
 			"op": "transpose"
 		}
 	},
 	"EXIT_V_TR": {
-		"coords": [
-			7.0,
-			1.0
-		],
+		"coords": [7, 1],
 		"inherit": {
 			"from": "EXIT_V_TL",
 			"op": "flip_x"
 		}
 	},
 	"EXIT_V_BL": {
-		"coords": [
-			4.0,
-			2.0
-		],
+		"coords": [4, 2],
 		"inherit": {
 			"from": "EXIT_V_TL",
 			"op": "flip_y"
 		}
 	},
 	"EXIT_V_BR": {
-		"coords": [
-			7.0,
-			2.0
-		],
+		"coords": [7, 2],
 		"inherit": {
 			"from": "EXIT_V_TL",
 			"op": "flip_xy"
@@ -906,10 +765,7 @@
 	},
 	"SLOPE_TL": {
 		"block": "slope",
-		"coords": [
-			0.0,
-			0.0
-		],
+		"coords": [0, 0],
 		"composite": [
 			"SLOPE_TL",
 			"CENTER"
@@ -948,10 +804,7 @@
 		}
 	},
 	"SLOPE_TR": {
-		"coords": [
-			3.0,
-			0.0
-		],
+		"coords": [3, 0],
 		"inherit": {
 			"from": "SLOPE_TL",
 			"op": "flip_x"
@@ -972,10 +825,7 @@
 		}
 	},
 	"SLOPE_BL": {
-		"coords": [
-			0.0,
-			3.0
-		],
+		"coords": [0, 3],
 		"inherit": {
 			"from": "SLOPE_TL",
 			"op": "flip_y"
@@ -996,10 +846,7 @@
 		}
 	},
 	"SLOPE_BR": {
-		"coords": [
-			3.0,
-			3.0
-		],
+		"coords": [3, 3],
 		"inherit": {
 			"from": "SLOPE_TL",
 			"op": "flip_xy"
@@ -1021,10 +868,7 @@
 	},
 	"LINK_TL": {
 		"block": "slope",
-		"coords": [
-			1.0,
-			0.0
-		],
+		"coords": [1, 0],
 		"composite": [
 			"LINK_TL",
 			"CENTER"
@@ -1085,30 +929,21 @@
 		}
 	},
 	"LINK_TR": {
-		"coords": [
-			2.0,
-			0.0
-		],
+		"coords": [2, 0],
 		"inherit": {
 			"from": "LINK_TL",
 			"op": "flip_x"
 		}
 	},
 	"LINK_BL": {
-		"coords": [
-			1.0,
-			3.0
-		],
+		"coords": [1, 3],
 		"inherit": {
 			"from": "LINK_TL",
 			"op": "flip_y"
 		}
 	},
 	"LINK_BR": {
-		"coords": [
-			2.0,
-			3.0
-		],
+		"coords": [2, 3],
 		"inherit": {
 			"from": "LINK_TL",
 			"op": "flip_xy"
@@ -1116,10 +951,7 @@
 	},
 	"STAIRCASE_TL": {
 		"block": "slope",
-		"coords": [
-			1.0,
-			5.0
-		],
+		"coords": [1, 5],
 		"composite": [
 			"STAIRCASE_TL",
 			"CENTER"
@@ -1162,30 +994,21 @@
 		}
 	},
 	"STAIRCASE_TR": {
-		"coords": [
-			2.0,
-			5.0
-		],
+		"coords": [2, 5],
 		"inherit": {
 			"from": "STAIRCASE_TL",
 			"op": "flip_x"
 		}
 	},
 	"STAIRCASE_BL": {
-		"coords": [
-			1.0,
-			6.0
-		],
+		"coords": [1, 6],
 		"inherit": {
 			"from": "STAIRCASE_TL",
 			"op": "flip_y"
 		}
 	},
 	"STAIRCASE_BR": {
-		"coords": [
-			2.0,
-			6.0
-		],
+		"coords": [2, 6],
 		"inherit": {
 			"from": "STAIRCASE_TL",
 			"op": "flip_xy"
@@ -1194,8 +1017,8 @@
 	"PEAK_TL": {
 		"block": "slope",
 		"coords": [
-			10.0,
-			0.0
+			10,
+			0
 		],
 		"composite": [
 			"PEAK_TL",
@@ -1247,8 +1070,8 @@
 	},
 	"PEAK_TR": {
 		"coords": [
-			9.0,
-			0.0
+			9,
+			0
 		],
 		"inherit": {
 			"from": "PEAK_TL",
@@ -1257,8 +1080,8 @@
 	},
 	"PEAK_BL": {
 		"coords": [
-			10.0,
-			3.0
+			10,
+			3
 		],
 		"inherit": {
 			"from": "PEAK_TL",
@@ -1267,8 +1090,8 @@
 	},
 	"PEAK_BR": {
 		"coords": [
-			9.0,
-			3.0
+			9,
+			3
 		],
 		"inherit": {
 			"from": "PEAK_TL",
@@ -1278,8 +1101,8 @@
 	"WALL_TL": {
 		"block": "slope",
 		"coords": [
-			5.0,
-			1.0
+			5,
+			1
 		],
 		"composite": [
 			"WALL_TL",
@@ -1340,8 +1163,8 @@
 	},
 	"WALL_TR": {
 		"coords": [
-			6.0,
-			1.0
+			6,
+			1
 		],
 		"inherit": {
 			"from": "WALL_TL",
@@ -1350,8 +1173,8 @@
 	},
 	"WALL_BL": {
 		"coords": [
-			5.0,
-			2.0
+			5,
+			2
 		],
 		"inherit": {
 			"from": "WALL_TL",
@@ -1360,8 +1183,8 @@
 	},
 	"WALL_BR": {
 		"coords": [
-			6.0,
-			2.0
+			6,
+			2
 		],
 		"inherit": {
 			"from": "WALL_TL",
@@ -1371,8 +1194,8 @@
 	"CLIFF_TL": {
 		"block": "slope",
 		"coords": [
-			4.0,
-			0.0
+			4,
+			0
 		],
 		"composite": [
 			"CLIFF_TL",
@@ -1403,8 +1226,8 @@
 	},
 	"CLIFF_TR": {
 		"coords": [
-			7.0,
-			0.0
+			7,
+			0
 		],
 		"inherit": {
 			"from": "CLIFF_TL",
@@ -1413,8 +1236,8 @@
 	},
 	"CLIFF_BL": {
 		"coords": [
-			4.0,
-			3.0
+			4,
+			3
 		],
 		"inherit": {
 			"from": "CLIFF_TL",
@@ -1423,8 +1246,8 @@
 	},
 	"CLIFF_BR": {
 		"coords": [
-			7.0,
-			3.0
+			7,
+			3
 		],
 		"inherit": {
 			"from": "CLIFF_TL",
@@ -1434,8 +1257,8 @@
 	"BASE_TL": {
 		"block": "slope",
 		"coords": [
-			9.0,
-			1.0
+			9,
+			1
 		],
 		"composite": [
 			"BASE_TL",
@@ -1496,8 +1319,8 @@
 	},
 	"BASE_TR": {
 		"coords": [
-			10.0,
-			1.0
+			10,
+			1
 		],
 		"inherit": {
 			"from": "BASE_TL",
@@ -1506,8 +1329,8 @@
 	},
 	"BASE_BL": {
 		"coords": [
-			9.0,
-			2.0
+			9,
+			2
 		],
 		"inherit": {
 			"from": "BASE_TL",
@@ -1516,8 +1339,8 @@
 	},
 	"BASE_BR": {
 		"coords": [
-			10.0,
-			2.0
+			10,
+			2
 		],
 		"inherit": {
 			"from": "BASE_TL",
@@ -1527,8 +1350,8 @@
 	"PIT_TL": {
 		"block": "slope",
 		"coords": [
-			8.0,
-			1.0
+			8,
+			1
 		],
 		"composite": [
 			"PIT_TL",
@@ -1580,8 +1403,8 @@
 	},
 	"PIT_TR": {
 		"coords": [
-			11.0,
-			1.0
+			11,
+			1
 		],
 		"inherit": {
 			"from": "PIT_TL",
@@ -1590,8 +1413,8 @@
 	},
 	"PIT_BL": {
 		"coords": [
-			8.0,
-			2.0
+			8,
+			2
 		],
 		"inherit": {
 			"from": "PIT_TL",
@@ -1600,8 +1423,8 @@
 	},
 	"PIT_BR": {
 		"coords": [
-			11.0,
-			2.0
+			11,
+			2
 		],
 		"inherit": {
 			"from": "PIT_TL",
@@ -1611,8 +1434,8 @@
 	"LEDGE_TL": {
 		"block": "slope",
 		"coords": [
-			8.0,
-			0.0
+			8,
+			0
 		],
 		"composite": [
 			"LEDGE_TL",
@@ -1655,8 +1478,8 @@
 	},
 	"LEDGE_TR": {
 		"coords": [
-			11.0,
-			0.0
+			11,
+			0
 		],
 		"inherit": {
 			"from": "LEDGE_TL",
@@ -1665,8 +1488,8 @@
 	},
 	"LEDGE_BL": {
 		"coords": [
-			8.0,
-			3.0
+			8,
+			3
 		],
 		"inherit": {
 			"from": "LEDGE_TL",
@@ -1675,8 +1498,8 @@
 	},
 	"LEDGE_BR": {
 		"coords": [
-			11.0,
-			3.0
+			11,
+			3
 		],
 		"inherit": {
 			"from": "LEDGE_TL",
@@ -1686,8 +1509,8 @@
 	"SUMMIT_T": {
 		"block": "slope",
 		"coords": [
-			5.0,
-			0.0
+			5,
+			0
 		],
 		"composite": [
 			"SUMMIT_T",
@@ -1728,8 +1551,8 @@
 	"SUMMIT_L": {
 		"block": "slope",
 		"coords": [
-			4.0,
-			2.0
+			4,
+			2
 		],
 		"composite": [
 			"SUMMIT_L",
@@ -1769,8 +1592,8 @@
 	},
 	"SUMMIT_R": {
 		"coords": [
-			7.0,
-			1.0
+			7,
+			1
 		],
 		"inherit": {
 			"from": "SUMMIT_L",
@@ -1779,8 +1602,8 @@
 	},
 	"SUMMIT_B": {
 		"coords": [
-			6.0,
-			3.0
+			6,
+			3
 		],
 		"inherit": {
 			"from": "SUMMIT_T",
@@ -1790,8 +1613,8 @@
 	"SHAFT_T": {
 		"block": "slope",
 		"coords": [
-			6.0,
-			0.0
+			6,
+			0
 		],
 		"composite": [
 			"SHAFT_T",
@@ -1835,8 +1658,8 @@
 	"SHAFT_L": {
 		"block": "slope",
 		"coords": [
-			4.0,
-			1.0
+			4,
+			1
 		],
 		"composite": [
 			"SHAFT_L",
@@ -1879,8 +1702,8 @@
 	},
 	"SHAFT_R": {
 		"coords": [
-			7.0,
-			2.0
+			7,
+			2
 		],
 		"inherit": {
 			"from": "SHAFT_L",
@@ -1889,8 +1712,8 @@
 	},
 	"SHAFT_B": {
 		"coords": [
-			5.0,
-			3.0
+			5,
+			3
 		],
 		"inherit": {
 			"from": "SHAFT_T",
@@ -1900,8 +1723,8 @@
 	"CHIMNEY_TL": {
 		"block": "slope",
 		"coords": [
-			0.0,
-			5.0
+			0,
+			5
 		],
 		"composite": [
 			"CHIMNEY_TL",
@@ -1935,8 +1758,8 @@
 	},
 	"CHIMNEY_TR": {
 		"coords": [
-			3.0,
-			5.0
+			3,
+			5
 		],
 		"inherit": {
 			"from": "CHIMNEY_TL",
@@ -1945,8 +1768,8 @@
 	},
 	"CHIMNEY_BL": {
 		"coords": [
-			0.0,
-			6.0
+			0,
+			6
 		],
 		"inherit": {
 			"from": "CHIMNEY_TL",
@@ -1955,8 +1778,8 @@
 	},
 	"CHIMNEY_BR": {
 		"coords": [
-			3.0,
-			6.0
+			3,
+			6
 		],
 		"inherit": {
 			"from": "CHIMNEY_TL",
@@ -1966,8 +1789,8 @@
 	"TUNNEL_TL": {
 		"block": "slope",
 		"coords": [
-			1.0,
-			4.0
+			1,
+			4
 		],
 		"composite": [
 			"TUNNEL_TL",
@@ -2001,8 +1824,8 @@
 	},
 	"TUNNEL_TR": {
 		"coords": [
-			2.0,
-			4.0
+			2,
+			4
 		],
 		"inherit": {
 			"from": "TUNNEL_TL",
@@ -2011,8 +1834,8 @@
 	},
 	"TUNNEL_BL": {
 		"coords": [
-			1.0,
-			7.0
+			1,
+			7
 		],
 		"inherit": {
 			"from": "TUNNEL_TL",
@@ -2021,8 +1844,8 @@
 	},
 	"TUNNEL_BR": {
 		"coords": [
-			2.0,
-			7.0
+			2,
+			7
 		],
 		"inherit": {
 			"from": "TUNNEL_TL",
@@ -2032,8 +1855,8 @@
 	"SHOULDER_TL": {
 		"block": "slope",
 		"coords": [
-			6.0,
-			4.0
+			6,
+			4
 		],
 		"composite": [
 			"SHOULDER_TL",
@@ -2076,8 +1899,8 @@
 	},
 	"SHOULDER_TR": {
 		"coords": [
-			5.0,
-			4.0
+			5,
+			4
 		],
 		"inherit": {
 			"from": "SHOULDER_TL",
@@ -2086,8 +1909,8 @@
 	},
 	"SHOULDER_BL": {
 		"coords": [
-			6.0,
-			7.0
+			6,
+			7
 		],
 		"inherit": {
 			"from": "SHOULDER_TL",
@@ -2096,8 +1919,8 @@
 	},
 	"SHOULDER_BR": {
 		"coords": [
-			5.0,
-			7.0
+			5,
+			7
 		],
 		"inherit": {
 			"from": "SHOULDER_TL",
@@ -2107,8 +1930,8 @@
 	"PILLAR_TL": {
 		"block": "slope",
 		"coords": [
-			4.0,
-			6.0
+			4,
+			6
 		],
 		"composite": [
 			"PILLAR_TL",
@@ -2151,8 +1974,8 @@
 	},
 	"PILLAR_TR": {
 		"coords": [
-			7.0,
-			6.0
+			7,
+			6
 		],
 		"inherit": {
 			"from": "PILLAR_TL",
@@ -2161,8 +1984,8 @@
 	},
 	"PILLAR_BL": {
 		"coords": [
-			4.0,
-			5.0
+			4,
+			5
 		],
 		"inherit": {
 			"from": "PILLAR_TL",
@@ -2171,8 +1994,8 @@
 	},
 	"PILLAR_BR": {
 		"coords": [
-			7.0,
-			5.0
+			7,
+			5
 		],
 		"inherit": {
 			"from": "PILLAR_TL",
@@ -2182,8 +2005,8 @@
 	"CAVE_H_TL": {
 		"block": "slope",
 		"coords": [
-			9.0,
-			6.0
+			9,
+			6
 		],
 		"composite": [
 			"CAVE_H_TL",
@@ -2226,8 +2049,8 @@
 	},
 	"CAVE_H_TR": {
 		"coords": [
-			10.0,
-			6.0
+			10,
+			6
 		],
 		"inherit": {
 			"from": "CAVE_H_TL",
@@ -2236,8 +2059,8 @@
 	},
 	"CAVE_H_BL": {
 		"coords": [
-			9.0,
-			5.0
+			9,
+			5
 		],
 		"inherit": {
 			"from": "CAVE_H_TL",
@@ -2246,8 +2069,8 @@
 	},
 	"CAVE_H_BR": {
 		"coords": [
-			10.0,
-			5.0
+			10,
+			5
 		],
 		"inherit": {
 			"from": "CAVE_H_TL",
@@ -2257,8 +2080,8 @@
 	"CAVE_V_TL": {
 		"block": "slope",
 		"coords": [
-			6.0,
-			6.0
+			6,
+			6
 		],
 		"composite": [
 			"CAVE_V_TL",
@@ -2301,8 +2124,8 @@
 	},
 	"CAVE_V_TR": {
 		"coords": [
-			5.0,
-			6.0
+			5,
+			6
 		],
 		"inherit": {
 			"from": "CAVE_V_TL",
@@ -2311,8 +2134,8 @@
 	},
 	"CAVE_V_BL": {
 		"coords": [
-			6.0,
-			5.0
+			6,
+			5
 		],
 		"inherit": {
 			"from": "CAVE_V_TL",
@@ -2321,8 +2144,8 @@
 	},
 	"CAVE_V_BR": {
 		"coords": [
-			5.0,
-			5.0
+			5,
+			5
 		],
 		"inherit": {
 			"from": "CAVE_V_TL",
@@ -2332,8 +2155,8 @@
 	"FORK_H_TL": {
 		"block": "slope",
 		"coords": [
-			3.0,
-			7.0
+			3,
+			7
 		],
 		"composite": [
 			"FORK_H_TL",
@@ -2370,8 +2193,8 @@
 	},
 	"FORK_H_TR": {
 		"coords": [
-			0.0,
-			7.0
+			0,
+			7
 		],
 		"inherit": {
 			"from": "FORK_H_TL",
@@ -2380,8 +2203,8 @@
 	},
 	"FORK_H_BL": {
 		"coords": [
-			3.0,
-			4.0
+			3,
+			4
 		],
 		"inherit": {
 			"from": "FORK_H_TL",
@@ -2390,8 +2213,8 @@
 	},
 	"FORK_H_BR": {
 		"coords": [
-			0.0,
-			4.0
+			0,
+			4
 		],
 		"inherit": {
 			"from": "FORK_H_TL",
@@ -2401,8 +2224,8 @@
 	"FORK_V_TL": {
 		"block": "slope",
 		"coords": [
-			11.0,
-			7.0
+			11,
+			7
 		],
 		"composite": [
 			"FORK_V_TL",
@@ -2439,8 +2262,8 @@
 	},
 	"FORK_V_TR": {
 		"coords": [
-			8.0,
-			7.0
+			8,
+			7
 		],
 		"inherit": {
 			"from": "FORK_V_TL",
@@ -2449,8 +2272,8 @@
 	},
 	"FORK_V_BL": {
 		"coords": [
-			11.0,
-			4.0
+			11,
+			4
 		],
 		"inherit": {
 			"from": "FORK_V_TL",
@@ -2459,8 +2282,8 @@
 	},
 	"FORK_V_BR": {
 		"coords": [
-			8.0,
-			4.0
+			8,
+			4
 		],
 		"inherit": {
 			"from": "FORK_V_TL",
@@ -2470,8 +2293,8 @@
 	"BRIDGE_TL": {
 		"block": "slope",
 		"coords": [
-			9.0,
-			4.0
+			9,
+			4
 		],
 		"composite": [
 			"BRIDGE_TL",
@@ -2507,8 +2330,8 @@
 	},
 	"BRIDGE_TR": {
 		"coords": [
-			10.0,
-			4.0
+			10,
+			4
 		],
 		"inherit": {
 			"from": "BRIDGE_TL",
@@ -2517,8 +2340,8 @@
 	},
 	"BRIDGE_BL": {
 		"coords": [
-			9.0,
-			7.0
+			9,
+			7
 		],
 		"inherit": {
 			"from": "BRIDGE_TL",
@@ -2527,8 +2350,8 @@
 	},
 	"BRIDGE_BR": {
 		"coords": [
-			10.0,
-			7.0
+			10,
+			7
 		],
 		"inherit": {
 			"from": "BRIDGE_TL",
@@ -2538,8 +2361,8 @@
 	"DROP_TL": {
 		"block": "slope",
 		"coords": [
-			8.0,
-			5.0
+			8,
+			5
 		],
 		"composite": [
 			"DROP_TL",
@@ -2575,8 +2398,8 @@
 	},
 	"DROP_TR": {
 		"coords": [
-			11.0,
-			5.0
+			11,
+			5
 		],
 		"inherit": {
 			"from": "DROP_TL",
@@ -2585,8 +2408,8 @@
 	},
 	"DROP_BL": {
 		"coords": [
-			8.0,
-			6.0
+			8,
+			6
 		],
 		"inherit": {
 			"from": "DROP_TL",
@@ -2595,8 +2418,8 @@
 	},
 	"DROP_BR": {
 		"coords": [
-			11.0,
-			6.0
+			11,
+			6
 		],
 		"inherit": {
 			"from": "DROP_TL",
@@ -2606,8 +2429,8 @@
 	"LONG_SLOPE_LOW_TL": {
 		"block": "long_slope",
 		"coords": [
-			0.0,
-			0.0
+			0,
+			0
 		],
 		"composite": [
 			"LONG_SLOPE_LOW_TL",
@@ -2648,8 +2471,8 @@
 	},
 	"LONG_SLOPE_LOW_TR": {
 		"coords": [
-			3.0,
-			0.0
+			3,
+			0
 		],
 		"inherit": {
 			"from": "LONG_SLOPE_LOW_TL",
@@ -2672,8 +2495,8 @@
 	},
 	"LONG_SLOPE_LOW_BL": {
 		"coords": [
-			0.0,
-			3.0
+			0,
+			3
 		],
 		"inherit": {
 			"from": "LONG_SLOPE_LOW_TL",
@@ -2696,8 +2519,8 @@
 	},
 	"LONG_SLOPE_LOW_BR": {
 		"coords": [
-			3.0,
-			3.0
+			3,
+			3
 		],
 		"inherit": {
 			"from": "LONG_SLOPE_LOW_TL",
@@ -2721,8 +2544,8 @@
 	"LONG_SLOPE_HI_TL": {
 		"block": "long_slope",
 		"coords": [
-			1.0,
-			0.0
+			1,
+			0
 		],
 		"composite": [
 			"LONG_SLOPE_HI_TL",
@@ -2769,8 +2592,8 @@
 	},
 	"LONG_SLOPE_HI_TR": {
 		"coords": [
-			2.0,
-			0.0
+			2,
+			0
 		],
 		"inherit": {
 			"from": "LONG_SLOPE_HI_TL",
@@ -2797,8 +2620,8 @@
 	},
 	"LONG_SLOPE_HI_BL": {
 		"coords": [
-			1.0,
-			3.0
+			1,
+			3
 		],
 		"inherit": {
 			"from": "LONG_SLOPE_HI_TL",
@@ -2825,8 +2648,8 @@
 	},
 	"LONG_SLOPE_HI_BR": {
 		"coords": [
-			2.0,
-			3.0
+			2,
+			3
 		],
 		"inherit": {
 			"from": "LONG_SLOPE_HI_TL",
@@ -2854,8 +2677,8 @@
 	"LONG_LINK_TL": {
 		"block": "long_slope",
 		"coords": [
-			0.0,
-			1.0
+			0,
+			1
 		],
 		"composite": [
 			"LONG_LINK_TL",
@@ -2919,8 +2742,8 @@
 	},
 	"LONG_LINK_TR": {
 		"coords": [
-			3.0,
-			1.0
+			3,
+			1
 		],
 		"inherit": {
 			"from": "LONG_LINK_TL",
@@ -2929,8 +2752,8 @@
 	},
 	"LONG_LINK_BL": {
 		"coords": [
-			0.0,
-			2.0
+			0,
+			2
 		],
 		"inherit": {
 			"from": "LONG_LINK_TL",
@@ -2939,8 +2762,8 @@
 	},
 	"LONG_LINK_BR": {
 		"coords": [
-			3.0,
-			2.0
+			3,
+			2
 		],
 		"inherit": {
 			"from": "LONG_LINK_TL",
@@ -2950,8 +2773,8 @@
 	"LONG_STAIRCASE_TL": {
 		"block": "long_slope",
 		"coords": [
-			1.0,
-			5.0
+			1,
+			5
 		],
 		"composite": [
 			"LONG_STAIRCASE_TL",
@@ -2997,8 +2820,8 @@
 	},
 	"LONG_STAIRCASE_TR": {
 		"coords": [
-			2.0,
-			5.0
+			2,
+			5
 		],
 		"inherit": {
 			"from": "LONG_STAIRCASE_TL",
@@ -3007,8 +2830,8 @@
 	},
 	"LONG_STAIRCASE_BL": {
 		"coords": [
-			1.0,
-			6.0
+			1,
+			6
 		],
 		"inherit": {
 			"from": "LONG_STAIRCASE_TL",
@@ -3017,8 +2840,8 @@
 	},
 	"LONG_STAIRCASE_BR": {
 		"coords": [
-			2.0,
-			6.0
+			2,
+			6
 		],
 		"inherit": {
 			"from": "LONG_STAIRCASE_TL",
@@ -3028,8 +2851,8 @@
 	"LONG_PEAK_TL": {
 		"block": "long_slope",
 		"coords": [
-			10.0,
-			0.0
+			10,
+			0
 		],
 		"composite": [
 			"LONG_PEAK_TL",
@@ -3081,8 +2904,8 @@
 	},
 	"LONG_PEAK_TR": {
 		"coords": [
-			9.0,
-			0.0
+			9,
+			0
 		],
 		"inherit": {
 			"from": "LONG_PEAK_TL",
@@ -3091,8 +2914,8 @@
 	},
 	"LONG_PEAK_BL": {
 		"coords": [
-			10.0,
-			3.0
+			10,
+			3
 		],
 		"inherit": {
 			"from": "LONG_PEAK_TL",
@@ -3101,8 +2924,8 @@
 	},
 	"LONG_PEAK_BR": {
 		"coords": [
-			9.0,
-			3.0
+			9,
+			3
 		],
 		"inherit": {
 			"from": "LONG_PEAK_TL",
@@ -3112,8 +2935,8 @@
 	"LONG_WALL_TL": {
 		"block": "long_slope",
 		"coords": [
-			5.0,
-			1.0
+			5,
+			1
 		],
 		"composite": [
 			"LONG_WALL_TL",
@@ -3174,8 +2997,8 @@
 	},
 	"LONG_WALL_TR": {
 		"coords": [
-			6.0,
-			1.0
+			6,
+			1
 		],
 		"inherit": {
 			"from": "LONG_WALL_TL",
@@ -3184,8 +3007,8 @@
 	},
 	"LONG_WALL_BL": {
 		"coords": [
-			5.0,
-			2.0
+			5,
+			2
 		],
 		"inherit": {
 			"from": "LONG_WALL_TL",
@@ -3194,8 +3017,8 @@
 	},
 	"LONG_WALL_BR": {
 		"coords": [
-			6.0,
-			2.0
+			6,
+			2
 		],
 		"inherit": {
 			"from": "LONG_WALL_TL",
@@ -3205,8 +3028,8 @@
 	"LONG_CLIFF_TL": {
 		"block": "long_slope",
 		"coords": [
-			4.0,
-			0.0
+			4,
+			0
 		],
 		"composite": [
 			"LONG_CLIFF_TL",
@@ -3237,8 +3060,8 @@
 	},
 	"LONG_CLIFF_TR": {
 		"coords": [
-			7.0,
-			0.0
+			7,
+			0
 		],
 		"inherit": {
 			"from": "LONG_CLIFF_TL",
@@ -3247,8 +3070,8 @@
 	},
 	"LONG_CLIFF_BL": {
 		"coords": [
-			4.0,
-			3.0
+			4,
+			3
 		],
 		"inherit": {
 			"from": "LONG_CLIFF_TL",
@@ -3257,8 +3080,8 @@
 	},
 	"LONG_CLIFF_BR": {
 		"coords": [
-			7.0,
-			3.0
+			7,
+			3
 		],
 		"inherit": {
 			"from": "LONG_CLIFF_TL",
@@ -3268,8 +3091,8 @@
 	"LONG_BASE_TL": {
 		"block": "long_slope",
 		"coords": [
-			9.0,
-			1.0
+			9,
+			1
 		],
 		"composite": [
 			"LONG_BASE_TL",
@@ -3331,8 +3154,8 @@
 	},
 	"LONG_BASE_TR": {
 		"coords": [
-			10.0,
-			1.0
+			10,
+			1
 		],
 		"inherit": {
 			"from": "LONG_BASE_TL",
@@ -3341,8 +3164,8 @@
 	},
 	"LONG_BASE_BL": {
 		"coords": [
-			9.0,
-			2.0
+			9,
+			2
 		],
 		"inherit": {
 			"from": "LONG_BASE_TL",
@@ -3351,8 +3174,8 @@
 	},
 	"LONG_BASE_BR": {
 		"coords": [
-			10.0,
-			2.0
+			10,
+			2
 		],
 		"inherit": {
 			"from": "LONG_BASE_TL",
@@ -3362,8 +3185,8 @@
 	"LONG_PIT_TL": {
 		"block": "long_slope",
 		"coords": [
-			8.0,
-			1.0
+			8,
+			1
 		],
 		"composite": [
 			"LONG_PIT_TL",
@@ -3416,8 +3239,8 @@
 	},
 	"LONG_PIT_TR": {
 		"coords": [
-			11.0,
-			1.0
+			11,
+			1
 		],
 		"inherit": {
 			"from": "LONG_PIT_TL",
@@ -3426,8 +3249,8 @@
 	},
 	"LONG_PIT_BL": {
 		"coords": [
-			8.0,
-			2.0
+			8,
+			2
 		],
 		"inherit": {
 			"from": "LONG_PIT_TL",
@@ -3436,8 +3259,8 @@
 	},
 	"LONG_PIT_BR": {
 		"coords": [
-			11.0,
-			2.0
+			11,
+			2
 		],
 		"inherit": {
 			"from": "LONG_PIT_TL",
@@ -3447,8 +3270,8 @@
 	"LONG_LEDGE_TL": {
 		"block": "long_slope",
 		"coords": [
-			8.0,
-			0.0
+			8,
+			0
 		],
 		"composite": [
 			"LONG_LEDGE_TL",
@@ -3492,8 +3315,8 @@
 	},
 	"LONG_LEDGE_TR": {
 		"coords": [
-			11.0,
-			0.0
+			11,
+			0
 		],
 		"inherit": {
 			"from": "LONG_LEDGE_TL",
@@ -3502,8 +3325,8 @@
 	},
 	"LONG_LEDGE_BL": {
 		"coords": [
-			8.0,
-			3.0
+			8,
+			3
 		],
 		"inherit": {
 			"from": "LONG_LEDGE_TL",
@@ -3512,8 +3335,8 @@
 	},
 	"LONG_LEDGE_BR": {
 		"coords": [
-			11.0,
-			3.0
+			11,
+			3
 		],
 		"inherit": {
 			"from": "LONG_LEDGE_TL",
@@ -3523,8 +3346,8 @@
 	"LONG_SUMMIT_T": {
 		"block": "long_slope",
 		"coords": [
-			5.0,
-			0.0
+			5,
+			0
 		],
 		"composite": [
 			"LONG_SUMMIT_T",
@@ -3565,8 +3388,8 @@
 	"LONG_SUMMIT_L": {
 		"block": "long_slope",
 		"coords": [
-			4.0,
-			2.0
+			4,
+			2
 		],
 		"composite": [
 			"LONG_SUMMIT_L",
@@ -3606,8 +3429,8 @@
 	},
 	"LONG_SUMMIT_R": {
 		"coords": [
-			7.0,
-			1.0
+			7,
+			1
 		],
 		"inherit": {
 			"from": "LONG_SUMMIT_L",
@@ -3616,8 +3439,8 @@
 	},
 	"LONG_SUMMIT_B": {
 		"coords": [
-			6.0,
-			3.0
+			6,
+			3
 		],
 		"inherit": {
 			"from": "LONG_SUMMIT_T",
@@ -3627,8 +3450,8 @@
 	"LONG_SHAFT_T": {
 		"block": "long_slope",
 		"coords": [
-			6.0,
-			0.0
+			6,
+			0
 		],
 		"composite": [
 			"LONG_SHAFT_T",
@@ -3672,8 +3495,8 @@
 	"LONG_SHAFT_L": {
 		"block": "long_slope",
 		"coords": [
-			4.0,
-			1.0
+			4,
+			1
 		],
 		"composite": [
 			"LONG_SHAFT_L",
@@ -3716,8 +3539,8 @@
 	},
 	"LONG_SHAFT_R": {
 		"coords": [
-			7.0,
-			2.0
+			7,
+			2
 		],
 		"inherit": {
 			"from": "LONG_SHAFT_L",
@@ -3726,8 +3549,8 @@
 	},
 	"LONG_SHAFT_B": {
 		"coords": [
-			5.0,
-			3.0
+			5,
+			3
 		],
 		"inherit": {
 			"from": "LONG_SHAFT_T",
@@ -3737,8 +3560,8 @@
 	"LONG_CHIMNEY_TL": {
 		"block": "long_slope",
 		"coords": [
-			0.0,
-			5.0
+			0,
+			5
 		],
 		"composite": [
 			"LONG_CHIMNEY_TL",
@@ -3772,8 +3595,8 @@
 	},
 	"LONG_CHIMNEY_TR": {
 		"coords": [
-			3.0,
-			5.0
+			3,
+			5
 		],
 		"inherit": {
 			"from": "LONG_CHIMNEY_TL",
@@ -3782,8 +3605,8 @@
 	},
 	"LONG_CHIMNEY_BL": {
 		"coords": [
-			0.0,
-			6.0
+			0,
+			6
 		],
 		"inherit": {
 			"from": "LONG_CHIMNEY_TL",
@@ -3792,8 +3615,8 @@
 	},
 	"LONG_CHIMNEY_BR": {
 		"coords": [
-			3.0,
-			6.0
+			3,
+			6
 		],
 		"inherit": {
 			"from": "LONG_CHIMNEY_TL",
@@ -3803,8 +3626,8 @@
 	"LONG_TUNNEL_TL": {
 		"block": "long_slope",
 		"coords": [
-			1.0,
-			4.0
+			1,
+			4
 		],
 		"composite": [
 			"LONG_TUNNEL_TL",
@@ -3839,8 +3662,8 @@
 	},
 	"LONG_TUNNEL_TR": {
 		"coords": [
-			2.0,
-			4.0
+			2,
+			4
 		],
 		"inherit": {
 			"from": "LONG_TUNNEL_TL",
@@ -3849,8 +3672,8 @@
 	},
 	"LONG_TUNNEL_BL": {
 		"coords": [
-			1.0,
-			7.0
+			1,
+			7
 		],
 		"inherit": {
 			"from": "LONG_TUNNEL_TL",
@@ -3859,8 +3682,8 @@
 	},
 	"LONG_TUNNEL_BR": {
 		"coords": [
-			2.0,
-			7.0
+			2,
+			7
 		],
 		"inherit": {
 			"from": "LONG_TUNNEL_TL",
@@ -3870,8 +3693,8 @@
 	"LONG_SHOULDER_TL": {
 		"block": "long_slope",
 		"coords": [
-			6.0,
-			4.0
+			6,
+			4
 		],
 		"composite": [
 			"LONG_SHOULDER_TL",
@@ -3915,8 +3738,8 @@
 	},
 	"LONG_SHOULDER_TR": {
 		"coords": [
-			5.0,
-			4.0
+			5,
+			4
 		],
 		"inherit": {
 			"from": "LONG_SHOULDER_TL",
@@ -3925,8 +3748,8 @@
 	},
 	"LONG_SHOULDER_BL": {
 		"coords": [
-			6.0,
-			7.0
+			6,
+			7
 		],
 		"inherit": {
 			"from": "LONG_SHOULDER_TL",
@@ -3935,8 +3758,8 @@
 	},
 	"LONG_SHOULDER_BR": {
 		"coords": [
-			5.0,
-			7.0
+			5,
+			7
 		],
 		"inherit": {
 			"from": "LONG_SHOULDER_TL",
@@ -3946,8 +3769,8 @@
 	"LONG_PILLAR_TL": {
 		"block": "long_slope",
 		"coords": [
-			4.0,
-			6.0
+			4,
+			6
 		],
 		"composite": [
 			"LONG_PILLAR_TL",
@@ -3990,8 +3813,8 @@
 	},
 	"LONG_PILLAR_TR": {
 		"coords": [
-			7.0,
-			6.0
+			7,
+			6
 		],
 		"inherit": {
 			"from": "LONG_PILLAR_TL",
@@ -4000,8 +3823,8 @@
 	},
 	"LONG_PILLAR_BL": {
 		"coords": [
-			4.0,
-			5.0
+			4,
+			5
 		],
 		"inherit": {
 			"from": "LONG_PILLAR_TL",
@@ -4010,8 +3833,8 @@
 	},
 	"LONG_PILLAR_BR": {
 		"coords": [
-			7.0,
-			5.0
+			7,
+			5
 		],
 		"inherit": {
 			"from": "LONG_PILLAR_TL",
@@ -4021,8 +3844,8 @@
 	"LONG_CAVE_H_TL": {
 		"block": "long_slope",
 		"coords": [
-			9.0,
-			6.0
+			9,
+			6
 		],
 		"composite": [
 			"LONG_CAVE_H_TL",
@@ -4066,8 +3889,8 @@
 	},
 	"LONG_CAVE_H_TR": {
 		"coords": [
-			10.0,
-			6.0
+			10,
+			6
 		],
 		"inherit": {
 			"from": "LONG_CAVE_H_TL",
@@ -4076,8 +3899,8 @@
 	},
 	"LONG_CAVE_H_BL": {
 		"coords": [
-			9.0,
-			5.0
+			9,
+			5
 		],
 		"inherit": {
 			"from": "LONG_CAVE_H_TL",
@@ -4086,8 +3909,8 @@
 	},
 	"LONG_CAVE_H_BR": {
 		"coords": [
-			10.0,
-			5.0
+			10,
+			5
 		],
 		"inherit": {
 			"from": "LONG_CAVE_H_TL",
@@ -4097,8 +3920,8 @@
 	"LONG_CAVE_V_TL": {
 		"block": "long_slope",
 		"coords": [
-			6.0,
-			6.0
+			6,
+			6
 		],
 		"composite": [
 			"LONG_CAVE_V_TL",
@@ -4141,8 +3964,8 @@
 	},
 	"LONG_CAVE_V_TR": {
 		"coords": [
-			5.0,
-			6.0
+			5,
+			6
 		],
 		"inherit": {
 			"from": "LONG_CAVE_V_TL",
@@ -4151,8 +3974,8 @@
 	},
 	"LONG_CAVE_V_BL": {
 		"coords": [
-			6.0,
-			5.0
+			6,
+			5
 		],
 		"inherit": {
 			"from": "LONG_CAVE_V_TL",
@@ -4161,8 +3984,8 @@
 	},
 	"LONG_CAVE_V_BR": {
 		"coords": [
-			5.0,
-			5.0
+			5,
+			5
 		],
 		"inherit": {
 			"from": "LONG_CAVE_V_TL",
@@ -4172,8 +3995,8 @@
 	"LONG_FORK_H_TL": {
 		"block": "long_slope",
 		"coords": [
-			3.0,
-			7.0
+			3,
+			7
 		],
 		"composite": [
 			"LONG_FORK_H_TL",
@@ -4211,8 +4034,8 @@
 	},
 	"LONG_FORK_H_TR": {
 		"coords": [
-			0.0,
-			7.0
+			0,
+			7
 		],
 		"inherit": {
 			"from": "LONG_FORK_H_TL",
@@ -4221,8 +4044,8 @@
 	},
 	"LONG_FORK_H_BL": {
 		"coords": [
-			3.0,
-			4.0
+			3,
+			4
 		],
 		"inherit": {
 			"from": "LONG_FORK_H_TL",
@@ -4231,8 +4054,8 @@
 	},
 	"LONG_FORK_H_BR": {
 		"coords": [
-			0.0,
-			4.0
+			0,
+			4
 		],
 		"inherit": {
 			"from": "LONG_FORK_H_TL",
@@ -4242,8 +4065,8 @@
 	"LONG_FORK_V_TL": {
 		"block": "long_slope",
 		"coords": [
-			11.0,
-			7.0
+			11,
+			7
 		],
 		"composite": [
 			"LONG_FORK_V_TL",
@@ -4280,8 +4103,8 @@
 	},
 	"LONG_FORK_V_TR": {
 		"coords": [
-			8.0,
-			7.0
+			8,
+			7
 		],
 		"inherit": {
 			"from": "LONG_FORK_V_TL",
@@ -4290,8 +4113,8 @@
 	},
 	"LONG_FORK_V_BL": {
 		"coords": [
-			11.0,
-			4.0
+			11,
+			4
 		],
 		"inherit": {
 			"from": "LONG_FORK_V_TL",
@@ -4300,8 +4123,8 @@
 	},
 	"LONG_FORK_V_BR": {
 		"coords": [
-			8.0,
-			4.0
+			8,
+			4
 		],
 		"inherit": {
 			"from": "LONG_FORK_V_TL",
@@ -4311,8 +4134,8 @@
 	"LONG_BRIDGE_TL": {
 		"block": "long_slope",
 		"coords": [
-			9.0,
-			4.0
+			9,
+			4
 		],
 		"composite": [
 			"LONG_BRIDGE_TL",
@@ -4348,8 +4171,8 @@
 	},
 	"LONG_BRIDGE_TR": {
 		"coords": [
-			10.0,
-			4.0
+			10,
+			4
 		],
 		"inherit": {
 			"from": "LONG_BRIDGE_TL",
@@ -4358,8 +4181,8 @@
 	},
 	"LONG_BRIDGE_BL": {
 		"coords": [
-			9.0,
-			7.0
+			9,
+			7
 		],
 		"inherit": {
 			"from": "LONG_BRIDGE_TL",
@@ -4368,8 +4191,8 @@
 	},
 	"LONG_BRIDGE_BR": {
 		"coords": [
-			10.0,
-			7.0
+			10,
+			7
 		],
 		"inherit": {
 			"from": "LONG_BRIDGE_TL",
@@ -4379,8 +4202,8 @@
 	"LONG_DROP_TL": {
 		"block": "long_slope",
 		"coords": [
-			8.0,
-			5.0
+			8,
+			5
 		],
 		"composite": [
 			"LONG_DROP_TL",
@@ -4417,8 +4240,8 @@
 	},
 	"LONG_DROP_TR": {
 		"coords": [
-			11.0,
-			5.0
+			11,
+			5
 		],
 		"inherit": {
 			"from": "LONG_DROP_TL",
@@ -4427,8 +4250,8 @@
 	},
 	"LONG_DROP_BL": {
 		"coords": [
-			8.0,
-			6.0
+			8,
+			6
 		],
 		"inherit": {
 			"from": "LONG_DROP_TL",
@@ -4437,8 +4260,8 @@
 	},
 	"LONG_DROP_BR": {
 		"coords": [
-			11.0,
-			6.0
+			11,
+			6
 		],
 		"inherit": {
 			"from": "LONG_DROP_TL",
@@ -4447,10 +4270,7 @@
 	},
 	"TALL_SLOPE_HI_TL": {
 		"block": "tall_slope",
-		"coords": [
-			0.0,
-			0.0
-		],
+		"coords": [0, 0],
 		"composite": [
 			"TALL_SLOPE_HI_TL",
 			"CENTER"
@@ -4489,10 +4309,7 @@
 		}
 	},
 	"TALL_SLOPE_HI_TR": {
-		"coords": [
-			3.0,
-			0.0
-		],
+		"coords": [3, 0],
 		"inherit": {
 			"from": "TALL_SLOPE_HI_TL",
 			"op": "flip_x"
@@ -4513,10 +4330,7 @@
 		}
 	},
 	"TALL_SLOPE_HI_BL": {
-		"coords": [
-			0.0,
-			3.0
-		],
+		"coords": [0, 3],
 		"inherit": {
 			"from": "TALL_SLOPE_HI_TL",
 			"op": "flip_y"
@@ -4537,10 +4351,7 @@
 		}
 	},
 	"TALL_SLOPE_HI_BR": {
-		"coords": [
-			3.0,
-			3.0
-		],
+		"coords": [3, 3],
 		"inherit": {
 			"from": "TALL_SLOPE_HI_TL",
 			"op": "flip_xy"
@@ -4562,10 +4373,7 @@
 	},
 	"TALL_SLOPE_LOW_TL": {
 		"block": "tall_slope",
-		"coords": [
-			0.0,
-			1.0
-		],
+		"coords": [0, 1],
 		"composite": [
 			"TALL_SLOPE_LOW_TL",
 			"CENTER"
@@ -4610,10 +4418,7 @@
 		}
 	},
 	"TALL_SLOPE_LOW_TR": {
-		"coords": [
-			3.0,
-			1.0
-		],
+		"coords": [3, 1],
 		"inherit": {
 			"from": "TALL_SLOPE_LOW_TL",
 			"op": "flip_x"
@@ -4638,10 +4443,7 @@
 		}
 	},
 	"TALL_SLOPE_LOW_BL": {
-		"coords": [
-			0.0,
-			2.0
-		],
+		"coords": [0, 2],
 		"inherit": {
 			"from": "TALL_SLOPE_LOW_TL",
 			"op": "flip_y"
@@ -4666,10 +4468,7 @@
 		}
 	},
 	"TALL_SLOPE_LOW_BR": {
-		"coords": [
-			3.0,
-			2.0
-		],
+		"coords": [3, 2],
 		"inherit": {
 			"from": "TALL_SLOPE_LOW_TL",
 			"op": "flip_xy"
@@ -4695,10 +4494,7 @@
 	},
 	"TALL_LINK_TL": {
 		"block": "tall_slope",
-		"coords": [
-			1.0,
-			0.0
-		],
+		"coords": [1, 0],
 		"composite": [
 			"TALL_LINK_TL",
 			"CENTER"
@@ -4756,30 +4552,21 @@
 		}
 	},
 	"TALL_LINK_TR": {
-		"coords": [
-			2.0,
-			0.0
-		],
+		"coords": [2, 0],
 		"inherit": {
 			"from": "TALL_LINK_TL",
 			"op": "flip_x"
 		}
 	},
 	"TALL_LINK_BL": {
-		"coords": [
-			1.0,
-			3.0
-		],
+		"coords": [1, 3],
 		"inherit": {
 			"from": "TALL_LINK_TL",
 			"op": "flip_y"
 		}
 	},
 	"TALL_LINK_BR": {
-		"coords": [
-			2.0,
-			3.0
-		],
+		"coords": [2, 3],
 		"inherit": {
 			"from": "TALL_LINK_TL",
 			"op": "flip_xy"
@@ -4787,10 +4574,7 @@
 	},
 	"TALL_STAIRCASE_TL": {
 		"block": "tall_slope",
-		"coords": [
-			1.0,
-			5.0
-		],
+		"coords": [1, 5],
 		"composite": [
 			"TALL_STAIRCASE_TL",
 			"CENTER"
@@ -4835,30 +4619,21 @@
 		}
 	},
 	"TALL_STAIRCASE_TR": {
-		"coords": [
-			2.0,
-			5.0
-		],
+		"coords": [2, 5],
 		"inherit": {
 			"from": "TALL_STAIRCASE_TL",
 			"op": "flip_x"
 		}
 	},
 	"TALL_STAIRCASE_BL": {
-		"coords": [
-			1.0,
-			6.0
-		],
+		"coords": [1, 6],
 		"inherit": {
 			"from": "TALL_STAIRCASE_TL",
 			"op": "flip_y"
 		}
 	},
 	"TALL_STAIRCASE_BR": {
-		"coords": [
-			2.0,
-			6.0
-		],
+		"coords": [2, 6],
 		"inherit": {
 			"from": "TALL_STAIRCASE_TL",
 			"op": "flip_xy"
@@ -4866,10 +4641,7 @@
 	},
 	"TALL_PEAK_TL": {
 		"block": "tall_slope",
-		"coords": [
-			10.0,
-			0.0
-		],
+		"coords": [10, 0],
 		"composite": [
 			"TALL_PEAK_TL",
 			"CENTER"
@@ -4920,30 +4692,21 @@
 		}
 	},
 	"TALL_PEAK_TR": {
-		"coords": [
-			9.0,
-			0.0
-		],
+		"coords": [9, 0],
 		"inherit": {
 			"from": "TALL_PEAK_TL",
 			"op": "flip_x"
 		}
 	},
 	"TALL_PEAK_BL": {
-		"coords": [
-			10.0,
-			3.0
-		],
+		"coords": [10, 3],
 		"inherit": {
 			"from": "TALL_PEAK_TL",
 			"op": "flip_y"
 		}
 	},
 	"TALL_PEAK_BR": {
-		"coords": [
-			9.0,
-			3.0
-		],
+		"coords": [9, 3],
 		"inherit": {
 			"from": "TALL_PEAK_TL",
 			"op": "flip_xy"
@@ -4951,10 +4714,7 @@
 	},
 	"TALL_WALL_TL": {
 		"block": "tall_slope",
-		"coords": [
-			5.0,
-			1.0
-		],
+		"coords": [5, 1],
 		"composite": [
 			"TALL_WALL_TL",
 			"CENTER"
@@ -5014,30 +4774,21 @@
 		}
 	},
 	"TALL_WALL_TR": {
-		"coords": [
-			6.0,
-			1.0
-		],
+		"coords": [6, 1],
 		"inherit": {
 			"from": "TALL_WALL_TL",
 			"op": "flip_x"
 		}
 	},
 	"TALL_WALL_BL": {
-		"coords": [
-			5.0,
-			2.0
-		],
+		"coords": [5, 2],
 		"inherit": {
 			"from": "TALL_WALL_TL",
 			"op": "flip_y"
 		}
 	},
 	"TALL_WALL_BR": {
-		"coords": [
-			6.0,
-			2.0
-		],
+		"coords": [6, 2],
 		"inherit": {
 			"from": "TALL_WALL_TL",
 			"op": "flip_xy"
@@ -5045,10 +4796,7 @@
 	},
 	"TALL_CLIFF_TL": {
 		"block": "tall_slope",
-		"coords": [
-			4.0,
-			0.0
-		],
+		"coords": [4, 0],
 		"composite": [
 			"TALL_CLIFF_TL",
 			"CENTER"
@@ -5078,30 +4826,21 @@
 		}
 	},
 	"TALL_CLIFF_TR": {
-		"coords": [
-			7.0,
-			0.0
-		],
+		"coords": [7, 0],
 		"inherit": {
 			"from": "TALL_CLIFF_TL",
 			"op": "flip_x"
 		}
 	},
 	"TALL_CLIFF_BL": {
-		"coords": [
-			4.0,
-			3.0
-		],
+		"coords": [4, 3],
 		"inherit": {
 			"from": "TALL_CLIFF_TL",
 			"op": "flip_y"
 		}
 	},
 	"TALL_CLIFF_BR": {
-		"coords": [
-			7.0,
-			3.0
-		],
+		"coords": [7, 3],
 		"inherit": {
 			"from": "TALL_CLIFF_TL",
 			"op": "flip_xy"
@@ -5109,10 +4848,7 @@
 	},
 	"TALL_BASE_TL": {
 		"block": "tall_slope",
-		"coords": [
-			9.0,
-			1.0
-		],
+		"coords": [9, 1],
 		"composite": [
 			"TALL_BASE_TL",
 			"CENTER"
@@ -5171,30 +4907,21 @@
 		}
 	},
 	"TALL_BASE_TR": {
-		"coords": [
-			10.0,
-			1.0
-		],
+		"coords": [10, 1],
 		"inherit": {
 			"from": "TALL_BASE_TL",
 			"op": "flip_x"
 		}
 	},
 	"TALL_BASE_BL": {
-		"coords": [
-			9.0,
-			2.0
-		],
+		"coords": [9, 2],
 		"inherit": {
 			"from": "TALL_BASE_TL",
 			"op": "flip_y"
 		}
 	},
 	"TALL_BASE_BR": {
-		"coords": [
-			10.0,
-			2.0
-		],
+		"coords": [10, 2],
 		"inherit": {
 			"from": "TALL_BASE_TL",
 			"op": "flip_xy"
@@ -5202,10 +4929,7 @@
 	},
 	"TALL_PIT_TL": {
 		"block": "tall_slope",
-		"coords": [
-			8.0,
-			1.0
-		],
+		"coords": [8, 1],
 		"composite": [
 			"TALL_PIT_TL",
 			"CENTER"
@@ -5255,30 +4979,21 @@
 		}
 	},
 	"TALL_PIT_TR": {
-		"coords": [
-			11.0,
-			1.0
-		],
+		"coords": [11, 1],
 		"inherit": {
 			"from": "TALL_PIT_TL",
 			"op": "flip_x"
 		}
 	},
 	"TALL_PIT_BL": {
-		"coords": [
-			8.0,
-			2.0
-		],
+		"coords": [8, 2],
 		"inherit": {
 			"from": "TALL_PIT_TL",
 			"op": "flip_y"
 		}
 	},
 	"TALL_PIT_BR": {
-		"coords": [
-			11.0,
-			2.0
-		],
+		"coords": [11, 2],
 		"inherit": {
 			"from": "TALL_PIT_TL",
 			"op": "flip_xy"
@@ -5286,10 +5001,7 @@
 	},
 	"TALL_LEDGE_TL": {
 		"block": "tall_slope",
-		"coords": [
-			8.0,
-			0.0
-		],
+		"coords": [8, 0],
 		"composite": [
 			"TALL_LEDGE_TL",
 			"CENTER"
@@ -5330,30 +5042,21 @@
 		}
 	},
 	"TALL_LEDGE_TR": {
-		"coords": [
-			11.0,
-			0.0
-		],
+		"coords": [11, 0],
 		"inherit": {
 			"from": "TALL_LEDGE_TL",
 			"op": "flip_x"
 		}
 	},
 	"TALL_LEDGE_BL": {
-		"coords": [
-			8.0,
-			3.0
-		],
+		"coords": [8, 3],
 		"inherit": {
 			"from": "TALL_LEDGE_TL",
 			"op": "flip_y"
 		}
 	},
 	"TALL_LEDGE_BR": {
-		"coords": [
-			11.0,
-			3.0
-		],
+		"coords": [11, 3],
 		"inherit": {
 			"from": "TALL_LEDGE_TL",
 			"op": "flip_xy"
@@ -5361,10 +5064,7 @@
 	},
 	"TALL_SUMMIT_T": {
 		"block": "tall_slope",
-		"coords": [
-			5.0,
-			0.0
-		],
+		"coords": [5, 0],
 		"composite": [
 			"TALL_SUMMIT_T",
 			"CENTER"
@@ -5405,10 +5105,7 @@
 	},
 	"TALL_SUMMIT_L": {
 		"block": "tall_slope",
-		"coords": [
-			4.0,
-			2.0
-		],
+		"coords": [4, 2],
 		"composite": [
 			"TALL_SUMMIT_L",
 			"CENTER"
@@ -5448,20 +5145,14 @@
 		}
 	},
 	"TALL_SUMMIT_R": {
-		"coords": [
-			7.0,
-			1.0
-		],
+		"coords": [7, 1],
 		"inherit": {
 			"from": "TALL_SUMMIT_L",
 			"op": "flip_xy"
 		}
 	},
 	"TALL_SUMMIT_B": {
-		"coords": [
-			6.0,
-			3.0
-		],
+		"coords": [6, 3],
 		"inherit": {
 			"from": "TALL_SUMMIT_T",
 			"op": "flip_xy"
@@ -5469,10 +5160,7 @@
 	},
 	"TALL_SHAFT_T": {
 		"block": "tall_slope",
-		"coords": [
-			6.0,
-			0.0
-		],
+		"coords": [6, 0],
 		"composite": [
 			"TALL_SHAFT_T",
 			"CENTER"
@@ -5516,10 +5204,7 @@
 	},
 	"TALL_SHAFT_L": {
 		"block": "tall_slope",
-		"coords": [
-			4.0,
-			1.0
-		],
+		"coords": [4, 1],
 		"composite": [
 			"TALL_SHAFT_L",
 			"CENTER"
@@ -5562,20 +5247,14 @@
 		}
 	},
 	"TALL_SHAFT_R": {
-		"coords": [
-			7.0,
-			2.0
-		],
+		"coords": [7, 2],
 		"inherit": {
 			"from": "TALL_SHAFT_L",
 			"op": "flip_x"
 		}
 	},
 	"TALL_SHAFT_B": {
-		"coords": [
-			5.0,
-			3.0
-		],
+		"coords": [5, 3],
 		"inherit": {
 			"from": "TALL_SHAFT_T",
 			"op": "flip_xy"
@@ -5583,10 +5262,7 @@
 	},
 	"TALL_CHIMNEY_TL": {
 		"block": "tall_slope",
-		"coords": [
-			0.0,
-			5.0
-		],
+		"coords": [0, 5],
 		"composite": [
 			"TALL_CHIMNEY_TL",
 			"CENTER"
@@ -5619,30 +5295,21 @@
 		}
 	},
 	"TALL_CHIMNEY_TR": {
-		"coords": [
-			3.0,
-			5.0
-		],
+		"coords": [3, 5],
 		"inherit": {
 			"from": "TALL_CHIMNEY_TL",
 			"op": "flip_x"
 		}
 	},
 	"TALL_CHIMNEY_BL": {
-		"coords": [
-			0.0,
-			6.0
-		],
+		"coords": [0, 6],
 		"inherit": {
 			"from": "TALL_CHIMNEY_TL",
 			"op": "flip_y"
 		}
 	},
 	"TALL_CHIMNEY_BR": {
-		"coords": [
-			3.0,
-			6.0
-		],
+		"coords": [3, 6],
 		"inherit": {
 			"from": "TALL_CHIMNEY_TL",
 			"op": "flip_xy"
@@ -5650,10 +5317,7 @@
 	},
 	"TALL_TUNNEL_TL": {
 		"block": "tall_slope",
-		"coords": [
-			1.0,
-			4.0
-		],
+		"coords": [1, 4],
 		"composite": [
 			"TALL_TUNNEL_TL",
 			"CENTER"
@@ -5686,30 +5350,21 @@
 		}
 	},
 	"TALL_TUNNEL_TR": {
-		"coords": [
-			2.0,
-			4.0
-		],
+		"coords": [2, 4],
 		"inherit": {
 			"from": "TALL_TUNNEL_TL",
 			"op": "flip_x"
 		}
 	},
 	"TALL_TUNNEL_BL": {
-		"coords": [
-			1.0,
-			7.0
-		],
+		"coords": [1, 7],
 		"inherit": {
 			"from": "TALL_TUNNEL_TL",
 			"op": "flip_y"
 		}
 	},
 	"TALL_TUNNEL_BR": {
-		"coords": [
-			2.0,
-			7.0
-		],
+		"coords": [2, 7],
 		"inherit": {
 			"from": "TALL_TUNNEL_TL",
 			"op": "flip_xy"
@@ -5717,10 +5372,7 @@
 	},
 	"TALL_SHOULDER_TL": {
 		"block": "tall_slope",
-		"coords": [
-			6.0,
-			4.0
-		],
+		"coords": [6, 4],
 		"composite": [
 			"TALL_SHOULDER_TL",
 			"CENTER"
@@ -5761,30 +5413,21 @@
 		}
 	},
 	"TALL_SHOULDER_TR": {
-		"coords": [
-			5.0,
-			4.0
-		],
+		"coords": [5, 4],
 		"inherit": {
 			"from": "TALL_SHOULDER_TL",
 			"op": "flip_x"
 		}
 	},
 	"TALL_SHOULDER_BL": {
-		"coords": [
-			6.0,
-			7.0
-		],
+		"coords": [6, 7],
 		"inherit": {
 			"from": "TALL_SHOULDER_TL",
 			"op": "flip_y"
 		}
 	},
 	"TALL_SHOULDER_BR": {
-		"coords": [
-			5.0,
-			7.0
-		],
+		"coords": [5, 7],
 		"inherit": {
 			"from": "TALL_SHOULDER_TL",
 			"op": "flip_xy"
@@ -5792,10 +5435,7 @@
 	},
 	"TALL_PILLAR_TL": {
 		"block": "tall_slope",
-		"coords": [
-			4.0,
-			6.0
-		],
+		"coords": [4, 6],
 		"composite": [
 			"TALL_PILLAR_TL",
 			"CENTER"
@@ -5837,30 +5477,21 @@
 		}
 	},
 	"TALL_PILLAR_TR": {
-		"coords": [
-			7.0,
-			6.0
-		],
+		"coords": [7, 6],
 		"inherit": {
 			"from": "TALL_PILLAR_TL",
 			"op": "flip_x"
 		}
 	},
 	"TALL_PILLAR_BL": {
-		"coords": [
-			4.0,
-			5.0
-		],
+		"coords": [4, 5],
 		"inherit": {
 			"from": "TALL_PILLAR_TL",
 			"op": "flip_y"
 		}
 	},
 	"TALL_PILLAR_BR": {
-		"coords": [
-			7.0,
-			5.0
-		],
+		"coords": [7, 5],
 		"inherit": {
 			"from": "TALL_PILLAR_TL",
 			"op": "flip_xy"
@@ -5868,10 +5499,7 @@
 	},
 	"TALL_CAVE_H_TL": {
 		"block": "tall_slope",
-		"coords": [
-			9.0,
-			6.0
-		],
+		"coords": [9, 6],
 		"composite": [
 			"TALL_CAVE_H_TL",
 			"CENTER"
@@ -5912,30 +5540,21 @@
 		}
 	},
 	"TALL_CAVE_H_TR": {
-		"coords": [
-			10.0,
-			6.0
-		],
+		"coords": [10, 6],
 		"inherit": {
 			"from": "TALL_CAVE_H_TL",
 			"op": "flip_x"
 		}
 	},
 	"TALL_CAVE_H_BL": {
-		"coords": [
-			9.0,
-			5.0
-		],
+		"coords": [9, 5],
 		"inherit": {
 			"from": "TALL_CAVE_H_TL",
 			"op": "flip_y"
 		}
 	},
 	"TALL_CAVE_H_BR": {
-		"coords": [
-			10.0,
-			5.0
-		],
+		"coords": [10, 5],
 		"inherit": {
 			"from": "TALL_CAVE_H_TL",
 			"op": "flip_xy"
@@ -5943,10 +5562,7 @@
 	},
 	"TALL_CAVE_V_TL": {
 		"block": "tall_slope",
-		"coords": [
-			6.0,
-			6.0
-		],
+		"coords": [6, 6],
 		"composite": [
 			"TALL_CAVE_V_TL",
 			"CENTER"
@@ -5988,30 +5604,21 @@
 		}
 	},
 	"TALL_CAVE_V_TR": {
-		"coords": [
-			5.0,
-			6.0
-		],
+		"coords": [5, 6],
 		"inherit": {
 			"from": "TALL_CAVE_V_TL",
 			"op": "flip_x"
 		}
 	},
 	"TALL_CAVE_V_BL": {
-		"coords": [
-			6.0,
-			5.0
-		],
+		"coords": [6, 5],
 		"inherit": {
 			"from": "TALL_CAVE_V_TL",
 			"op": "flip_y"
 		}
 	},
 	"TALL_CAVE_V_BR": {
-		"coords": [
-			5.0,
-			5.0
-		],
+		"coords": [5, 5],
 		"inherit": {
 			"from": "TALL_CAVE_V_TL",
 			"op": "flip_xy"
@@ -6019,10 +5626,7 @@
 	},
 	"TALL_FORK_H_TL": {
 		"block": "tall_slope",
-		"coords": [
-			3.0,
-			7.0
-		],
+		"coords": [3, 7],
 		"composite": [
 			"TALL_FORK_H_TL",
 			"CENTER"
@@ -6057,30 +5661,21 @@
 		}
 	},
 	"TALL_FORK_H_TR": {
-		"coords": [
-			0.0,
-			7.0
-		],
+		"coords": [0, 7],
 		"inherit": {
 			"from": "TALL_FORK_H_TL",
 			"op": "flip_x"
 		}
 	},
 	"TALL_FORK_H_BL": {
-		"coords": [
-			3.0,
-			4.0
-		],
+		"coords": [3, 4],
 		"inherit": {
 			"from": "TALL_FORK_H_TL",
 			"op": "flip_y"
 		}
 	},
 	"TALL_FORK_H_BR": {
-		"coords": [
-			0.0,
-			4.0
-		],
+		"coords": [0, 4],
 		"inherit": {
 			"from": "TALL_FORK_H_TL",
 			"op": "flip_xy"
@@ -6088,10 +5683,7 @@
 	},
 	"TALL_FORK_V_TL": {
 		"block": "tall_slope",
-		"coords": [
-			11.0,
-			7.0
-		],
+		"coords": [11, 7],
 		"composite": [
 			"TALL_FORK_V_TL",
 			"CENTER"
@@ -6127,30 +5719,21 @@
 		}
 	},
 	"TALL_FORK_V_TR": {
-		"coords": [
-			8.0,
-			7.0
-		],
+		"coords": [8, 7],
 		"inherit": {
 			"from": "TALL_FORK_V_TL",
 			"op": "flip_x"
 		}
 	},
 	"TALL_FORK_V_BL": {
-		"coords": [
-			11.0,
-			4.0
-		],
+		"coords": [11, 4],
 		"inherit": {
 			"from": "TALL_FORK_V_TL",
 			"op": "flip_y"
 		}
 	},
 	"TALL_FORK_V_BR": {
-		"coords": [
-			8.0,
-			4.0
-		],
+		"coords": [8, 4],
 		"inherit": {
 			"from": "TALL_FORK_V_TL",
 			"op": "flip_xy"
@@ -6158,10 +5741,7 @@
 	},
 	"TALL_BRIDGE_TL": {
 		"block": "tall_slope",
-		"coords": [
-			9.0,
-			4.0
-		],
+		"coords": [9, 4],
 		"composite": [
 			"TALL_BRIDGE_TL",
 			"CENTER"
@@ -6196,30 +5776,21 @@
 		}
 	},
 	"TALL_BRIDGE_TR": {
-		"coords": [
-			10.0,
-			4.0
-		],
+		"coords": [10, 4],
 		"inherit": {
 			"from": "TALL_BRIDGE_TL",
 			"op": "flip_x"
 		}
 	},
 	"TALL_BRIDGE_BL": {
-		"coords": [
-			9.0,
-			7.0
-		],
+		"coords": [9, 7],
 		"inherit": {
 			"from": "TALL_BRIDGE_TL",
 			"op": "flip_y"
 		}
 	},
 	"TALL_BRIDGE_BR": {
-		"coords": [
-			10.0,
-			7.0
-		],
+		"coords": [10, 7],
 		"inherit": {
 			"from": "TALL_BRIDGE_TL",
 			"op": "flip_xy"
@@ -6227,10 +5798,7 @@
 	},
 	"TALL_DROP_TL": {
 		"block": "tall_slope",
-		"coords": [
-			8.0,
-			5.0
-		],
+		"coords": [8, 5],
 		"composite": [
 			"TALL_DROP_TL",
 			"CENTER"
@@ -6264,30 +5832,21 @@
 		}
 	},
 	"TALL_DROP_TR": {
-		"coords": [
-			11.0,
-			5.0
-		],
+		"coords": [11, 5],
 		"inherit": {
 			"from": "TALL_DROP_TL",
 			"op": "flip_x"
 		}
 	},
 	"TALL_DROP_BL": {
-		"coords": [
-			8.0,
-			6.0
-		],
+		"coords": [8, 6],
 		"inherit": {
 			"from": "TALL_DROP_TL",
 			"op": "flip_y"
 		}
 	},
 	"TALL_DROP_BR": {
-		"coords": [
-			11.0,
-			6.0
-		],
+		"coords": [11, 6],
 		"inherit": {
 			"from": "TALL_DROP_TL",
 			"op": "flip_xy"
@@ -6295,10 +5854,7 @@
 	},
 	"RIDGE_TL": {
 		"block": "slope_mix",
-		"coords": [
-			0.0,
-			0.0
-		],
+		"coords": [0, 0],
 		"composite": [
 			"RIDGE_TL",
 			"CENTER"
@@ -6346,30 +5902,21 @@
 		}
 	},
 	"RIDGE_TR": {
-		"coords": [
-			1.0,
-			0.0
-		],
+		"coords": [1, 0],
 		"inherit": {
 			"from": "RIDGE_TL",
 			"op": "flip_x"
 		}
 	},
 	"RIDGE_BL": {
-		"coords": [
-			0.0,
-			1.0
-		],
+		"coords": [0, 1],
 		"inherit": {
 			"from": "RIDGE_TL",
 			"op": "flip_y"
 		}
 	},
 	"RIDGE_BR": {
-		"coords": [
-			1.0,
-			1.0
-		],
+		"coords": [1, 1],
 		"inherit": {
 			"from": "RIDGE_TL",
 			"op": "flip_xy"
@@ -6377,10 +5924,7 @@
 	},
 	"RIDGE_STAIR_TL": {
 		"block": "slope_mix",
-		"coords": [
-			0.0,
-			2.0
-		],
+		"coords": [0, 2],
 		"composite": [
 			"RIDGE_STAIR_TL",
 			"CENTER"
@@ -6424,30 +5968,21 @@
 		}
 	},
 	"RIDGE_STAIR_TR": {
-		"coords": [
-			1.0,
-			2.0
-		],
+		"coords": [1, 2],
 		"inherit": {
 			"from": "RIDGE_STAIR_TL",
 			"op": "flip_x"
 		}
 	},
 	"RIDGE_STAIR_BL": {
-		"coords": [
-			0.0,
-			3.0
-		],
+		"coords": [0, 3],
 		"inherit": {
 			"from": "RIDGE_STAIR_TL",
 			"op": "flip_y"
 		}
 	},
 	"RIDGE_STAIR_BR": {
-		"coords": [
-			1.0,
-			3.0
-		],
+		"coords": [1, 3],
 		"inherit": {
 			"from": "RIDGE_STAIR_TL",
 			"op": "flip_xy"
@@ -6455,10 +5990,7 @@
 	},
 	"VALLEY_TL": {
 		"block": "slope_mix",
-		"coords": [
-			2.0,
-			0.0
-		],
+		"coords": [2, 0],
 		"composite": [
 			"VALLEY_TL",
 			"CENTER"
@@ -6505,30 +6037,21 @@
 		}
 	},
 	"VALLEY_TR": {
-		"coords": [
-			3.0,
-			0.0
-		],
+		"coords": [3, 0],
 		"inherit": {
 			"from": "VALLEY_TL",
 			"op": "flip_x"
 		}
 	},
 	"VALLEY_BL": {
-		"coords": [
-			2.0,
-			1.0
-		],
+		"coords": [2, 1],
 		"inherit": {
 			"from": "VALLEY_TL",
 			"op": "flip_y"
 		}
 	},
 	"VALLEY_BR": {
-		"coords": [
-			3.0,
-			1.0
-		],
+		"coords": [3, 1],
 		"inherit": {
 			"from": "VALLEY_TL",
 			"op": "flip_xy"
@@ -6536,10 +6059,7 @@
 	},
 	"VALLEY_STAIR_TL": {
 		"block": "slope_mix",
-		"coords": [
-			2.0,
-			2.0
-		],
+		"coords": [2, 2],
 		"composite": [
 			"VALLEY_STAIR_TL",
 			"CENTER"
@@ -6583,30 +6103,21 @@
 		}
 	},
 	"VALLEY_STAIR_TR": {
-		"coords": [
-			3.0,
-			2.0
-		],
+		"coords": [3, 2],
 		"inherit": {
 			"from": "VALLEY_STAIR_TL",
 			"op": "flip_x"
 		}
 	},
 	"VALLEY_STAIR_BL": {
-		"coords": [
-			2.0,
-			3.0
-		],
+		"coords": [2, 3],
 		"inherit": {
 			"from": "VALLEY_STAIR_TL",
 			"op": "flip_y"
 		}
 	},
 	"VALLEY_STAIR_BR": {
-		"coords": [
-			3.0,
-			3.0
-		],
+		"coords": [3, 3],
 		"inherit": {
 			"from": "VALLEY_STAIR_TL",
 			"op": "flip_xy"
@@ -6614,10 +6125,7 @@
 	},
 	"LONG_VALLEY_TL": {
 		"block": "slope_mix",
-		"coords": [
-			4.0,
-			0.0
-		],
+		"coords": [4, 0],
 		"composite": [
 			"LONG_VALLEY_TL",
 			"CENTER"
@@ -6664,30 +6172,21 @@
 		}
 	},
 	"LONG_VALLEY_TR": {
-		"coords": [
-			5.0,
-			0.0
-		],
+		"coords": [5, 0],
 		"inherit": {
 			"from": "LONG_VALLEY_TL",
 			"op": "flip_x"
 		}
 	},
 	"LONG_VALLEY_BL": {
-		"coords": [
-			4.0,
-			1.0
-		],
+		"coords": [4, 1],
 		"inherit": {
 			"from": "LONG_VALLEY_TL",
 			"op": "flip_y"
 		}
 	},
 	"LONG_VALLEY_BR": {
-		"coords": [
-			5.0,
-			1.0
-		],
+		"coords": [5, 1],
 		"inherit": {
 			"from": "LONG_VALLEY_TL",
 			"op": "flip_xy"
@@ -6695,10 +6194,7 @@
 	},
 	"LONG_VALLEY_STAIR_TL": {
 		"block": "slope_mix",
-		"coords": [
-			4.0,
-			2.0
-		],
+		"coords": [4, 2],
 		"composite": [
 			"LONG_VALLEY_STAIR_TL",
 			"CENTER"
@@ -6741,30 +6237,21 @@
 		}
 	},
 	"LONG_VALLEY_STAIR_TR": {
-		"coords": [
-			5.0,
-			2.0
-		],
+		"coords": [5, 2],
 		"inherit": {
 			"from": "LONG_VALLEY_STAIR_TL",
 			"op": "flip_x"
 		}
 	},
 	"LONG_VALLEY_STAIR_BL": {
-		"coords": [
-			4.0,
-			3.0
-		],
+		"coords": [4, 3],
 		"inherit": {
 			"from": "LONG_VALLEY_STAIR_TL",
 			"op": "flip_y"
 		}
 	},
 	"LONG_VALLEY_STAIR_BR": {
-		"coords": [
-			5.0,
-			3.0
-		],
+		"coords": [5, 3],
 		"inherit": {
 			"from": "LONG_VALLEY_STAIR_TL",
 			"op": "flip_xy"
@@ -6772,10 +6259,7 @@
 	},
 	"TALL_RIDGE_TL": {
 		"block": "slope_mix",
-		"coords": [
-			6.0,
-			0.0
-		],
+		"coords": [6, 0],
 		"composite": [
 			"TALL_RIDGE_TL",
 			"CENTER"
@@ -6823,30 +6307,21 @@
 		}
 	},
 	"TALL_RIDGE_TR": {
-		"coords": [
-			7.0,
-			0.0
-		],
+		"coords": [7, 0],
 		"inherit": {
 			"from": "TALL_RIDGE_TL",
 			"op": "flip_x"
 		}
 	},
 	"TALL_RIDGE_BL": {
-		"coords": [
-			6.0,
-			1.0
-		],
+		"coords": [6, 1],
 		"inherit": {
 			"from": "TALL_RIDGE_TL",
 			"op": "flip_y"
 		}
 	},
 	"TALL_RIDGE_BR": {
-		"coords": [
-			7.0,
-			1.0
-		],
+		"coords": [7, 1],
 		"inherit": {
 			"from": "TALL_RIDGE_TL",
 			"op": "flip_xy"
@@ -6854,10 +6329,7 @@
 	},
 	"TALL_RIDGE_STAIR_TL": {
 		"block": "slope_mix",
-		"coords": [
-			6.0,
-			2.0
-		],
+		"coords": [6, 2],
 		"composite": [
 			"TALL_RIDGE_STAIR_TL",
 			"CENTER"
@@ -6901,30 +6373,21 @@
 		}
 	},
 	"TALL_RIDGE_STAIR_TR": {
-		"coords": [
-			7.0,
-			2.0
-		],
+		"coords": [7, 2],
 		"inherit": {
 			"from": "TALL_RIDGE_STAIR_TL",
 			"op": "flip_x"
 		}
 	},
 	"TALL_RIDGE_STAIR_BL": {
-		"coords": [
-			6.0,
-			3.0
-		],
+		"coords": [6, 3],
 		"inherit": {
 			"from": "TALL_RIDGE_STAIR_TL",
 			"op": "flip_y"
 		}
 	},
 	"TALL_RIDGE_STAIR_BR": {
-		"coords": [
-			7.0,
-			3.0
-		],
+		"coords": [7, 3],
 		"inherit": {
 			"from": "TALL_RIDGE_STAIR_TL",
 			"op": "flip_xy"
@@ -6932,10 +6395,7 @@
 	},
 	"STEEP_VALLEY_TL": {
 		"block": "slope_mix",
-		"coords": [
-			8.0,
-			0.0
-		],
+		"coords": [8, 0],
 		"composite": [
 			"STEEP_VALLEY_TL",
 			"CENTER"
@@ -6983,30 +6443,21 @@
 		}
 	},
 	"STEEP_VALLEY_TR": {
-		"coords": [
-			9.0,
-			0.0
-		],
+		"coords": [9, 0],
 		"inherit": {
 			"from": "STEEP_VALLEY_TL",
 			"op": "flip_x"
 		}
 	},
 	"STEEP_VALLEY_BL": {
-		"coords": [
-			8.0,
-			1.0
-		],
+		"coords": [8, 1],
 		"inherit": {
 			"from": "STEEP_VALLEY_TL",
 			"op": "flip_y"
 		}
 	},
 	"STEEP_VALLEY_BR": {
-		"coords": [
-			9.0,
-			1.0
-		],
+		"coords": [9, 1],
 		"inherit": {
 			"from": "STEEP_VALLEY_TL",
 			"op": "flip_xy"
@@ -7014,10 +6465,7 @@
 	},
 	"STEEP_VALLEY_STAIR_TL": {
 		"block": "slope_mix",
-		"coords": [
-			8.0,
-			2.0
-		],
+		"coords": [8, 2],
 		"composite": [
 			"STEEP_VALLEY_STAIR_TL",
 			"CENTER"
@@ -7061,30 +6509,21 @@
 		}
 	},
 	"STEEP_VALLEY_STAIR_TR": {
-		"coords": [
-			9.0,
-			2.0
-		],
+		"coords": [9, 2],
 		"inherit": {
 			"from": "STEEP_VALLEY_STAIR_TL",
 			"op": "flip_x"
 		}
 	},
 	"STEEP_VALLEY_STAIR_BL": {
-		"coords": [
-			8.0,
-			3.0
-		],
+		"coords": [8, 3],
 		"inherit": {
 			"from": "STEEP_VALLEY_STAIR_TL",
 			"op": "flip_y"
 		}
 	},
 	"STEEP_VALLEY_STAIR_BR": {
-		"coords": [
-			9.0,
-			3.0
-		],
+		"coords": [9, 3],
 		"inherit": {
 			"from": "STEEP_VALLEY_STAIR_TL",
 			"op": "flip_xy"
@@ -7092,10 +6531,7 @@
 	},
 	"STEEP_RIDGE_TL": {
 		"block": "slope_mix",
-		"coords": [
-			10.0,
-			0.0
-		],
+		"coords": [10, 0],
 		"composite": [
 			"STEEP_RIDGE_TL",
 			"CENTER"
@@ -7144,30 +6580,21 @@
 		}
 	},
 	"STEEP_RIDGE_TR": {
-		"coords": [
-			11.0,
-			0.0
-		],
+		"coords": [11, 0],
 		"inherit": {
 			"from": "STEEP_RIDGE_TL",
 			"op": "flip_x"
 		}
 	},
 	"STEEP_RIDGE_BL": {
-		"coords": [
-			10.0,
-			1.0
-		],
+		"coords": [10, 1],
 		"inherit": {
 			"from": "STEEP_RIDGE_TL",
 			"op": "flip_y"
 		}
 	},
 	"STEEP_RIDGE_BR": {
-		"coords": [
-			11.0,
-			1.0
-		],
+		"coords": [11, 1],
 		"inherit": {
 			"from": "STEEP_RIDGE_TL",
 			"op": "flip_xy"
@@ -7175,10 +6602,7 @@
 	},
 	"STEEP_RIDGE_STAIR_TL": {
 		"block": "slope_mix",
-		"coords": [
-			10.0,
-			2.0
-		],
+		"coords": [10, 2],
 		"composite": [
 			"STEEP_RIDGE_STAIR_TL",
 			"CENTER"
@@ -7223,30 +6647,21 @@
 		}
 	},
 	"STEEP_RIDGE_STAIR_TR": {
-		"coords": [
-			11.0,
-			2.0
-		],
+		"coords": [11, 2],
 		"inherit": {
 			"from": "STEEP_RIDGE_STAIR_TL",
 			"op": "flip_x"
 		}
 	},
 	"STEEP_RIDGE_STAIR_BL": {
-		"coords": [
-			10.0,
-			3.0
-		],
+		"coords": [10, 3],
 		"inherit": {
 			"from": "STEEP_RIDGE_STAIR_TL",
 			"op": "flip_y"
 		}
 	},
 	"STEEP_RIDGE_STAIR_BR": {
-		"coords": [
-			11.0,
-			3.0
-		],
+		"coords": [11, 3],
 		"inherit": {
 			"from": "STEEP_RIDGE_STAIR_TL",
 			"op": "flip_xy"
