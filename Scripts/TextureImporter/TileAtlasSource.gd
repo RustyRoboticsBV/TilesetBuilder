@@ -5,6 +5,8 @@ class_name TileAtlasSource;
 
 @export var tiles : Dictionary[String, Image];
 @export var masks : Dictionary[String, Image];
+@export var variant_tiles : Dictionary[String, Array];
+@export var variant_masks : Dictionary[String, Array];
 @export var user_tiles : Dictionary[String, Image];
 @export var user_masks : Dictionary[String, Image];
 @export var tile_w : int;
@@ -155,23 +157,41 @@ func _categorize(images : Dictionary[String, Image], database : TileDatabase) ->
 	user_tiles = {};
 	user_masks = {};
 	
+	# Sort keys alphabetically.
+	var keys : Array[String] = images.keys();
+	keys.sort();
+	
 	# Read and classify images from dictionary.
 	for key : String in images.keys():
 		if key.begins_with("MASK_"):
-			var tile_key : String = key.substr(5);
-			if database.has_tile(tile_key):
-				masks[tile_key] = images[key];
-				print("Found part mask: " + tile_key);
+			var suffix : String = key.substr(5);
+			if database.has_tile(suffix):
+				masks[suffix] = images[key];
+				print("Found mask: " + suffix);
 			else:
-				user_masks[tile_key] = images[key];
-				print("Found user-defined mask: " + tile_key);
+				var id : String = _is_variant(suffix, database.keys());
+				if id != suffix:
+					if !variant_masks.has(id):
+						variant_masks[id] = [];
+					variant_masks[id].append(images[key]);
+					print("Found variant mask: " + id + " " + suffix.remove_chars(id));
+				else:
+					user_masks[id] = images[key];
+					print("Found user-defined mask: " + id);
 		else:
 			if database.has_tile(key):
 				tiles[key] = images[key]
 				print("Found tile: " + key);
 			else:
-				user_tiles[key] = images[key];
-				print("Found user-defined tile: " + key);
+				var id : String = _is_variant(key, database.keys());
+				if id != key:
+					if !variant_tiles.has(id):
+						variant_tiles[id] = [];
+					variant_tiles[id].append(images[key]);
+					print("Found variant tile: " + id + " " + key.remove_chars(id));
+				else:
+					user_tiles[key] = images[key];
+					print("Found user-defined tile: " + key);
 	
 	# Sort built-in tiles by id.
 	var temp : Dictionary[String, Image] = {};
@@ -179,11 +199,13 @@ func _categorize(images : Dictionary[String, Image], database : TileDatabase) ->
 		if tiles.has(id):
 			temp[id] = tiles[id];
 	tiles = temp;
-	
-	# Sort user-defined tiles alphabetically.
-	temp = {};
-	var sorted_user_ids = user_tiles.keys()
-	sorted_user_ids.sort();
-	for id in sorted_user_ids:
-		temp[id] = user_tiles[id];
-	user_tiles = temp;
+
+## Check if a key matches a tile variant ID.
+## Returns the ID of the main tile if it's a variant. Else, it returns the key as-is.
+func _is_variant(key: String, ids: Array) -> String:
+	for id : String in ids:
+		if key.begins_with(id):
+			var number : String = key.substr(id.length());
+			if number.is_valid_int():
+				return id;
+	return key;
