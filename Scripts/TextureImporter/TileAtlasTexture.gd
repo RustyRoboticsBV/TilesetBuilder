@@ -84,8 +84,6 @@ func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database 
 		atlas.generate_mipmaps();
 	set_image(atlas);
 
-
-
 ## Create a block texture and store it. Does nothing if the block had already been allocated.
 func _allocate_block(name : String, tile_w : int, tile_h : int) -> void:
 	# Do nothing if the block has already been allocated.

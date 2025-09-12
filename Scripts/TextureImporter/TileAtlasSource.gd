@@ -3,10 +3,10 @@ class_name TileAtlasSource;
 
 @warning_ignore_start("shadowed_variable")
 
-@export var parts : Dictionary[String, Image];
-@export var part_masks : Dictionary[String, Image];
-@export var prefabs : Dictionary[String, Image];
+@export var tiles : Dictionary[String, Image];
+@export var masks : Dictionary[String, Image];
 @export var user_tiles : Dictionary[String, Image];
+@export var user_masks : Dictionary[String, Image];
 @export var tile_w : int;
 @export var tile_h : int;
 @export var margin : int;
@@ -43,8 +43,6 @@ func load_from_zip(file_path : String, database : TileDatabase, margin : int) ->
 	
 	# Categorize images.
 	_categorize(images, database);
-
-
 
 ## Load all the images from a ZIP file and return them as a dictionary.
 ## Unrecognized file types are ignored.
@@ -152,27 +150,40 @@ func _add_margins(source_image: Image, margin: int) -> Image:
 ## Categorize the images in a dictionary and store them.
 func _categorize(images : Dictionary[String, Image], database : TileDatabase) -> void:
 	# Clear current images.
-	parts = {};
-	part_masks = {};
-	prefabs = {};
+	tiles = {};
+	masks = {};
 	user_tiles = {};
+	user_masks = {};
 	
 	# Read and classify images from dictionary.
 	for key : String in images.keys():
-		if key.begins_with("PART_"):
-			parts[key.substr(5)] = images[key];
-			print("Found part: " + key.substr(5));
-		elif key.begins_with("MASK_"):
-			part_masks[key.substr(5)] = images[key];
-			print("Found part mask: " + key.substr(5));
-		elif database.has_tile(key):
-			prefabs[key] = images[key]
-			print("Found tile: " + key);
+		if key.begins_with("MASK_"):
+			var tile_key : String = key.substr(5);
+			if database.has_tile(tile_key):
+				masks[tile_key] = images[key];
+				print("Found part mask: " + tile_key);
+			else:
+				user_masks[tile_key] = images[key];
+				print("Found user-defined mask: " + tile_key);
 		else:
-			user_tiles[key] = images[key];
-			print("Found user-defined tile: " + key);
+			if database.has_tile(key):
+				tiles[key] = images[key]
+				print("Found tile: " + key);
+			else:
+				user_tiles[key] = images[key];
+				print("Found user-defined tile: " + key);
 	
-	# Special case: if the CENTER tile's part image is not present, but the prefab image is, use the prefab as the part.
-	if parts.size() > 0 and prefabs.has("CENTER") and !parts.has("CENTER"):
-		parts["CENTER"] = prefabs["CENTER"].duplicate();
-		print("Used CENTER prefab as CENTER part.");
+	# Sort built-in tiles by id.
+	var temp : Dictionary[String, Image] = {};
+	for id in database.keys():
+		if tiles.has(id):
+			temp[id] = tiles[id];
+	tiles = temp;
+	
+	# Sort user-defined tiles alphabetically.
+	temp = {};
+	var sorted_user_ids = user_tiles.keys()
+	sorted_user_ids.sort();
+	for id in sorted_user_ids:
+		temp[id] = user_tiles[id];
+	user_tiles = temp;

@@ -66,20 +66,16 @@ func _import(source_file: String, save_path: String, options: Dictionary, _platf
 	source.load_from_zip(source_file, db, options["margin_size"]);
 	
 	print();
-	print("Generating missing parts...");
-	var generator_parts = TileAtlasGenerator.new(source, db, "parts");
+	print("Generating missing tiles...");
+	var generator_tiles = TileAtlasGenerator.new(source, db, "tiles");
 	
 	print();
 	print("Generating missing part masks...");
 	var generator_masks = TileAtlasGenerator.new(source, db, "masks");
 	
 	print();
-	print("Generating missing prefabs...");
-	var generator_prefabs = TileAtlasGenerator.new(source, db, "prefabs");
-	
-	print();
 	print("Compositing tile images...");
-	var compositor = TileAtlasCompositor.new(source, generator_parts, generator_masks, generator_prefabs, db);
+	var compositor = TileAtlasCompositor.new(source, generator_tiles, generator_masks);
 	
 	print();
 	print("Building texture...");

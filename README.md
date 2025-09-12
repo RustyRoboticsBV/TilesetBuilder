@@ -8,7 +8,7 @@ A ZIP tileset texture importer & tile generator plugin for the Godot game engine
 - Generate tileset resources with painted terrain and physics shapes.
   - Supports the [better terrain](https://github.com/Portponky/better-terrain) plugin.
 
-Each image in the ZIP corresponds to one tile. In order to be recognized, their filenames must conform to specific values (see the images below). Each tile can be provided as either a fully-finished image, or as a part + mask image pair that will be used to build the tile at import time.
+Each image in the ZIP corresponds to a tile. In order to be recognized, their filenames must conform to specific values (see the images below). Each tile can be provided as either a single image, or as a tile + mask image pair that will be used to build the tile at import time.
 
 ## Install Guide
 1. Download the latest release from the 'Releases' page.
@@ -56,27 +56,26 @@ Their filenames are as follows:
 ![The inter-slope link tiles and their identifiers.](LinkMixReference.png)
 
 ### User-Defined Tiles
-You can add custom tiles by adding images with filenames that are not in the image above. These tiles are placed below the standard tileset area. When you generate a tileset resource, user-defined tiles will not get their terrain or physics shape painted.
+You can add custom tiles by adding images with filenames that are not in the image above. These tiles are placed below the standard and slope tileset blocks, in alphabetical order. When you generate a tileset resource, user-defined tiles will not get their terrain or physics shape painted.
 
 ## Tile Generation
-Tiles can be loaded from a ZIP archive in four ways, in the following order:
-1. If the tile is present in the ZIP: load it directly.
-2. If its parts are present in the ZIP: construct it from parts.
-3. If its parts can be derived from other parts: construct it from derived parts.
-4. If possible, derive it from other loaded tiles in the tileset.
+Tiles can be loaded from a ZIP archive in three ways, in the following order:
+1. If the tile AND its mask are present in the ZIP: composite it with the `CENTER` tile.
+2. If only the tile is present in the ZIP: load it directly.
+3. Otherwise, derive it (and its mask) from other loaded tiles in the tileset (if possible).
 
-This allows you to make your archive as complex as it needs to be.
+This allows you to make your archives as complex as they need to be. For example, if your `EDGE_T` and `EDGE_L` combine into an acceptable `NOOK_TL` tile, there's no need to include it in your archive.
 
-### Parts
-Often, you don't want a tile to be directly loaded from a single image, but instead use a foreground and background image. If you prefix your tile image with `PART_`, the importer will treat as a foreground image, which will get overlayed on top of a background image (which is always the `CENTER` tile). You can control the compositing process on a per-pixel basis using a `MASK_` image.
+### Masks
+Often, you don't want a tile to be directly loaded from a single image, but use the `CENTER` tile as a background and overlay something on top of it. To do this, you must define a `MASK_` image.
 
 For example:
 
 ![The slope tiles and their identifiers.](Compositing.png)
 
-Here, the `EDGE_T` tile is created by overlaying the `PART_EDGE_T` image over the `PART_CENTER` image. The `MASK_EDGE_T` controls how blending is done: white pixels replace the background pixels, and black pixels are alpha-blended with the background pixels.
+Here, the final `EDGE_T` tile is created by overlaying the `EDGE_T` image over the `CENTER` image. The `MASK_EDGE_T` controls how blending is done: the white pixels replace the background pixels, and the black pixels are alpha-blended with the background pixels.
 
-Your tileset archives can have both prefab tiles and part images. If a tile has both a prefab image and part images available, then the prefab is always used (but the parts may still be used to generate other tiles).
+Mask images can be derived from other masks like regular tile images. However, masks will not be used for a tile if it's present in the ZIP archive, but does not explicitly define a mask image.
 
 ## Planned Featuress
 - Adding support for tile variants.

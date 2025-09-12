@@ -4,58 +4,55 @@ class_name TileAtlasCompositor;
 @warning_ignore_start("shadowed_variable")
 
 @export var tiles : Dictionary[String, Image] = {};
-@export var source : TileAtlasSource;
-@export var parts_generator : TileAtlasGenerator;
-@export var parts_masks_generator : TileAtlasGenerator;
-@export var prefabs_generator : TileAtlasGenerator;
+@export var user_tiles : Dictionary[String, Image] = {};
 
-func _init(source : TileAtlasSource, parts : TileAtlasGenerator, part_masks : TileAtlasGenerator, prefabs : TileAtlasGenerator, database : TileDatabase) -> void:
-	self.source = source;
-	self.parts_generator = parts;
-	self.parts_masks_generator = part_masks;
-	self.prefabs_generator = prefabs;
+func _init(source : TileAtlasSource, tiles : TileAtlasGenerator, masks : TileAtlasGenerator) -> void:
+	# Find center tile.
+	var background : Image = null;
+	if tiles.images.has("CENTER"):
+		background = tiles.images["CENTER"];
 	
-	for id in database.keys():
-		if source.prefabs.has(id):
-			tiles[id] = source.prefabs[id].duplicate();
-			print("No composite needed for " + id + ".");
-		
-		elif !_try_composite(id, parts, part_masks, database) and prefabs.tiles.has(id):
-			tiles[id] = prefabs.tiles[id].duplicate();
-			print("Could not composite " + id + ", used prefab tile instead.");
+	# Composite tiles.
+	self.tiles = _handle_tiles(tiles.images, masks.images, background);
+	self.user_tiles = _handle_tiles(source.user_tiles, source.user_masks, background);
 
-
-
-func _try_composite(id : String, parts : TileAtlasGenerator, masks : TileAtlasGenerator, database : TileDatabase) -> bool:
-	var tile_info : Dictionary = database.get_tile(id);
-	if !tile_info.has("composite"):
-		return false;
-
-	var used_parts : Array = tile_info["composite"];
-	var image : Image = null;
-	for i in range(used_parts.size() - 1, -1, -1):
-		var part = used_parts[i];
-		if !parts.tiles.has(part):
-			return false;
-		
-		if image == null:
-			image = parts.tiles[part].duplicate();
-		else:
-			if masks.tiles.has(part):
-				_composite(parts.tiles[part], masks.tiles[part], image);
+## Composite all tiles in a dictionary onto some background tile, using a mask dictionary.
+func _handle_tiles(tiles : Dictionary[String, Image], masks : Dictionary[String, Image], background : Image) -> Dictionary[String, Image]:
+	var results : Dictionary[String, Image] = {};
+	
+	for id in tiles.keys():
+		# If a mask exists, try to composite.
+		if masks.has(id):
+			var result : Image = _try_composite(tiles[id], masks[id], background);
+			if result != null:
+				results[id] = result;
+				print("Composited " + id + ".");
 			else:
-				_composite(parts.tiles[part], null, image);
+				results[id] = tiles.images[id].duplicate();
+				print("Could not composite " + id + ".");
 	
-	print("Composited " + id + " from " + str(used_parts) +  ".");
-	tiles[id] = image;
-	return true;
+		# Else, load the tile directly.
+		else:
+			results[id] = tiles[id];
+			print("No composite needed for " + id + ".");
+	
+	return results;
 
+## Try to composite a tile together overlaying it over the CENTER tile.
+func _try_composite(tile : Image, mask : Image, background : Image) -> Image:
+	if tile == null:
+		return null;
+	elif tile == background:
+		return background;
+	elif mask == null or background == null:
+		return tile;
+	else:
+		var result : Image = background.duplicate();
+		_composite(tile, mask, result);
+		return result;
+
+## Composite one image over another. If a mask is used, then black pixels are alpha-blended and white pixels replace the second image.
 func _composite(src_image : Image, src_mask : Image, dst_image : Image) -> void:
-	if (src_mask != null and src_image.get_size() != src_mask.get_size()) \
-	 or src_image.get_size() != dst_image.get_size():
-		push_error("Cannot composite images that are not of the same size!");
-		return;
-	
 	var width : int = dst_image.get_width();
 	var height : int = dst_image.get_height();
 	for y in height:
