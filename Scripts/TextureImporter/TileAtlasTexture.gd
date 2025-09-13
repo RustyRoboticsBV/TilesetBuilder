@@ -12,6 +12,7 @@ var blocks : Dictionary[String, Image] = {};
 @export var tile_size : Vector2i;
 @export var tile_coords : Dictionary[String, Vector2i] = {};
 @export var block_coords : Dictionary[String, Vector2i] = {};
+@export var variant_coords : Dictionary[String, Vector2i] = {};
 @export var margin_size : int;
 
 func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database : TileDatabase, use_mipmaps : bool) -> void:
@@ -51,6 +52,7 @@ func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database 
 		var user_height : int = ceili(source.user_tiles.size() / 12.0);
 		blocks["user"] = Image.create(12 * tile_w, user_height * tile_h, false, Image.FORMAT_RGBA8);
 		print("Allocating block: user");
+		block_coords["user"] = Vector2i(0, current_h);
 		current_h += blocks["user"].get_height() / tile_h;
 		var i : int = 0;
 		for id in source.user_tiles:
@@ -70,6 +72,7 @@ func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database 
 		var user_height : int = ceili(variants.size() / 12.0);
 		blocks["variant"] = Image.create(12 * tile_w, user_height * tile_h, use_mipmaps, Image.FORMAT_RGBA8);
 		print("Allocating block: variant");
+		block_coords["variant"] = Vector2i(0, current_h);
 		current_h += blocks["variant"].get_height() / tile_h;
 		var i : int = 0;
 		for variant in variants.keys():
@@ -77,6 +80,7 @@ func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database 
 			var y : int = i / 12;
 			i += 1;
 			print("Placing " + variant + " at (" + str(x) + ", " + str(y) + ") on block variant");
+			variant_coords[variant] = Vector2i(x, y);
 			blocks["variant"].blit_rect(variants[variant], Rect2i(0, 0, tile_w, tile_h), Vector2i(x * tile_w, y * tile_h));
 	
 	# Merge block images into one image.

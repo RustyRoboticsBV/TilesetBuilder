@@ -30,12 +30,13 @@ static func _handle_tiles(tiles : Dictionary[String, Image], masks : Dictionary[
 				results[id] = result;
 				print("Composited " + id + ".");
 			else:
-				results[id] = tiles.images[id].duplicate();
+				results[id] = tiles[id];
 				print("Could not composite " + id + ".");
 	
 		# Else, load the tile directly.
 		else:
 			results[id] = tiles[id];
+			print("No need to composite " + id + ".");
 	
 	return results;
 
@@ -51,8 +52,11 @@ static func _handle_variants(tiles : Dictionary[String, Dictionary], masks : Dic
 					results[id][number] = result;
 					print("Composited variant " + id + " " + number + ".");
 				else:
-					results[id][number] = tiles.images[id].duplicate();
+					results[id][number] = tiles[id][number];
 					print("Could not composite variant " + id + ".");
+			else:
+				print("No need to composite " + id + number + ".");
+				results[id][number] = tiles[id][number];
 	return results;
 
 ## Try to composite a tile together overlaying it over the CENTER tile.
