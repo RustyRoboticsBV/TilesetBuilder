@@ -70,7 +70,7 @@ func _import(source_file: String, save_path: String, options: Dictionary, _platf
 	var generator_tiles = TileAtlasGenerator.new(source, db, "tiles");
 	
 	print();
-	print("Generating missing part masks...");
+	print("Generating missing masks...");
 	var generator_masks = TileAtlasGenerator.new(source, db, "masks");
 	
 	print();

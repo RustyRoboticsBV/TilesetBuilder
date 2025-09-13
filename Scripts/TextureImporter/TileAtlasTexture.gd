@@ -132,7 +132,7 @@ static func _get_block_size(name : String) -> Vector2i:
 ##
 ## Transparent pixels have color in their RGB channels, which can lead to weird edges when these images are scaled.
 ## This function fixes that by filling the RGB channels of transparent pixels with the nearest non-transparent pixel's color, while preserving alpha.
-func _fix_alpha_border(image : Image) -> void:
+static func _fix_alpha_border(image : Image) -> void:
 	for x in image.get_width():
 		for y in image.get_height():
 			var pixel = image.get_pixel(x, y);
@@ -142,7 +142,7 @@ func _fix_alpha_border(image : Image) -> void:
 				image.set_pixel(x, y, opaque);
 
 ## Return the nearest opaque pixel on an image relative to some pixel coordinate.
-func _get_nearest_opaque_pixel(image: Image, x: int, y: int) -> Color:
+static func _get_nearest_opaque_pixel(image: Image, x: int, y: int) -> Color:
 	# Get dimensions.
 	var width : int = image.get_width();
 	var height : int = image.get_height();

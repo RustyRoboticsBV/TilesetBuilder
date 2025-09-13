@@ -4,6 +4,7 @@ class_name TileAtlasCompositor;
 @warning_ignore_start("shadowed_variable")
 
 @export var tiles : Dictionary[String, Image] = {};
+@export var variant_tiles : Dictionary[String, Dictionary] = {};
 @export var user_tiles : Dictionary[String, Image] = {};
 
 func _init(source : TileAtlasSource, tiles : TileAtlasGenerator, masks : TileAtlasGenerator) -> void:
@@ -14,10 +15,11 @@ func _init(source : TileAtlasSource, tiles : TileAtlasGenerator, masks : TileAtl
 	
 	# Composite tiles.
 	self.tiles = _handle_tiles(tiles.images, masks.images, background);
+	self.variant_tiles = _handle_variants(source.variant_tiles, source.variant_masks, background);
 	self.user_tiles = _handle_tiles(source.user_tiles, source.user_masks, background);
 
 ## Composite all tiles in a dictionary onto some background tile, using a mask dictionary.
-func _handle_tiles(tiles : Dictionary[String, Image], masks : Dictionary[String, Image], background : Image) -> Dictionary[String, Image]:
+static func _handle_tiles(tiles : Dictionary[String, Image], masks : Dictionary[String, Image], background : Image) -> Dictionary[String, Image]:
 	var results : Dictionary[String, Image] = {};
 	
 	for id in tiles.keys():
@@ -34,12 +36,27 @@ func _handle_tiles(tiles : Dictionary[String, Image], masks : Dictionary[String,
 		# Else, load the tile directly.
 		else:
 			results[id] = tiles[id];
-			print("No composite needed for " + id + ".");
 	
 	return results;
 
+## Composite all variants in a dictionary onto some background tile, using a mask dictionary.
+static func _handle_variants(tiles : Dictionary[String, Dictionary], masks : Dictionary[String, Dictionary], background : Image) -> Dictionary[String, Dictionary]:
+	var results : Dictionary[String, Dictionary] = {};
+	for id in tiles.keys():
+		results[id] = {};
+		for number in tiles[id].keys():
+			if masks.has(id) and masks[id].has(number):
+				var result : Image = _try_composite(tiles[id][number], masks[id][number], background);
+				if result != null:
+					results[id][number] = result;
+					print("Composited variant " + id + " " + number + ".");
+				else:
+					results[id][number] = tiles.images[id].duplicate();
+					print("Could not composite variant " + id + ".");
+	return results;
+
 ## Try to composite a tile together overlaying it over the CENTER tile.
-func _try_composite(tile : Image, mask : Image, background : Image) -> Image:
+static func _try_composite(tile : Image, mask : Image, background : Image) -> Image:
 	if tile == null:
 		return null;
 	elif tile == background:
@@ -52,7 +69,7 @@ func _try_composite(tile : Image, mask : Image, background : Image) -> Image:
 		return result;
 
 ## Composite one image over another. If a mask is used, then black pixels are alpha-blended and white pixels replace the second image.
-func _composite(src_image : Image, src_mask : Image, dst_image : Image) -> void:
+static func _composite(src_image : Image, src_mask : Image, dst_image : Image) -> void:
 	var width : int = dst_image.get_width();
 	var height : int = dst_image.get_height();
 	for y in height:

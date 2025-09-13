@@ -5,8 +5,8 @@ class_name TileAtlasSource;
 
 @export var tiles : Dictionary[String, Image];
 @export var masks : Dictionary[String, Image];
-@export var variant_tiles : Dictionary[String, Array];
-@export var variant_masks : Dictionary[String, Array];
+@export var variant_tiles : Dictionary[String, Dictionary];
+@export var variant_masks : Dictionary[String, Dictionary];
 @export var user_tiles : Dictionary[String, Image];
 @export var user_masks : Dictionary[String, Image];
 @export var tile_w : int;
@@ -171,10 +171,11 @@ func _categorize(images : Dictionary[String, Image], database : TileDatabase) ->
 			else:
 				var id : String = _is_variant(suffix, database.keys());
 				if id != suffix:
+					var number : String = suffix.substr(id.length());
 					if !variant_masks.has(id):
-						variant_masks[id] = [];
-					variant_masks[id].append(images[key]);
-					print("Found variant mask: " + id + " " + suffix.remove_chars(id));
+						variant_masks[id] = {};
+					variant_masks[id][number] = images[key];
+					print("Found variant mask: " + id + " " + number);
 				else:
 					user_masks[id] = images[key];
 					print("Found user-defined mask: " + id);
@@ -185,10 +186,11 @@ func _categorize(images : Dictionary[String, Image], database : TileDatabase) ->
 			else:
 				var id : String = _is_variant(key, database.keys());
 				if id != key:
+					var number : String = key.substr(id.length());
 					if !variant_tiles.has(id):
-						variant_tiles[id] = [];
-					variant_tiles[id].append(images[key]);
-					print("Found variant tile: " + id + " " + key.remove_chars(id));
+						variant_tiles[id] = {};
+					variant_tiles[id][number] = images[key];
+					print("Found variant tile: " + id + " " + number);
 				else:
 					user_tiles[key] = images[key];
 					print("Found user-defined tile: " + key);
