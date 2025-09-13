@@ -19,8 +19,8 @@ func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database 
 	
 	# Store tile size.
 	tile_size = Vector2i(source.tile_w, source.tile_h);
-	var tile_w = tile_size.x;
-	var tile_h = tile_size.y;
+	var tile_w : int = tile_size.x;
+	var tile_h : int = tile_size.y;
 	margin_size = source.margin;
 	
 	# Place tiles.
@@ -45,13 +45,13 @@ func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database 
 	for id in blocks.keys():
 		block_coords[id] = Vector2i(0, current_h);
 		current_h += _get_block_size(id).y;
-	block_coords["user"] = Vector2i(0, current_h);
 	
 	# Add user-defined tiles.
 	if source.user_tiles.size() > 0:
 		var user_height : int = ceili(source.user_tiles.size() / 12.0);
 		blocks["user"] = Image.create(12 * tile_w, user_height * tile_h, false, Image.FORMAT_RGBA8);
 		print("Allocating block: user");
+		current_h += blocks["user"].get_height() / tile_h;
 		var i : int = 0;
 		for id in source.user_tiles:
 			var x : int = i % 12;
@@ -59,16 +59,28 @@ func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database 
 			i += 1;
 			print("Placing " + id + " at (" + str(x) + ", " + str(y) + ") on block user");
 			tile_coords[id] = Vector2i(x, y);
-			blocks["user"].blit_rect(source.user_tiles[id], Rect2(0, 0, tile_w, tile_h), Vector2i(x * tile_w, y * tile_h));
+			blocks["user"].blit_rect(source.user_tiles[id], Rect2i(0, 0, tile_w, tile_h), Vector2i(x * tile_w, y * tile_h));
+	
+	# Add variant tiles.
+	var variants : Dictionary[String, Image] = {};
+	for id in compositor.variant_tiles.keys():
+		for number in compositor.variant_tiles[id].keys():
+			variants[id + number] = compositor.variant_tiles[id][number];
+	if variants.size() > 0:
+		var user_height : int = ceili(variants.size() / 12.0);
+		blocks["variant"] = Image.create(12 * tile_w, user_height * tile_h, use_mipmaps, Image.FORMAT_RGBA8);
+		print("Allocating block: variant");
+		current_h += blocks["variant"].get_height() / tile_h;
+		var i : int = 0;
+		for variant in variants.keys():
+			var x : int = i % 12;
+			var y : int = i / 12;
+			i += 1;
+			print("Placing " + variant + " at (" + str(x) + ", " + str(y) + ") on block variant");
+			blocks["variant"].blit_rect(variants[variant], Rect2i(0, 0, tile_w, tile_h), Vector2i(x * tile_w, y * tile_h));
 	
 	# Merge block images into one image.
-	var total_h = 0;
-	for block : Image in blocks.values():
-		total_h += block.get_height();
-	if blocks.has("user"):
-		block_coords["user"] = Vector2i(0, (total_h - blocks["user"].get_height()) / tile_h);
-	
-	var atlas = Image.create(12 * tile_w, total_h, use_mipmaps, Image.FORMAT_RGBA8);
+	var atlas = Image.create(12 * tile_w, current_h * tile_h, use_mipmaps, Image.FORMAT_RGBA8);
 	var block_y : int = 0;
 	for block : Image in blocks.values():
 		atlas.blit_rect(block, Rect2i(Vector2i.ZERO, block.get_size()), Vector2i(0, block_y));
