@@ -74,42 +74,66 @@ static func _create_tileset(atlas : TileAtlasTexture) -> TileSet:
 	for id in atlas.tile_coords.keys():
 		_setup_tile(atlas, tileset, source, db, bt, layers, id);
 	
+	# Create variant tiles.
+	for id in atlas.variant_coords.keys():
+		_setup_tile(atlas, tileset, source, db, bt, layers, id);
+	
 	return tileset;
 
 static func _setup_tile(atlas : TileAtlasTexture, tileset : TileSet, source : TileSetSource, db : TileDatabase, bt, layers, id : String):
 	var tile_w : int = atlas.tile_size.x;
 	var tile_h : int = atlas.tile_size.y;
 	
-	var block : String = db.get_tile(id)["block"] if db.has_tile(id) else "user";
-	var coords : Vector2i = atlas.block_coords[block] + atlas.tile_coords[id];
+	# Figure out block.
+	var source_id : String = id;
+	var block : String = "";
+	var source_block : String = "";
+	var coords : Vector2i = Vector2i.ONE * -1;
+	var is_variant : bool = false;
+	if db.has_tile(id):
+		block = db.get_tile(id)["block"];
+		source_block = block;
+		coords = atlas.block_coords[block] + atlas.tile_coords[source_id];
+	else:
+		var try_source_id : String = _get_variant_source(id, db.keys());
+		if source_id == "":
+			block = "user";
+			source_block = block;
+			coords = atlas.block_coords[block] + atlas.tile_coords[source_id];
+		else:
+			source_id = try_source_id;
+			block = "variant";
+			source_block = db.get_tile(source_id)["block"];
+			coords = atlas.block_coords[block] + atlas.variant_coords[id];
+			is_variant = true;
 	
 	# Only set built-in terrain peering bits for tiles in the main block.
 	var peering_bits : Dictionary = {};
-	if block == "main":
-		peering_bits = db.get_tile(id)["peering_bits"];
+	if source_block == "main":
+		peering_bits = db.get_tile(source_id)["peering_bits"];
 	
 	# Get physics shape.
 	var physics_shape = DEFAULT_PHYS_SHAPE;
-	if block == "user":
+	if source_block == "user":
 		physics_shape = {};
-	elif db.get_tile(id).has("physics_shape"):
-		physics_shape = db.get_tile(id)["physics_shape"];
+	elif db.get_tile(source_id).has("physics_shape"):
+		physics_shape = db.get_tile(source_id)["physics_shape"];
+	
+	# Get probability.
+	var probability : float = 0.0 if is_variant else 1.0;
 	
 	print("Creating tile " + id + " at " + str(coords));
 	_create_tile(source, coords.x, coords.y, tile_w, tile_h, \
-	  0 if block == "main" else -1, peering_bits, physics_shape);
+	  0 if source_block == "main" else -1, peering_bits, physics_shape, probability);
 	
 	# Better terrain support.
-	if bt != null and block != "user":
-		var db_data = db.get_tile(id);
-			
-		var block_id : String = db_data["block"];
-		var block_coords : Vector2i = atlas.block_coords[block_id];
-		var tile_coords : Vector2i = block_coords + atlas.tile_coords[id];
-		var tile_data : TileData = source.get_tile_data(tile_coords, 0);
+	if bt != null and source_block != "user":
+		var db_data = db.get_tile(source_id);
+		
+		var tile_data : TileData = source.get_tile_data(coords, 0);
 		
 		# Set tile terrain layer.
-		var tile_layer = layers.find(_get_tile_layer(id, db));
+		var tile_layer = layers.find(_get_tile_layer(source_id, db));
 		if tile_layer != -1:
 			bt.set_tile_terrain_type(tileset, tile_data, tile_layer);
 		
@@ -122,7 +146,7 @@ static func _setup_tile(atlas : TileAtlasTexture, tileset : TileSet, source : Ti
 					if layer != -1:
 						bt.add_tile_peering_type(tileset, tile_data, side, layer);
 
-static func _create_tile(source : TileSetSource, x : int, y : int, width : int, height : int, terrain : int, peering_bits : Dictionary, physics_shape : Dictionary):
+static func _create_tile(source : TileSetSource, x : int, y : int, width : int, height : int, terrain : int, peering_bits : Dictionary, physics_shape : Dictionary, probability : float):
 	# Create tile.
 	source.create_tile(Vector2i(x, y));
 	var tile : TileData = source.get_tile_data(Vector2i(x, y), 0);
@@ -130,6 +154,9 @@ static func _create_tile(source : TileSetSource, x : int, y : int, width : int, 
 	# Set terrain.
 	tile.terrain_set = 0;
 	tile.terrain = terrain;
+	
+	# Set probability.
+	tile.probability = probability;
 	
 	# Set peering bits.
 	_set_peering_bit(tile, PeeringBit.TL, peering_bits.has("TL"));
@@ -258,11 +285,11 @@ static func _get_tile_layer(id : String, db : TileDatabase) -> String:
 			return "none";
 
 
-## Get the source ID of a variant tile. Returns the input value if the tile is not a variant.
+## Get the source ID of a variant tile. Returns the empty string if the tile is not a variant.
 static func _get_variant_source(key: String, ids: Array) -> String:
 	for id : String in ids:
 		if key.begins_with(id):
 			var number : String = key.substr(id.length());
 			if number.is_valid_int():
 				return id;
-	return key;
+	return "";
