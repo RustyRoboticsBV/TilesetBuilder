@@ -58,6 +58,11 @@ Their filenames are as follows:
 ### User-Defined Tiles
 You can add custom tiles by adding images with filenames that are not in the image above. These tiles are placed below the standard and slope tileset blocks, in alphabetical order. When you generate a tileset resource, user-defined tiles will not get their terrain or physics shape painted.
 
+### Variant Tiles
+Often you want to have the ability to have multiple variations of common tiles. You can do this by adding a number to your filenames, for example `CENTER01.png`.
+
+Variant tiles are painted with the same terrain and physics shape as the main tile, but have their probability set to 0. They are placed at the very bottom of the tileset.
+
 ## Tile Generation
 Tiles can be loaded from a ZIP archive in three ways, in the following order:
 1. If the tile AND its mask are present in the ZIP: composite it with the `CENTER` tile.
@@ -77,8 +82,7 @@ Here, the final `EDGE_T` tile is created by overlaying the `EDGE_T` image over t
 
 Mask images can be derived from other masks like regular tile images. However, masks will not be used for a tile if it's present in the ZIP archive, but does not explicitly define a mask image.
 
-## Planned Featuress
-- Adding support for tile variants.
+## Planned Features
 - Making the generation process configurable in the import window: currently the process is completely fixed and untransparent, limiting its usefulness.
 
 ## Known Issues
