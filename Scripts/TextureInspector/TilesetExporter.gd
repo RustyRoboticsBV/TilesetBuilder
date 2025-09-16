@@ -84,7 +84,7 @@ static func _create_tileset(atlas : TileAtlasTexture) -> TileSet:
 
 
 ## Try to get the better-terrain plugin. Returns null if the plugin could not be loaded.
-static func _try_get_better_terrain(tileset : TileSet, terrain_types : Array[String]) -> Variant:
+static func _try_get_better_terrain(tileset : TileSet, terrain_types : Array[String]) -> Node:
 	if ProjectSettings.has_setting("autoload/BetterTerrain"):
 		# Get script path.
 		var script_path : String = ProjectSettings.get_setting("autoload/BetterTerrain");
@@ -168,8 +168,8 @@ static func _get_layer_color(layer : String) -> Color:
 
 
 
-# Create a tile and its better-terrain data (if the plugin was located).
-static func _setup_tile(better_terrain, atlas : TileAtlasTexture, tileset : TileSet, source : TileSetSource, db : TileDatabase, id : String, terrain_types : Array[String]) -> void:
+## Create a tile and its better-terrain data (if the plugin was located).
+static func _setup_tile(better_terrain : Node, atlas : TileAtlasTexture, tileset : TileSet, source : TileSetSource, database : TileDatabase, id : String, terrain_types : Array[String]) -> void:
 	var tile_w : int = atlas.tile_size.x;
 	var tile_h : int = atlas.tile_size.y;
 	
@@ -179,12 +179,12 @@ static func _setup_tile(better_terrain, atlas : TileAtlasTexture, tileset : Tile
 	var source_block : String = "";
 	var coords : Vector2i = Vector2i.ONE * -1;
 	var is_variant : bool = false;
-	if db.has_tile(id):
-		block = db.get_tile(id)["block"];
+	if database.has_tile(id):
+		block = database.get_tile(id)["block"];
 		source_block = block;
 		coords = atlas.block_coords[block] + atlas.tile_coords[source_id];
 	else:
-		var try_source_id : String = _get_variant_source(id, db.keys());
+		var try_source_id : String = _get_variant_source(id, database.keys());
 		if source_id == "":
 			block = "user";
 			source_block = block;
@@ -192,21 +192,21 @@ static func _setup_tile(better_terrain, atlas : TileAtlasTexture, tileset : Tile
 		else:
 			source_id = try_source_id;
 			block = "variant";
-			source_block = db.get_tile(source_id)["block"];
+			source_block = database.get_tile(source_id)["block"];
 			coords = atlas.block_coords[block] + atlas.variant_coords[id];
 			is_variant = true;
 	
 	# Only set built-in terrain peering bits for tiles in the main block.
 	var peering_bits : Dictionary = {};
 	if source_block == "main":
-		peering_bits = db.get_tile(source_id)["peering_bits"];
+		peering_bits = database.get_tile(source_id)["peering_bits"];
 	
 	# Get physics shape.
 	var physics_shape : Dictionary = DEFAULT_PHYS_SHAPE;
 	if source_block == "user":
 		physics_shape = {};
-	elif db.get_tile(source_id).has("physics_shape"):
-		physics_shape = db.get_tile(source_id)["physics_shape"];
+	elif database.get_tile(source_id).has("physics_shape"):
+		physics_shape = database.get_tile(source_id)["physics_shape"];
 	
 	# Get probability.
 	var probability : float = 0.0 if is_variant else 1.0;
@@ -222,9 +222,9 @@ static func _setup_tile(better_terrain, atlas : TileAtlasTexture, tileset : Tile
 	
 	# Better terrain support.
 	if better_terrain != null and source_block != "user":
-		var terrain_type_name = db.get_tile(source_id)["layer"];
+		var terrain_type_name = database.get_tile(source_id)["layer"];
 		terrain_type = terrain_types.find(terrain_type_name);
-		peering_bits = db.get_tile(source_id)["peering_bits"];
+		peering_bits = database.get_tile(source_id)["peering_bits"];
 		_create_better_terrain(better_terrain, tileset, tile_data, terrain_type, terrain_types, peering_bits);
 
 ## Get the source ID of a variant tile. Returns the empty string if the tile is not a variant.
@@ -264,9 +264,9 @@ static func _get_layers(texture : TileAtlasTexture, database : TileDatabase) -> 
 	return sorted;
 
 ## Get the terrain type of a tile.
-static func _get_tile_layer(id : String, db : TileDatabase) -> String:
-		if db.has_tile(id):
-			var tile : Dictionary = db.get_tile(id);
+static func _get_tile_layer(id : String, database : TileDatabase) -> String:
+		if database.has_tile(id):
+			var tile : Dictionary = database.get_tile(id);
 			if tile.has("layer"):
 				return tile["layer"];
 			else:
@@ -314,7 +314,7 @@ static func _set_peering_bit(tile : TileData, side : PeeringBit, enabled : bool)
 
 
 ## Create better-terrain data.
-static func _create_better_terrain(better_terrain, tileset : TileSet, tile_data : TileData, terrain_type : int, terrain_types : Array[String], peering_bits : Dictionary) -> void:
+static func _create_better_terrain(better_terrain : Node, tileset : TileSet, tile_data : TileData, terrain_type : int, terrain_types : Array[String], peering_bits : Dictionary) -> void:
 	# Set terrain type.
 	if terrain_type != -1:
 		better_terrain.set_tile_terrain_type(tileset, tile_data, terrain_type);

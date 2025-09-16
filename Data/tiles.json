@@ -29,11 +29,13 @@
 		"derive": {
 			"0": {
 				"op": "flip_y",
-				"src": "EDGE_B"
+				"src": "EDGE_B",
+				"tag": "Flip Edges"
 			},
 			"1": {
 				"op": "rotate_clock",
-				"src": "EDGE_L"
+				"src": "EDGE_L",
+				"tag": "Rotate Edges"
 			}
 		},
 		"layer": "solid",
@@ -52,11 +54,13 @@
 		"derive": {
 			"0": {
 				"op": "flip_x",
-				"src": "EDGE_R"
+				"src": "EDGE_R",
+				"tag": "Flip Edges"
 			},
 			"1": {
 				"op": "rotate_counter",
-				"src": "EDGE_T"
+				"src": "EDGE_T",
+				"tag": "Rotate Edges"
 			}
 		},
 		"layer": "solid",
@@ -90,7 +94,23 @@
 			"0": {
 				"op": "merge_diag_d",
 				"BL": "EDGE_L",
-				"TR": "EDGE_T"
+				"TR": "EDGE_T",
+				"tag": "Merge Edges"
+			},
+			"1": {
+				"op": "flip_x",
+				"src": "NOOK_TR",
+				"tag": "Flip Nooks"
+			},
+			"2": {
+				"op": "flip_y",
+				"src": "NOOK_BL",
+				"tag": "Flip Nooks"
+			},
+			"3": {
+				"op": "rotate_clock",
+				"src": "NOOK_BL",
+				"tag": "Rotate Nooks"
 			}
 		},
 		"layer": "solid",
@@ -129,7 +149,23 @@
 			"0": {
 				"op": "merge_diag_d",
 				"BL": "EDGE_T",
-				"TR": "EDGE_L"
+				"TR": "EDGE_L",
+				"tag": "Merge Edges"
+			},
+			"1": {
+				"op": "flip_x",
+				"src": "CORNER_TR",
+				"tag": "Flip Corners"
+			},
+			"2": {
+				"op": "flip_y",
+				"src": "CORNER_BL",
+				"tag": "Flip Corners"
+			},
+			"3": {
+				"op": "rotate_clock",
+				"src": "CORNER_BL",
+				"tag": "Rotate Corners"
 			}
 		},
 		"layer": "solid",

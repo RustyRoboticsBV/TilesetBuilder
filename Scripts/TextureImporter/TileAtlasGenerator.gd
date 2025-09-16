@@ -7,6 +7,8 @@ class_name TileAtlasGenerator;
 @export var source : TileAtlasSource;
 @export var images : Dictionary[String, Image] = {};
 
+var _fallback : Dictionary[String, bool] = {};
+
 func _init(source : TileAtlasSource, database : TileDatabase, use_image_type : String) -> void:
 	self.source = source;
 	match use_image_type:
@@ -18,19 +20,20 @@ func _init(source : TileAtlasSource, database : TileDatabase, use_image_type : S
 	# Try to resolve missing tiles.
 	for loop_index in 100:
 		print("Loop " + str(loop_index) + ":");
-		var _changed : bool = false;
+		var changed : bool = false;
 		
 		for key in database.keys():
 			if images.has(key):
 				continue;
 			
 			var info = database.get_tile(key);
-			var derive = info["derive"];
-			var success = _try_resolve(key, derive);
+			var fallback = info["fallback"];
+			var success = _try_resolve(key, fallback);
 			if success:
-				_changed = true;
+				changed = true;
+				_fallback[key] = true;
 		
-		if !_changed:
+		if !changed:
 			print("No more tiles could be derived.");
 			break;
 
