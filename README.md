@@ -71,6 +71,8 @@ Tiles can be loaded from a ZIP archive in three ways, in the following order:
 
 This allows you to make your archives as complex as they need to be. For example, if your `EDGE_T` and `EDGE_L` combine into an acceptable `NOOK_TL` tile, there's no need to include it in your archive.
 
+You can choose how the edge, nook and corner tiles are derived in the importer panel.
+
 ### Masks
 Often, you don't want a tile to be directly loaded from a single image, but use the `CENTER` tile as a background and overlay something on top of it. To do this, you must define a `MASK_` image.
 

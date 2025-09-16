@@ -12,5 +12,5 @@ dest_files=["res://.godot/imported/bricks.zip-d04f7ca057f32a4127b7755dd8ea1811.r
 
 [params]
 
-margin_size=4
+margin_size=0
 use_mipmaps=false
