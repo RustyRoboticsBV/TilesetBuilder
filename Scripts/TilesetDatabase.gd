@@ -1,23 +1,33 @@
 extends Resource;
 class_name TileDatabase;
 
-var _dict : Dictionary = {};
+static var _dict : Dictionary = {};
 
 ## Get a tile's data from the database.
-func get_tile(id : String) -> Dictionary:
+static func get_tile(id : String) -> Dictionary:
+	_ensure_loaded();
 	return _dict[id];
 
 ## Check if the database has some tile.
-func has_tile(id : String) -> bool:
+static func has_tile(id : String) -> bool:
+	_ensure_loaded();
 	return _dict.has(id);
 
 ## Get a list of all tile names in the database.
-func keys() -> Array:
+static func keys() -> Array:
+	_ensure_loaded();
 	return _dict.keys() as Array;
 
+
+
 ## Load the database from a JSON file.
-func load_from_json(file_path : String) -> void:
-	var json = _load_json_from_file(file_path);
+static func _ensure_loaded() -> void:
+	# Do nothing if the data was already loaded.
+	if _dict.size() > 0:
+		return;
+	
+	# Get json.
+	var json = _load_json_from_file("../Data/tiles.json");
 	
 	# Expand inherited entries.
 	for key in json.keys():
@@ -38,10 +48,8 @@ func load_from_json(file_path : String) -> void:
 			json[key] = copy;
 	_dict = json;
 
-
-
-func _load_json_from_file(file_path: String) -> Dictionary:
-	file_path = get_script().resource_path.get_base_dir() + "/" + file_path;
+static func _load_json_from_file(file_path: String) -> Dictionary:
+	file_path = new().get_script().resource_path.get_base_dir() + "/" + file_path;
 	file_path = ProjectSettings.globalize_path(file_path);
 	
 	var file := FileAccess.open(file_path, FileAccess.READ);
@@ -58,7 +66,7 @@ func _load_json_from_file(file_path: String) -> Dictionary:
 	
 	return data;
 
-func _apply_string(text : String, operator : String) -> String:
+static func _apply_string(text : String, operator : String) -> String:
 	match operator:
 		"flip_x":
 			return _apply_flip_x(text);
@@ -77,7 +85,7 @@ func _apply_string(text : String, operator : String) -> String:
 		_:
 			return text;
 
-func _apply_flip_x(text : String) -> String:
+static func _apply_flip_x(text : String) -> String:
 	var mapping : Dictionary[String, String] = {
 		"_LO": "_LO",
 		"_HI": "_HI",
@@ -116,7 +124,7 @@ func _apply_flip_x(text : String) -> String:
 	};
 	return _apply_replace(text, mapping);
 
-func _apply_flip_y(text : String) -> String:
+static func _apply_flip_y(text : String) -> String:
 	var mapping : Dictionary[String, String] = {
 		"_LO": "_LO",
 		"_HI": "_HI",
@@ -155,7 +163,7 @@ func _apply_flip_y(text : String) -> String:
 	};
 	return _apply_replace(text, mapping);
 
-func _apply_rotate_clock(text : String) -> String:
+static func _apply_rotate_clock(text : String) -> String:
 	var mapping : Dictionary[String, String] = {
 		"_LO": "_LO",
 		"_HI": "_HI",
@@ -200,7 +208,7 @@ func _apply_rotate_clock(text : String) -> String:
 	};
 	return _apply_replace(text, mapping);
 
-func _apply_rotate_counter(text : String) -> String:
+static func _apply_rotate_counter(text : String) -> String:
 	var mapping : Dictionary[String, String] = {
 		"_LO": "_LO",
 		"_HI": "_HI",
@@ -245,7 +253,7 @@ func _apply_rotate_counter(text : String) -> String:
 	};
 	return _apply_replace(text, mapping);
 
-func _apply_replace(text : String, mapping : Dictionary[String, String]) -> String:
+static func _apply_replace(text : String, mapping : Dictionary[String, String]) -> String:
 	var result = "";
 	var i = 0;
 	while i < text.length():

@@ -15,7 +15,7 @@ var blocks : Dictionary[String, Image] = {};
 @export var variant_coords : Dictionary[String, Vector2i] = {};
 @export var margin_size : int;
 
-func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database : TileDatabase, use_mipmaps : bool) -> void:
+func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, use_mipmaps : bool) -> void:
 	self.compositor = compositor;
 	
 	# Store tile size.
@@ -30,7 +30,7 @@ func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, database 
 		_fix_alpha_border(image);
 		
 		# Retrieve information about tile from database.
-		var tile_info : Dictionary = database.get_tile(id);
+		var tile_info : Dictionary = TileDatabase.get_tile(id);
 		var x : int = tile_info["coords"][0];
 		var y : int = tile_info["coords"][1];
 		

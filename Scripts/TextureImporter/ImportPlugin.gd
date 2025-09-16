@@ -56,22 +56,17 @@ func _import(source_file: String, save_path: String, options: Dictionary, _platf
 
 	# Create tileset.
 	print();
-	print("Loading tile database...")
-	var db = TileDatabase.new();
-	db.load_from_json("../Data/tiles.json");
-	
-	print();
 	print("Loading atlas source...");
 	var source = TileAtlasSource.new();
-	source.load_from_zip(source_file, db, options["margin_size"]);
+	source.load_from_zip(source_file, options["margin_size"]);
 	
 	print();
 	print("Generating missing tiles...");
-	var generator_tiles = TileAtlasGenerator.new(source, db, "tiles");
+	var generator_tiles = TileAtlasGenerator.new(source, "tiles");
 	
 	print();
 	print("Generating missing masks...");
-	var generator_masks = TileAtlasGenerator.new(source, db, "masks");
+	var generator_masks = TileAtlasGenerator.new(source, "masks");
 	
 	print();
 	print("Compositing tile images...");
@@ -79,7 +74,7 @@ func _import(source_file: String, save_path: String, options: Dictionary, _platf
 	
 	print();
 	print("Building texture...");
-	var texture = TileAtlasTexture.new(source, compositor, db, options["use_mipmaps"]);
+	var texture = TileAtlasTexture.new(source, compositor, options["use_mipmaps"]);
 	
 	# Save the resulting resource.
 	print();

@@ -9,7 +9,7 @@ class_name TileAtlasGenerator;
 
 var _fallback : Dictionary[String, bool] = {};
 
-func _init(source : TileAtlasSource, database : TileDatabase, use_image_type : String) -> void:
+func _init(source : TileAtlasSource, use_image_type : String) -> void:
 	self.source = source;
 	match use_image_type:
 		"masks":
@@ -22,13 +22,13 @@ func _init(source : TileAtlasSource, database : TileDatabase, use_image_type : S
 		print("Loop " + str(loop_index) + ":");
 		var changed : bool = false;
 		
-		for key in database.keys():
+		for key in TileDatabase.keys():
 			if images.has(key):
 				continue;
 			
-			var info = database.get_tile(key);
-			var fallback = info["fallback"];
-			var success = _try_resolve(key, fallback);
+			var info = TileDatabase.get_tile(key);
+			var derive = info["derive"];
+			var success = _try_resolve(key, derive);
 			if success:
 				changed = true;
 				_fallback[key] = true;

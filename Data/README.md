@@ -7,7 +7,8 @@ Each tile follows the format:
 	"coords": [x, y],
 	"derive": { ... },
 	"layer": "terrain type name",
-	"peering_bits": { ... }
+	"peering_bits": { ... },
+	"physics_shape": { ... }
 }
 ```
 
@@ -17,6 +18,7 @@ Where:
 - The `derive` block represents the derivation rules for tile generation.
 - The `layer` represents the terrain type of the tile, and must be one of the following values: `solid`, `slope_tl`, `slope_tr`, `slope_bl`, `slope_br`, `long_slope_tl`, `long_slope_tr`, `long_slope_bl`, `long_slope_br`, `tall_slope_tl`, `tall_slope_tr`, `tall_slope_bl` or `tall_slope_br`.
 - The `peering_bits` block represent the possible terrain peering bits.
+- The `physics_shape` represents the collision shape of the tile.
 
 Since many tile definitions are just flipped or rotated versions of other tiles, we can also use the "inherit block", such as:
 ```

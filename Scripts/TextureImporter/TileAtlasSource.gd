@@ -14,7 +14,7 @@ class_name TileAtlasSource;
 @export var margin : int;
 
 ## Load images from a ZIP file.
-func load_from_zip(file_path : String, database : TileDatabase, margin : int) -> void:
+func load_from_zip(file_path : String, margin : int) -> void:
 	# Load images from ZIP.
 	var images : Dictionary[String, Image] = _load_images_from_zip(file_path);
 	
@@ -44,7 +44,7 @@ func load_from_zip(file_path : String, database : TileDatabase, margin : int) ->
 		self.margin = margin;
 	
 	# Categorize images.
-	_categorize(images, database);
+	_categorize(images);
 
 ## Load all the images from a ZIP file and return them as a dictionary.
 ## Unrecognized file types are ignored.
@@ -150,7 +150,7 @@ func _add_margins(source_image: Image, margin: int) -> Image:
 	return new_image;
 
 ## Categorize the images in a dictionary and store them.
-func _categorize(images : Dictionary[String, Image], database : TileDatabase) -> void:
+func _categorize(images : Dictionary[String, Image]) -> void:
 	# Clear current images.
 	tiles = {};
 	masks = {};
@@ -165,11 +165,11 @@ func _categorize(images : Dictionary[String, Image], database : TileDatabase) ->
 	for key : String in images.keys():
 		if key.begins_with("MASK_"):
 			var suffix : String = key.substr(5);
-			if database.has_tile(suffix):
+			if TileDatabase.has_tile(suffix):
 				masks[suffix] = images[key];
 				print("Found mask: " + suffix);
 			else:
-				var id : String = _is_variant(suffix, database.keys());
+				var id : String = _is_variant(suffix, TileDatabase.keys());
 				if id != suffix:
 					var number : String = suffix.substr(id.length());
 					if !variant_masks.has(id):
@@ -180,11 +180,11 @@ func _categorize(images : Dictionary[String, Image], database : TileDatabase) ->
 					user_masks[id] = images[key];
 					print("Found user-defined mask: " + id);
 		else:
-			if database.has_tile(key):
+			if TileDatabase.has_tile(key):
 				tiles[key] = images[key]
 				print("Found tile: " + key);
 			else:
-				var id : String = _is_variant(key, database.keys());
+				var id : String = _is_variant(key, TileDatabase.keys());
 				if id != key:
 					var number : String = key.substr(id.length());
 					if !variant_tiles.has(id):
@@ -197,7 +197,7 @@ func _categorize(images : Dictionary[String, Image], database : TileDatabase) ->
 	
 	# Sort built-in tiles by id.
 	var temp : Dictionary[String, Image] = {};
-	for id in database.keys():
+	for id in TileDatabase.keys():
 		if tiles.has(id):
 			temp[id] = tiles[id];
 	tiles = temp;
