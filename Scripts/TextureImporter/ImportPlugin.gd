@@ -37,7 +37,20 @@ func _get_preset_name(index : int) -> String:
 func _get_import_options(path : String, preset_index : int) -> Array[Dictionary]:
 	match preset_index:
 		0:
-			return [{
+			var config_options : Dictionary[String, Array] = {};
+			for id in TileDatabase.keys():
+				var tile_data = TileDatabase.get_tile(id);
+				if tile_data.has("config_group") and tile_data.has("derive"):
+					var config_group = tile_data["config_group"];
+					if !config_options.has(config_group):
+						config_options[config_group] = [];
+					for derive_rule in tile_data["derive"].values():
+						if derive_rule.has("tag"):
+							var tag : String = derive_rule["tag"];
+							if !(tag in config_options[config_group]):
+								config_options[config_group].append(tag);
+			
+			var result : Array[Dictionary] = [{
 					   "name": "margin_size",
 					   "default_value": 0
 					},
@@ -45,6 +58,19 @@ func _get_import_options(path : String, preset_index : int) -> Array[Dictionary]
 					   "name": "use_mipmaps",
 					   "default_value": false
 					}];
+			for config_option in config_options:
+				var hint_string = "";
+				for value in config_options[config_option]:
+					if hint_string != "":
+						hint_string += ",";
+					hint_string += value;
+				result.append({
+					"name": config_option,
+					"default_value": 0,
+					"property_hint": PROPERTY_HINT_ENUM,
+					"hint_string": hint_string
+				});
+			return result;
 		_:
 			return [];
 

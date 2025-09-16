@@ -5,6 +5,8 @@ var import_plugin;
 var inspector_plugin;
 
 func _enter_tree():
+	TileDatabase.keys();
+	
 	import_plugin = preload("TextureImporter/ImportPlugin.gd").new();
 	add_import_plugin(import_plugin);
 	

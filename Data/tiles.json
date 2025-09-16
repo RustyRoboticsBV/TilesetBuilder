@@ -26,6 +26,7 @@
 		"block": "main",
 		"coords": [10, 0],
 		"composite": ["EDGE_T", "CENTER"],
+		"config_group": "Generation/Edges",
 		"derive": {
 			"0": {
 				"op": "flip_y",
@@ -51,6 +52,7 @@
 		"block": "main",
 		"coords": [8, 1],
 		"composite": ["EDGE_L", "CENTER"],
+		"config_group": "Generation/Edges",
 		"derive": {
 			"0": {
 				"op": "flip_x",
@@ -90,12 +92,12 @@
 		"block": "main",
 		"coords": [8, 0],
 		"composite": ["NOOK_TL", "CENTER"],
+		"config_group": "Generation/Nooks",
 		"derive": {
 			"0": {
 				"op": "merge_diag_d",
 				"BL": "EDGE_L",
-				"TR": "EDGE_T",
-				"tag": "Merge Edges"
+				"TR": "EDGE_T"
 			},
 			"1": {
 				"op": "flip_x",
@@ -111,7 +113,13 @@
 				"op": "rotate_clock",
 				"src": "NOOK_BL",
 				"tag": "Rotate Nooks"
-			}
+			},
+			"4": {
+				"op": "merge_diag_d",
+				"BL": "EDGE_L",
+				"TR": "EDGE_T",
+				"tag": "Merge Edges"
+			},
 		},
 		"layer": "solid",
 		"peering_bits": {
@@ -145,12 +153,12 @@
 		"block": "main",
 		"coords": [5, 1],
 		"composite": ["CORNER_TL", "CENTER"],
+		"config_group": "Generation/Corners",
 		"derive": {
 			"0": {
 				"op": "merge_diag_d",
 				"BL": "EDGE_T",
-				"TR": "EDGE_L",
-				"tag": "Merge Edges"
+				"TR": "EDGE_L"
 			},
 			"1": {
 				"op": "flip_x",
@@ -166,7 +174,13 @@
 				"op": "rotate_clock",
 				"src": "CORNER_BL",
 				"tag": "Rotate Corners"
-			}
+			},
+			"4": {
+				"op": "merge_diag_d",
+				"BL": "EDGE_T",
+				"TR": "EDGE_L",
+				"tag": "Merge Edges"
+			},
 		},
 		"layer": "solid",
 		"peering_bits": {
