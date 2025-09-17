@@ -102,6 +102,12 @@ func _try_resolve(id : String, rules : Dictionary) -> bool:
 				var foreground_corner = rules[key]["fg_corner"];
 				if _try_merge_complex(id, foreground, foreground_corner, background, background_corner):
 					return true;
+			"angular_merge_tl":
+				var left = rules[key]["L"];
+				var right = rules[key]["R"];
+				var angle = float(rules[key]["angle"]);
+				if _try_angular_merge_tl(id, left, right, angle):
+					return true;
 	return false;
 
 func _try_flip_x(target : String, source : String) -> bool:
@@ -278,7 +284,7 @@ func _try_merge_complex(target : String, foreground : String, foreground_corner 
 	if !images.has(foreground) or !images.has(background):
 		return false;
 	
-	# Get corner sub-imag.
+	# Get corner sub-image.
 	var c : Image = _cut_part(images[foreground], foreground_corner);
 	
 	# Get target background.
@@ -301,7 +307,7 @@ func _try_merge_side(target : String, foreground : String, foreground_side : Str
 	if !images.has(foreground) or !images.has(background):
 		return false;
 	
-	# Get corner sub-imag.
+	# Get corner sub-image.
 	var s : Image = _cut_part(images[foreground], foreground_side);
 	
 	# Get target background.
@@ -316,6 +322,41 @@ func _try_merge_side(target : String, foreground : String, foreground_side : Str
 	
 	print("Derived " + target + " using merge_side(" + foreground + ", " + foreground_side + ", " + background + ", " + background_side + ")");
 	images[target] = result;
+	return true;
+
+func _try_angular_merge_tl(target : String, left : String, right : String, angle_deg : float) -> bool:
+	if !images.has(left) or !images.has(right):
+		return false;
+	
+	# Get images.
+	var img1 = images[left];
+	var img2 = images[right];
+	
+	# Get dimensions.
+	var width = img1.get_width()
+	var height = img1.get_height()
+
+	# Convert angle to radians.
+	var angle_rad = deg_to_rad(angle_deg)
+
+	# Precompute tan(angle).
+	var slope = tan(angle_rad)
+
+	# Create output image.
+	var result = Image.create(width, height, false, img1.get_format())
+	
+	for y in height:
+		for x in width:
+			var boundary_x = int(y / slope) if slope != 0 else width + 1  # prevent div by zero
+
+			if x <= boundary_x:
+				result.set_pixel(x, y, img1.get_pixel(x, y));
+			else:
+				result.set_pixel(x, y, img2.get_pixel(x, y));
+	
+	images[target] = result;
+	print("Derived " + target + " using angular_merge_tl(" + left + ", " + right + ", " + str(angle_deg) + ")");
+
 	return true;
 
 func _cut_part(image : Image, corner : String) -> Image:
