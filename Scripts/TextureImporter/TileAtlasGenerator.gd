@@ -9,7 +9,7 @@ class_name TileAtlasGenerator;
 
 var _fallback : Dictionary[String, bool] = {};
 
-func _init(source : TileAtlasSource, use_image_type : String) -> void:
+func _init(source : TileAtlasSource, use_image_type : String, generation_options : Dictionary) -> void:
 	self.source = source;
 	match use_image_type:
 		"masks":

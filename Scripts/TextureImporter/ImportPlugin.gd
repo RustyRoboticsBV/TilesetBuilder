@@ -90,6 +90,13 @@ func _get_option_visibility(path : String, option_name : StringName, options : D
 
 func _import(source_file: String, save_path: String, options: Dictionary, _platform_variants: Array, _gen_files: Array) -> int:
 	print("Importing tileset from: '%s'" % source_file);
+	
+	# Get generation options.
+	var generation_options : Dictionary = options.duplicate();
+	generation_options.erase("margin_size");
+	generation_options.erase("use_mipmaps");
+	generation_options.erase("fix_alpha_borders");
+	print(generation_options);
 
 	# Create tileset.
 	print();
@@ -99,11 +106,11 @@ func _import(source_file: String, save_path: String, options: Dictionary, _platf
 	
 	print();
 	print("Generating missing tiles...");
-	var generator_tiles = TileAtlasGenerator.new(source, "tiles");
+	var generator_tiles = TileAtlasGenerator.new(source, "tiles", generation_options);
 	
 	print();
 	print("Generating missing masks...");
-	var generator_masks = TileAtlasGenerator.new(source, "masks");
+	var generator_masks = TileAtlasGenerator.new(source, "masks", generation_options);
 	
 	print();
 	print("Compositing tile images...");
