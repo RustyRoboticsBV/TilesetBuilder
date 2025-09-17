@@ -37,6 +37,7 @@ func _get_preset_name(index : int) -> String:
 func _get_import_options(path : String, preset_index : int) -> Array[Dictionary]:
 	match preset_index:
 		0:
+			# Find generation configuration options.
 			var config_options : Dictionary[String, Array] = {};
 			for id in TileDatabase.keys():
 				var tile_data = TileDatabase.get_tile(id);
@@ -50,6 +51,7 @@ func _get_import_options(path : String, preset_index : int) -> Array[Dictionary]
 							if !(tag in config_options[config_group]):
 								config_options[config_group].append(tag);
 			
+			# Create import options array.
 			var result : Array[Dictionary] = [{
 					   "name": "margin_size",
 					   "default_value": 0
@@ -58,15 +60,20 @@ func _get_import_options(path : String, preset_index : int) -> Array[Dictionary]
 					   "name": "use_mipmaps",
 					   "default_value": false
 					}];
-			for config_option in config_options:
-				var hint_string = "";
-				for value in config_options[config_option]:
-					if hint_string != "":
+			
+			# Added generation import options.
+			for config_option : String in config_options:
+				var default_value : String = "";
+				var hint_string : String = "";
+				for value : String in config_options[config_option]:
+					if default_value == "":
+						default_value = value;
+					else:
 						hint_string += ",";
 					hint_string += value;
 				result.append({
 					"name": config_option,
-					"default_value": 0,
+					"default_value": default_value,
 					"property_hint": PROPERTY_HINT_ENUM,
 					"hint_string": hint_string
 				});
@@ -74,7 +81,7 @@ func _get_import_options(path : String, preset_index : int) -> Array[Dictionary]
 		_:
 			return [];
 
-func _get_option_visibility(path, option_name, options):
+func _get_option_visibility(path : String, option_name : StringName, options : Dictionary) -> bool:
 	return true;
 
 func _import(source_file: String, save_path: String, options: Dictionary, _platform_variants: Array, _gen_files: Array) -> int:

@@ -2,7 +2,7 @@
 
 importer="tile_atlas_builder"
 type="Texture2D"
-uid="uid://d3c7nscil2u5q"
+uid="uid://b4ju4n2ngaet0"
 path="res://.godot/imported/demo_all_slopes.zip-527aedc2efe0d37636b986f05de64737.res"
 
 [deps]
@@ -14,6 +14,6 @@ dest_files=["res://.godot/imported/demo_all_slopes.zip-527aedc2efe0d37636b986f05
 
 margin_size=0
 use_mipmaps=false
-Generation/Edges=1
-Generation/Nooks=0
-Generation/Corners=0
+Generation/Edges="Flip Edges"
+Generation/Nooks="Flip Nooks"
+Generation/Corners="Flip Corners"
