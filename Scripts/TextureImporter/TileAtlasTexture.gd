@@ -27,7 +27,6 @@ func _init(source : TileAtlasSource, compositor : TileAtlasCompositor, use_mipma
 	# Place tiles.
 	for id in compositor.tiles.keys():
 		var image : Image = compositor.tiles[id].duplicate();
-		_fix_alpha_border(image);
 		
 		# Retrieve information about tile from database.
 		var tile_info : Dictionary = TileDatabase.get_tile(id);
@@ -143,51 +142,3 @@ static func _get_block_size(name : String) -> Vector2i:
 		_:
 			push_error("Illegal block name: " + name);
 	return Vector2i(0, 0);
-
-## Return a copy of an image with corrected transparent pixels.
-##
-## Transparent pixels have color in their RGB channels, which can lead to weird edges when these images are scaled.
-## This function fixes that by filling the RGB channels of transparent pixels with the nearest non-transparent pixel's color, while preserving alpha.
-static func _fix_alpha_border(image : Image) -> void:
-	for x in image.get_width():
-		for y in image.get_height():
-			var pixel = image.get_pixel(x, y);
-			if pixel.a == 0:
-				var opaque : Color = _get_nearest_opaque_pixel(image, x, y);
-				opaque.a = 0;
-				image.set_pixel(x, y, opaque);
-
-## Return the nearest opaque pixel on an image relative to some pixel coordinate.
-static func _get_nearest_opaque_pixel(image: Image, x: int, y: int) -> Color:
-	# Get dimensions.
-	var width : int = image.get_width();
-	var height : int = image.get_height();
-	
-	# If the pixel itself is opaque, return it.
-	var pixel : Color = image.get_pixel(x, y);
-	if pixel.a > 0.0:
-		return pixel;
-	
-	# Find nearest opaque pixel.
-	var max_radius : int = max(width, height)
-	
-	for r in range(1, max_radius):
-		# Loop over the square border at radius r.
-		for dy in range(-r, r + 1):
-			for dx in range(-r, r + 1):
-				if abs(dx) != r and abs(dy) != r:
-					continue;
-				
-				var nx = x + dx;
-				var ny = y + dy;
-				if nx < 0 or ny < 0 or nx >= width or ny >= height:
-					continue;
-				
-				pixel = image.get_pixel(nx, ny);
-				if pixel.a > 0.0:
-					return pixel;
-				elif pixel.r > 0.0 && pixel.r < 1.0 or pixel.g > 0.0 && pixel.g < 1.0 or pixel.b > 0.0 && pixel.b < 1.0:
-					return Color(pixel.r, pixel.g, pixel.b, 1);
-	
-	# Return original pixel if no opaque pixel was found.
-	return image.get_pixel(x, y);
