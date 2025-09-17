@@ -59,6 +59,10 @@ func _get_import_options(path : String, preset_index : int) -> Array[Dictionary]
 					{
 					   "name": "use_mipmaps",
 					   "default_value": false
+					},
+					{
+					   "name": "fix_alpha_borders",
+					   "default_value": true
 					}];
 			
 			# Added generation import options.
@@ -91,7 +95,7 @@ func _import(source_file: String, save_path: String, options: Dictionary, _platf
 	print();
 	print("Loading atlas source...");
 	var source = TileAtlasSource.new();
-	source.load_from_zip(source_file, options["margin_size"]);
+	source.load_from_zip(source_file, options["margin_size"], options["fix_alpha_borders"]);
 	
 	print();
 	print("Generating missing tiles...");

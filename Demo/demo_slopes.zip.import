@@ -14,6 +14,7 @@ dest_files=["res://.godot/imported/demo_slopes.zip-a1247bd09c3218b1b8031c85c4fda
 
 margin_size=0
 use_mipmaps=false
+fix_alpha_borders=true
 Generation/Edges="Flip Edges"
 Generation/Nooks="Flip Nooks"
 Generation/Corners="Flip Corners"

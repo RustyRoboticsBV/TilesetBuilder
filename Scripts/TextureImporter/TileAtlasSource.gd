@@ -14,9 +14,9 @@ class_name TileAtlasSource;
 @export var margin : int;
 
 ## Load images from a ZIP file.
-func load_from_zip(file_path : String, margin : int) -> void:
+func load_from_zip(file_path : String, margin : int, fix_alpha_border : bool) -> void:
 	# Load images from ZIP.
-	var images : Dictionary[String, Image] = _load_images_from_zip(file_path);
+	var images : Dictionary[String, Image] = _load_images_from_zip(file_path, fix_alpha_border);
 	
 	# Find tile size.
 	for image : Image in images.values():
@@ -48,7 +48,7 @@ func load_from_zip(file_path : String, margin : int) -> void:
 
 ## Load all the images from a ZIP file and return them as a dictionary.
 ## Unrecognized file types are ignored.
-func _load_images_from_zip(path: String) -> Dictionary[String, Image]:
+func _load_images_from_zip(path: String, fix_alpha_border : bool) -> Dictionary[String, Image]:
 	var images : Dictionary[String, Image] = {};
 	
 	# Open the zip file.
@@ -91,7 +91,8 @@ func _load_images_from_zip(path: String) -> Dictionary[String, Image]:
 			
 			# Set image format.
 			image.convert(Image.FORMAT_RGBA8);
-			_fix_alpha_border(image);
+			if fix_alpha_border:
+				_fix_alpha_border(image);
 			
 			# Store loaded image.
 			if load_err == ERR_FILE_UNRECOGNIZED:
