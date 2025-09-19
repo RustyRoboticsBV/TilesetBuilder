@@ -9,6 +9,8 @@ class_name TileAtlasGenerator;
 
 var _fallback : Dictionary[String, bool] = {};
 
+const ImageFilters = preload("ImageFilters.gd");
+
 func _init(source : TileAtlasSource, use_image_type : String, generation_options : Dictionary) -> void:
 	self.source = source;
 	match use_image_type:
@@ -111,173 +113,125 @@ func _try_resolve(id : String, rules : Dictionary) -> bool:
 	return false;
 
 func _try_flip_x(target : String, source : String) -> bool:
+	# Check if image has been loaded.
 	if !images.has(source):
 		return false;
-		
-	# Create new image.
-	var copy = images[source].duplicate();
-	copy.flip_x();
-	images[target] = copy;
 	
+	# Apply image filter.
+	images[target] = ImageFilters.flip_x(images[source]);
 	print("Derived " + target + " using flip_x(" + source + ")");
 	return true;
 
 func _try_flip_y(target : String, source : String) -> bool:
+	# Check if image has been loaded.
 	if !images.has(source):
 		return false;
-		
-	# Create new image.
-	var copy = images[source].duplicate();
-	copy.flip_y();
-	images[target] = copy;
 	
+	# Apply image filter.
+	images[target] = ImageFilters.flip_y(images[source]);
 	print("Derived " + target + " using flip_y(" + source + ")");
 	return true;
 
 func _try_flip_xy(target : String, source : String) -> bool:
+	# Check if image has been loaded.
 	if !images.has(source):
 		return false;
-		
-	# Create new image.
-	var copy = images[source].duplicate();
-	copy.flip_x().flip_y();
-	images[target] = copy;
 	
+	# Apply image filter.
+	images[target] = ImageFilters.flip_xy(images[source]);
 	print("Derived " + target + " using flip_xy(" + source + ")");
 	return true;
 
 func _try_rotate_clock(target : String, source : String) -> bool:
+	# Check if image has been loaded.
 	if !images.has(source):
 		return false;
-		
-	# Create new image.
-	var copy = images[source].duplicate();
-	copy.rotate_90(CLOCKWISE);
-	images[target] = copy;
 	
+	# Apply image filter.
+	images[target] = ImageFilters.rotate_clock(images[source]);
 	print("Derived " + target + " using rotate_clock(" + source + ")");
 	return true;
 
 func _try_rotate_counter(target : String, source : String) -> bool:
+	# Check if image has been loaded.
 	if !images.has(source):
 		return false;
-		
-	# Create new image.
-	var copy = images[source].duplicate();
-	copy.rotate_90(COUNTERCLOCKWISE);
-	images[target] = copy;
 	
+	# Apply image filter.
+	images[target] = ImageFilters.rotate_counter(images[source]);
 	print("Derived " + target + " using rotate_counter(" + source + ")");
 	return true;
 
 func _try_merge_x(target : String, left : String, right : String) -> bool:
+	# Check if image has been loaded.
 	if !images.has(left) or !images.has(right):
 		return false;
 	
 	# Get images.
-	var l : Image = images[left];
-	var r : Image = images[right];
+	var src_l : Image = images[left];
+	var src_r : Image = images[right];
 	
-	# Get dimensions.
-	var half_width : int = floor(l.get_width() / 2.0);
-	var height : int = l.get_height();
-	
-	# Create new image.
-	var copy = l.duplicate();
-	copy.blit_rect(r, Rect2(Vector2(half_width, 0), Vector2(half_width, height)), Vector2(half_width, 0));
-	images[target] = copy;
-	
+	# Apply image filter.
+	images[target] = ImageFilters.merge_x(src_l, src_r);
 	print("Derived " + target + " using merge_x(" + left + ", " + right + ")");
 	return true;
 
 func _try_merge_y(target : String, bottom : String, top : String) -> bool:
+	# Check if image has been loaded.
 	if !images.has(bottom) or !images.has(top):
 		return false;
 	
 	# Get images.
-	var b : Image = images[bottom];
-	var t : Image = images[top];
+	var src_b : Image = images[bottom];
+	var src_t : Image = images[top];
 	
-	# Get dimensions.
-	var width : int = b.get_width();
-	var half_height : int = floor(b.get_height() / 2.0);
-	
-	# Create new image.
-	var copy = b.duplicate();
-	copy.blit_rect(t, Rect2(Vector2.ZERO, Vector2(width, half_height)), Vector2.ZERO);
-	images[target] = copy;
-	
+	# Apply image filter.
+	images[target] = ImageFilters.merge_y(src_b, src_t);
 	print("Derived " + target + " using merge_y(" + bottom + ", " + top + ")");
 	return true;
 
 func _try_merge_diag_d(target : String, bottom_left : String, top_right : String) -> bool:
+	# Check if image has been loaded.
 	if !images.has(bottom_left) or !images.has(top_right):
 		return false;
 	
 	# Get images.
-	var bl : Image = images[bottom_left];
-	var tr : Image = images[top_right];
+	var src_bl : Image = images[bottom_left];
+	var src_tr : Image = images[top_right];
 	
-	# Get dimensions.
-	var w = bl.get_width();
-	var h = bl.get_height();
-	
-	# Create new image.
-	var copy : Image = bl.duplicate();
-	for y in range(h):
-		for x in range(w):
-			if x * h > y * w:
-				copy.set_pixel(x, y, tr.get_pixel(x, y));
-	images[target] = copy;
-	
+	# Apply image filter.
+	images[target] = ImageFilters.merge_diag_d(src_bl, src_tr);
 	print("Derived " + target + " using merge_diag_d(" + bottom_left + ", " + top_right + ")");
 	return true;
 
 func _try_merge_diag_u(target : String, top_left : String, bottom_right : String) -> bool:
+	# Check if image has been loaded.
 	if !images.has(top_left) or !images.has(bottom_right):
 		return false;
 	
 	# Get images.
-	var tl : Image = images[top_left];
-	var br : Image = images[bottom_right];
+	var src_tl : Image = images[top_left];
+	var src_br : Image = images[bottom_right];
 	
-	# Get dimensions.
-	var w = tl.get_width();
-	var h = tl.get_height();
-	
-	# Create new image.
-	var copy : Image = tl.duplicate();
-	for y in range(h):
-		for x in range(w):
-			if x * h > (h - 1 - y) * w:
-				copy.set_pixel(x, y, br.get_pixel(x, y));
-	images[target] = copy;
-	
+	# Apply image filter.
+	images[target] = ImageFilters.merge_diag_u(src_tl, src_br);
 	print("Derived " + target + " using merge_diag_u(" + top_left + ", " + bottom_right + ")");
 	return true;
 
 func _try_merge_quad(target : String, bottom_left : String, bottom_right : String, top_left : String, top_right : String) -> bool:
+	# Check if image has been loaded.
 	if !images.has(bottom_left) or !images.has(bottom_right) or !images.has(top_left) or !images.has(top_right):
 		return false;
 	
 	# Get images.
-	var bl : Image = images[bottom_left];
-	var br : Image = images[bottom_right];
-	var tl : Image = images[top_left];
-	var tr : Image = images[top_right];
+	var src_bl : Image = images[bottom_left];
+	var src_br : Image = images[bottom_right];
+	var src_tl : Image = images[top_left];
+	var src_tr : Image = images[top_right];
 	
-	# Get dimensions.
-	var half_width : int = floor(bl.get_width() / 2.0);
-	var half_height : int = floor(bl.get_height() / 2.0);
-	
-	# Create new image.
-	var copy = bl.duplicate();
-	copy.blit_rect(br, Rect2i(Vector2i(half_width, half_height), Vector2i(half_width, half_height)), Vector2i(half_width, half_height));
-	copy.blit_rect(tl, Rect2i(Vector2i.ZERO, Vector2i(half_width, half_height)), Vector2i.ZERO);
-	copy.blit_rect(tr, Rect2i(Vector2i(half_width, 0), Vector2i(half_width, half_height)), Vector2i(half_width, 0));
-	images[target] = copy;
-	
-	print("Derived " + target + " using merge_quad(" + bottom_left + ", " + bottom_right + ", " + top_left + ", " + top_right + ")");
+	# Apply image filter.
+	images[target] = ImageFilters.merge_corners(src_bl, src_br, src_tl, src_tr);
+	print("Derived " + target + " using merge_corners(" + bottom_left + ", " + bottom_right + ", " + top_left + ", " + top_right + ")");
 	return true;
 
 func _try_merge_complex(target : String, foreground : String, foreground_corner : String, background : String, background_corner : String) -> bool:
