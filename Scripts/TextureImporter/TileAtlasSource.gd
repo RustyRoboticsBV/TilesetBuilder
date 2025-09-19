@@ -13,6 +13,8 @@ class_name TileAtlasSource;
 @export var tile_h : int;
 @export var margin : int;
 
+const ImageFilters = preload("ImageFilters.gd");
+
 ## Load images from a ZIP file.
 func load_from_zip(file_path : String, margin : int, fix_alpha_border : bool) -> void:
 	# Load images from ZIP.
@@ -92,7 +94,7 @@ func _load_images_from_zip(path: String, fix_alpha_border : bool) -> Dictionary[
 			# Set image format.
 			image.convert(Image.FORMAT_RGBA8);
 			if fix_alpha_border:
-				_fix_alpha_border(image);
+				image = ImageFilters.fix_alpha_border(image);
 			
 			# Store loaded image.
 			if load_err == ERR_FILE_UNRECOGNIZED:
