@@ -121,6 +121,28 @@ static func merge_corners(bottom_left : Image, bottom_right : Image, top_left : 
 	dst.blit_rect(top_right, Rect2i(Vector2i(half_width, 0), Vector2i(half_width, half_height)), Vector2i(half_width, 0));
 	return dst;
 
+## Create an image from the left, right, top and bottom triangles of four images.
+static func merge_diag_cross(left: Image, right: Image, bottom: Image, top: Image) -> Image:
+	# Get dimensions.
+	var width : int = top.get_width();
+	var height : int = top.get_height();
+	
+	# Create new image.
+	var dst : Image = copy(top);
+	for y : int in range(height):
+		for x : int in range(width):
+			var is_left : bool = (x * height < y * width) and (x * height < (height - y) * width);
+			var is_right : bool = (x * height >= y * width) and (x * height >= (height - y) * width);
+			var is_bottom : bool = (y * width >= x * height) and (y * width >= (width - x) * height);
+			
+			if is_left:
+				dst.set_pixel(x, y, left.get_pixel(x, y));
+			elif is_right:
+				dst.set_pixel(x, y, right.get_pixel(x, y));
+			elif is_bottom:
+				dst.set_pixel(x, y, bottom.get_pixel(x, y));
+	return dst;
+
 ## Return a copy of an image where transparent pixels adjacent to non-transparent pixels get those pixels' color.
 ##
 ## Transparent pixels have color in their RGB channels, which can lead to weird edges when these images are scaled.

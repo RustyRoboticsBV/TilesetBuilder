@@ -281,11 +281,11 @@
 		"composite": ["SINGLE", "CENTER"],
 		"derive": {
 			"0": {
-				"op": "merge_quad",
-				"BL": "NOOK_BL",
-				"BR": "NOOK_BR",
-				"TL": "NOOK_TL",
-				"TR": "NOOK_TR"
+				"op": "merge_diag_cross",
+				"L": "EDGE_L",
+				"R": "EDGE_R",
+				"B": "EDGE_B",
+				"T": "EDGE_T"
 			}
 		},
 		"layer": "solid",

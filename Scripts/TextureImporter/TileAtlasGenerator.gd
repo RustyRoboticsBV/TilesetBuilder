@@ -83,6 +83,13 @@ func _try_resolve(id : String, rules : Dictionary) -> bool:
 				var bottom_right = rules[key]["BR"];
 				if _try_merge_diag_u(id, top_left, bottom_right):
 					return true;
+			"merge_diag_cross":
+				var left = rules[key]["L"];
+				var right = rules[key]["R"];
+				var bottom = rules[key]["B"];
+				var top = rules[key]["T"];
+				if _try_merge_diag_cross(id, left, right, bottom, top):
+					return true;
 			"merge_quad":
 				var bottom_left = rules[key]["BL"];
 				var bottom_right = rules[key]["BR"];
@@ -232,6 +239,22 @@ func _try_merge_quad(target : String, bottom_left : String, bottom_right : Strin
 	# Apply image filter.
 	images[target] = ImageFilters.merge_corners(src_bl, src_br, src_tl, src_tr);
 	print("Derived " + target + " using merge_corners(" + bottom_left + ", " + bottom_right + ", " + top_left + ", " + top_right + ")");
+	return true;
+
+func _try_merge_diag_cross(target : String, left : String, right : String, bottom : String, top : String) -> bool:
+	# Check if image has been loaded.
+	if !images.has(left) or !images.has(right) or !images.has(bottom) or !images.has(top):
+		return false;
+	
+	# Get images.
+	var src_l : Image = images[left];
+	var src_r : Image = images[right];
+	var src_b : Image = images[bottom];
+	var src_t : Image = images[top];
+	
+	# Apply image filter.
+	images[target] = ImageFilters.merge_diag_cross(src_l, src_r, src_b, src_t);
+	print("Derived " + target + " using merge_diag_cross(" + left + ", " + right + ", " + bottom + ", " + top + ")");
 	return true;
 
 func _try_merge_complex(target : String, foreground : String, foreground_corner : String, background : String, background_corner : String) -> bool:
